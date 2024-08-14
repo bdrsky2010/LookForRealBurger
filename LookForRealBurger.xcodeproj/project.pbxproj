@@ -30,6 +30,7 @@
 		7B91C2132C6CFC060019C51F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C2122C6CFC060019C51F /* SnapKit */; };
 		7B91C2162C6CFC0F0019C51F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C2152C6CFC0F0019C51F /* IQKeyboardManagerSwift */; };
 		7B91C2192C6CFC430019C51F /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C2182C6CFC430019C51F /* Moya */; };
+		7B91C21C2C6CFCB30019C51F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C21B2C6CFCB30019C51F /* Lottie */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -77,6 +78,7 @@
 				7B91C2192C6CFC430019C51F /* Moya in Frameworks */,
 				7B91C20B2C6CFBD90019C51F /* Kingfisher in Frameworks */,
 				7B91C2082C6CFBCD0019C51F /* Toast in Frameworks */,
+				7B91C21C2C6CFCB30019C51F /* Lottie in Frameworks */,
 				7B91C2132C6CFC060019C51F /* SnapKit in Frameworks */,
 				7B91C20E2C6CFBF90019C51F /* RxCocoa in Frameworks */,
 				7B91C2032C6CFBC10019C51F /* Differentiator in Frameworks */,
@@ -193,6 +195,7 @@
 				7B91C2122C6CFC060019C51F /* SnapKit */,
 				7B91C2152C6CFC0F0019C51F /* IQKeyboardManagerSwift */,
 				7B91C2182C6CFC430019C51F /* Moya */,
+				7B91C21B2C6CFCB30019C51F /* Lottie */,
 			);
 			productName = LookForRealBurger;
 			productReference = 7B91C1C22C6C7CE30019C51F /* LookForRealBurger.app */;
@@ -232,6 +235,7 @@
 				7B91C2112C6CFC060019C51F /* XCRemoteSwiftPackageReference "SnapKit" */,
 				7B91C2142C6CFC0F0019C51F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				7B91C2172C6CFC430019C51F /* XCRemoteSwiftPackageReference "Moya" */,
+				7B91C21A2C6CFCB20019C51F /* XCRemoteSwiftPackageReference "lottie-ios" */,
 			);
 			productRefGroup = 7B91C1C32C6C7CE30019C51F /* Products */;
 			projectDirPath = "";
@@ -577,6 +581,14 @@
 				minimumVersion = 15.0.3;
 			};
 		};
+		7B91C21A2C6CFCB20019C51F /* XCRemoteSwiftPackageReference "lottie-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -624,6 +636,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7B91C2172C6CFC430019C51F /* XCRemoteSwiftPackageReference "Moya" */;
 			productName = Moya;
+		};
+		7B91C21B2C6CFCB30019C51F /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B91C21A2C6CFCB20019C51F /* XCRemoteSwiftPackageReference "lottie-ios" */;
+			productName = Lottie;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
