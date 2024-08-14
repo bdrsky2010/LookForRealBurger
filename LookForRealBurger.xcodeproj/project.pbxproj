@@ -21,6 +21,15 @@
 		7B91C1FB2C6C96160019C51F /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1FA2C6C96160019C51F /* R.swift */; };
 		7B91C1FD2C6C967E0019C51F /* R+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1FC2C6C967E0019C51F /* R+Font.swift */; };
 		7B91C1FF2C6C983A0019C51F /* R+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1FE2C6C983A0019C51F /* R+Color.swift */; };
+		7B91C2032C6CFBC10019C51F /* Differentiator in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C2022C6CFBC10019C51F /* Differentiator */; };
+		7B91C2052C6CFBC10019C51F /* RxDataSources in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C2042C6CFBC10019C51F /* RxDataSources */; };
+		7B91C2082C6CFBCD0019C51F /* Toast in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C2072C6CFBCD0019C51F /* Toast */; };
+		7B91C20B2C6CFBD90019C51F /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C20A2C6CFBD90019C51F /* Kingfisher */; };
+		7B91C20E2C6CFBF90019C51F /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C20D2C6CFBF90019C51F /* RxCocoa */; };
+		7B91C2102C6CFBF90019C51F /* RxSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C20F2C6CFBF90019C51F /* RxSwift */; };
+		7B91C2132C6CFC060019C51F /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C2122C6CFC060019C51F /* SnapKit */; };
+		7B91C2162C6CFC0F0019C51F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C2152C6CFC0F0019C51F /* IQKeyboardManagerSwift */; };
+		7B91C2192C6CFC430019C51F /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C2182C6CFC430019C51F /* Moya */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -63,6 +72,15 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B91C2102C6CFBF90019C51F /* RxSwift in Frameworks */,
+				7B91C2162C6CFC0F0019C51F /* IQKeyboardManagerSwift in Frameworks */,
+				7B91C2192C6CFC430019C51F /* Moya in Frameworks */,
+				7B91C20B2C6CFBD90019C51F /* Kingfisher in Frameworks */,
+				7B91C2082C6CFBCD0019C51F /* Toast in Frameworks */,
+				7B91C2132C6CFC060019C51F /* SnapKit in Frameworks */,
+				7B91C20E2C6CFBF90019C51F /* RxCocoa in Frameworks */,
+				7B91C2032C6CFBC10019C51F /* Differentiator in Frameworks */,
+				7B91C2052C6CFBC10019C51F /* RxDataSources in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -89,6 +107,7 @@
 		7B91C1C42C6C7CE30019C51F /* LookForRealBurger */ = {
 			isa = PBXGroup;
 			children = (
+				7B91C2002C6CB1900019C51F /* Data */,
 				7B91C1F52C6C905D0019C51F /* Extension */,
 				7B91C1DD2C6C8BF80019C51F /* Resources */,
 				7B91C1EA2C6C8DF20019C51F /* Fonts */,
@@ -141,6 +160,13 @@
 			path = Extension;
 			sourceTree = "<group>";
 		};
+		7B91C2002C6CB1900019C51F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -157,6 +183,17 @@
 			dependencies = (
 			);
 			name = LookForRealBurger;
+			packageProductDependencies = (
+				7B91C2022C6CFBC10019C51F /* Differentiator */,
+				7B91C2042C6CFBC10019C51F /* RxDataSources */,
+				7B91C2072C6CFBCD0019C51F /* Toast */,
+				7B91C20A2C6CFBD90019C51F /* Kingfisher */,
+				7B91C20D2C6CFBF90019C51F /* RxCocoa */,
+				7B91C20F2C6CFBF90019C51F /* RxSwift */,
+				7B91C2122C6CFC060019C51F /* SnapKit */,
+				7B91C2152C6CFC0F0019C51F /* IQKeyboardManagerSwift */,
+				7B91C2182C6CFC430019C51F /* Moya */,
+			);
 			productName = LookForRealBurger;
 			productReference = 7B91C1C22C6C7CE30019C51F /* LookForRealBurger.app */;
 			productType = "com.apple.product-type.application";
@@ -187,6 +224,15 @@
 				ja,
 			);
 			mainGroup = 7B91C1B92C6C7CE30019C51F;
+			packageReferences = (
+				7B91C2012C6CFBC10019C51F /* XCRemoteSwiftPackageReference "RxDataSources" */,
+				7B91C2062C6CFBCD0019C51F /* XCRemoteSwiftPackageReference "Toast-Swift" */,
+				7B91C2092C6CFBD90019C51F /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				7B91C20C2C6CFBF90019C51F /* XCRemoteSwiftPackageReference "RxSwift" */,
+				7B91C2112C6CFC060019C51F /* XCRemoteSwiftPackageReference "SnapKit" */,
+				7B91C2142C6CFC0F0019C51F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
+				7B91C2172C6CFC430019C51F /* XCRemoteSwiftPackageReference "Moya" */,
+			);
 			productRefGroup = 7B91C1C32C6C7CE30019C51F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -473,6 +519,113 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7B91C2012C6CFBC10019C51F /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.0.2;
+			};
+		};
+		7B91C2062C6CFBCD0019C51F /* XCRemoteSwiftPackageReference "Toast-Swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scalessec/Toast-Swift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.1.1;
+			};
+		};
+		7B91C2092C6CFBD90019C51F /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.12.0;
+			};
+		};
+		7B91C20C2C6CFBF90019C51F /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.7.1;
+			};
+		};
+		7B91C2112C6CFC060019C51F /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.1;
+			};
+		};
+		7B91C2142C6CFC0F0019C51F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/hackiftekhar/IQKeyboardManager.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.1.1;
+			};
+		};
+		7B91C2172C6CFC430019C51F /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7B91C2022C6CFBC10019C51F /* Differentiator */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B91C2012C6CFBC10019C51F /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = Differentiator;
+		};
+		7B91C2042C6CFBC10019C51F /* RxDataSources */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B91C2012C6CFBC10019C51F /* XCRemoteSwiftPackageReference "RxDataSources" */;
+			productName = RxDataSources;
+		};
+		7B91C2072C6CFBCD0019C51F /* Toast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B91C2062C6CFBCD0019C51F /* XCRemoteSwiftPackageReference "Toast-Swift" */;
+			productName = Toast;
+		};
+		7B91C20A2C6CFBD90019C51F /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B91C2092C6CFBD90019C51F /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		7B91C20D2C6CFBF90019C51F /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B91C20C2C6CFBF90019C51F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		7B91C20F2C6CFBF90019C51F /* RxSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B91C20C2C6CFBF90019C51F /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxSwift;
+		};
+		7B91C2122C6CFC060019C51F /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B91C2112C6CFC060019C51F /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		7B91C2152C6CFC0F0019C51F /* IQKeyboardManagerSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B91C2142C6CFC0F0019C51F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */;
+			productName = IQKeyboardManagerSwift;
+		};
+		7B91C2182C6CFC430019C51F /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B91C2172C6CFC430019C51F /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7B91C1BA2C6C7CE30019C51F /* Project object */;
 }
