@@ -10,11 +10,17 @@
 		7B91C1C62C6C7CE30019C51F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1C52C6C7CE30019C51F /* AppDelegate.swift */; };
 		7B91C1C82C6C7CE30019C51F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1C72C6C7CE30019C51F /* SceneDelegate.swift */; };
 		7B91C1CA2C6C7CE30019C51F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1C92C6C7CE30019C51F /* ViewController.swift */; };
-		7B91C1CD2C6C7CE30019C51F /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C1CC2C6C7CE30019C51F /* Base */; };
 		7B91C1CF2C6C7CE40019C51F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C1CE2C6C7CE40019C51F /* Assets.xcassets */; };
 		7B91C1D22C6C7CE40019C51F /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C1D12C6C7CE40019C51F /* Base */; };
 		7B91C1DA2C6C7D3D0019C51F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C1D92C6C7D3D0019C51F /* .gitignore */; };
 		7B91C1DC2C6C7D820019C51F /* APIKEY.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1DB2C6C7D820019C51F /* APIKEY.swift */; };
+		7B91C1E02C6C8C430019C51F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C1DE2C6C8C430019C51F /* Localizable.strings */; };
+		7B91C1E72C6C8D3F0019C51F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C1E52C6C8D3F0019C51F /* InfoPlist.strings */; };
+		7B91C1F72C6C90770019C51F /* UIFont+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1F62C6C90770019C51F /* UIFont+.swift */; };
+		7B91C1F92C6C93900019C51F /* String+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1F82C6C93900019C51F /* String+.swift */; };
+		7B91C1FB2C6C96160019C51F /* R.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1FA2C6C96160019C51F /* R.swift */; };
+		7B91C1FD2C6C967E0019C51F /* R+Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1FC2C6C967E0019C51F /* R+Font.swift */; };
+		7B91C1FF2C6C983A0019C51F /* R+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1FE2C6C983A0019C51F /* R+Color.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,12 +28,34 @@
 		7B91C1C52C6C7CE30019C51F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B91C1C72C6C7CE30019C51F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 		7B91C1C92C6C7CE30019C51F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		7B91C1CC2C6C7CE30019C51F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7B91C1CE2C6C7CE40019C51F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B91C1D12C6C7CE40019C51F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B91C1D32C6C7CE40019C51F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7B91C1D92C6C7D3D0019C51F /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
 		7B91C1DB2C6C7D820019C51F /* APIKEY.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKEY.swift; sourceTree = "<group>"; };
+		7B91C1DF2C6C8C430019C51F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B91C1E12C6C8C940019C51F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		7B91C1E22C6C8C940019C51F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B91C1E32C6C8C9F0019C51F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
+		7B91C1E42C6C8C9F0019C51F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
+		7B91C1E62C6C8D3F0019C51F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7B91C1E82C6C8D450019C51F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7B91C1E92C6C8D460019C51F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		7B91C1EB2C6C8F320019C51F /* chab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chab.ttf; sourceTree = "<group>"; };
+		7B91C1EC2C6C8FCF0019C51F /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		7B91C1ED2C6C8FCF0019C51F /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		7B91C1EE2C6C8FCF0019C51F /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		7B91C1EF2C6C8FCF0019C51F /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		7B91C1F02C6C8FCF0019C51F /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		7B91C1F12C6C8FCF0019C51F /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		7B91C1F22C6C8FCF0019C51F /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		7B91C1F32C6C8FCF0019C51F /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		7B91C1F42C6C8FCF0019C51F /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		7B91C1F62C6C90770019C51F /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
+		7B91C1F82C6C93900019C51F /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
+		7B91C1FA2C6C96160019C51F /* R.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
+		7B91C1FC2C6C967E0019C51F /* R+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Font.swift"; sourceTree = "<group>"; };
+		7B91C1FE2C6C983A0019C51F /* R+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Color.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,16 +89,56 @@
 		7B91C1C42C6C7CE30019C51F /* LookForRealBurger */ = {
 			isa = PBXGroup;
 			children = (
+				7B91C1F52C6C905D0019C51F /* Extension */,
+				7B91C1DD2C6C8BF80019C51F /* Resources */,
+				7B91C1EA2C6C8DF20019C51F /* Fonts */,
 				7B91C1C52C6C7CE30019C51F /* AppDelegate.swift */,
 				7B91C1C72C6C7CE30019C51F /* SceneDelegate.swift */,
 				7B91C1C92C6C7CE30019C51F /* ViewController.swift */,
-				7B91C1CB2C6C7CE30019C51F /* Main.storyboard */,
 				7B91C1CE2C6C7CE40019C51F /* Assets.xcassets */,
 				7B91C1D02C6C7CE40019C51F /* LaunchScreen.storyboard */,
 				7B91C1D32C6C7CE40019C51F /* Info.plist */,
 				7B91C1DB2C6C7D820019C51F /* APIKEY.swift */,
 			);
 			path = LookForRealBurger;
+			sourceTree = "<group>";
+		};
+		7B91C1DD2C6C8BF80019C51F /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C1FA2C6C96160019C51F /* R.swift */,
+				7B91C1FC2C6C967E0019C51F /* R+Font.swift */,
+				7B91C1FE2C6C983A0019C51F /* R+Color.swift */,
+				7B91C1DE2C6C8C430019C51F /* Localizable.strings */,
+				7B91C1E52C6C8D3F0019C51F /* InfoPlist.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		7B91C1EA2C6C8DF20019C51F /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C1EB2C6C8F320019C51F /* chab.ttf */,
+				7B91C1F32C6C8FCF0019C51F /* Pretendard-Black.otf */,
+				7B91C1F02C6C8FCF0019C51F /* Pretendard-Bold.otf */,
+				7B91C1EF2C6C8FCF0019C51F /* Pretendard-ExtraBold.otf */,
+				7B91C1F42C6C8FCF0019C51F /* Pretendard-ExtraLight.otf */,
+				7B91C1EE2C6C8FCF0019C51F /* Pretendard-Light.otf */,
+				7B91C1F22C6C8FCF0019C51F /* Pretendard-Medium.otf */,
+				7B91C1EC2C6C8FCF0019C51F /* Pretendard-Regular.otf */,
+				7B91C1ED2C6C8FCF0019C51F /* Pretendard-SemiBold.otf */,
+				7B91C1F12C6C8FCF0019C51F /* Pretendard-Thin.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		7B91C1F52C6C905D0019C51F /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C1F62C6C90770019C51F /* UIFont+.swift */,
+				7B91C1F82C6C93900019C51F /* String+.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -115,6 +183,8 @@
 			knownRegions = (
 				en,
 				Base,
+				ko,
+				ja,
 			);
 			mainGroup = 7B91C1B92C6C7CE30019C51F;
 			productRefGroup = 7B91C1C32C6C7CE30019C51F /* Products */;
@@ -132,9 +202,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7B91C1DA2C6C7D3D0019C51F /* .gitignore in Resources */,
+				7B91C1E02C6C8C430019C51F /* Localizable.strings in Resources */,
 				7B91C1CF2C6C7CE40019C51F /* Assets.xcassets in Resources */,
 				7B91C1D22C6C7CE40019C51F /* Base in Resources */,
-				7B91C1CD2C6C7CE30019C51F /* Base in Resources */,
+				7B91C1E72C6C8D3F0019C51F /* InfoPlist.strings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -147,28 +218,47 @@
 			files = (
 				7B91C1CA2C6C7CE30019C51F /* ViewController.swift in Sources */,
 				7B91C1C62C6C7CE30019C51F /* AppDelegate.swift in Sources */,
+				7B91C1F72C6C90770019C51F /* UIFont+.swift in Sources */,
+				7B91C1FD2C6C967E0019C51F /* R+Font.swift in Sources */,
+				7B91C1FF2C6C983A0019C51F /* R+Color.swift in Sources */,
 				7B91C1DC2C6C7D820019C51F /* APIKEY.swift in Sources */,
+				7B91C1F92C6C93900019C51F /* String+.swift in Sources */,
 				7B91C1C82C6C7CE30019C51F /* SceneDelegate.swift in Sources */,
+				7B91C1FB2C6C96160019C51F /* R.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		7B91C1CB2C6C7CE30019C51F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7B91C1CC2C6C7CE30019C51F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		7B91C1D02C6C7CE40019C51F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
 				7B91C1D12C6C7CE40019C51F /* Base */,
+				7B91C1E12C6C8C940019C51F /* ko */,
+				7B91C1E32C6C8C9F0019C51F /* ja */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		7B91C1DE2C6C8C430019C51F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B91C1DF2C6C8C430019C51F /* en */,
+				7B91C1E22C6C8C940019C51F /* ko */,
+				7B91C1E42C6C8C9F0019C51F /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		7B91C1E52C6C8D3F0019C51F /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				7B91C1E62C6C8D3F0019C51F /* en */,
+				7B91C1E82C6C8D450019C51F /* ja */,
+				7B91C1E92C6C8D460019C51F /* ko */,
+			);
+			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -179,6 +269,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -226,7 +317,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -242,6 +333,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -283,7 +375,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -305,9 +397,9 @@
 				INFOPLIST_FILE = LookForRealBurger/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -338,9 +430,9 @@
 				INFOPLIST_FILE = LookForRealBurger/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
-				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
