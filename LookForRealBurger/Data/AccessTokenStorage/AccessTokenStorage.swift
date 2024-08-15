@@ -12,7 +12,7 @@ enum TokenType {
     case refresh
 }
 
-protocol AccessTokenStorage {
+protocol AccessTokenStorage: AnyObject {
     func fetchToken(for tokenType: TokenType) -> String
     func saveToken(for tokenType: TokenType, with token: String)
     func removeToken()
