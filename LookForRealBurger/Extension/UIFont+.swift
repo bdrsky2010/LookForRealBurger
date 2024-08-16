@@ -10,7 +10,7 @@ import UIKit
 // MARK: Custom Font chap
 extension UIFont {
     static func chap(size fontSize: CGFloat) -> UIFont {
-        let familyName = "chab"
+        let familyName = "LOTTERIACHAB"
         return UIFont(name: familyName, size: fontSize) ?? UIFont.systemFont(ofSize: fontSize, weight: .black)
     }
 }
