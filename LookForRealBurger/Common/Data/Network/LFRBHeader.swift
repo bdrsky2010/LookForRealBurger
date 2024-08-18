@@ -1,5 +1,5 @@
 //
-//  Header.swift
+//  LFRBHeader.swift
 //  LookForRealBurger
 //
 //  Created by Minjae Kim on 8/17/24.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Header: String {
+enum LFRBHeader: String {
     case authorization = "Authorization"
     case sesacKey      = "SesacKey"
     case refresh       = "Refresh"
