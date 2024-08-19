@@ -31,6 +31,46 @@
 		7B91C2162C6CFC0F0019C51F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C2152C6CFC0F0019C51F /* IQKeyboardManagerSwift */; };
 		7B91C2192C6CFC430019C51F /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C2182C6CFC430019C51F /* Moya */; };
 		7B91C21C2C6CFCB30019C51F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C21B2C6CFCB30019C51F /* Lottie */; };
+		7B91C21F2C6E3EAE0019C51F /* UserDefaultsAccessTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C21E2C6E3EAE0019C51F /* UserDefaultsAccessTokenStorage.swift */; };
+		7B91C2222C6E46630019C51F /* AccessTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2212C6E46630019C51F /* AccessTokenStorage.swift */; };
+		7B91C2352C70DB630019C51F /* LFRBHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2342C70DB630019C51F /* LFRBHeader.swift */; };
+		7B91C2462C70E5D40019C51F /* LFRBRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2452C70E5D40019C51F /* LFRBRequestDTO.swift */; };
+		7B91C2482C70E5EA0019C51F /* LFRBResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2472C70E5EA0019C51F /* LFRBResponseDTO.swift */; };
+		7B91C24A2C70E7EA0019C51F /* JoinRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2492C70E7EA0019C51F /* JoinRequestDTO.swift */; };
+		7B91C24C2C70E7F00019C51F /* JoinResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C24B2C70E7F00019C51F /* JoinResponseDTO+Mapping.swift */; };
+		7B91C2502C71F3210019C51F /* LFRBNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C24F2C71F3210019C51F /* LFRBNetworkManager.swift */; };
+		7B91C2562C7210F60019C51F /* JoinRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2552C7210F60019C51F /* JoinRouter.swift */; };
+		7B91C2582C7211470019C51F /* LFRBTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2572C7211470019C51F /* LFRBTargetType.swift */; };
+		7B91C25A2C723F400019C51F /* LFRBJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2592C723F400019C51F /* LFRBJoinViewController.swift */; };
+		7B91C25C2C723F460019C51F /* LFRBJoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C25B2C723F460019C51F /* LFRBJoinViewModel.swift */; };
+		7B91C25F2C723F720019C51F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C25E2C723F720019C51F /* BaseViewController.swift */; };
+		7B91C2612C7242000019C51F /* chab.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2602C7242000019C51F /* chab.ttf */; };
+		7B91C26B2C7242100019C51F /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2622C7242100019C51F /* Pretendard-Bold.otf */; };
+		7B91C26C2C7242100019C51F /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2632C7242100019C51F /* Pretendard-Regular.otf */; };
+		7B91C26D2C7242100019C51F /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2642C7242100019C51F /* Pretendard-Black.otf */; };
+		7B91C26E2C7242100019C51F /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2652C7242100019C51F /* Pretendard-Medium.otf */; };
+		7B91C26F2C7242100019C51F /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2662C7242100019C51F /* Pretendard-SemiBold.otf */; };
+		7B91C2702C7242100019C51F /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2672C7242100019C51F /* Pretendard-Light.otf */; };
+		7B91C2712C7242100019C51F /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2682C7242100019C51F /* Pretendard-ExtraBold.otf */; };
+		7B91C2722C7242100019C51F /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2692C7242100019C51F /* Pretendard-Thin.otf */; };
+		7B91C2732C7242100019C51F /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C26A2C7242100019C51F /* Pretendard-ExtraLight.otf */; };
+		7B91C2752C7249290019C51F /* much_burger.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2742C7249290019C51F /* much_burger.png */; };
+		7B91C2792C724C0A0019C51F /* LookForRealBurgerTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2782C724C0A0019C51F /* LookForRealBurgerTitle.png */; };
+		7B91C27B2C72CA2A0019C51F /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C27A2C72CA2A0019C51F /* BaseViewModel.swift */; };
+		7B91C2872C733E8E0019C51F /* JoinRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2862C733E8E0019C51F /* JoinRepository.swift */; };
+		7B91C2892C733E980019C51F /* EmailValidRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2882C733E980019C51F /* EmailValidRepository.swift */; };
+		7B91C28B2C733EE10019C51F /* JoinUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C28A2C733EE10019C51F /* JoinUseCase.swift */; };
+		7B91C28D2C7340E80019C51F /* JoinUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C28C2C7340E80019C51F /* JoinUser.swift */; };
+		7B91C28F2C7341530019C51F /* EmailValidMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C28E2C7341530019C51F /* EmailValidMessage.swift */; };
+		7B91C2912C7345210019C51F /* JoinQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2902C7345210019C51F /* JoinQuery.swift */; };
+		7B91C2932C7345260019C51F /* EmailQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2922C7345260019C51F /* EmailQuery.swift */; };
+		7B91C2952C7365840019C51F /* R+Phrase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2942C7365840019C51F /* R+Phrase.swift */; };
+		7B91C2982C7370FE0019C51F /* BorderRoundedSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2972C7370FE0019C51F /* BorderRoundedSearchBar.swift */; };
+		7B91C29A2C7374250019C51F /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2992C7374250019C51F /* AppAppearance.swift */; };
+		7B91C29C2C7377A40019C51F /* LookForRealBurgerRed.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C29B2C7377A40019C51F /* LookForRealBurgerRed.png */; };
+		7B91C29E2C7377EB0019C51F /* LookForRealBurgerBrown.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C29D2C7377EB0019C51F /* LookForRealBurgerBrown.png */; };
+		7B91C2A02C7379CB0019C51F /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C29F2C7379CB0019C51F /* UIViewController+.swift */; };
+		7B91C2A22C73862F0019C51F /* CapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2A12C73862F0019C51F /* CapsuleButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -51,21 +91,51 @@
 		7B91C1E62C6C8D3F0019C51F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7B91C1E82C6C8D450019C51F /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		7B91C1E92C6C8D460019C51F /* ko */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ko; path = ko.lproj/InfoPlist.strings; sourceTree = "<group>"; };
-		7B91C1EB2C6C8F320019C51F /* chab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chab.ttf; sourceTree = "<group>"; };
-		7B91C1EC2C6C8FCF0019C51F /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
-		7B91C1ED2C6C8FCF0019C51F /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
-		7B91C1EE2C6C8FCF0019C51F /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
-		7B91C1EF2C6C8FCF0019C51F /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
-		7B91C1F02C6C8FCF0019C51F /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
-		7B91C1F12C6C8FCF0019C51F /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
-		7B91C1F22C6C8FCF0019C51F /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
-		7B91C1F32C6C8FCF0019C51F /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
-		7B91C1F42C6C8FCF0019C51F /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
 		7B91C1F62C6C90770019C51F /* UIFont+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+.swift"; sourceTree = "<group>"; };
 		7B91C1F82C6C93900019C51F /* String+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+.swift"; sourceTree = "<group>"; };
 		7B91C1FA2C6C96160019C51F /* R.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
 		7B91C1FC2C6C967E0019C51F /* R+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Font.swift"; sourceTree = "<group>"; };
 		7B91C1FE2C6C983A0019C51F /* R+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Color.swift"; sourceTree = "<group>"; };
+		7B91C21E2C6E3EAE0019C51F /* UserDefaultsAccessTokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsAccessTokenStorage.swift; sourceTree = "<group>"; };
+		7B91C2212C6E46630019C51F /* AccessTokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenStorage.swift; sourceTree = "<group>"; };
+		7B91C2342C70DB630019C51F /* LFRBHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRBHeader.swift; sourceTree = "<group>"; };
+		7B91C2452C70E5D40019C51F /* LFRBRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRBRequestDTO.swift; sourceTree = "<group>"; };
+		7B91C2472C70E5EA0019C51F /* LFRBResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRBResponseDTO.swift; sourceTree = "<group>"; };
+		7B91C2492C70E7EA0019C51F /* JoinRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRequestDTO.swift; sourceTree = "<group>"; };
+		7B91C24B2C70E7F00019C51F /* JoinResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JoinResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B91C24F2C71F3210019C51F /* LFRBNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRBNetworkManager.swift; sourceTree = "<group>"; };
+		7B91C2552C7210F60019C51F /* JoinRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRouter.swift; sourceTree = "<group>"; };
+		7B91C2572C7211470019C51F /* LFRBTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRBTargetType.swift; sourceTree = "<group>"; };
+		7B91C2592C723F400019C51F /* LFRBJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRBJoinViewController.swift; sourceTree = "<group>"; };
+		7B91C25B2C723F460019C51F /* LFRBJoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRBJoinViewModel.swift; sourceTree = "<group>"; };
+		7B91C25E2C723F720019C51F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		7B91C2602C7242000019C51F /* chab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chab.ttf; sourceTree = "<group>"; };
+		7B91C2622C7242100019C51F /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
+		7B91C2632C7242100019C51F /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		7B91C2642C7242100019C51F /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
+		7B91C2652C7242100019C51F /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
+		7B91C2662C7242100019C51F /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
+		7B91C2672C7242100019C51F /* Pretendard-Light.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Light.otf"; sourceTree = "<group>"; };
+		7B91C2682C7242100019C51F /* Pretendard-ExtraBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraBold.otf"; sourceTree = "<group>"; };
+		7B91C2692C7242100019C51F /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
+		7B91C26A2C7242100019C51F /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
+		7B91C2742C7249290019C51F /* much_burger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = much_burger.png; sourceTree = "<group>"; };
+		7B91C2782C724C0A0019C51F /* LookForRealBurgerTitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LookForRealBurgerTitle.png; sourceTree = "<group>"; };
+		7B91C27A2C72CA2A0019C51F /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
+		7B91C2862C733E8E0019C51F /* JoinRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRepository.swift; sourceTree = "<group>"; };
+		7B91C2882C733E980019C51F /* EmailValidRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidRepository.swift; sourceTree = "<group>"; };
+		7B91C28A2C733EE10019C51F /* JoinUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinUseCase.swift; sourceTree = "<group>"; };
+		7B91C28C2C7340E80019C51F /* JoinUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinUser.swift; sourceTree = "<group>"; };
+		7B91C28E2C7341530019C51F /* EmailValidMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidMessage.swift; sourceTree = "<group>"; };
+		7B91C2902C7345210019C51F /* JoinQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinQuery.swift; sourceTree = "<group>"; };
+		7B91C2922C7345260019C51F /* EmailQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailQuery.swift; sourceTree = "<group>"; };
+		7B91C2942C7365840019C51F /* R+Phrase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Phrase.swift"; sourceTree = "<group>"; };
+		7B91C2972C7370FE0019C51F /* BorderRoundedSearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderRoundedSearchBar.swift; sourceTree = "<group>"; };
+		7B91C2992C7374250019C51F /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
+		7B91C29B2C7377A40019C51F /* LookForRealBurgerRed.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LookForRealBurgerRed.png; sourceTree = "<group>"; };
+		7B91C29D2C7377EB0019C51F /* LookForRealBurgerBrown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LookForRealBurgerBrown.png; sourceTree = "<group>"; };
+		7B91C29F2C7379CB0019C51F /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
+		7B91C2A12C73862F0019C51F /* CapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -109,17 +179,11 @@
 		7B91C1C42C6C7CE30019C51F /* LookForRealBurger */ = {
 			isa = PBXGroup;
 			children = (
-				7B91C2002C6CB1900019C51F /* Data */,
-				7B91C1F52C6C905D0019C51F /* Extension */,
+				7B91C2232C6F2C6A0019C51F /* Application */,
+				7B91C2362C70E2460019C51F /* Common */,
+				7B91C2372C70E2AC0019C51F /* Scene */,
 				7B91C1DD2C6C8BF80019C51F /* Resources */,
-				7B91C1EA2C6C8DF20019C51F /* Fonts */,
-				7B91C1C52C6C7CE30019C51F /* AppDelegate.swift */,
-				7B91C1C72C6C7CE30019C51F /* SceneDelegate.swift */,
 				7B91C1C92C6C7CE30019C51F /* ViewController.swift */,
-				7B91C1CE2C6C7CE40019C51F /* Assets.xcassets */,
-				7B91C1D02C6C7CE40019C51F /* LaunchScreen.storyboard */,
-				7B91C1D32C6C7CE40019C51F /* Info.plist */,
-				7B91C1DB2C6C7D820019C51F /* APIKEY.swift */,
 			);
 			path = LookForRealBurger;
 			sourceTree = "<group>";
@@ -130,8 +194,18 @@
 				7B91C1FA2C6C96160019C51F /* R.swift */,
 				7B91C1FC2C6C967E0019C51F /* R+Font.swift */,
 				7B91C1FE2C6C983A0019C51F /* R+Color.swift */,
+				7B91C2942C7365840019C51F /* R+Phrase.swift */,
 				7B91C1DE2C6C8C430019C51F /* Localizable.strings */,
 				7B91C1E52C6C8D3F0019C51F /* InfoPlist.strings */,
+				7B91C1EA2C6C8DF20019C51F /* Fonts */,
+				7B91C1CE2C6C7CE40019C51F /* Assets.xcassets */,
+				7B91C2782C724C0A0019C51F /* LookForRealBurgerTitle.png */,
+				7B91C29B2C7377A40019C51F /* LookForRealBurgerRed.png */,
+				7B91C29D2C7377EB0019C51F /* LookForRealBurgerBrown.png */,
+				7B91C2742C7249290019C51F /* much_burger.png */,
+				7B91C1D02C6C7CE40019C51F /* LaunchScreen.storyboard */,
+				7B91C1D32C6C7CE40019C51F /* Info.plist */,
+				7B91C1DB2C6C7D820019C51F /* APIKEY.swift */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -139,16 +213,16 @@
 		7B91C1EA2C6C8DF20019C51F /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				7B91C1EB2C6C8F320019C51F /* chab.ttf */,
-				7B91C1F32C6C8FCF0019C51F /* Pretendard-Black.otf */,
-				7B91C1F02C6C8FCF0019C51F /* Pretendard-Bold.otf */,
-				7B91C1EF2C6C8FCF0019C51F /* Pretendard-ExtraBold.otf */,
-				7B91C1F42C6C8FCF0019C51F /* Pretendard-ExtraLight.otf */,
-				7B91C1EE2C6C8FCF0019C51F /* Pretendard-Light.otf */,
-				7B91C1F22C6C8FCF0019C51F /* Pretendard-Medium.otf */,
-				7B91C1EC2C6C8FCF0019C51F /* Pretendard-Regular.otf */,
-				7B91C1ED2C6C8FCF0019C51F /* Pretendard-SemiBold.otf */,
-				7B91C1F12C6C8FCF0019C51F /* Pretendard-Thin.otf */,
+				7B91C2602C7242000019C51F /* chab.ttf */,
+				7B91C2642C7242100019C51F /* Pretendard-Black.otf */,
+				7B91C2622C7242100019C51F /* Pretendard-Bold.otf */,
+				7B91C2682C7242100019C51F /* Pretendard-ExtraBold.otf */,
+				7B91C26A2C7242100019C51F /* Pretendard-ExtraLight.otf */,
+				7B91C2672C7242100019C51F /* Pretendard-Light.otf */,
+				7B91C2652C7242100019C51F /* Pretendard-Medium.otf */,
+				7B91C2632C7242100019C51F /* Pretendard-Regular.otf */,
+				7B91C2662C7242100019C51F /* Pretendard-SemiBold.otf */,
+				7B91C2692C7242100019C51F /* Pretendard-Thin.otf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -157,16 +231,234 @@
 			isa = PBXGroup;
 			children = (
 				7B91C1F62C6C90770019C51F /* UIFont+.swift */,
+				7B91C29F2C7379CB0019C51F /* UIViewController+.swift */,
 				7B91C1F82C6C93900019C51F /* String+.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
 		};
-		7B91C2002C6CB1900019C51F /* Data */ = {
+		7B91C21D2C6E3DF60019C51F /* UserDefaultsStorage */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C21E2C6E3EAE0019C51F /* UserDefaultsAccessTokenStorage.swift */,
+			);
+			path = UserDefaultsStorage;
+			sourceTree = "<group>";
+		};
+		7B91C2202C6E46300019C51F /* AccessTokenStorage */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2212C6E46630019C51F /* AccessTokenStorage.swift */,
+				7B91C21D2C6E3DF60019C51F /* UserDefaultsStorage */,
+			);
+			path = AccessTokenStorage;
+			sourceTree = "<group>";
+		};
+		7B91C2232C6F2C6A0019C51F /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C1C52C6C7CE30019C51F /* AppDelegate.swift */,
+				7B91C1C72C6C7CE30019C51F /* SceneDelegate.swift */,
+				7B91C2992C7374250019C51F /* AppAppearance.swift */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		7B91C2362C70E2460019C51F /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C25D2C723F600019C51F /* Base */,
+				7B91C2962C7368930019C51F /* Reusable */,
+				7B91C2392C70E3360019C51F /* Data */,
+				7B91C2442C70E56A0019C51F /* Repository */,
+				7B91C23A2C70E35C0019C51F /* Utilities */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		7B91C2372C70E2AC0019C51F /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C23B2C70E3C60019C51F /* Login */,
+				7B91C23C2C70E3DC0019C51F /* Join */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		7B91C2382C70E2CF0019C51F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2342C70DB630019C51F /* LFRBHeader.swift */,
+				7B91C2572C7211470019C51F /* LFRBTargetType.swift */,
+				7B91C24F2C71F3210019C51F /* LFRBNetworkManager.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		7B91C2392C70E3360019C51F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2432C70E5420019C51F /* Models */,
+				7B91C2382C70E2CF0019C51F /* Network */,
+				7B91C2202C6E46300019C51F /* AccessTokenStorage */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		7B91C23A2C70E35C0019C51F /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C1F52C6C905D0019C51F /* Extension */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		7B91C23B2C70E3C60019C51F /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C23F2C70E46F0019C51F /* Data */,
+				7B91C23E2C70E46C0019C51F /* Domain */,
+				7B91C23D2C70E46A0019C51F /* Presentation */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		7B91C23C2C70E3DC0019C51F /* Join */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2422C70E4790019C51F /* Data */,
+				7B91C2412C70E4760019C51F /* Domain */,
+				7B91C2402C70E4730019C51F /* Presentation */,
+			);
+			path = Join;
+			sourceTree = "<group>";
+		};
+		7B91C23D2C70E46A0019C51F /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		7B91C23E2C70E46C0019C51F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		7B91C23F2C70E46F0019C51F /* Data */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		7B91C2402C70E4730019C51F /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2592C723F400019C51F /* LFRBJoinViewController.swift */,
+				7B91C25B2C723F460019C51F /* LFRBJoinViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		7B91C2412C70E4760019C51F /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2512C720EA50019C51F /* Entities */,
+				7B91C2522C720EB60019C51F /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		7B91C2422C70E4790019C51F /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2532C7210D40019C51F /* DTO */,
+				7B91C2542C7210E20019C51F /* Network */,
+				7B91C2842C733CEF0019C51F /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		7B91C2432C70E5420019C51F /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2452C70E5D40019C51F /* LFRBRequestDTO.swift */,
+				7B91C2472C70E5EA0019C51F /* LFRBResponseDTO.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7B91C2442C70E56A0019C51F /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		7B91C2512C720EA50019C51F /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C28C2C7340E80019C51F /* JoinUser.swift */,
+				7B91C28E2C7341530019C51F /* EmailValidMessage.swift */,
+				7B91C2902C7345210019C51F /* JoinQuery.swift */,
+				7B91C2922C7345260019C51F /* EmailQuery.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		7B91C2522C720EB60019C51F /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C28A2C733EE10019C51F /* JoinUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		7B91C2532C7210D40019C51F /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2492C70E7EA0019C51F /* JoinRequestDTO.swift */,
+				7B91C24B2C70E7F00019C51F /* JoinResponseDTO+Mapping.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		7B91C2542C7210E20019C51F /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2552C7210F60019C51F /* JoinRouter.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		7B91C25D2C723F600019C51F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C25E2C723F720019C51F /* BaseViewController.swift */,
+				7B91C27A2C72CA2A0019C51F /* BaseViewModel.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		7B91C2842C733CEF0019C51F /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2862C733E8E0019C51F /* JoinRepository.swift */,
+				7B91C2882C733E980019C51F /* EmailValidRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		7B91C2962C7368930019C51F /* Reusable */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2972C7370FE0019C51F /* BorderRoundedSearchBar.swift */,
+				7B91C2A12C73862F0019C51F /* CapsuleButton.swift */,
+			);
+			path = Reusable;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,11 +543,25 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B91C26F2C7242100019C51F /* Pretendard-SemiBold.otf in Resources */,
+				7B91C29C2C7377A40019C51F /* LookForRealBurgerRed.png in Resources */,
 				7B91C1DA2C6C7D3D0019C51F /* .gitignore in Resources */,
+				7B91C26E2C7242100019C51F /* Pretendard-Medium.otf in Resources */,
 				7B91C1E02C6C8C430019C51F /* Localizable.strings in Resources */,
+				7B91C26B2C7242100019C51F /* Pretendard-Bold.otf in Resources */,
+				7B91C2752C7249290019C51F /* much_burger.png in Resources */,
+				7B91C2792C724C0A0019C51F /* LookForRealBurgerTitle.png in Resources */,
+				7B91C2702C7242100019C51F /* Pretendard-Light.otf in Resources */,
+				7B91C2612C7242000019C51F /* chab.ttf in Resources */,
+				7B91C26D2C7242100019C51F /* Pretendard-Black.otf in Resources */,
 				7B91C1CF2C6C7CE40019C51F /* Assets.xcassets in Resources */,
+				7B91C2722C7242100019C51F /* Pretendard-Thin.otf in Resources */,
+				7B91C2712C7242100019C51F /* Pretendard-ExtraBold.otf in Resources */,
+				7B91C26C2C7242100019C51F /* Pretendard-Regular.otf in Resources */,
+				7B91C2732C7242100019C51F /* Pretendard-ExtraLight.otf in Resources */,
 				7B91C1D22C6C7CE40019C51F /* Base in Resources */,
 				7B91C1E72C6C8D3F0019C51F /* InfoPlist.strings in Resources */,
+				7B91C29E2C7377EB0019C51F /* LookForRealBurgerBrown.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -266,14 +572,40 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B91C28D2C7340E80019C51F /* JoinUser.swift in Sources */,
+				7B91C2482C70E5EA0019C51F /* LFRBResponseDTO.swift in Sources */,
+				7B91C2952C7365840019C51F /* R+Phrase.swift in Sources */,
+				7B91C29A2C7374250019C51F /* AppAppearance.swift in Sources */,
+				7B91C25C2C723F460019C51F /* LFRBJoinViewModel.swift in Sources */,
 				7B91C1CA2C6C7CE30019C51F /* ViewController.swift in Sources */,
+				7B91C2892C733E980019C51F /* EmailValidRepository.swift in Sources */,
+				7B91C2562C7210F60019C51F /* JoinRouter.swift in Sources */,
+				7B91C28B2C733EE10019C51F /* JoinUseCase.swift in Sources */,
+				7B91C28F2C7341530019C51F /* EmailValidMessage.swift in Sources */,
 				7B91C1C62C6C7CE30019C51F /* AppDelegate.swift in Sources */,
+				7B91C2502C71F3210019C51F /* LFRBNetworkManager.swift in Sources */,
 				7B91C1F72C6C90770019C51F /* UIFont+.swift in Sources */,
 				7B91C1FD2C6C967E0019C51F /* R+Font.swift in Sources */,
 				7B91C1FF2C6C983A0019C51F /* R+Color.swift in Sources */,
+				7B91C25A2C723F400019C51F /* LFRBJoinViewController.swift in Sources */,
 				7B91C1DC2C6C7D820019C51F /* APIKEY.swift in Sources */,
+				7B91C2A02C7379CB0019C51F /* UIViewController+.swift in Sources */,
+				7B91C2912C7345210019C51F /* JoinQuery.swift in Sources */,
+				7B91C2982C7370FE0019C51F /* BorderRoundedSearchBar.swift in Sources */,
 				7B91C1F92C6C93900019C51F /* String+.swift in Sources */,
+				7B91C2932C7345260019C51F /* EmailQuery.swift in Sources */,
+				7B91C2222C6E46630019C51F /* AccessTokenStorage.swift in Sources */,
+				7B91C25F2C723F720019C51F /* BaseViewController.swift in Sources */,
+				7B91C27B2C72CA2A0019C51F /* BaseViewModel.swift in Sources */,
+				7B91C2872C733E8E0019C51F /* JoinRepository.swift in Sources */,
+				7B91C2352C70DB630019C51F /* LFRBHeader.swift in Sources */,
+				7B91C24C2C70E7F00019C51F /* JoinResponseDTO+Mapping.swift in Sources */,
+				7B91C2A22C73862F0019C51F /* CapsuleButton.swift in Sources */,
+				7B91C24A2C70E7EA0019C51F /* JoinRequestDTO.swift in Sources */,
+				7B91C2462C70E5D40019C51F /* LFRBRequestDTO.swift in Sources */,
 				7B91C1C82C6C7CE30019C51F /* SceneDelegate.swift in Sources */,
+				7B91C21F2C6E3EAE0019C51F /* UserDefaultsAccessTokenStorage.swift in Sources */,
+				7B91C2582C7211470019C51F /* LFRBTargetType.swift in Sources */,
 				7B91C1FB2C6C96160019C51F /* R.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -444,7 +776,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T62JF6T7Q4;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LookForRealBurger/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/LookForRealBurger/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
@@ -477,7 +809,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = T62JF6T7Q4;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = LookForRealBurger/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/LookForRealBurger/Resources/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
