@@ -16,7 +16,7 @@ enum NetworkError: Error {
     case tooManyRequest
     case invalidURL
     case networkFailure
-    case unknown(_ statusCode: Int)
+    case unknown(_ statusCode: Int, _ description: String)
 }
 
 final class LFRBNetworkManager {
@@ -24,13 +24,13 @@ final class LFRBNetworkManager {
     
     private init() { }
     
-    func requestAPI<Target: TargetType, T: Decodable>(
+    func request<Target: LFRBTargetType, T: Decodable>(
         _ targetType: Target,
         of type: T.Type,
         completionHandler: @escaping (Result<T, NetworkError>
         ) -> Void) {
         let provider = MoyaProvider<Target>()
-        print(targetType.baseURL.description)
+        
         provider.request(targetType) { result in
             switch result {
             case .success(let response):
@@ -51,7 +51,7 @@ final class LFRBNetworkManager {
                 case 500:
                     completionHandler(.failure(.networkFailure))
                 default:
-                    completionHandler(.failure(.unknown(response.statusCode)))
+                    completionHandler(.failure(.unknown(response.statusCode, response.description)))
                 }
             case .failure(let error):
                 completionHandler(.failure(.requestFailure(error)))
