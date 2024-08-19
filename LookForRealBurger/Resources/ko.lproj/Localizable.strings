@@ -5,3 +5,6 @@
   Created by Minjae Kim on 8/14/24.
   
 */
+
+"errorOccurred" = "에러가 발생하였습니다";
+"networkUnstable" = "인터넷 연결이 불안정합니다";
