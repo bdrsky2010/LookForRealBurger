@@ -17,9 +17,10 @@ class BaseViewController: UIViewController {
         view.backgroundColor = R.Color.background
         configureHierarchy()
         configureLayout()
+        configureUI()
     }
     
     func configureHierarchy() { }
-    
     func configureLayout() { }
+    func configureUI() { }
 }
