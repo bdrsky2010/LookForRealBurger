@@ -11,11 +11,15 @@ struct JoinResponseDTO { }
 
 extension JoinResponseDTO {
     struct JoinDTO: Decodable {
+        let userId: String
         let email: String
-        let password: String
         let nick: String
-        let phoneNum: String?
-        let birthDay: String?
+        
+        enum CodingKeys: String, CodingKey {
+            case userId = "user_id"
+            case email
+            case nick
+        }
     }
 }
 
