@@ -11,16 +11,24 @@ final class BorderRoundedSearchBar: UITextField {
     init(
         borderWidth: CGFloat,
         borderColor: UIColor,
-        placeholder: String?
+        placeholder: String
     ) {
         super.init(frame: .zero)
         self.layer.borderWidth = borderWidth
         self.layer.borderColor = borderColor.cgColor
-        self.layer.cornerRadius = 10
-        self.backgroundColor = .clear
-        self.borderStyle = .roundedRect
-        self.placeholder = placeholder
-        self.font = R.Font.bold16
+        
+        layer.cornerRadius = 10
+        backgroundColor = .clear
+        leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: 0))
+        leftViewMode = .always
+        rightView = UIView(frame: CGRect(x: 0, y: 0, width: 40, height: 0))
+        rightViewMode = .always
+        attributedPlaceholder = NSAttributedString(
+            string: placeholder,
+            attributes: [NSAttributedString.Key.foregroundColor: R.Color.brown.withAlphaComponent(0.5)]
+        )
+        font = R.Font.bold18
+        textColor = R.Color.brown
     }
     
     @available(*, unavailable)
