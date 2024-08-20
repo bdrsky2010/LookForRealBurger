@@ -18,4 +18,5 @@ extension R.Color {
     static let brown = UIColor.appBrown
     static let orange = UIColor.appOrange
     static let green = UIColor.appGreen
+    static let yellow = UIColor.appYellow
 }
