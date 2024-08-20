@@ -11,14 +11,14 @@ final class CapsuleButton: UIButton {
     init(title: String, backgroudColor: UIColor) {
         super.init(frame: .zero)
         
-        configuration = .plain()
+        configuration = .bordered()
         configuration?.cornerStyle = .capsule
         configuration?.baseBackgroundColor = backgroudColor
         configuration?.attributedTitle = AttributedString(
             NSAttributedString(
                 string: title,
                 attributes: [
-                    NSAttributedString.Key.font: R.Font.chab16,
+                    NSAttributedString.Key.font: R.Font.chab18,
                     NSAttributedString.Key.foregroundColor: R.Color.background
                 ]
             )
