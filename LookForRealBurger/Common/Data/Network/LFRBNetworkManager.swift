@@ -9,6 +9,10 @@ import Foundation
 
 import Moya
 
+protocol NetworkManager {
+    
+}
+
 enum NetworkError: Error {
     case requestFailure(Error)
     case apiKey
@@ -16,7 +20,7 @@ enum NetworkError: Error {
     case tooManyRequest
     case invalidURL
     case networkFailure
-    case unknown(_ statusCode: Int, _ description: String)
+    case unknown(_ statusCode: Int)
 }
 
 final class LFRBNetworkManager {
@@ -51,7 +55,7 @@ final class LFRBNetworkManager {
                 case 500:
                     completionHandler(.failure(.networkFailure))
                 default:
-                    completionHandler(.failure(.unknown(response.statusCode, response.description)))
+                    completionHandler(.failure(.unknown(response.statusCode)))
                 }
             case .failure(let error):
                 completionHandler(.failure(.requestFailure(error)))
