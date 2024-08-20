@@ -36,7 +36,7 @@ extension JoinRouter: LFRBTargetType {
         case .join(let dto):       parameters = dto.asParameters
         case .emailValid(let dto): parameters = dto.asParameters
         }
-        return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+        return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
     }
     
     var headers: [String : String]? {
