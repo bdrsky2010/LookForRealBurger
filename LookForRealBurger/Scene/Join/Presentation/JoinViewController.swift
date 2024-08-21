@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import Lottie
+
 import RxCocoa
 import RxSwift
 import SnapKit
@@ -62,15 +62,16 @@ final class JoinViewController: BaseViewController {
         return imageView
     }()
     
-    private let disposeBag = DisposeBag()
-    
     private var viewModel: JoinViewModel!
+    private var disposeBag: DisposeBag!
     
     static func create(
-        with viewModel: JoinViewModel
+        with viewModel: JoinViewModel,
+        disposeBag: DisposeBag = DisposeBag()
     ) -> JoinViewController {
         let view = JoinViewController()
         view.viewModel = viewModel
+        view.disposeBag = disposeBag
         return view
     }
     
@@ -200,7 +201,7 @@ extension JoinViewController {
         }
         .disposed(by: disposeBag)
         
-        let fieldData = Observable.zip(
+        let fieldData = Observable.combineLatest(
             emailSearchBar.rx.text.orEmpty,
             passwordSearchBar.rx.text.orEmpty,
             nickSearchBar.rx.text.orEmpty
@@ -242,6 +243,13 @@ extension JoinViewController {
         
         viewModel.isFilledFieldData
             .bind(to: joinButton.rx.isEnabled)
+            .disposed(by: disposeBag)
+        
+        viewModel.isSuccessJoin
+            .bind(with: self) { owner, user in
+                let vc = JoinScene.makeView(user: user)
+                owner.navigationController?.pushViewController(vc, animated: false)
+            }
             .disposed(by: disposeBag)
     }
 }
