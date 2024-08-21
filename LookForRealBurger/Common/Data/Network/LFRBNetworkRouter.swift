@@ -1,20 +1,20 @@
 //
-//  JoinRouter.swift
+//  LFRBNetworkRouter.swift
 //  LookForRealBurger
 //
-//  Created by Minjae Kim on 8/18/24.
+//  Created by Minjae Kim on 8/21/24.
 //
 
 import Foundation
 
 import Moya
 
-enum JoinRouter {
+enum LFRBNetworkRouter {
     case join(_ dto: JoinRequestDTO.JoinDTO)
     case emailValid(_ dto: JoinRequestDTO.EmailValidDTO)
 }
 
-extension JoinRouter: LFRBTargetType {
+extension LFRBNetworkRouter: LFRBTargetType {
     var path: String {
         switch self {
         case .join:       return "v1/users/join"
@@ -53,6 +53,4 @@ extension JoinRouter: LFRBTargetType {
             ]
         }
     }
-    
-    
 }
