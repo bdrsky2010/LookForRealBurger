@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct JoinRequestDTO: Encodable { }
+struct JoinRequestDTO { }
 
 extension JoinRequestDTO {
     struct JoinDTO: Encodable {
