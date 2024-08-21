@@ -1,5 +1,5 @@
 //
-//  LFRBJoinViewController.swift
+//  JoinViewController.swift
 //  LookForRealBurger
 //
 //  Created by Minjae Kim on 8/18/24.
@@ -12,7 +12,7 @@ import RxSwift
 import SnapKit
 import Toast
 
-final class LFRBJoinViewController: BaseViewController {
+final class JoinViewController: BaseViewController {
     private let baseView: UIView = {
         let view = UIView()
         view.backgroundColor = .clear
@@ -68,8 +68,8 @@ final class LFRBJoinViewController: BaseViewController {
     
     static func create(
         with viewModel: JoinViewModel
-    ) -> LFRBJoinViewController {
-        let view = LFRBJoinViewController()
+    ) -> JoinViewController {
+        let view = JoinViewController()
         view.viewModel = viewModel
         return view
     }
@@ -155,7 +155,7 @@ final class LFRBJoinViewController: BaseViewController {
     }
 }
 
-extension LFRBJoinViewController {
+extension JoinViewController {
     private func bind() {
         emailSearchBar.rx.text.orEmpty
             .bind(with: self) { owner, text in

@@ -1,5 +1,5 @@
 //
-//  LFRBJoinViewModel.swift
+//  JoinViewModel.swift
 //  LookForRealBurger
 //
 //  Created by Minjae Kim on 8/18/24.
