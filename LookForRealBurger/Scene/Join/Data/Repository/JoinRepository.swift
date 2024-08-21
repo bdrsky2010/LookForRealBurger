@@ -24,9 +24,9 @@ enum JoinError: Error {
 }
 
 final class DefaultJoinRepository {
-    private let network: LFRBNetworkManager
+    private let network: NetworkManager
     
-    init(network: LFRBNetworkManager = LFRBNetworkManager.shared) {
+    init(network: NetworkManager) {
         self.network = network
     }
 }
