@@ -39,13 +39,13 @@ extension DefaultJoinRepository: JoinRepository {
         let requestDTO = JoinRequestDTO.JoinDTO(
             email: query.email,
             password: query.password,
-            nick: query.email,
+            nick: query.nick,
             phoneNum: nil,
             birthDay: nil
         )
         
         network.request(
-            JoinRouter.join(requestDTO),
+            LFRBNetworkRouter.join(requestDTO),
             of: JoinResponseDTO.JoinDTO.self
         ) { result in
             switch result {
