@@ -19,3 +19,21 @@ extension UIViewController {
         navigationItem.leftBarButtonItem = leftBarButtonItem
     }
 }
+
+extension UIViewController {
+    func changeRootViewController(_ rootViewController: UIViewController) {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+        guard let window = (windowScene.delegate as? SceneDelegate)?.window else { return }
+
+        window.rootViewController = rootViewController
+        window.makeKeyAndVisible()
+    }
+    
+    func changeRootViewController(_ rootViewController: UINavigationController) {
+        guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene else { return }
+        guard let window = (windowScene.delegate as? SceneDelegate)?.window else { return }
+        
+        window.rootViewController = rootViewController
+        window.makeKeyAndVisible()
+    }
+}
