@@ -7,14 +7,10 @@
 
 import Foundation
 
-enum TokenType {
-    case access
-    case refresh
-}
-
 protocol AccessTokenStorage: AnyObject {
-    func fetchToken(for tokenType: TokenType) -> String
-    func saveToken(for tokenType: TokenType, with token: String)
+    var accessToken: String { get set }
+    var refreshToken: String { get set }
+    
     func removeToken()
 }
 
@@ -39,30 +35,22 @@ final class UserDefaultsAccessTokenStorage {
 }
 
 extension UserDefaultsAccessTokenStorage: AccessTokenStorage {
-    func fetchToken(for tokenType: TokenType) -> String {
-        let token: String
-        
-        switch tokenType {
-        case .access:
-            token = userDefaults.string(forKey: accessTokenKey) ?? ""
-        case .refresh:
-            token = userDefaults.string(forKey: refreshTokenKey) ?? ""
+    var accessToken: String {
+        get {
+            userDefaults.string(forKey: accessTokenKey) ?? ""
         }
-        
-        return token
+        set {
+            userDefaults.set(newValue, forKey: accessToken)
+        }
     }
     
-    func saveToken(for tokenType: TokenType, with token: String) {
-        let tokenKey: String
-        
-        switch tokenType {
-        case .access:
-            tokenKey = accessTokenKey
-        case .refresh:
-            tokenKey = refreshTokenKey
+    var refreshToken: String {
+        get {
+            userDefaults.string(forKey: refreshTokenKey) ?? ""
         }
-        
-        userDefaults.set(token, forKey: tokenKey)
+        set {
+            userDefaults.set(newValue, forKey: refreshToken)
+        }
     }
     
     func removeToken() {
