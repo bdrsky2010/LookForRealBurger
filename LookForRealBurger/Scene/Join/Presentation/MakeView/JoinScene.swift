@@ -9,8 +9,9 @@ import UIKit
 
 enum JoinScene {
     static func makeView() -> JoinViewController {
-        let joinRepository = DefaultJoinRepository()
-        let emailValidRepository = DefaultEmailValidRepository()
+        let network = LFRBNetworkManager.shared
+        let joinRepository = DefaultJoinRepository(network: network)
+        let emailValidRepository = DefaultEmailValidRepository(network: network)
         let joinUseCase = DefaultJoinUseCase(joinRepository: joinRepository, emailValidRepository: emailValidRepository)
         let joinViewModel = DefaultLFRBJoinViewModel(joinUseCase: joinUseCase)
         let joinView = JoinViewController.create(with: joinViewModel)
