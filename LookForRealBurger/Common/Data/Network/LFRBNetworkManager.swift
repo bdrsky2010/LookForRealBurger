@@ -10,7 +10,11 @@ import Foundation
 import Moya
 
 protocol NetworkManager {
-    
+    func request<Target: LFRBTargetType, T: Decodable>(
+        _ targetType: Target,
+        of type: T.Type,
+        completionHandler: @escaping (Result<T, NetworkError>
+        ) -> Void)
 }
 
 enum NetworkError: Error {
@@ -23,7 +27,7 @@ enum NetworkError: Error {
     case unknown(_ statusCode: Int)
 }
 
-final class LFRBNetworkManager {
+final class LFRBNetworkManager: NetworkManager {
     static let shared = LFRBNetworkManager()
     
     private init() { }
