@@ -14,4 +14,8 @@ extension R {
 extension R.Phrase {
     static let errorOccurred = "errorOccurred".localized
     static let networkUnstable = "networkUnstable".localized
+    
+    static func getCongratulation(nick: String) -> String {
+        return "congratulation".localized(nick)
+    }
 }
