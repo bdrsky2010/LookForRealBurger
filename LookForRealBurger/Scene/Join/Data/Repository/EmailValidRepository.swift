@@ -23,9 +23,9 @@ enum EmailValidError: Error {
 }
 
 final class DefaultEmailValidRepository {
-    private let network: LFRBNetworkManager
+    private let network: NetworkManager
     
-    init(network: LFRBNetworkManager = LFRBNetworkManager.shared) {
+    init(network: NetworkManager) {
         self.network = network
     }
 }
@@ -38,7 +38,7 @@ extension DefaultEmailValidRepository: EmailValidRepository {
         let requestDTO = JoinRequestDTO.EmailValidDTO(email: query.email)
         
         network.request(
-            JoinRouter.emailValid(requestDTO),
+            LFRBNetworkRouter.emailValid(requestDTO),
             of: JoinResponseDTO.EmailValidDTO.self
         ) { result in
             switch result {
