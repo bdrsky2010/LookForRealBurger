@@ -12,6 +12,7 @@ import Moya
 enum LFRBNetworkRouter {
     case join(_ dto: JoinRequestDTO.JoinDTO)
     case emailValid(_ dto: JoinRequestDTO.EmailValidDTO)
+    case login(_ dto: LoginRequestDTO)
 }
 
 extension LFRBNetworkRouter: LFRBTargetType {
@@ -19,6 +20,7 @@ extension LFRBNetworkRouter: LFRBTargetType {
         switch self {
         case .join:       return "v1/users/join"
         case .emailValid: return "v1/validation/email"
+        case .login:      return "v1/users/login"
         }
     }
     
@@ -26,6 +28,7 @@ extension LFRBNetworkRouter: LFRBTargetType {
         switch self {
         case .join:       return .post
         case .emailValid: return .post
+        case .login:      return .post
         }
     }
     
@@ -35,6 +38,7 @@ extension LFRBNetworkRouter: LFRBTargetType {
         switch self {
         case .join(let dto):       parameters = dto.asParameters
         case .emailValid(let dto): parameters = dto.asParameters
+        case .login(let dto):      parameters = dto.asParameters
         }
         return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
     }
@@ -47,6 +51,11 @@ extension LFRBNetworkRouter: LFRBTargetType {
                 LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue
             ]
         case .emailValid:
+            return [
+                LFRBHeader.contentType.rawValue: LFRBHeader.json.rawValue,
+                LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue
+            ]
+        case .login:
             return [
                 LFRBHeader.contentType.rawValue: LFRBHeader.json.rawValue,
                 LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue
