@@ -27,6 +27,7 @@ protocol JoinOutput {
     var isValidEmail: BehaviorRelay<Bool> { get }
     var isNotDuplicateEmail: BehaviorRelay<Bool> { get }
     var isFilledFieldData: BehaviorRelay<Bool> { get }
+    var isSuccessJoin: PublishRelay<JoinUser> { get }
 }
 
 typealias JoinViewModel = JoinInput & JoinOutput
@@ -44,6 +45,7 @@ final class DefaultLFRBJoinViewModel: JoinOutput {
     var isValidEmail = BehaviorRelay<Bool>(value: false)
     var isNotDuplicateEmail = BehaviorRelay<Bool>(value: false)
     var isFilledFieldData = BehaviorRelay<Bool>(value: false)
+    var isSuccessJoin = PublishRelay<JoinUser>()
     
     init(
         joinUseCase: JoinUseCase,
@@ -117,7 +119,7 @@ extension DefaultLFRBJoinViewModel: JoinInput {
             .drive(with: self) { owner, result in
                 switch result {
                 case .success(let value):
-                    print("회원가입 성공 \(value.nick)")
+                    owner.isSuccessJoin.accept(value)
                 case .failure(let error):
                     let errorMessage: String
                     switch error {
