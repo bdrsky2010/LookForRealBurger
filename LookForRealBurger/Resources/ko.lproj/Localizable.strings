@@ -5,6 +5,9 @@
   Created by Minjae Kim on 8/14/24.
   
 */
+"emailPlaceholder" = "아이디(이메일)";
+"passwordPlaceholder" = "비밀번호";
+"nickPlaceholder" = "닉네임";
 
 "errorOccurred" = "에러가 발생하였습니다";
 "networkUnstable" = "인터넷 연결이 불안정합니다";
