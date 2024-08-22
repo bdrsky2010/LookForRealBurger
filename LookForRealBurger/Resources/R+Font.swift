@@ -18,7 +18,9 @@ extension R.Font {
     static let chab16 = UIFont.chap(size: 16)
     static let chab18 = UIFont.chap(size: 18)
     static let chab20 = UIFont.chap(size: 20)
-    static let chab30 = UIFont.chap(size: 53)
+    static let chab30 = UIFont.chap(size: 30)
+    static let chab40 = UIFont.chap(size: 40)
+    static let chab50 = UIFont.chap(size: 50)
     static let chab70 = UIFont.chap(size: 70)
     
     static let regular12 = UIFont.pretendard(size: 12, weight: .regular)
