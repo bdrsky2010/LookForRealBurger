@@ -18,7 +18,7 @@ final class JoinCompleteViewController: BaseViewController {
         label.textColor = R.Color.brown
         label.numberOfLines = 0
         label.textAlignment = .center
-        label.font = R.Font.chab30
+        label.font = R.Font.chab40
         return label
     }()
     
