@@ -10,11 +10,12 @@ import UIKit
 import RxCocoa
 import RxSwift
 import SnapKit
+import Toast
 
 final class LoginViewController: BaseViewController {
     private let appTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = R.Font.chab30
+        label.font = R.Font.chab50
         label.numberOfLines = 0
         label.textColor = R.Color.brown
         label.textAlignment = .center
@@ -38,11 +39,11 @@ final class LoginViewController: BaseViewController {
     }()
     
     private let emailSearchBar = BorderRoundedSearchBar(
-        borderWidth: 4, borderColor: R.Color.red, placeholder: "아이디(이메일)"
+        borderWidth: 4, borderColor: R.Color.red, placeholder: R.Phrase.emailPlaceholder
     )
 
     private let passwordSearchBar = BorderRoundedSearchBar(
-        borderWidth: 4, borderColor: R.Color.yellow, placeholder: "비밀번호"
+        borderWidth: 4, borderColor: R.Color.yellow, placeholder: R.Phrase.passwordPlaceholder
     )
     
     private let loginButton = CapsuleButton(
@@ -62,20 +63,21 @@ final class LoginViewController: BaseViewController {
     }()
     
     private var viewModel: LoginViewModel!
+    private var disposeBag: DisposeBag!
     
-    static func create(with viewModel: LoginViewModel) -> LoginViewController {
+    static func create(
+        with viewModel: LoginViewModel,
+        disposeBag: DisposeBag = DisposeBag()
+    ) -> LoginViewController {
         let view = LoginViewController()
         view.viewModel = viewModel
+        view.disposeBag = disposeBag
         return view
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
-    }
-    
-    override func configureNavigation() {
-        
     }
     
     override func configureHierarchy() {
@@ -146,6 +148,64 @@ final class LoginViewController: BaseViewController {
 
 extension LoginViewController {
     private func bind() {
+        emailSearchBar.rx.text.orEmpty
+            .bind(with: self) { owner, email in
+                owner.viewModel.didEditEmailText(text: email)
+            }
+            .disposed(by: disposeBag)
         
+        passwordSearchBar.rx.text.orEmpty
+            .bind(with: self) { owner, password in
+                owner.viewModel.didEditPasswordText(text: password)
+            }
+            .disposed(by: disposeBag)
+        
+        let fieldData = Observable.combineLatest(
+            emailSearchBar.rx.text.orEmpty,
+            passwordSearchBar.rx.text.orEmpty
+        )
+        
+        loginButton.rx.tap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .withLatestFrom(fieldData)
+            .bind(with: self) { owner, fieldData in
+                owner.viewModel.didLoginTap(
+                    query: .init(email: fieldData.0, password: fieldData.1)
+                )
+            }
+            .disposed(by: disposeBag)
+        
+        joinButton.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.viewModel.didJoinTap()
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.trimmedEmailText
+            .bind(to: emailSearchBar.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.trimmedPasswordText
+            .bind(to: passwordSearchBar.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.toastMessage
+            .bind(with: self) { owner, message in
+                owner.view.makeToast(message, duration: 1.5, position: .center)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.goToMain
+            .bind(with: self) { owner, _ in
+                print("앱 드가자~")
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.goToJoin
+            .bind(with: self) { owner, _ in
+                let joinViewController = JoinScene.makeView()
+                owner.navigationController?.pushViewController(joinViewController, animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }
