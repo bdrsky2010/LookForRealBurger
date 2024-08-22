@@ -40,7 +40,7 @@ extension UserDefaultsAccessTokenStorage: AccessTokenStorage {
             userDefaults.string(forKey: accessTokenKey) ?? ""
         }
         set {
-            userDefaults.set(newValue, forKey: accessToken)
+            userDefaults.set(newValue, forKey: accessTokenKey)
         }
     }
     
@@ -49,7 +49,7 @@ extension UserDefaultsAccessTokenStorage: AccessTokenStorage {
             userDefaults.string(forKey: refreshTokenKey) ?? ""
         }
         set {
-            userDefaults.set(newValue, forKey: refreshToken)
+            userDefaults.set(newValue, forKey: refreshTokenKey)
         }
     }
     
