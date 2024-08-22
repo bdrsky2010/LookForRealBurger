@@ -11,6 +11,7 @@ import RxCocoa
 import RxSwift
 
 protocol JoinInput {
+    func didTapBack()
     func didEditEmailText(text: String)
     func didEditPasswordText(text: String)
     func didEditNickText(text: String)
@@ -20,6 +21,7 @@ protocol JoinInput {
 }
 
 protocol JoinOutput {
+    var goToBack: PublishRelay<Void> { get }
     var trimmedEmailText: PublishRelay<String> { get }
     var trimmedPasswordText: PublishRelay<String> { get }
     var trimmedNickText: PublishRelay<String> { get }
@@ -38,6 +40,7 @@ final class DefaultLFRBJoinViewModel: JoinOutput {
     
     private var originEmail = ""
     
+    var goToBack = PublishRelay<Void>()
     var trimmedEmailText = PublishRelay<String>()
     var trimmedPasswordText = PublishRelay<String>()
     var trimmedNickText = PublishRelay<String>()
@@ -57,6 +60,10 @@ final class DefaultLFRBJoinViewModel: JoinOutput {
 }
 
 extension DefaultLFRBJoinViewModel: JoinInput {
+    func didTapBack() {
+        goToBack.accept(())
+    }
+    
     func didEditEmailText(text: String) {
         let trimmedText = text.filter { $0 != " " }
         trimmedEmailText.accept(trimmedText)

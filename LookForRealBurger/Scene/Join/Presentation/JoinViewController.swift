@@ -39,16 +39,16 @@ final class JoinViewController: BaseViewController {
     }()
     
     private let emailSearchBar = BorderRoundedSearchBar(
-        borderWidth: 4, borderColor: R.Color.green, placeholder: "아이디(이메일)"
+        borderWidth: 4, borderColor: R.Color.green, placeholder: R.Phrase.emailPlaceholder
     )
     private let emailValidButton = CapsuleButton(
         title: "이메일 중복 검사", backgroudColor: R.Color.red
     )
     private let passwordSearchBar = BorderRoundedSearchBar(
-        borderWidth: 4, borderColor: R.Color.yellow, placeholder: "비밀번호"
+        borderWidth: 4, borderColor: R.Color.yellow, placeholder: R.Phrase.passwordPlaceholder
     )
     private let nickSearchBar = BorderRoundedSearchBar(
-        borderWidth: 4, borderColor: R.Color.brown, placeholder: "닉네임"
+        borderWidth: 4, borderColor: R.Color.brown, placeholder: R.Phrase.nickPlaceholder
     )
     private let joinButton = CapsuleButton(
         title: "회원가입", backgroudColor: R.Color.green
@@ -158,9 +158,14 @@ final class JoinViewController: BaseViewController {
 
 extension JoinViewController {
     private func bind() {
+        navigationItem.leftBarButtonItem?.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
+        
         emailSearchBar.rx.text.orEmpty
             .bind(with: self) { owner, text in
-                print(text)
                 owner.viewModel.didEditEmailText(text: text)
             }
             .disposed(by: disposeBag)
