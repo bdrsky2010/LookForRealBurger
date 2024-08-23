@@ -14,10 +14,10 @@ protocol LoginUseCase {
 }
 
 final class DefaultLoginUseCase {
-    private let loginService: LoginService
+    private let loginRepository: LoginRepository
     
-    init(loginService: LoginService) {
-        self.loginService = loginService
+    init(loginRepository: LoginRepository) {
+        self.loginRepository = loginRepository
     }
 }
 
@@ -28,7 +28,7 @@ extension DefaultLoginUseCase: LoginUseCase {
                 single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
-            loginService.loginRequest(query: query) { result in
+            loginRepository.loginRequest(query: query) { result in
                 switch result {
                 case .success(let value):
                     single(.success(.success(value)))

@@ -10,12 +10,12 @@ import UIKit
 enum LoginScene {
     static func makeView() -> LoginViewController {
         let network = LFRBNetworkManager.shared
-        let tokenStorage = UserDefaultsAccessTokenStorage.shared
-        let loginService = DefaultLoginService(
+        let accessStorage = UserDefaultsAccessStorage.shared
+        let loginRepository = DefaultLoginRepository(
             network: network,
-            tokenStorage: tokenStorage
+            accessStorage: accessStorage
         )
-        let useCase = DefaultLoginUseCase(loginService: loginService)
+        let useCase = DefaultLoginUseCase(loginRepository: loginRepository)
         let viewModel = DefaultLoginViewModel(useCase: useCase)
         let view = LoginViewController.create(with: viewModel)
         return view
