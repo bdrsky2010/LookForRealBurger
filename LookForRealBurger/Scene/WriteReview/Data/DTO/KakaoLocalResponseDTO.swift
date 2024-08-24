@@ -19,7 +19,9 @@ struct KakaoLocalResponseDTO: Decodable {
     struct Document: Decodable {
         let id: String
         let placeName: String
+        let distance: String? // 단위 meter
         let placeUrl: String
+        let category: String
         let address: String
         let roadAddress: String
         let phone: String
@@ -29,12 +31,18 @@ struct KakaoLocalResponseDTO: Decodable {
         enum CodingKeys: String, CodingKey {
             case id
             case placeName = "place_name"
+            case distance
             case placeUrl = "place_url"
+            case category = "category_name"
             case address = "address_name"
             case roadAddress = "road_address_name"
             case phone
             case x
             case y
+        }
+        
+        var categories: [String] {
+            category.components(separatedBy: " > ")
         }
     }
     
