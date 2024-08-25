@@ -9,9 +9,11 @@ import Foundation
 
 struct KakaoLocalResponseDTO: Decodable {
     struct Meta: Decodable {
+        let totalCount: Int
         let isEnd: Bool
         
         enum CodingKeys: String, CodingKey {
+            case totalCount = "total_count"
             case isEnd = "is_end"
         }
     }
@@ -48,4 +50,28 @@ struct KakaoLocalResponseDTO: Decodable {
     
     let meta: Meta
     let documents: [Document]
+}
+
+extension KakaoLocalResponseDTO {
+    func toDomain(query: String, nextPage: Int) -> BurgerPage {
+        let burgerCategories = Set(["햄버거", query])
+        let burgerHouses = self.documents
+            .filter {
+                let categories = Set($0.categories)
+                return !burgerCategories.intersection(categories).isEmpty
+            }
+            .map {
+                return BurgerHouse(
+                    id: $0.id,
+                    name: $0.placeName,
+                    placeUrl: $0.placeUrl,
+                    address: $0.address,
+                    roadAddress: $0.roadAddress,
+                    phone: $0.phone,
+                    x: Double($0.x),
+                    y: Double($0.y)
+                )
+            }
+        return BurgerPage(nextPage: nextPage, isEndPage: self.meta.isEnd, burgerHouses: burgerHouses)
+    }
 }
