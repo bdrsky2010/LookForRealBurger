@@ -25,7 +25,7 @@ protocol SearchBurgerHouseInput {
 protocol SearchBurgerHouseOutput {
     var popView: PublishRelay<Void> { get }
     var isSearchEnabled: PublishRelay<Bool> { get }
-    var burgerHouses: PublishRelay<[BurgerHouse]> { get }
+    var burgerHouses: BehaviorRelay<[BurgerHouse]> { get }
     var toastMessage: PublishRelay<String> { get }
     var selectItem: PublishRelay<BurgerHouse> { get }
     var nextPage: Int { get }
@@ -37,7 +37,7 @@ typealias SearchBurgerHouseViewModel = SearchBurgerHouseInput & SearchBurgerHous
 final class DefaultSearchBurgerHouseViewModel: SearchBurgerHouseOutput {
     var popView = PublishRelay<Void>()
     var isSearchEnabled = PublishRelay<Bool>()
-    var burgerHouses = PublishRelay<[BurgerHouse]>()
+    var burgerHouses = BehaviorRelay<[BurgerHouse]>(value: [])
     var toastMessage = PublishRelay<String>()
     var selectItem = PublishRelay<BurgerHouse>()
     
@@ -74,6 +74,8 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
             isEndPage = false
         }
         
+        guard !isEndPage else { return }
+        
         let data = Observable.combineLatest(
             Observable.just(nextPage),
             Observable.just(text)
@@ -98,10 +100,12 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
                         case .success(let value):
                             owner.isEndPage = value.isEndPage
                             owner.nextPage = value.nextPage
-                            if owner.nextPage == 1 {
+                            if owner.nextPage == 2 {
                                 owner.burgerHouses.accept(value.burgerHouses)
                             } else {
-                                
+                                var list = owner.burgerHouses.value
+                                list.append(contentsOf: value.burgerHouses)
+                                owner.burgerHouses.accept(list)
                             }
                         case .failure(let error):
                             let errorMessage: String
