@@ -14,11 +14,12 @@ struct BurgerHouse: Hashable, Identifiable {
     let address: String
     let roadAddress: String
     let phone: String
-    let x: String
-    let y: String
+    let x: Double?
+    let y: Double?
 }
 
 struct BurgerPage: Hashable {
-    let isEndPage: Bool
-    let burgerHouses: [BurgerHouse]
+    var nextPage: Int
+    var isEndPage: Bool
+    var burgerHouses: [BurgerHouse]
 }
