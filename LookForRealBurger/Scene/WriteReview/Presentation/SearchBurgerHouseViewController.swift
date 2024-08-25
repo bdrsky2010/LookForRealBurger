@@ -131,11 +131,14 @@ extension SearchBurgerHouseViewController {
             .disposed(by: disposeBag)
         
         localSearchTableView.rx.prefetchRows
-            .compactMap(\.last?.row)
-            .withLatestFrom(searchBar.rx.text.orEmpty) { (row: $0, text: $1) }
+            .withLatestFrom(searchBar.rx.text.orEmpty) { (indexPaths: $0, text: $1) }
             .bind(with: self) { owner, tuple in
-                if tuple.row == (owner.viewModel.nextPage * 15) - 1 {
-                    owner.viewModel.searchText(type: .pagination, text: tuple.text)
+                for indexPath in tuple.indexPaths {
+                    print(tuple.indexPaths, indexPath)
+                    if indexPath.row == ((owner.viewModel.nextPage - 1) * 14) - 1 {
+                        print("페이징!", indexPath.row)
+                        owner.viewModel.searchText(type: .pagination, text: tuple.text)
+                    }
                 }
             }
             .disposed(by: disposeBag)
