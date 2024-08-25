@@ -9,10 +9,16 @@ import Foundation
 
 struct KakaoLocalResponseDTO: Decodable {
     struct Meta: Decodable {
+        struct SameName: Decodable {
+            let keyword: String
+        }
+        
+        let sameName: SameName
         let totalCount: Int
         let isEnd: Bool
         
         enum CodingKeys: String, CodingKey {
+            case sameName = "same_name"
             case totalCount = "total_count"
             case isEnd = "is_end"
         }
@@ -54,7 +60,7 @@ struct KakaoLocalResponseDTO: Decodable {
 
 extension KakaoLocalResponseDTO {
     func toDomain(query: String, nextPage: Int) -> BurgerPage {
-        let burgerCategories = Set(["햄버거", query])
+        let burgerCategories = Set(["햄버거", self.meta.sameName.keyword.filter { $0 != " " }])
         let burgerHouses = self.documents
             .filter {
                 let categories = Set($0.categories)
