@@ -13,6 +13,7 @@ enum LFRBNetworkRouter {
     case join(_ dto: JoinRequestDTO.JoinDTO)
     case emailValid(_ dto: JoinRequestDTO.EmailValidDTO)
     case login(_ dto: LoginRequestDTO)
+    case getPost(_ dto: GetPostRequestDTO)
     case imageUpload(_ files: [Data])
 }
 
@@ -22,6 +23,7 @@ extension LFRBNetworkRouter: LFRBTargetType {
         case .join:        return "v1/users/join"
         case .emailValid:  return "v1/validation/email"
         case .login:       return "v1/users/login"
+        case .getPost:     return "v1/posts"
         case .imageUpload: return "v1/posts/files"
         }
     }
@@ -31,6 +33,7 @@ extension LFRBNetworkRouter: LFRBTargetType {
         case .join:        return .post
         case .emailValid:  return .post
         case .login:       return .post
+        case .getPost:     return .get
         case .imageUpload: return .post
         }
     }
@@ -48,6 +51,9 @@ extension LFRBNetworkRouter: LFRBTargetType {
         case .login(let dto):
             parameters = dto.asParameters
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+        case .getPost(let dto):
+            parameters = dto.asParameters
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
         case .imageUpload(let files):
             let multipartFormData = files.map {
                 MultipartFormData(provider: .data($0),
@@ -74,6 +80,11 @@ extension LFRBNetworkRouter: LFRBTargetType {
         case .login:
             return [
                 LFRBHeader.contentType.rawValue: LFRBHeader.json.rawValue,
+                LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue
+            ]
+        case .getPost:
+            return [
+                LFRBHeader.authorization.rawValue: UserDefaultsAccessStorage.shared.accessToken,
                 LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue
             ]
         case .imageUpload:
