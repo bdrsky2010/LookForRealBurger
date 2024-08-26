@@ -8,10 +8,20 @@
 import UIKit
 
 final class EmptyPresentViewController: BaseViewController {
+    private var loginUseCase: LoginUseCase!
+    
+    static func create(loginUseCase: LoginUseCase) -> EmptyPresentViewController {
+        let view = EmptyPresentViewController()
+        view.loginUseCase = loginUseCase
+        return view
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        let vc = WriteReviewViewController.create(tabBar: tabBarController ?? UITabBarController())
+        let vc = WriteReviewScene.makeView(
+            tabBar: tabBarController ?? UITabBarController(),
+            loginUseCase: loginUseCase
+        )
         let nav = UINavigationController(rootViewController: vc)
         nav.modalPresentationStyle = .fullScreen
         present(nav, animated: true)
