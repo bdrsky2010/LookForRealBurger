@@ -8,8 +8,24 @@
 import UIKit
 
 enum WriteReviewScene {
-    static func makeView(tabBar: UITabBarController) -> WriteReviewViewController {
-        let view = WriteReviewViewController.create(tabBar: tabBar)
+    static func makeView(loginUseCase: LoginUseCase) -> EmptyPresentViewController {
+        let view = EmptyPresentViewController.create(loginUseCase: loginUseCase)
+        return view
+    }
+    
+    static func makeView(
+        tabBar: UITabBarController,
+        loginUseCase: LoginUseCase
+    ) -> WriteReviewViewController {
+        let network = LFRBNetworkManager.shared
+        let imageUploadRepository = DefaultImageUploadRepository(network: network)
+        let postUploadRepository = DefaultPostUploadRepository(network: network)
+        let postUploadUseCase = DefaultPostUploadUseCase(
+            imageUploadRepository: imageUploadRepository,
+            postUploadRepository: postUploadRepository
+        )
+        let viewModel = DefaultWriteReviewViewModel(loginUseCase: loginUseCase, postUploadUseCase: postUploadUseCase)
+        let view = WriteReviewViewController.create(tabBar: tabBar, viewModel: viewModel)
         return view
     }
     
