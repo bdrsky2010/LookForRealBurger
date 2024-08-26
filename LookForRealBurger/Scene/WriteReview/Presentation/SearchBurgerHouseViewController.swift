@@ -136,7 +136,6 @@ extension SearchBurgerHouseViewController {
                 for indexPath in tuple.indexPaths {
                     print(tuple.indexPaths, indexPath)
                     if indexPath.row == ((owner.viewModel.nextPage - 1) * 14) - 1 {
-                        print("페이징!", indexPath.row)
                         owner.viewModel.searchText(type: .pagination, text: tuple.text)
                     }
                 }
