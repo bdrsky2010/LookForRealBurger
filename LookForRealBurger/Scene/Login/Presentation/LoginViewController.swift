@@ -15,7 +15,7 @@ import Toast
 final class LoginViewController: BaseViewController {
     private let appTitleLabel: UILabel = {
         let label = UILabel()
-        label.font = R.Font.chab50
+        label.font = UIWindowScene.isSmallDevice ? R.Font.chab35 : R.Font.chab50
         label.numberOfLines = 0
         label.textColor = R.Color.brown
         label.textAlignment = .center
@@ -148,6 +148,14 @@ final class LoginViewController: BaseViewController {
 
 extension LoginViewController {
     private func bind() {
+        Observable.just("timmy@timmy.com")
+            .bind(to: emailSearchBar.rx.text)
+            .disposed(by: disposeBag)
+        
+        Observable.just("timmy")
+            .bind(to: passwordSearchBar.rx.text)
+            .disposed(by: disposeBag)
+        
         emailSearchBar.rx.text.orEmpty
             .bind(with: self) { owner, email in
                 owner.viewModel.didEditEmailText(text: email)
@@ -197,7 +205,12 @@ extension LoginViewController {
         
         viewModel.goToMain
             .bind(with: self) { owner, _ in
-                print("앱 드가자~")
+                let network = LFRBNetworkManager.shared
+                let accessStorage = UserDefaultsAccessStorage.shared
+                let loginRepository = DefaultLoginRepository(network: network, accessStorage: accessStorage)
+                let loginUseCase = DefaultLoginUseCase(loginRepository: loginRepository)
+                let mainTabBar = MainTabBar.create(loginUseCase: loginUseCase)
+                owner.changeRootViewController(mainTabBar)
             }
             .disposed(by: disposeBag)
         
