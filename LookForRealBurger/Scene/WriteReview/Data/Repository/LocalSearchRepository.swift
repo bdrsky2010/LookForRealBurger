@@ -23,14 +23,14 @@ enum KakaoAPIError: Error {
 }
 
 protocol LocalSearchRepository {
-    func Request(
+    func request(
         query: LocalSearchQuery,
         completion: @escaping (Result<BurgerPage, KakaoAPIError>
         ) -> Void)
 }
 
 final class KakaoLocalSearchRepository: LocalSearchRepository {
-    func Request(
+    func request(
         query: LocalSearchQuery,
         completion: @escaping (Result<BurgerPage, KakaoAPIError>
         ) -> Void) {
