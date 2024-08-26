@@ -16,6 +16,8 @@ enum RequestType {
 }
 
 protocol SearchBurgerHouseInput {
+    func viewWillAppear()
+    func viewWillDisAppear()
     func didTapBack()
     func didChangeText(text: String)
     func searchText(type: RequestType, text: String)
@@ -24,6 +26,7 @@ protocol SearchBurgerHouseInput {
 }
 
 protocol SearchBurgerHouseOutput {
+    var requestAuthAlert: PublishRelay<String> { get }
     var popView: PublishRelay<Void> { get }
     var isSearchEnabled: PublishRelay<Bool> { get }
     var burgerHouses: BehaviorRelay<[BurgerHouse]> { get }
@@ -36,6 +39,7 @@ protocol SearchBurgerHouseOutput {
 typealias SearchBurgerHouseViewModel = SearchBurgerHouseInput & SearchBurgerHouseOutput
 
 final class DefaultSearchBurgerHouseViewModel: SearchBurgerHouseOutput {
+    var requestAuthAlert = PublishRelay<String>()
     var popView = PublishRelay<Void>()
     var isSearchEnabled = PublishRelay<Bool>()
     var burgerHouses = BehaviorRelay<[BurgerHouse]>(value: [])
@@ -61,6 +65,18 @@ final class DefaultSearchBurgerHouseViewModel: SearchBurgerHouseOutput {
 }
 
 extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
+    func viewWillAppear() {
+        locationManager.requestAuthAlert
+            .bind(to: requestAuthAlert)
+            .disposed(by: disposeBag)
+        
+        locationManager.checkDeviceLocationAuthorization()
+    }
+    
+    func viewWillDisAppear() {
+        locationManager.stopUpdatingLocation()
+    }
+    
     func didTapBack() {
         popView.accept(())
     }
@@ -78,18 +94,18 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
         guard !isEndPage else { return }
         
         let data = Observable.combineLatest(
+            Observable.just(locationManager.coordinate),
             Observable.just(nextPage),
             Observable.just(text)
         )
         
-        locationManager.coordinate
-            .withLatestFrom(data) { (coordinate: $0, nextPage: $1.0, text: $1.1) }
+        data
             .map {
                 LocalSearchQuery(
-                    query: $0.text,
-                    x: $0.coordinate.longitude,
-                    y: $0.coordinate.latitude,
-                    page: $0.nextPage
+                    query: $2,
+                    x: $0.value.longitude,
+                    y: $0.value.latitude,
+                    page: $1
                 )
             }
             .subscribe(with: self) { owner, localSearchQuery in
@@ -140,13 +156,12 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
                         print("localSearchExecute disposed")
                     }
                     .disposed(by: owner.disposeBag)
-                    
+                
             }
             .disposed(by: disposeBag)
     }
     
     func modelSelected(item: BurgerHouse) {
-//        selectItem.accept(item)
         let getPostQuery = GetPostQuery(
             next: nil,
             limit: "10000",
@@ -188,6 +203,47 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
     }
     
     func notExistBurgerHouse(burgerHouse: BurgerHouse) {
-        print(#function, burgerHouse)
+        let uploadBurgerHouseQuery = UploadBurgerHouseQuery(
+            name: burgerHouse.name,
+            totalRating: 0,
+            hashtagName: "#" + burgerHouse.name,
+            longitude: burgerHouse.x,
+            latitude: burgerHouse.y,
+            roadAddress: burgerHouse.roadAddress,
+            phone: burgerHouse.phone,
+            localId: burgerHouse.id,
+            productId: LFRBProductID.burgerHouse.rawValue)
+        
+        localSearchUseCase.uploadBurgerHouseExecute(query: uploadBurgerHouseQuery)
+            .asDriver(onErrorJustReturn: .failure(.unknown(message: R.Phrase.errorOccurred)))
+            .drive(with: self) { owner, result in
+                switch result {
+                case .success(let value):
+                    print("\(value.name) 서버 저장 완료")
+                    owner.selectItem.accept(burgerHouse)
+                case .failure(let error):
+                    switch error {
+                    case .network(let message):
+                        owner.toastMessage.accept(message)
+                    case .invalidValue(let message):
+                        owner.toastMessage.accept(message)
+                    case .invalidToken(let message):
+                        owner.toastMessage.accept(message)
+                    case .forbidden(let message):
+                        owner.toastMessage.accept(message)
+                    case .dbServer(let message):
+                        owner.toastMessage.accept(message)
+                    case .expiredToken:
+                        print("uploadBurgerHouseExecute 액세스 토큰 만료")
+                    case .unknown(let message):
+                        owner.toastMessage.accept(message)
+                    }
+                }
+            } onCompleted: { _ in
+                print("uploadBurgerHouseExecute completed")
+            } onDisposed: { _ in
+                print("uploadBurgerHouseExecute disposed")
+            }
+            .disposed(by: disposeBag)
     }
 }
