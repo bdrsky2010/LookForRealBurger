@@ -18,18 +18,25 @@ protocol LocalSearchUseCase {
         query: GetPostQuery,
         localId: String
     ) -> Single<Result<ExistBurgerHouseData, GetPostError>>
+    
+    func uploadBurgerHouseExecute(
+        query: UploadBurgerHouseQuery
+    ) -> Single<Result<GetBurgerHouse, UploadPostError>>
 }
 
 final class DefaultLocalSearchUseCase {
     private let localSearchRepository: LocalSearchRepository
     private let getPostRepository: GetPostRepository
+    private let uploadPostRepository: UploadPostRepository
     
     init(
         localSearchRepository: LocalSearchRepository,
-        getPostRepository: GetPostRepository
+        getPostRepository: GetPostRepository,
+        uploadPostRepository: UploadPostRepository
     ) {
         self.localSearchRepository = localSearchRepository
         self.getPostRepository = getPostRepository
+        self.uploadPostRepository = uploadPostRepository
     }
 }
 
@@ -68,6 +75,26 @@ extension DefaultLocalSearchUseCase: LocalSearchUseCase {
                 case .success(let value):
                     let isExist = !value.filter { $0.localId == localId }.isEmpty
                     single(.success(.success(.init(isExist: isExist))))
+                case .failure(let error):
+                    single(.success(.failure(error)))
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func uploadBurgerHouseExecute(
+        query: UploadBurgerHouseQuery
+    ) -> Single<Result<GetBurgerHouse, UploadPostError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
+                return Disposables.create()
+            }
+            uploadPostRepository.uploadBurgerHouse(query: query) { result in
+                switch result {
+                case .success(let value):
+                    single(.success(.success(value)))
                 case .failure(let error):
                     single(.success(.failure(error)))
                 }
