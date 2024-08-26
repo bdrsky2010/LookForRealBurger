@@ -26,10 +26,18 @@ final class BurgerMapViewController: BaseViewController {
         return view
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.viewWillAppear()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        viewModel.viewWillDisappear()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        viewModel.viewDidLoad()
         bind()
     }
     

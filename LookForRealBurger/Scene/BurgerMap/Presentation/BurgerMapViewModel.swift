@@ -11,7 +11,8 @@ import RxCocoa
 import RxSwift
 
 protocol BurgerMapInput {
-    func viewDidLoad()
+    func viewWillAppear()
+    func viewWillDisappear()
 }
 
 protocol BurgerMapOutput {
@@ -36,9 +37,15 @@ final class DefaultBurgerMapViewModel: BurgerMapOutput {
 }
 
 extension DefaultBurgerMapViewModel: BurgerMapInput {
-    func viewDidLoad() {
+    func viewWillAppear() {
         locationManager.requestAuthAlert
             .bind(to: requestAuthAlert)
             .disposed(by: disposeBag)
+        
+        locationManager.checkDeviceLocationAuthorization()
+    }
+    
+    func viewWillDisappear() {
+        locationManager.stopUpdatingLocation()
     }
 }
