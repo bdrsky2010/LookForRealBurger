@@ -65,6 +65,7 @@ final class SearchBurgerHouseViewController: BaseViewController {
     override func configureUI() {
         localSearchTableView.backgroundColor = .clear
         localSearchTableView.rowHeight = UITableView.automaticDimension
+        localSearchTableView.keyboardDismissMode = .interactive
         localSearchTableView.register(
             LocalSearchTableViewCell.self,
             forCellReuseIdentifier: LocalSearchTableViewCell.identifier
@@ -79,6 +80,7 @@ extension SearchBurgerHouseViewController {
                 owner.viewModel.didTapBack()
             }
             .disposed(by: disposeBag)
+        
         searchBar.rx.text.orEmpty
             .bind(with: self) { owner, text in
                 owner.viewModel.didChangeText(text: text)
@@ -90,6 +92,7 @@ extension SearchBurgerHouseViewController {
             .withLatestFrom(searchBar.rx.text.orEmpty)
             .bind(with: self) { owner, text in
                 owner.viewModel.searchText(type: .search, text: text)
+                owner.searchBar.resignFirstResponder()
             }
             .disposed(by: disposeBag)
         
@@ -134,7 +137,6 @@ extension SearchBurgerHouseViewController {
             .withLatestFrom(searchBar.rx.text.orEmpty) { (indexPaths: $0, text: $1) }
             .bind(with: self) { owner, tuple in
                 for indexPath in tuple.indexPaths {
-                    print(tuple.indexPaths, indexPath)
                     if indexPath.row == ((owner.viewModel.nextPage - 1) * 14) - 1 {
                         owner.viewModel.searchText(type: .pagination, text: tuple.text)
                     }
