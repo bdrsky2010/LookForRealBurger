@@ -65,16 +65,19 @@ final class WriteReviewViewController: BaseViewController {
     
     private var tabBar: UITabBarController!
     private var viewModel: WriteReviewViewModel!
+    private var uploadPostRepository: UploadPostRepository!
     private var disposeBag: DisposeBag!
     
     static func create(
         tabBar: UITabBarController,
         viewModel: WriteReviewViewModel,
+        uploadPostRepository: UploadPostRepository,
         disposeBag: DisposeBag = DisposeBag()
     ) -> WriteReviewViewController {
         let view = WriteReviewViewController()
         view.tabBar = tabBar
         view.viewModel  = viewModel
+        view.uploadPostRepository = uploadPostRepository
         view.disposeBag = disposeBag
         return view
     }
@@ -326,7 +329,7 @@ extension WriteReviewViewController {
         
         viewModel.goToLocalSearch
             .bind(with: self) { owner, _ in
-                let view = WriteReviewScene.makeView()
+                let view = WriteReviewScene.makeView(uploadPostRepository: owner.uploadPostRepository)
                 view.didSelectItem = { burgerHouse in
                     owner.viewModel.burgerHouseSelect(burgerHouse: burgerHouse)
                 }

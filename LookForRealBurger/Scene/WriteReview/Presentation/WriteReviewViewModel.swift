@@ -53,12 +53,12 @@ final class DefaultWriteReviewViewModel: WriteReviewOutput {
     
     private var burgerHouse: BurgerHouse?
     private var loginUseCase: LoginUseCase!
-    private var postUploadUseCase: PostUploadUseCase!
+    private var postUploadUseCase: UploadPostUseCase!
     private var disposeBag: DisposeBag!
     
     init(
         loginUseCase: LoginUseCase,
-        postUploadUseCase: PostUploadUseCase,
+        postUploadUseCase: UploadPostUseCase,
         disposeBag: DisposeBag = DisposeBag()
     ) {
         self.loginUseCase = loginUseCase
