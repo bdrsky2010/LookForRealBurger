@@ -20,6 +20,7 @@ protocol SearchBurgerHouseInput {
     func didChangeText(text: String)
     func searchText(type: RequestType, text: String)
     func modelSelected(item: BurgerHouse)
+    func notExistBurgerHouse(burgerHouse: BurgerHouse)
 }
 
 protocol SearchBurgerHouseOutput {
@@ -145,6 +146,48 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
     }
     
     func modelSelected(item: BurgerHouse) {
-        selectItem.accept(item)
+//        selectItem.accept(item)
+        let getPostQuery = GetPostQuery(
+            next: nil,
+            limit: "10000",
+            productId: LFRBProductID.burgerHouse.rawValue
+        )
+        localSearchUseCase.existBurgerHouseExecute(query: getPostQuery, localId: item.id)
+            .asDriver(onErrorJustReturn: .failure(.unknown(message: R.Phrase.errorOccurred)))
+            .drive(with: self) { owner, result in
+                switch result {
+                case .success(let value):
+                    if value.isExist {
+                        owner.selectItem.accept(item)
+                    } else {
+                        print("식당 데이터 없음 저장해야 함")
+                        owner.notExistBurgerHouse(burgerHouse: item)
+                    }
+                case .failure(let error):
+                    switch error {
+                    case .network(let message):
+                        owner.toastMessage.accept(message)
+                    case .badRequest(let message):
+                        owner.toastMessage.accept(message)
+                    case .invalidToken(let message):
+                        owner.toastMessage.accept(message)
+                    case .forbidden(let message):
+                        owner.toastMessage.accept(message)
+                    case .expiredToken:
+                        print("existBurgerHouseExecute 액세스 토큰 만료")
+                    case .unknown(let message):
+                        owner.toastMessage.accept(message)
+                    }
+                }
+            } onCompleted: { _ in
+                print("existBurgerHouseExecute completed")
+            } onDisposed: { _ in
+                print("existBurgerHouseExecute disposed")
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func notExistBurgerHouse(burgerHouse: BurgerHouse) {
+        print(#function, burgerHouse)
     }
 }
