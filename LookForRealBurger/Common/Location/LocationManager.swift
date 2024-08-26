@@ -18,6 +18,7 @@ protocol LocationManager {
     
     func checkDeviceLocationAuthorization()
     func checkCurrentLocationAuthorization()
+    func stopUpdatingLocation()
     func bind()
 }
 
@@ -73,6 +74,10 @@ extension DefaultLocationManager: LocationManager {
         default:
             print(status)
         }
+    }
+    
+    func stopUpdatingLocation() {
+        manager.stopUpdatingLocation()
     }
     
     func bind() {
