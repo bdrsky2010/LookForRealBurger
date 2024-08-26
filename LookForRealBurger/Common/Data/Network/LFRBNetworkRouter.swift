@@ -14,6 +14,7 @@ enum LFRBNetworkRouter {
     case emailValid(_ dto: JoinRequestDTO.EmailValidDTO)
     case login(_ dto: LoginRequestDTO)
     case getPost(_ dto: GetPostRequestDTO)
+    case uploadPost(_ dto: UploadPostRequestDTO)
     case imageUpload(_ files: [Data])
 }
 
@@ -24,6 +25,7 @@ extension LFRBNetworkRouter: LFRBTargetType {
         case .emailValid:  return "v1/validation/email"
         case .login:       return "v1/users/login"
         case .getPost:     return "v1/posts"
+        case .uploadPost:  return "v1/posts"
         case .imageUpload: return "v1/posts/files"
         }
     }
@@ -34,6 +36,7 @@ extension LFRBNetworkRouter: LFRBTargetType {
         case .emailValid:  return .post
         case .login:       return .post
         case .getPost:     return .get
+        case .uploadPost:  return .post
         case .imageUpload: return .post
         }
     }
@@ -54,6 +57,9 @@ extension LFRBNetworkRouter: LFRBTargetType {
         case .getPost(let dto):
             parameters = dto.asParameters
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+        case .uploadPost(let dto):
+            parameters = dto.asParameters
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         case .imageUpload(let files):
             let multipartFormData = files.map {
                 MultipartFormData(provider: .data($0),
@@ -85,6 +91,12 @@ extension LFRBNetworkRouter: LFRBTargetType {
         case .getPost:
             return [
                 LFRBHeader.authorization.rawValue: UserDefaultsAccessStorage.shared.accessToken,
+                LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue
+            ]
+        case .uploadPost:
+            return [
+                LFRBHeader.authorization.rawValue: UserDefaultsAccessStorage.shared.accessToken,
+                LFRBHeader.contentType.rawValue: LFRBHeader.json.rawValue,
                 LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue
             ]
         case .imageUpload:
