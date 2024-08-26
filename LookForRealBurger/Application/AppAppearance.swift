@@ -11,7 +11,7 @@ enum AppAppearance {
     static func setupAppearance() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = .clear
+        appearance.backgroundColor = R.Color.background
         appearance.titleTextAttributes = [
             NSAttributedString.Key.font: R.Font.chab20,
             NSAttributedString.Key.foregroundColor: R.Color.brown
