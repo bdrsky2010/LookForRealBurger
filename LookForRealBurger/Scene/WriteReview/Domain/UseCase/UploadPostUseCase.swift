@@ -9,24 +9,24 @@ import Foundation
 
 import RxSwift
 
-protocol PostUploadUseCase {
+protocol UploadPostUseCase {
     func uploadImage(files: [Data]) -> Single<Result<UploadedImage, ImageUploadError>>
 }
 
-final class DefaultPostUploadUseCase {
+final class DefaultUploadPostUseCase {
     private let imageUploadRepository: ImageUploadRepository
-    private let postUploadRepository: PostUploadRepository
+    private let uploadPostRepository: UploadPostRepository
     
     init(
         imageUploadRepository: ImageUploadRepository,
-        postUploadRepository: PostUploadRepository
+        uploadPostRepository: UploadPostRepository
     ) {
         self.imageUploadRepository = imageUploadRepository
-        self.postUploadRepository = postUploadRepository
+        self.uploadPostRepository = uploadPostRepository
     }
 }
 
-extension DefaultPostUploadUseCase: PostUploadUseCase {
+extension DefaultUploadPostUseCase: UploadPostUseCase {
     func uploadImage(files: [Data]) -> Single<Result<UploadedImage, ImageUploadError>> {
         return Single.create { [weak self] single -> Disposable in
             guard let self else {
