@@ -58,7 +58,6 @@ extension DefaultLoginViewModel: LoginInput {
     }
     
     func didLoginTap(query: LoginQuery) {
-        print(query)
         useCase.loginExecute(query: query)
             .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
             .drive(with: self) { owner, result in
