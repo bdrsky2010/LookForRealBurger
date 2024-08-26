@@ -13,22 +13,25 @@ enum LFRBNetworkRouter {
     case join(_ dto: JoinRequestDTO.JoinDTO)
     case emailValid(_ dto: JoinRequestDTO.EmailValidDTO)
     case login(_ dto: LoginRequestDTO)
+    case imageUpload(_ files: [Data])
 }
 
 extension LFRBNetworkRouter: LFRBTargetType {
     var path: String {
         switch self {
-        case .join:       return "v1/users/join"
-        case .emailValid: return "v1/validation/email"
-        case .login:      return "v1/users/login"
+        case .join:        return "v1/users/join"
+        case .emailValid:  return "v1/validation/email"
+        case .login:       return "v1/users/login"
+        case .imageUpload: return "v1/posts/files"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .join:       return .post
-        case .emailValid: return .post
-        case .login:      return .post
+        case .join:        return .post
+        case .emailValid:  return .post
+        case .login:       return .post
+        case .imageUpload: return .post
         }
     }
     
@@ -36,11 +39,24 @@ extension LFRBNetworkRouter: LFRBTargetType {
         var parameters: [String: Any] = [:]
         
         switch self {
-        case .join(let dto):       parameters = dto.asParameters
-        case .emailValid(let dto): parameters = dto.asParameters
-        case .login(let dto):      parameters = dto.asParameters
+        case .join(let dto):       
+            parameters = dto.asParameters
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+        case .emailValid(let dto):
+            parameters = dto.asParameters
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+        case .login(let dto):
+            parameters = dto.asParameters
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+        case .imageUpload(let files):
+            let multipartFormData = files.map {
+                MultipartFormData(provider: .data($0),
+                                  name: "files",
+                                  fileName: "LFRB_" + UUID().uuidString,
+                                  mimeType: "image/jpg")
+            }
+            return .uploadMultipart(multipartFormData)
         }
-        return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
     }
     
     var headers: [String : String]? {
@@ -58,6 +74,12 @@ extension LFRBNetworkRouter: LFRBTargetType {
         case .login:
             return [
                 LFRBHeader.contentType.rawValue: LFRBHeader.json.rawValue,
+                LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue
+            ]
+        case .imageUpload:
+            return [
+                LFRBHeader.authorization.rawValue: UserDefaultsAccessStorage.shared.accessToken,
+                LFRBHeader.contentType.rawValue: LFRBHeader.multipart.rawValue,
                 LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue
             ]
         }
