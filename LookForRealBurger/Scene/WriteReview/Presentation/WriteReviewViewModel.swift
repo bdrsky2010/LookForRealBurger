@@ -17,8 +17,11 @@ protocol WriteReviewInput {
     func imageTap()
     func cameraSelect()
     func gallerySelect()
-    func saveTap(files: [Data])
+    func saveTap()
+    func confirmedSave(files: [Data])
     func imageUploadSuccess(uploadedImage: UploadedImage)
+    func plusRatingTap()
+    func minusRatingTap()
 }
 
 protocol WriteReviewOutput {
@@ -28,7 +31,9 @@ protocol WriteReviewOutput {
     var presentAddPhotoAction: PublishRelay<Void> { get }
     var presentCamera: PublishRelay<Void> { get }
     var presentGallery: PublishRelay<Void> { get }
+    var burgerHouseRating: BehaviorSubject<Int> { get }
     var toastMessage: PublishRelay<String> { get }
+    var saveConfirm: PublishRelay<Void> { get }
     var uploadSuccess: PublishRelay<UploadedImage> { get }
 }
 
@@ -41,7 +46,9 @@ final class DefaultWriteReviewViewModel: WriteReviewOutput {
     var presentAddPhotoAction = PublishRelay<Void>()
     var presentCamera = PublishRelay<Void>()
     var presentGallery = PublishRelay<Void>()
+    var burgerHouseRating = BehaviorSubject<Int>(value: 1)
     var toastMessage = PublishRelay<String>()
+    var saveConfirm = PublishRelay<Void>()
     var uploadSuccess = PublishRelay<UploadedImage>()
     
     private var burgerHouse: BurgerHouse?
@@ -87,7 +94,11 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
         presentGallery.accept(())
     }
     
-    func saveTap(files: [Data]) {
+    func saveTap() {
+        saveConfirm.accept(())
+    }
+    
+    func confirmedSave(files: [Data]) {
         guard files.reduce(0, { $0 + $1.count }) < 5000000 else {
             toastMessage.accept("사진 용량 제한: 5MB 제한")
             return
@@ -122,6 +133,26 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
                 print("uploadImage disposed")
             }
             .disposed(by: disposeBag)
+    }
+    
+    func plusRatingTap() {
+        do {
+            var rating = try burgerHouseRating.value()
+            rating = rating < 5 ? (rating + 1) : rating
+            burgerHouseRating.onNext(rating)
+        } catch {
+            toastMessage.accept("왜 여기서 에러가...?")
+        }
+    }
+    
+    func minusRatingTap() {
+        do {
+            var rating = try burgerHouseRating.value()
+            rating = rating > 1 ? (rating - 1) : rating
+            burgerHouseRating.onNext(rating)
+        } catch {
+            toastMessage.accept("왜 여기서 에러가...?")
+        }
     }
     
     func imageUploadSuccess(uploadedImage: UploadedImage) {

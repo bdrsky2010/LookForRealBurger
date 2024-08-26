@@ -47,8 +47,19 @@ final class WriteReviewViewController: BaseViewController {
     private let secondImageView = UIImageView()
     private let thirdImageView = UIImageView()
     private let fourthImageView = UIImageView()
-    private let fifthmageView = UIImageView()
-    private lazy var imageViewList = [addImageView, firstImageView, secondImageView, thirdImageView, fourthImageView, fifthmageView]
+    private let fifthImageView = UIImageView()
+    private lazy var imageViewList = [addImageView, firstImageView, secondImageView, thirdImageView, fourthImageView, fifthImageView]
+    
+    private let minusButton = PretendardRoundedButton(title: "-", font: R.Font.chab30, backgroudColor: R.Color.orange)
+    private let plusButton = PretendardRoundedButton(title: "+", font: R.Font.chab30, backgroudColor: R.Color.green)
+    
+    private let firstRatingView = UIImageView()
+    private let secondRatingView = UIImageView()
+    private let thirdRatingView = UIImageView()
+    private let fourthRatingView = UIImageView()
+    private let fifthRatingView = UIImageView()
+    private let ratingStackView = UIStackView()
+    private lazy var ratingViewList = [firstRatingView, secondRatingView, thirdRatingView, fourthRatingView, fifthRatingView]
     
     private let placeholder = "리뷰를 작성해주세요"
     
@@ -85,9 +96,20 @@ final class WriteReviewViewController: BaseViewController {
     }
     
     override func configureHierarchy() {
-        view.addSubview(burgerHouseSearchBar)
-        view.addSubview(contentTextView)
-        view.addSubview(photoScrollView)
+        view.addSubview(mainScrollView)
+        mainScrollView.addSubview(contentView)
+        
+        contentView.addSubview(burgerHouseSearchBar)
+        contentView.addSubview(searchBarCover)
+        contentView.addSubview(contentTextView)
+        contentView.addSubview(photoScrollView)
+        contentView.addSubview(plusButton)
+        contentView.addSubview(minusButton)
+        contentView.addSubview(ratingStackView)
+        
+//        view.addSubview(burgerHouseSearchBar)
+//        view.addSubview(contentTextView)
+//        view.addSubview(photoScrollView)
         photoScrollView.addSubview(photoStackView)
         imageViewList.forEach {
             photoStackView.addArrangedSubview($0)
@@ -101,25 +123,49 @@ final class WriteReviewViewController: BaseViewController {
                 $0.backgroundColor = R.Color.brown
             }
         }
+        
+        ratingViewList.forEach {
+            ratingStackView.addArrangedSubview($0)
+            $0.preferredSymbolConfiguration = .init(font: .systemFont(ofSize: 20, weight: .bold))
+            $0.tintColor = R.Color.white
+            $0.image = UIImage(systemName: "star.fill")
+        }
+        
         view.addSubview(saveButton)
     }
     
     override func configureLayout() {
+        mainScrollView.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(saveButton.snp.top).offset(-16)
+        }
+        
+        contentView.snp.makeConstraints { make in
+            make.edges.width.equalToSuperview()
+        }
+        
         burgerHouseSearchBar.snp.makeConstraints { make in
-            make.top.equalTo(view.safeAreaLayoutGuide).offset(16)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.top.equalToSuperview().inset(16)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.height.equalTo(50)
+        }
+        
+        searchBarCover.snp.makeConstraints { make in
+            make.top.equalToSuperview().inset(16)
+            make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(50)
         }
         
         contentTextView.snp.makeConstraints { make in
             make.top.equalTo(burgerHouseSearchBar.snp.bottom).offset(16)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(400)
         }
         
         photoScrollView.snp.makeConstraints { make in
             make.top.equalTo(contentTextView.snp.bottom).offset(16)
-            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(120)
         }
         
@@ -132,11 +178,35 @@ final class WriteReviewViewController: BaseViewController {
         
         photoStackView.spacing = 20
         
+        minusButton.snp.makeConstraints { make in
+            make.top.equalTo(photoScrollView.snp.bottom).offset(16)
+            make.leading.equalToSuperview().inset(20)
+            make.width.equalTo(40)
+            make.height.equalTo(60)
+            make.bottom.equalToSuperview()
+        }
+        
+        plusButton.snp.makeConstraints { make in
+            make.top.equalTo(photoScrollView.snp.bottom).offset(16)
+            make.trailing.equalToSuperview().inset(20)
+            make.width.equalTo(40)
+            make.height.equalTo(60)
+            make.bottom.equalToSuperview()
+        }
+        
+        ratingStackView.snp.makeConstraints { make in
+            make.top.equalTo(photoScrollView.snp.bottom).offset(16)
+            make.leading.equalTo(minusButton.snp.trailing).offset(8)
+            make.trailing.equalTo(plusButton.snp.leading).offset(-8)
+            make.height.equalTo(60)
+            make.bottom.equalToSuperview()
+        }
+        ratingStackView.distribution = .fillEqually
+        
         saveButton.snp.makeConstraints { make in
-            make.top.greaterThanOrEqualTo(photoScrollView.snp.bottom).offset(16)
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(50)
-            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(16)
+            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-16)
         }
     }
     
@@ -157,7 +227,6 @@ extension WriteReviewViewController {
             .tapGesture()
             .when(.recognized)
             .bind(with: self) { owner, _ in
-                print("????")
                 owner.viewModel.searchBarTap()
             }
             .disposed(by: disposeBag)
@@ -230,10 +299,21 @@ extension WriteReviewViewController {
             }
             .disposed(by: disposeBag)
         
+        plusButton.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.viewModel.plusRatingTap()
+            }
+            .disposed(by: disposeBag)
+        
+        minusButton.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.viewModel.minusRatingTap()
+            }
+            .disposed(by: disposeBag)
+        
         saveButton.rx.tap
             .bind(with: self) { owner, _ in
-                let imageData = owner.imageViewList.suffix(5).compactMap { $0.image?.jpegData(compressionQuality: 0.4) }
-                owner.viewModel.saveTap(files: imageData)
+                owner.viewModel.saveTap()
             }
             .disposed(by: disposeBag)
         
@@ -299,9 +379,39 @@ extension WriteReviewViewController {
             }
             .disposed(by: disposeBag)
         
+        viewModel.burgerHouseRating
+            .bind(with: self) { owner, rating in
+                (0..<5).forEach {
+                    if $0 <= rating - 1 {
+                        owner.ratingViewList[$0].tintColor = R.Color.brown
+                    } else {
+                        owner.ratingViewList[$0].tintColor = R.Color.white
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+        
         viewModel.toastMessage
             .bind(with: self) { owner, message in
                 owner.view.makeToast(message, duration: 1.5)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.saveConfirm
+            .bind(with: self) { owner, _ in
+                let alert = UIAlertController(
+                    title: "저장하시겠습니까?",
+                    message: nil,
+                    preferredStyle: .alert
+                )
+                let save = UIAlertAction(title: "저장", style: .default) { _ in
+                    let imageData = owner.imageViewList.suffix(5).compactMap { $0.image?.jpegData(compressionQuality: 0.4) }
+                    owner.viewModel.confirmedSave(files: imageData)
+                }
+                let cancel = UIAlertAction(title: "취소", style: .destructive)
+                alert.addAction(save)
+                alert.addAction(cancel)
+                owner.present(alert, animated: true)
             }
             .disposed(by: disposeBag)
     }
