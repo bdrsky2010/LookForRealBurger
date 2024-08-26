@@ -19,23 +19,31 @@ enum WriteReviewScene {
     ) -> WriteReviewViewController {
         let network = LFRBNetworkManager.shared
         let imageUploadRepository = DefaultImageUploadRepository(network: network)
-        let postUploadRepository = DefaultPostUploadRepository(network: network)
-        let postUploadUseCase = DefaultPostUploadUseCase(
+        let uploadPostRepository = DefaultUploadPostRepository(network: network)
+        let postUploadUseCase = DefaultUploadPostUseCase(
             imageUploadRepository: imageUploadRepository,
-            postUploadRepository: postUploadRepository
+            uploadPostRepository: uploadPostRepository
         )
-        let viewModel = DefaultWriteReviewViewModel(loginUseCase: loginUseCase, postUploadUseCase: postUploadUseCase)
-        let view = WriteReviewViewController.create(tabBar: tabBar, viewModel: viewModel)
+        let viewModel = DefaultWriteReviewViewModel(
+            loginUseCase: loginUseCase,
+            postUploadUseCase: postUploadUseCase
+        )
+        let view = WriteReviewViewController.create(
+            tabBar: tabBar,
+            viewModel: viewModel,
+            uploadPostRepository: uploadPostRepository
+        )
         return view
     }
     
-    static func makeView() -> SearchBurgerHouseViewController {
+    static func makeView(uploadPostRepository: UploadPostRepository) -> SearchBurgerHouseViewController {
         let network = LFRBNetworkManager.shared
         let localSearchRepository = KakaoLocalSearchRepository()
         let getPostRepository = DefaultGetPostRepository(network: network)
         let localSearchUseCase = DefaultLocalSearchUseCase(
             localSearchRepository: localSearchRepository,
-            getPostRepository: getPostRepository
+            getPostRepository: getPostRepository,
+            uploadPostRepository: uploadPostRepository
         )
         let locationManager = DefaultLocationManager.shared
         let viewModel = DefaultSearchBurgerHouseViewModel(
