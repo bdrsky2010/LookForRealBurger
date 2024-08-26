@@ -39,7 +39,6 @@ final class DefaultLocationManager {
 extension DefaultLocationManager: LocationManager {
     // 1) 사용자에게 권한 요청을 하기 위해, iOS 위치 서비스 활성화 여부 체크
     func checkDeviceLocationAuthorization() {
-        print(#function)
         DispatchQueue.global().async { [weak self] in
             guard let self else { return }
             if CLLocationManager.locationServicesEnabled() {
