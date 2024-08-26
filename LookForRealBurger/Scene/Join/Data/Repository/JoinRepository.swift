@@ -8,19 +8,19 @@
 import Foundation
 import Moya
 
-protocol JoinRepository {
-    func joinRequest(
-        query: JoinQuery,
-        completion: @escaping (Result<JoinUser, JoinError>) -> Void
-    )
-}
-
 enum JoinError: Error {
     case network(_ message: String)
     case missingFields(_ message: String)
     case existBlank(_ message: String)
     case existUser(_ message: String)
     case unknown(_ message: String)
+}
+
+protocol JoinRepository {
+    func joinRequest(
+        query: JoinQuery,
+        completion: @escaping (Result<JoinUser, JoinError>) -> Void
+    )
 }
 
 final class DefaultJoinRepository {
