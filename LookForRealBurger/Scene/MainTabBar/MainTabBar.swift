@@ -23,11 +23,13 @@ private enum TabItem: CaseIterable {
         
         switch self {
         case .map/*(let loginUseCase)*/:
-            view = BurgerMapViewController.create()
+            let locationManager = DefaultLocationManager.shared
+            let viewModel = DefaultBurgerMapViewModel(locationManager: locationManager)
+            view = BurgerMapViewController.create(viewModel: viewModel)
         case .review/*(let loginUseCase)*/:
             view = BurgerReviewViewController()
-        case .writeReview/*(let loginUseCase)*/:
-            view = EmptyPresentViewController()
+        case .writeReview(let loginUseCase):
+            view = EmptyPresentViewController.create(loginUseCase: loginUseCase)
         case .profile/*(let loginUseCase)*/:
             view = MyProfileViewController()
         }
