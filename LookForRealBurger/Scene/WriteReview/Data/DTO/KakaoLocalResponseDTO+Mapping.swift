@@ -74,8 +74,8 @@ extension KakaoLocalResponseDTO {
                     address: $0.address,
                     roadAddress: $0.roadAddress,
                     phone: $0.phone,
-                    x: Double($0.x),
-                    y: Double($0.y)
+                    x: $0.x,
+                    y: $0.y
                 )
             }
         return BurgerPage(nextPage: nextPage, isEndPage: self.meta.isEnd, burgerHouses: burgerHouses)
