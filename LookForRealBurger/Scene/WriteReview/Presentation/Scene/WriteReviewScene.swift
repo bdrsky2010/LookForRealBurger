@@ -30,8 +30,13 @@ enum WriteReviewScene {
     }
     
     static func makeView() -> SearchBurgerHouseViewController {
+        let network = LFRBNetworkManager.shared
         let localSearchRepository = KakaoLocalSearchRepository()
-        let localSearchUseCase = DefaultLocalSearchUseCase(localSearchRepository: localSearchRepository)
+        let getPostRepository = DefaultGetPostRepository(network: network)
+        let localSearchUseCase = DefaultLocalSearchUseCase(
+            localSearchRepository: localSearchRepository,
+            getPostRepository: getPostRepository
+        )
         let locationManager = DefaultLocationManager.shared
         let viewModel = DefaultSearchBurgerHouseViewModel(
             localSearchUseCase: localSearchUseCase,
