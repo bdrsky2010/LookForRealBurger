@@ -7,6 +7,11 @@
 
 import Foundation
 
+enum PostType: String {
+    case review
+    case burgerHouse
+}
+
 enum GetPostError: Error {
     case network(message: String)
     case badRequest(message: String)
@@ -24,11 +29,6 @@ protocol GetPostRepository {
 }
 
 final class DefaultGetPostRepository {
-    enum PostType: String {
-        case review
-        case burgerHouse
-    }
-    
     private let network: NetworkManager
     
     init(network: NetworkManager) {
@@ -74,7 +74,7 @@ extension DefaultGetPostRepository {
             print("GetPostRepository(\(type.rawValue)) 포스트 조회 에러 -> \(error.localizedDescription)")
         case .apiKey, .invalidData, .tooManyRequest, .invalidURL, .networkFailure:
             sendError = .network(message: "에러가 발생하였습니다.\n잠시후에 다시 시도 부탁드립니다.")
-            print("GetPostRepository(burgerHouse) 포스트 조회 에러 -> \(failure.self)")
+            print("GetPostRepository(\(type.rawValue)) 포스트 조회 에러 -> \(failure.self)")
         case .unknown(let statusCode):
             switch statusCode {
             case 400:
