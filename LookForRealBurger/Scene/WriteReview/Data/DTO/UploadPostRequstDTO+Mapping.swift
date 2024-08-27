@@ -12,10 +12,10 @@ struct UploadPostRequestDTO: Encodable {
     let price: Int
     let content: String
     let content1: String
-    let content2: String
-    let content3: String
-    let content4: String
-    let content5: String
+    let content2: String?
+    let content3: String?
+    let content4: String?
+    let content5: String?
     let productID: String
     let files: [String]?
     
