@@ -140,6 +140,10 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
                         print("uploadImageExecute 토큰 리프레시 필요")
                     case .unknown(let message):
                         owner.toastMessage.accept(message)
+                    case .invalidValue(let message):
+                        owner.toastMessage.accept(message)
+                    case .dbServer(let message):
+                        owner.toastMessage.accept(message)
                     }
                 }
             } onCompleted: { _ in
@@ -214,6 +218,8 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
                             // TODO: 토큰 리프레시
                             print("uploadReviewExecute 토큰 리프레시 필요")
                         case .unknown(let message):
+                            owner.toastMessage.accept(message)
+                        case .badRequest(let message):
                             owner.toastMessage.accept(message)
                         }
                     }

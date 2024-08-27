@@ -59,7 +59,7 @@ extension DefaultLoginViewModel: LoginInput {
     
     func didLoginTap(query: LoginQuery) {
         useCase.loginExecute(query: query)
-            .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
+            .asDriver(onErrorJustReturn: .failure(.unknown(message: R.Phrase.errorOccurred)))
             .drive(with: self) { owner, result in
                 switch result {
                 case .success(let value):
@@ -75,6 +75,12 @@ extension DefaultLoginViewModel: LoginInput {
                     case .accountVerify(let message):
                         errorMessage = message
                     case .unknown(let message):
+                        errorMessage = message
+                    case .existBlank(let message):
+                        errorMessage = message
+                    case .existUser(let message):
+                        errorMessage = message
+                    case .enable(let message):
                         errorMessage = message
                     }
                     owner.toastMessage.accept(errorMessage)

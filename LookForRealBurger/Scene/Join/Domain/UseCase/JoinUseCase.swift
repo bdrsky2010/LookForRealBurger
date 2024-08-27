@@ -10,20 +10,17 @@ import RxSwift
 
 protocol JoinUseCase {
     func isValidEmail(_ email: String) -> Bool
-    func checkValidEmail(email: String) -> Single<Result<EmailValidMessage, EmailValidError>>
-    func joinMembership(query: JoinQuery) -> Single<Result<JoinUser, JoinError>>
+    func checkValidEmail(email: String) -> Single<Result<EmailValidMessage, AuthError>>
+    func joinMembership(query: JoinQuery) -> Single<Result<JoinUser, AuthError>>
 }
 
 final class DefaultJoinUseCase {
-    private let joinRepository: JoinRepository
-    private let emailValidRepository: EmailValidRepository
+    private let authRepository: AuthRepository
     
     init(
-        joinRepository: JoinRepository,
-        emailValidRepository: EmailValidRepository
+        authRepository: AuthRepository
     ) {
-        self.joinRepository = joinRepository
-        self.emailValidRepository = emailValidRepository
+        self.authRepository = authRepository
     }
 }
 
@@ -34,13 +31,13 @@ extension DefaultJoinUseCase: JoinUseCase {
        return emailTest.evaluate(with: email)
     }
     
-    func checkValidEmail(email: String) -> Single<Result<EmailValidMessage, EmailValidError>> {
+    func checkValidEmail(email: String) -> Single<Result<EmailValidMessage, AuthError>> {
         return Single.create { [weak self] single -> Disposable in
             guard let self else {
-                single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
+                single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
-            emailValidRepository.emailValidRequest(query: .init(email: email)) { result in
+            authRepository.emailValidRequest(query: .init(email: email)) { result in
                 switch result {
                 case .success(let value):
                     print("성공")
@@ -54,13 +51,13 @@ extension DefaultJoinUseCase: JoinUseCase {
         }
     }
     
-    func joinMembership(query: JoinQuery) -> Single<Result<JoinUser, JoinError>> {
+    func joinMembership(query: JoinQuery) -> Single<Result<JoinUser, AuthError>> {
         return Single.create { [weak self] single -> Disposable in
             guard let self else {
-                single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
+                single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
-            joinRepository.joinRequest(query: query) { result in
+            authRepository.joinRequest(query: query) { result in
                 switch result {
                 case .success(let value):
                     single(.success(.success(value)))

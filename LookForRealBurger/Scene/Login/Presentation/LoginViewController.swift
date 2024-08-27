@@ -148,6 +148,13 @@ final class LoginViewController: BaseViewController {
 
 extension LoginViewController {
     private func bind() {
+        /*
+         "timmy@timmy.com"
+         "timmy"
+         
+         "timmy2@timmy.com"
+         "timmy"
+         */
         Observable.just("timmy@timmy.com")
             .bind(to: emailSearchBar.rx.text)
             .disposed(by: disposeBag)
@@ -205,10 +212,8 @@ extension LoginViewController {
         
         viewModel.goToMain
             .bind(with: self) { owner, _ in
-                let network = LFRBNetworkManager.shared
-                let accessStorage = UserDefaultsAccessStorage.shared
-                let loginRepository = DefaultLoginRepository(network: network, accessStorage: accessStorage)
-                let loginUseCase = DefaultLoginUseCase(loginRepository: loginRepository)
+                let authRepository = DefualtAuthRepository.shared
+                let loginUseCase = DefaultLoginUseCase(authRepository: authRepository)
                 let mainTabBar = MainTabBar.create(loginUseCase: loginUseCase)
                 owner.changeRootViewController(mainTabBar)
             }

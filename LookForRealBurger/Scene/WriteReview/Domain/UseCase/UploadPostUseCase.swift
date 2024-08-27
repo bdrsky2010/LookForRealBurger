@@ -12,11 +12,11 @@ import RxSwift
 protocol UploadPostUseCase {
     func uploadImageExecute(
         files: [Data]
-    ) -> Single<Result<UploadedImage, ImageUploadError>>
+    ) -> Single<Result<UploadedImage, PostError>>
     
     func uploadReviewExecute(
         query: UploadBurgerHouseReviewQuery
-    ) -> Single<Result<BurgerHouseReview, UploadPostError>>
+    ) -> Single<Result<BurgerHouseReview, PostError>>
     
     func registerReviewIdExecute(
         query: RegisterReviewIdQuery
@@ -24,29 +24,26 @@ protocol UploadPostUseCase {
 }
 
 final class DefaultUploadPostUseCase {
-    private let imageUploadRepository: ImageUploadRepository
-    private let uploadPostRepository: UploadPostRepository
+    private let postRepository: PostRepository
     private let commentRepository: CommentRepository
     
     init(
-        imageUploadRepository: ImageUploadRepository,
-        uploadPostRepository: UploadPostRepository,
+        postRepository: PostRepository,
         commentRepository: CommentRepository
     ) {
-        self.imageUploadRepository = imageUploadRepository
-        self.uploadPostRepository = uploadPostRepository
+        self.postRepository = postRepository
         self.commentRepository = commentRepository
     }
 }
 
 extension DefaultUploadPostUseCase: UploadPostUseCase {
-    func uploadImageExecute(files: [Data]) -> Single<Result<UploadedImage, ImageUploadError>> {
+    func uploadImageExecute(files: [Data]) -> Single<Result<UploadedImage, PostError>> {
         return Single.create { [weak self] single -> Disposable in
             guard let self else {
                 single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
-            imageUploadRepository.uploadRequest(files: files) { result in
+            postRepository.uploadImageRequest(files: files) { result in
                 switch result {
                 case .success(let value):
                     single(.success(.success(value)))
@@ -60,13 +57,13 @@ extension DefaultUploadPostUseCase: UploadPostUseCase {
     
     func uploadReviewExecute(
         query: UploadBurgerHouseReviewQuery
-    ) -> Single<Result<BurgerHouseReview, UploadPostError>> {
+    ) -> Single<Result<BurgerHouseReview, PostError>> {
         return Single.create { [weak self] single -> Disposable in
             guard let self else {
                 single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
-            uploadPostRepository.uploadBurgerHouseReview(
+            postRepository.uploadBurgerHouseReview(
                 query: query
             ) { result in
                 switch result {

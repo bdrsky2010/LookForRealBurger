@@ -17,13 +17,11 @@ enum WriteReviewScene {
         tabBar: UITabBarController,
         loginUseCase: LoginUseCase
     ) -> WriteReviewViewController {
-        let network = LFRBNetworkManager.shared
-        let imageUploadRepository = DefaultImageUploadRepository(network: network)
-        let uploadPostRepository = DefaultUploadPostRepository(network: network)
+        let postRepository = DefaultPostRepository.shared
+        let commentRepository = DefaultCommentRepository.shared
         let postUploadUseCase = DefaultUploadPostUseCase(
-            imageUploadRepository: imageUploadRepository,
-            uploadPostRepository: uploadPostRepository,
-            commentRepository: DefaultCommentRepository.shared
+            postRepository: postRepository,
+            commentRepository: commentRepository
         )
         let viewModel = DefaultWriteReviewViewModel(
             loginUseCase: loginUseCase,
@@ -31,20 +29,17 @@ enum WriteReviewScene {
         )
         let view = WriteReviewViewController.create(
             tabBar: tabBar,
-            viewModel: viewModel,
-            uploadPostRepository: uploadPostRepository
+            viewModel: viewModel
         )
         return view
     }
     
-    static func makeView(uploadPostRepository: UploadPostRepository) -> SearchBurgerHouseViewController {
-        let network = LFRBNetworkManager.shared
+    static func makeView() -> SearchBurgerHouseViewController {
         let localSearchRepository = KakaoLocalSearchRepository()
-        let getPostRepository = DefaultGetPostRepository(network: network)
+        let postRepository = DefaultPostRepository.shared
         let localSearchUseCase = DefaultLocalSearchUseCase(
             localSearchRepository: localSearchRepository,
-            getPostRepository: getPostRepository,
-            uploadPostRepository: uploadPostRepository
+            postRepository: postRepository
         )
         let locationManager = DefaultLocationManager.shared
         let viewModel = DefaultSearchBurgerHouseViewModel(

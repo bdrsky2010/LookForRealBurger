@@ -10,25 +10,25 @@ import Foundation
 import RxSwift
 
 protocol LoginUseCase {
-    func loginExecute(query: LoginQuery) -> Single<Result<LoginUser, LoginError>>
+    func loginExecute(query: LoginQuery) -> Single<Result<LoginUser, AuthError>>
 }
 
 final class DefaultLoginUseCase {
-    private let loginRepository: LoginRepository
+    private let authRepository: AuthRepository
     
-    init(loginRepository: LoginRepository) {
-        self.loginRepository = loginRepository
+    init(authRepository: AuthRepository) {
+        self.authRepository = authRepository
     }
 }
 
 extension DefaultLoginUseCase: LoginUseCase {
-    func loginExecute(query: LoginQuery) -> Single<Result<LoginUser, LoginError>> {
+    func loginExecute(query: LoginQuery) -> Single<Result<LoginUser, AuthError>> {
         Single.create { [weak self] single in
             guard let self else {
-                single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
+                single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
-            loginRepository.loginRequest(query: query) { result in
+            authRepository.loginRequest(query: query) { result in
                 switch result {
                 case .success(let value):
                     single(.success(.success(value)))

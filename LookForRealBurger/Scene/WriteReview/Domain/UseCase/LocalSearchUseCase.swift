@@ -17,26 +17,23 @@ protocol LocalSearchUseCase {
     func existBurgerHouseExecute(
         query: GetPostQuery,
         localId: String
-    ) -> Single<Result<ExistBurgerHouseData, GetPostError>>
+    ) -> Single<Result<ExistBurgerHouseData, PostError>>
     
     func uploadBurgerHouseExecute(
         query: UploadBurgerHouseQuery
-    ) -> Single<Result<GetBurgerHouse, UploadPostError>>
+    ) -> Single<Result<GetBurgerHouse, PostError>>
 }
 
 final class DefaultLocalSearchUseCase {
     private let localSearchRepository: LocalSearchRepository
-    private let getPostRepository: GetPostRepository
-    private let uploadPostRepository: UploadPostRepository
+    private let postRepository: PostRepository
     
     init(
         localSearchRepository: LocalSearchRepository,
-        getPostRepository: GetPostRepository,
-        uploadPostRepository: UploadPostRepository
+        postRepository: PostRepository
     ) {
         self.localSearchRepository = localSearchRepository
-        self.getPostRepository = getPostRepository
-        self.uploadPostRepository = uploadPostRepository
+        self.postRepository = postRepository
     }
 }
 
@@ -64,13 +61,13 @@ extension DefaultLocalSearchUseCase: LocalSearchUseCase {
     func existBurgerHouseExecute(
         query: GetPostQuery,
         localId: String
-    ) -> Single<Result<ExistBurgerHouseData, GetPostError>> {
+    ) -> Single<Result<ExistBurgerHouseData, PostError>> {
         return Single.create { [weak self] single in
             guard let self else {
                 single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
-            getPostRepository.getPostRequest(query: query) { result in
+            postRepository.getPostRequest(query: query) { result in
                 switch result {
                 case .success(let value):
                     let filteredList = value.filter { $0.localId == localId }
@@ -87,13 +84,13 @@ extension DefaultLocalSearchUseCase: LocalSearchUseCase {
     
     func uploadBurgerHouseExecute(
         query: UploadBurgerHouseQuery
-    ) -> Single<Result<GetBurgerHouse, UploadPostError>> {
+    ) -> Single<Result<GetBurgerHouse, PostError>> {
         return Single.create { [weak self] single in
             guard let self else {
                 single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
-            uploadPostRepository.uploadBurgerHouse(query: query) { result in
+            postRepository.uploadBurgerHouse(query: query) { result in
                 switch result {
                 case .success(let value):
                     single(.success(.success(value)))

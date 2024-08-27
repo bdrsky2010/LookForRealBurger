@@ -211,11 +211,21 @@ extension JoinViewController {
             nickSearchBar.rx.text.orEmpty
         )
         joinButton.rx.tap
-            .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .withLatestFrom(fieldData)
             .map { JoinQuery(email: $0.0, password: $0.1, nick: $0.2) }
             .bind(with: self) { owner, query in
-                owner.viewModel.didTapJoin(query: query)
+                let alert = UIAlertController(
+                    title: "가입확인",
+                    message: "가입을 하시겠습니까?",
+                    preferredStyle: .alert
+                )
+                let join = UIAlertAction(title: "가입", style: .default) { _ in
+                    owner.viewModel.didTapJoin(query: query)
+                }
+                let cancel = UIAlertAction(title: "취소", style: .cancel)
+                alert.addAction(join)
+                alert.addAction(cancel)
+                owner.present(alert, animated: true)
             }
             .disposed(by: disposeBag)
         

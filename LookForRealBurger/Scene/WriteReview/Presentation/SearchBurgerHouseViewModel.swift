@@ -194,6 +194,10 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
                         print("existBurgerHouseExecute 액세스 토큰 만료")
                     case .unknown(let message):
                         owner.toastMessage.accept(message)
+                    case .invalidValue(let message):
+                        owner.toastMessage.accept(message)
+                    case .dbServer(let message):
+                        owner.toastMessage.accept(message)
                     }
                 }
             } onCompleted: { _ in
@@ -240,6 +244,8 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
                     case .expiredToken:
                         print("uploadBurgerHouseExecute 액세스 토큰 만료")
                     case .unknown(let message):
+                        owner.toastMessage.accept(message)
+                    case .badRequest(let message):
                         owner.toastMessage.accept(message)
                     }
                 }

@@ -66,19 +66,16 @@ final class WriteReviewViewController: BaseViewController {
     
     private var tabBar: UITabBarController!
     private var viewModel: WriteReviewViewModel!
-    private var uploadPostRepository: UploadPostRepository!
     private var disposeBag: DisposeBag!
     
     static func create(
         tabBar: UITabBarController,
         viewModel: WriteReviewViewModel,
-        uploadPostRepository: UploadPostRepository,
         disposeBag: DisposeBag = DisposeBag()
     ) -> WriteReviewViewController {
         let view = WriteReviewViewController()
         view.tabBar = tabBar
         view.viewModel  = viewModel
-        view.uploadPostRepository = uploadPostRepository
         view.disposeBag = disposeBag
         return view
     }
@@ -216,7 +213,7 @@ final class WriteReviewViewController: BaseViewController {
         saveButton.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.height.equalTo(50)
-            make.bottom.equalTo(view.keyboardLayoutGuide.snp.top).offset(-16)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-16)
         }
     }
     
@@ -350,7 +347,7 @@ extension WriteReviewViewController {
         
         viewModel.goToLocalSearch
             .bind(with: self) { owner, _ in
-                let view = WriteReviewScene.makeView(uploadPostRepository: owner.uploadPostRepository)
+                let view = WriteReviewScene.makeView()
                 view.didSelectItem = { burgerHouse in
                     owner.viewModel.burgerHouseSelect(burgerHouse: burgerHouse)
                 }
@@ -432,7 +429,7 @@ extension WriteReviewViewController {
                     let imageData = owner.imageViewList.suffix(5).compactMap { $0.image?.jpegData(compressionQuality: 0.4) }
                     owner.viewModel.confirmedSave(files: imageData)
                 }
-                let cancel = UIAlertAction(title: "취소", style: .destructive)
+                let cancel = UIAlertAction(title: "취소", style: .cancel)
                 alert.addAction(save)
                 alert.addAction(cancel)
                 owner.present(alert, animated: true)
