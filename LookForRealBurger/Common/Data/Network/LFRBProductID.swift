@@ -10,4 +10,6 @@ import Foundation
 enum LFRBProductID: String {
     case burgerHouse = "LFRB_BURGER_HOUSE"
     case review      = "LFRB_BURGER_HOUSE_REVIEW"
+    case burgerHouseTest = "LFRB_BURGER_HOUSE_TEST"
+    case reviewTest      = "LFRB_BURGER_HOUSE_REVIEW_TEST"
 }
