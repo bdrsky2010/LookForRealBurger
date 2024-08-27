@@ -9,7 +9,7 @@
 "passwordPlaceholder" = "비밀번호";
 "nickPlaceholder" = "닉네임";
 
-"errorOccurred" = "에러가 발생하였습니다";
+"errorOccurred" = "에러가 발생하였습니다.\n잠시후에 다시 시도 부탁드립니다.";
 "networkUnstable" = "인터넷 연결이 불안정합니다";
 
 "congratulation" = "%@ 님, 회원가입을\n진심으로 축하드립니다";
