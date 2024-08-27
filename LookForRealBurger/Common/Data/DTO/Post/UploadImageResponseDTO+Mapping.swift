@@ -1,5 +1,5 @@
 //
-//  ImageUploadResponseDTO+Mapping.swift
+//  UploadImageResponseDTO+Mapping.swift
 //  LookForRealBurger
 //
 //  Created by Minjae Kim on 8/26/24.
@@ -7,11 +7,11 @@
 
 import Foundation
 
-struct ImageUploadResponseDTO: Decodable {
+struct UploadImageResponseDTO: Decodable {
     let files: [String]
 }
 
-extension ImageUploadResponseDTO {
+extension UploadImageResponseDTO {
     func toDomain() -> UploadedImage {
         return UploadedImage(paths: self.files)
     }
