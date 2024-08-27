@@ -14,12 +14,7 @@ protocol LoginRepository {
     )
 }
 
-enum LoginError: Error {
-    case network(_ message: String)
-    case missingFields(_ message: String)
-    case accountVerify(_ message: String)
-    case unknown(_ message: String)
-}
+
 
 final class DefaultLoginRepository {
     private let network: NetworkManager
