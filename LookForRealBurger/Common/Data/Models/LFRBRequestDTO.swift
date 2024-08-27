@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: Request Data Transfer Object
-struct LFRBRequestDTO {
+enum LFRBRequestDTO {
     private static let encoder = JSONEncoder()
     
     static func toDictionary<T: Encodable>(_ dto: T) -> [String: Any] {
