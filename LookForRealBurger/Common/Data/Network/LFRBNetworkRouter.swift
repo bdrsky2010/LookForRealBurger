@@ -10,12 +10,12 @@ import Foundation
 import Moya
 
 enum LFRBNetworkRouter {
-    case join(_ dto: JoinRequestDTO.JoinDTO)
-    case emailValid(_ dto: JoinRequestDTO.EmailValidDTO)
+    case join(_ dto: JoinRequestDTO)
+    case emailValid(_ dto: EmailValidRequestDTO)
     case login(_ dto: LoginRequestDTO)
     case getPost(_ dto: GetPostRequestDTO)
     case uploadPost(_ dto: UploadPostRequestDTO)
-    case imageUpload(_ files: [Data])
+    case imageUpload(_ dto: UploadImageRequestDTO)
 }
 
 extension LFRBNetworkRouter: LFRBTargetType {
@@ -60,8 +60,8 @@ extension LFRBNetworkRouter: LFRBTargetType {
         case .uploadPost(let dto):
             parameters = dto.asParameters
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
-        case .imageUpload(let files):
-            let multipartFormData = files.map {
+        case .imageUpload(let dto):
+            let multipartFormData = dto.files.map {
                 MultipartFormData(provider: .data($0),
                                   name: "files",
                                   fileName: "LFRB_" + UUID().uuidString,
