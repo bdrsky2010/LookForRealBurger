@@ -32,6 +32,13 @@ final class WriteReviewViewController: BaseViewController {
         return view
     }()
     
+    private let titleTextField: UITextField = {
+        let textField = UITextField()
+        textField.borderStyle = .roundedRect
+        textField.placeholder = "제목"
+        return textField
+    }()
+    
     private lazy var contentTextView: UITextView = {
         let textView = UITextView()
         textView.text = placeholder
@@ -52,16 +59,10 @@ final class WriteReviewViewController: BaseViewController {
     
     private let minusButton = PretendardRoundedButton(title: "-", font: R.Font.chab30, backgroudColor: R.Color.orange)
     private let plusButton = PretendardRoundedButton(title: "+", font: R.Font.chab30, backgroudColor: R.Color.green)
-    
-    private let firstRatingView = UIImageView()
-    private let secondRatingView = UIImageView()
-    private let thirdRatingView = UIImageView()
-    private let fourthRatingView = UIImageView()
-    private let fifthRatingView = UIImageView()
     private let ratingStackView = UIStackView()
-    private lazy var ratingViewList = [firstRatingView, secondRatingView, thirdRatingView, fourthRatingView, fifthRatingView]
+    private lazy var ratingViewList = [UIImageView(), UIImageView(), UIImageView(), UIImageView(), UIImageView()]
     
-    private let placeholder = "리뷰를 작성해주세요"
+    private let placeholder = "리뷰를 작성해주세요."
     
     private var tabBar: UITabBarController!
     private var viewModel: WriteReviewViewModel!
@@ -104,16 +105,15 @@ final class WriteReviewViewController: BaseViewController {
         
         contentView.addSubview(burgerHouseSearchBar)
         contentView.addSubview(searchBarCover)
+        contentView.addSubview(titleTextField)
         contentView.addSubview(contentTextView)
         contentView.addSubview(photoScrollView)
         contentView.addSubview(plusButton)
         contentView.addSubview(minusButton)
         contentView.addSubview(ratingStackView)
         
-//        view.addSubview(burgerHouseSearchBar)
-//        view.addSubview(contentTextView)
-//        view.addSubview(photoScrollView)
         photoScrollView.addSubview(photoStackView)
+        
         imageViewList.forEach {
             photoStackView.addArrangedSubview($0)
             $0.snp.makeConstraints { make in
@@ -143,6 +143,7 @@ final class WriteReviewViewController: BaseViewController {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalTo(saveButton.snp.top).offset(-16)
         }
+        mainScrollView.keyboardDismissMode = .onDrag
         
         contentView.snp.makeConstraints { make in
             make.edges.width.equalToSuperview()
@@ -160,8 +161,14 @@ final class WriteReviewViewController: BaseViewController {
             make.height.equalTo(50)
         }
         
-        contentTextView.snp.makeConstraints { make in
+        titleTextField.snp.makeConstraints { make in
             make.top.equalTo(burgerHouseSearchBar.snp.bottom).offset(16)
+            make.horizontalEdges.equalToSuperview().inset(20)
+            make.height.equalTo(50)
+        }
+        
+        contentTextView.snp.makeConstraints { make in
+            make.top.equalTo(titleTextField.snp.bottom).offset(16)
             make.horizontalEdges.equalToSuperview().inset(20)
             make.height.equalTo(400)
         }
@@ -314,6 +321,20 @@ extension WriteReviewViewController {
             }
             .disposed(by: disposeBag)
         
+        // TODO: 햄버거 집 선택, 리뷰작성, 사진이 1개 이상 존재해야 버튼이 enabled 하다라고 말할 수 있을거야,,,
+        contentTextView.rx.text.orEmpty
+            .bind(with: self) { owner, review in
+                if !review.isEmpty,
+                   review != owner.placeholder,
+                   !(owner.burgerHouseSearchBar.text ?? "").isEmpty,
+                   !owner.imageViewList.compactMap({ $0.image }).isEmpty {
+                    print("다 있다")
+                } else {
+                    print("아니다")
+                }
+            }
+            .disposed(by: disposeBag)
+        
         saveButton.rx.tap
             .bind(with: self) { owner, _ in
                 owner.viewModel.saveTap()
@@ -415,6 +436,26 @@ extension WriteReviewViewController {
                 alert.addAction(save)
                 alert.addAction(cancel)
                 owner.present(alert, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.uploadImageSuccess
+            .bind(with: self) { owner, uploadImage in
+                guard let title = owner.titleTextField.text,
+                      !title.isEmpty,
+                      let content = owner.contentTextView.text,
+                      !content.isEmpty else {
+                    owner.viewModel.missingField()
+                    return
+                }
+                owner.viewModel.uploadPost(title: title, content: content, files: uploadImage)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.didSuccessUploadReview
+            .bind(with: self) { owner, _ in
+                owner.tabBar.selectedIndex = 1
+                owner.dismiss(animated: true)
             }
             .disposed(by: disposeBag)
     }

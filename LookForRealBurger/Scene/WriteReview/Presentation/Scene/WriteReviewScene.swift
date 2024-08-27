@@ -22,7 +22,8 @@ enum WriteReviewScene {
         let uploadPostRepository = DefaultUploadPostRepository(network: network)
         let postUploadUseCase = DefaultUploadPostUseCase(
             imageUploadRepository: imageUploadRepository,
-            uploadPostRepository: uploadPostRepository
+            uploadPostRepository: uploadPostRepository,
+            commentRepository: DefaultCommentRepository.shared
         )
         let viewModel = DefaultWriteReviewViewModel(
             loginUseCase: loginUseCase,
