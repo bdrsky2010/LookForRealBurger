@@ -8,5 +8,6 @@
 import Foundation
 
 struct ExistBurgerHouseData {
+    let burgerHousePostId: String?
     let isExist: Bool
 }

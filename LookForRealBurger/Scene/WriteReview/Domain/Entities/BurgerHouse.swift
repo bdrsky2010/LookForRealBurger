@@ -16,6 +16,8 @@ struct BurgerHouse: Hashable, Identifiable {
     let phone: String
     let x: String
     let y: String
+    
+    var burgerHousePostId: String?
 }
 
 struct BurgerPage: Hashable {

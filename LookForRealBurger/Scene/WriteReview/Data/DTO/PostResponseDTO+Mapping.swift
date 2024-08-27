@@ -52,7 +52,7 @@ struct PostResponseDTO: Decodable {
 extension PostResponseDTO {
     func toDomain() -> GetBurgerHouse {
         return GetBurgerHouse(
-            burgerHouseId: self.postId,
+            burgerHousePostId: self.postId,
             name: self.title,
             totalRating: self.price,
             hashtagName: self.content,

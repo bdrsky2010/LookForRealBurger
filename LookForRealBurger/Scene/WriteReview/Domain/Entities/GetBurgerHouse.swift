@@ -8,7 +8,7 @@
 import Foundation
 
 struct GetBurgerHouse {
-    let burgerHouseId: String
+    let burgerHousePostId: String
     let name: String
     let totalRating: Int
     let hashtagName: String
