@@ -21,7 +21,7 @@ extension GetPostResponseDTO {
     func toDomain() -> [GetBurgerHouse] {
         return self.data.map {
             return GetBurgerHouse(
-                burgerHouseId: $0.postId,
+                burgerHousePostId: $0.postId,
                 name: $0.title,
                 totalRating: $0.price,
                 hashtagName: $0.content,
