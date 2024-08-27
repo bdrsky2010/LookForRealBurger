@@ -165,7 +165,7 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
         let getPostQuery = GetPostQuery(
             next: nil,
             limit: "10000",
-            productId: LFRBProductID.burgerHouse.rawValue
+            productId: LFRBProductID.burgerHouseTest.rawValue
         )
         localSearchUseCase.existBurgerHouseExecute(query: getPostQuery, localId: item.id)
             .asDriver(onErrorJustReturn: .failure(.unknown(message: R.Phrase.errorOccurred)))
@@ -173,7 +173,9 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
                 switch result {
                 case .success(let value):
                     if value.isExist {
-                        owner.selectItem.accept(item)
+                        var result = item
+                        result.burgerHousePostId = value.burgerHousePostId
+                        owner.selectItem.accept(result)
                     } else {
                         print("식당 데이터 없음 저장해야 함")
                         owner.notExistBurgerHouse(burgerHouse: item)
@@ -212,7 +214,7 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
             roadAddress: burgerHouse.roadAddress,
             phone: burgerHouse.phone,
             localId: burgerHouse.id,
-            productId: LFRBProductID.burgerHouse.rawValue)
+            productId: LFRBProductID.burgerHouseTest.rawValue)
         
         localSearchUseCase.uploadBurgerHouseExecute(query: uploadBurgerHouseQuery)
             .asDriver(onErrorJustReturn: .failure(.unknown(message: R.Phrase.errorOccurred)))
@@ -220,7 +222,9 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
                 switch result {
                 case .success(let value):
                     print("\(value.name) 서버 저장 완료")
-                    owner.selectItem.accept(burgerHouse)
+                    var result = burgerHouse
+                    result.burgerHousePostId = value.burgerHousePostId
+                    owner.selectItem.accept(result)
                 case .failure(let error):
                     switch error {
                     case .network(let message):
