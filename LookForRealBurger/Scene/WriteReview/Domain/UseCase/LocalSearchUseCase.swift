@@ -73,8 +73,10 @@ extension DefaultLocalSearchUseCase: LocalSearchUseCase {
             getPostRepository.getPostRequest(query: query) { result in
                 switch result {
                 case .success(let value):
-                    let isExist = !value.filter { $0.localId == localId }.isEmpty
-                    single(.success(.success(.init(isExist: isExist))))
+                    let filteredList = value.filter { $0.localId == localId }
+                    let burgerHousePostId = filteredList.first?.burgerHousePostId
+                    let isExist = !filteredList.isEmpty
+                    single(.success(.success(.init(burgerHousePostId: burgerHousePostId, isExist: isExist))))
                 case .failure(let error):
                     single(.success(.failure(error)))
                 }
