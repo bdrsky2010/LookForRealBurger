@@ -197,7 +197,6 @@ extension JoinViewController {
             viewModel.isNotDuplicateEmail
         )
         .bind(with: self) { owner, field in
-            print(field)
             if !field.0.isEmpty, !field.1.isEmpty, !field.2.isEmpty, field.3 {
                 owner.viewModel.didFilledFieldData(isFilled: true)
             } else {
