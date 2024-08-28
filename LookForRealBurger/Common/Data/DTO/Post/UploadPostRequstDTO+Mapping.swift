@@ -9,7 +9,7 @@ import Foundation
 
 struct UploadPostRequestDTO: Encodable {
     let title: String
-    let price: Int
+    let price: Int?
     let content: String
     let content1: String
     let content2: String?
