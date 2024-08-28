@@ -10,7 +10,6 @@ import Foundation
 struct GetBurgerHouse {
     let burgerHousePostId: String
     let name: String
-    let totalRating: Int
     let hashtagName: String
     let longitude: String
     let latitude: String
@@ -22,8 +21,4 @@ struct GetBurgerHouse {
     let plannedUserIds: [String]
     let hashTags: [String]
     let reviewIds: [String]
-    
-    var avgRating: Int {
-        Int(round(Double(totalRating) / Double(reviewIds.count)))
-    }
 }
