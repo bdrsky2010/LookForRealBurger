@@ -26,3 +26,25 @@ class BaseViewController: UIViewController {
     func configureLayout() { }
     func configureUI() { }
 }
+
+extension BaseViewController: RefreshFailable {
+    func goToLogin() {
+        let alert = UIAlertController(
+            title: R.Phrase.expiredLogin,
+            message: R.Phrase.expiredLoginExplain,
+            preferredStyle: .alert
+        )
+        let check = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+            guard let self else { return }
+            let view = LoginScene.makeView()
+            let navigationContoller = UINavigationController()
+            navigationContoller.pushViewController(view, animated: false)
+            if self is WriteReviewViewController {
+                dismiss(animated: false)
+            }
+            changeRootViewController(navigationContoller)
+        }
+        alert.addAction(check)
+        present(alert, animated: true)
+    }
+}
