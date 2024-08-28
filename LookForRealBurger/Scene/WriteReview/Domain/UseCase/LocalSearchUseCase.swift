@@ -69,10 +69,10 @@ extension DefaultLocalSearchUseCase: LocalSearchUseCase {
     ) -> Single<Result<ExistBurgerHouseData, PostError>> {
         return Single.create { [weak self] single in
             guard let self else {
-                single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
+                single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
-            postRepository.getPostRequest(query: query) { result in
+            postRepository.getBurgerHouseRequest(query: query) { result in
                 switch result {
                 case .success(let value):
                     let filteredList = value.filter { $0.localId == localId }
@@ -92,7 +92,7 @@ extension DefaultLocalSearchUseCase: LocalSearchUseCase {
     ) -> Single<Result<GetBurgerHouse, PostError>> {
         return Single.create { [weak self] single in
             guard let self else {
-                single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
+                single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
             postRepository.uploadBurgerHouse(query: query) { result in
