@@ -11,4 +11,6 @@ struct LoginUser {
     let userId: String
     let email: String
     let nick: String
+    let accessToken: String
+    let refreshToken: String
 }
