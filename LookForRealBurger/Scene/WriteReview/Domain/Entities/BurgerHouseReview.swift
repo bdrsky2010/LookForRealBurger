@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct BurgerHouseReview {
-    let reviewId: String
+struct BurgerHouseReview: Hashable, Identifiable {
+    let id: String
     let title: String
     let rating: Int
     let content: String
@@ -21,13 +21,13 @@ struct BurgerHouseReview {
     let comments: [Comment]
 }
 
-struct Creator {
+struct Creator: Hashable {
     let userId: String
     let nick: String
 }
 
-struct Comment {
-    let commentId: String
+struct Comment: Hashable, Identifiable {
+    let id: String
     let content: String
     let createdAt: String
     let creator: Creator
