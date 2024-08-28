@@ -7,12 +7,21 @@
 
 import UIKit
 import CoreLocation
+import MapKit
 
 import RxCocoa
 import RxSwift
-import RxCoreLocation
+import SnapKit
+import Toast
 
 final class BurgerMapViewController: BaseViewController {
+    private let burgerMapView: MKMapView = {
+        let mapView = MKMapView()
+        mapView.showsUserLocation = true
+        mapView.userTrackingMode = .follow
+        return mapView
+    }()
+    
     private var viewModel: BurgerMapViewModel!
     private var disposeBag: DisposeBag!
     
@@ -28,34 +37,37 @@ final class BurgerMapViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
         viewModel.viewWillAppear()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        viewModel.viewWillDisappear()
+        navigationController?.navigationBar.isHidden = false
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        burgerMapView.delegate = self
         bind()
     }
     
-    override func configureNavigation() {
-        navigationItem.title = "버거맵"
-    }
-    
     override func configureHierarchy() {
-        
+        view.addSubview(burgerMapView)
     }
     
     override func configureLayout() {
-        
+        burgerMapView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
     }
 }
 
 extension BurgerMapViewController {
     private func bind() {
+        viewModel.viewDidLoad()
+        
         viewModel.requestAuthAlert
             .asDriver(onErrorJustReturn: "")
             .drive(with: self) { owner, message in
@@ -88,5 +100,49 @@ extension BurgerMapViewController {
                 print("requestAuthAlert onDisposed")
             }
             .disposed(by: disposeBag)
+        
+        viewModel.setRegion
+            .asDriver(onErrorJustReturn: .init(latitude: 37.517742, longitude: 126.886463))
+            .drive(with: self) { owner, coordinate in
+                let region = MKCoordinateRegion(
+                    center: coordinate,
+                    latitudinalMeters: 500,
+                    longitudinalMeters: 500
+                )
+                owner.burgerMapView.setRegion(region, animated: true)
+            } onCompleted: { _ in
+                print("setRegion completed")
+            } onDisposed: { _ in
+                print("setRegion disposed")
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.burgerMapHouses
+            .bind(with: self) { owner, burgerMapHouses in
+                dump(burgerMapHouses)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.toastMessage
+            .bind(with: self) { owner, message in
+                owner.view.makeToast(message, duration: 1.5)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.goToLogin
+            .bind(with: self) { owner, _ in
+                owner.goToLogin()
+            }
+            .disposed(by: disposeBag)
+    }
+}
+
+extension BurgerMapViewController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, viewFor annotation: any MKAnnotation) -> MKAnnotationView? {
+        guard !(annotation is MKUserLocation) else { return nil }
+        
+        
+        
+        return nil
     }
 }
