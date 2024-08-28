@@ -9,7 +9,6 @@ import Foundation
 
 struct UploadBurgerHouseQuery {
     let name: String
-    let totalRating: Int
     let hashtagName: String
     let longitude: String
     let latitude: String
