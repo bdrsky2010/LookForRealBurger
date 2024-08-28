@@ -34,7 +34,7 @@ extension DefaultJoinUseCase: JoinUseCase {
     func checkValidEmail(email: String) -> Single<Result<EmailValidMessage, AuthError>> {
         return Single.create { [weak self] single -> Disposable in
             guard let self else {
-                single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
+                single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
             authRepository.emailValidRequest(query: .init(email: email)) { result in
@@ -54,7 +54,7 @@ extension DefaultJoinUseCase: JoinUseCase {
     func joinMembership(query: JoinQuery) -> Single<Result<JoinUser, AuthError>> {
         return Single.create { [weak self] single -> Disposable in
             guard let self else {
-                single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
+                single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
             authRepository.joinRequest(query: query) { result in

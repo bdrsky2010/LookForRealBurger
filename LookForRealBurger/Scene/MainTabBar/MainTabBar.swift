@@ -11,26 +11,24 @@ import RxCocoa
 import RxSwift
 
 private enum TabItem: CaseIterable {
-    static var allCases = [TabItem]()
-    
-    case map(loginUseCase: LoginUseCase)
-    case review(loginUseCase: LoginUseCase)
-    case writeReview(loginUseCase: LoginUseCase)
-    case profile(loginUseCase: LoginUseCase)
+    case map
+    case review
+    case writeReview
+    case profile
     
     var viewController: UIViewController {
         let view: BaseViewController
         
         switch self {
-        case .map/*(let loginUseCase)*/:
+        case .map:
             let locationManager = DefaultLocationManager.shared
             let viewModel = DefaultBurgerMapViewModel(locationManager: locationManager)
             view = BurgerMapViewController.create(viewModel: viewModel)
-        case .review/*(let loginUseCase)*/:
+        case .review:
             view = BurgerReviewViewController()
-        case .writeReview(let loginUseCase):
-            view = EmptyPresentViewController.create(loginUseCase: loginUseCase)
-        case .profile/*(let loginUseCase)*/:
+        case .writeReview:
+            view = EmptyPresentViewController()
+        case .profile:
             view = MyProfileViewController()
         }
         
@@ -77,16 +75,8 @@ final class MainTabBar: UITabBarController {
     ) -> UITabBarController {
         let view = MainTabBar()
         view.loginUseCase = loginUseCase
-        TabItem.allCases.append(
-            contentsOf: [
-                .map(loginUseCase: loginUseCase),
-                .review(loginUseCase: loginUseCase),
-                .writeReview(loginUseCase: loginUseCase),
-                .profile(loginUseCase: loginUseCase)
-            ]
-        )
         
-        var viewControllers: [UIViewController] = []
+        var viewControllers = [UIViewController]()
         
         TabItem.allCases.forEach { item in
             let vc = item.viewController
@@ -122,6 +112,10 @@ final class MainTabBar: UITabBarController {
         view.setViewControllers(viewControllers, animated: true)
         
         return view
+    }
+    
+    deinit {
+        print("deinit -> \(String(describing: self))")
     }
     
     override func viewDidLoad() {

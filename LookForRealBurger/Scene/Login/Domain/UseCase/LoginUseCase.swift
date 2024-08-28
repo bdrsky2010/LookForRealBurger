@@ -16,7 +16,9 @@ protocol LoginUseCase {
 final class DefaultLoginUseCase {
     private let authRepository: AuthRepository
     
-    init(authRepository: AuthRepository) {
+    init(
+        authRepository: AuthRepository
+    ) {
         self.authRepository = authRepository
     }
 }
@@ -25,7 +27,7 @@ extension DefaultLoginUseCase: LoginUseCase {
     func loginExecute(query: LoginQuery) -> Single<Result<LoginUser, AuthError>> {
         Single.create { [weak self] single in
             guard let self else {
-                single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
+                single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
             authRepository.loginRequest(query: query) { result in

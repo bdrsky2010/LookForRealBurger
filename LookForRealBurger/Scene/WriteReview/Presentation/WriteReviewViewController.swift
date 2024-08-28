@@ -64,19 +64,20 @@ final class WriteReviewViewController: BaseViewController {
     
     private let placeholder = "리뷰를 작성해주세요."
     
-    private var tabBar: UITabBarController!
     private var viewModel: WriteReviewViewModel!
     private var disposeBag: DisposeBag!
     
+    private weak var tabBar: UITabBarController?
+    
     static func create(
-        tabBar: UITabBarController,
         viewModel: WriteReviewViewModel,
-        disposeBag: DisposeBag = DisposeBag()
+        disposeBag: DisposeBag = DisposeBag(),
+        tabBar: UITabBarController?
     ) -> WriteReviewViewController {
         let view = WriteReviewViewController()
-        view.tabBar = tabBar
         view.viewModel  = viewModel
         view.disposeBag = disposeBag
+        view.tabBar = tabBar
         return view
     }
     
@@ -325,9 +326,6 @@ extension WriteReviewViewController {
                    review != owner.placeholder,
                    !(owner.burgerHouseSearchBar.text ?? "").isEmpty,
                    !owner.imageViewList.compactMap({ $0.image }).isEmpty {
-                    print("다 있다")
-                } else {
-                    print("아니다")
                 }
             }
             .disposed(by: disposeBag)
@@ -340,7 +338,9 @@ extension WriteReviewViewController {
         
         viewModel.goToPreviousTab
             .bind(with: self) { owner, _ in
-                owner.tabBar.selectedIndex = owner.tabBar.previousSelectedIndex
+                if let index = owner.tabBar?.previousSelectedIndex {
+                    owner.tabBar?.selectedIndex = index
+                }
                 owner.dismiss(animated: true)
             }
             .disposed(by: disposeBag)
@@ -427,7 +427,7 @@ extension WriteReviewViewController {
                 )
                 let save = UIAlertAction(title: "저장", style: .default) { _ in
                     let imageData = owner.imageViewList.suffix(5).compactMap { $0.image?.jpegData(compressionQuality: 0.4) }
-                    owner.viewModel.confirmedSave(files: imageData)
+                    owner.viewModel.uploadImage(files: imageData)
                 }
                 let cancel = UIAlertAction(title: "취소", style: .cancel)
                 alert.addAction(save)
@@ -451,8 +451,14 @@ extension WriteReviewViewController {
         
         viewModel.didSuccessUploadReview
             .bind(with: self) { owner, _ in
-                owner.tabBar.selectedIndex = 1
+                owner.tabBar?.selectedIndex = 1
                 owner.dismiss(animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.goToLogin
+            .bind(with: self) { owner, _ in
+                owner.goToLogin()
             }
             .disposed(by: disposeBag)
     }

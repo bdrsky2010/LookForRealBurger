@@ -10,8 +10,12 @@ import UIKit
 enum LoginScene {
     static func makeView() -> LoginViewController {
         let authRepository = DefualtAuthRepository.shared
-        let useCase = DefaultLoginUseCase(authRepository: authRepository)
-        let viewModel = DefaultLoginViewModel(useCase: useCase)
+        let loginUseCase = DefaultLoginUseCase(authRepository: authRepository)
+        let accessStorage = UserDefaultsAccessStorage.shared
+        let viewModel = DefaultLoginViewModel(
+            loginUseCase: loginUseCase,
+            accessStorage: accessStorage
+        )
         let view = LoginViewController.create(with: viewModel)
         return view
     }

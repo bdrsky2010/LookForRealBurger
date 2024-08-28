@@ -15,6 +15,7 @@ protocol LoginInput {
     func didEditPasswordText(text: String)
     func didLoginTap(query: LoginQuery)
     func didJoinTap()
+    func saveToken(loginUser: LoginUser)
 }
 
 protocol LoginOutput {
@@ -28,7 +29,8 @@ protocol LoginOutput {
 typealias LoginViewModel = LoginInput & LoginOutput
 
 final class DefaultLoginViewModel: LoginOutput {
-    private let useCase: LoginUseCase
+    private let loginUseCase: LoginUseCase
+    private let accessStorage: AccessStorage
     private let disposeBag: DisposeBag
     
     var trimmedEmailText = PublishRelay<String>()
@@ -38,10 +40,12 @@ final class DefaultLoginViewModel: LoginOutput {
     var goToJoin = PublishRelay<Void>()
     
     init(
-        useCase: LoginUseCase,
+        loginUseCase: LoginUseCase,
+        accessStorage: AccessStorage,
         disposeBag: DisposeBag = DisposeBag()
     ) {
-        self.useCase = useCase
+        self.loginUseCase = loginUseCase
+        self.accessStorage = accessStorage
         self.disposeBag = disposeBag
     }
 }
@@ -58,32 +62,39 @@ extension DefaultLoginViewModel: LoginInput {
     }
     
     func didLoginTap(query: LoginQuery) {
-        useCase.loginExecute(query: query)
-            .asDriver(onErrorJustReturn: .failure(.unknown(message: R.Phrase.errorOccurred)))
+        loginUseCase.loginExecute(query: query)
+            .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
             .drive(with: self) { owner, result in
                 switch result {
                 case .success(let value):
                     print("login success", value)
+                    owner.saveToken(loginUser: value)
                     owner.goToMain.accept(())
                 case .failure(let error):
-                    let errorMessage: String
                     switch error {
                     case .network(let message):
-                        errorMessage = message
+                        owner.toastMessage.accept(message)
                     case .missingFields(let message):
-                        errorMessage = message
+                        owner.toastMessage.accept(message)
                     case .accountVerify(let message):
-                        errorMessage = message
+                        owner.toastMessage.accept(message)
                     case .unknown(let message):
-                        errorMessage = message
-                    case .existBlank(let message):
-                        errorMessage = message
-                    case .existUser(let message):
-                        errorMessage = message
-                    case .enable(let message):
-                        errorMessage = message
+                        owner.toastMessage.accept(message)
+                    case .existBlank:
+                        break
+                    case .existUser:
+                        break
+                    case .enable:
+                        break
+                    case .invalidToken:
+                        break
+                    case .forbidden:
+                        break
+                    case .expiredRefreshToken:
+                        break
+                    case .expiredAccessToken:
+                        break
                     }
-                    owner.toastMessage.accept(errorMessage)
                 }
             } onCompleted: { _ in
                 print("loginExecute completed")
@@ -95,5 +106,10 @@ extension DefaultLoginViewModel: LoginInput {
     
     func didJoinTap() {
         goToJoin.accept(())
+    }
+    
+    func saveToken(loginUser: LoginUser) {
+        accessStorage.accessToken = loginUser.accessToken
+        accessStorage.refreshToken = loginUser.refreshToken
     }
 }

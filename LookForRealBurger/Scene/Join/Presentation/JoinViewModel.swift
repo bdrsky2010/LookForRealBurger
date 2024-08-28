@@ -90,7 +90,7 @@ extension DefaultLFRBJoinViewModel: JoinInput {
     
     func didTapEmailValid(email: String) {
         joinUseCase.checkValidEmail(email: email)
-            .asDriver(onErrorJustReturn: .failure(.unknown(message: R.Phrase.errorOccurred)))
+            .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
             .drive(with: self) { owner, result in
                 switch result {
                 case .success(let value):
@@ -98,24 +98,30 @@ extension DefaultLFRBJoinViewModel: JoinInput {
                     owner.isNotDuplicateEmail.accept(true)
                 case .failure(let error):
                     owner.isNotDuplicateEmail.accept(false)
-                    let errorMessage: String
                     switch error {
                     case .network(let message):
-                        errorMessage = message
+                        owner.toastMessage.accept(message)
                     case .missingFields(let message):
-                        errorMessage = message
+                        owner.toastMessage.accept(message)
                     case .enable(let message):
-                        errorMessage = message
+                        owner.toastMessage.accept(message)
                     case .unknown(let message):
-                        errorMessage = message
-                    case .accountVerify(let message):
-                        errorMessage = message
-                    case .existBlank(let message):
-                        errorMessage = message
-                    case .existUser(let message):
-                        errorMessage = message
+                        owner.toastMessage.accept(message)
+                    case .accountVerify:
+                        break
+                    case .existBlank:
+                        break
+                    case .existUser:
+                        break
+                    case .invalidToken:
+                        break
+                    case .forbidden:
+                        break
+                    case .expiredRefreshToken:
+                        break
+                    case .expiredAccessToken:
+                        break
                     }
-                    owner.toastMessage.accept(errorMessage)
                 }
             } onCompleted: { _ in
                 print("checkValidEmail completed")
@@ -128,30 +134,36 @@ extension DefaultLFRBJoinViewModel: JoinInput {
     
     func didTapJoin(query: JoinQuery) {
         joinUseCase.joinMembership(query: query)
-            .asDriver(onErrorJustReturn: .failure(.unknown(message: R.Phrase.errorOccurred)))
+            .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
             .drive(with: self) { owner, result in
                 switch result {
                 case .success(let value):
                     owner.isSuccessJoin.accept(value)
                 case .failure(let error):
-                    let errorMessage: String
                     switch error {
                     case .network(let message):
-                        errorMessage = message
+                        owner.toastMessage.accept(message)
                     case .missingFields(let message):
-                        errorMessage = message
+                        owner.toastMessage.accept(message)
                     case .existBlank(let message):
-                        errorMessage = message
+                        owner.toastMessage.accept(message)
                     case .existUser(let message):
-                        errorMessage = message
+                        owner.toastMessage.accept(message)
                     case .unknown(let message):
-                        errorMessage = message
-                    case .accountVerify(let message):
-                        errorMessage = message
-                    case .enable(let message):
-                        errorMessage = message
+                        owner.toastMessage.accept(message)
+                    case .accountVerify:
+                        break
+                    case .enable:
+                        break
+                    case .invalidToken:
+                        break
+                    case .forbidden:
+                        break
+                    case .expiredRefreshToken:
+                        break
+                    case .expiredAccessToken:
+                        break
                     }
-                    owner.toastMessage.accept(errorMessage)
                 }
             } onCompleted: { _ in
                 print("joinMembership completed")
