@@ -18,7 +18,6 @@ protocol LocationManager {
     
     func checkDeviceLocationAuthorization()
     func checkCurrentLocationAuthorization()
-    func stopUpdatingLocation()
     func bind()
 }
 
@@ -61,6 +60,7 @@ extension DefaultLocationManager: LocationManager {
             // 3) notDetermined 상태일 때 권한을 요청
             print("notDetermined")
             coordinate.accept(.init(latitude: 37.517742, longitude: 126.886463))
+            manager.desiredAccuracy = kCLLocationAccuracyBest
             manager.requestWhenInUseAuthorization()
         case .denied:
             print("denied")
@@ -69,15 +69,10 @@ extension DefaultLocationManager: LocationManager {
         case .authorizedAlways, .authorizedWhenInUse:
             // 4) authorized 상태일 때 위치 정보 업데이트가 시작할 수 있도록 요청
             print("authorized")
-            coordinate.accept(.init(latitude: 37.517742, longitude: 126.886463))
             manager.startUpdatingLocation()
         default:
             print(status)
         }
-    }
-    
-    func stopUpdatingLocation() {
-        manager.stopUpdatingLocation()
     }
     
     func bind() {
@@ -87,6 +82,7 @@ extension DefaultLocationManager: LocationManager {
                 guard let current = locations.locations.last else { return }
                 print("didUpdateLocations")
                 owner.coordinate.accept(current.coordinate)
+                owner.manager.stopUpdatingLocation()
             }
             .disposed(by: disposeBag)
         
