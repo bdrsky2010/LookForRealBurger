@@ -14,22 +14,23 @@ enum PostType: String {
 
 enum PostError: Error {
     // 공통
-    case network(message: String)
-    case badRequest(message: String)
-    case invalidToken(message: String)
-    case forbidden(message: String)
+    case network(_ message: String)
+    case badRequest(_ message: String)
+    case invalidToken(_ message: String)
+    case forbidden(_ message: String)
     case expiredToken
-    case unknown(message: String)
+    case unknown(_ message: String)
     
     // 업로드 포스트
-    case invalidValue(message: String) // price의 타입이 int가 아닌 경우(빈 문자열 포함)
-    case dbServer(message: String) // db서버 장애로 게시글이 저장되지 않았을 때
+    case invalidValue(_ message: String) // price의 타입이 int가 아닌 경우(빈 문자열 포함)
+    case dbServer(_ message: String) // db서버 장애로 게시글이 저장되지 않았을 때
 }
 
 enum PostAPIType: String {
     case uploadImage
     case uploadPost
     case getPost
+    case getSinglePost
 }
 
 protocol PostRepository {
@@ -48,9 +49,19 @@ protocol PostRepository {
         completion: @escaping (Result<BurgerHouseReview, PostError>) -> Void
     )
     
-    func getPostRequest(
+    func getBurgerHouseRequest(
         query: GetPostQuery,
         completion: @escaping (Result<[GetBurgerHouse], PostError>) -> Void
+    )
+    
+    func getBurgerMapHouseRequest(
+        query: GetPostQuery,
+        completion: @escaping (Result<[BurgerMapHouse], PostError>) -> Void
+    )
+    
+    func getSingleBurgerHouseReviewRequest(
+        query: GetSinglePostQuery,
+        completion: @escaping (Result<BurgerHouseReview, PostError>) -> Void
     )
 }
 
@@ -91,7 +102,7 @@ extension DefaultPostRepository: PostRepository {
     ) {
         let uploadPostRequestDTO = UploadPostRequestDTO(
             title: query.name,
-            price: query.totalRating,
+            price: nil,
             content: query.hashtagName,
             content1: query.longitude,
             content2: query.latitude,
@@ -147,7 +158,7 @@ extension DefaultPostRepository: PostRepository {
         }
     }
     
-    func getPostRequest(
+    func getBurgerHouseRequest(
         query: GetPostQuery,
         completion: @escaping (Result<[GetBurgerHouse], PostError>) -> Void
     ) {
@@ -169,6 +180,48 @@ extension DefaultPostRepository: PostRepository {
                 }
             }
     }
+    
+    func getBurgerMapHouseRequest(
+        query: GetPostQuery,
+        completion: @escaping (Result<[BurgerMapHouse], PostError>) -> Void
+    ) {
+        let getPostRequestDTO = GetPostRequestDTO(
+            next: query.next,
+            limit: query.limit,
+            productId: query.productId
+        )
+        network.request(
+            PostRouter.getPost(getPostRequestDTO),
+            of: GetPostResponseDTO.self) { [weak self] result in
+                guard let self else { return }
+                switch result {
+                case .success(let success):
+                    completion(.success(success.toDomain()))
+                case .failure(let failure):
+                    let postError = errorHandling(type: .getPost, failure: failure)
+                    completion(.failure(postError))
+                }
+            }
+    }
+    
+    func getSingleBurgerHouseReviewRequest(
+        query: GetSinglePostQuery,
+        completion: @escaping (Result<BurgerHouseReview, PostError>
+        ) -> Void) {
+        network.request(
+            PostRouter.getSinglePost(query.postId),
+            of: PostResponseDTO.self
+        ) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let success):
+                completion(.success(success.toDomain()))
+            case .failure(let failure):
+                let postError = errorHandling(type: .getSinglePost, failure: failure)
+                completion(.failure(postError))
+            }
+        }
+    }
 }
 
 extension DefaultPostRepository {
@@ -176,31 +229,31 @@ extension DefaultPostRepository {
         let postError: PostError
         switch failure {
         case .requestFailure(let error):
-            postError = .network(message: R.Phrase.errorOccurred)
+            postError = .network(R.Phrase.errorOccurred)
             print("PostRepository \(type.rawValue) 에러 -> \(error.localizedDescription)")
         case .apiKey, .invalidData, .tooManyRequest, .invalidURL, .networkFailure:
-            postError = .network(message: R.Phrase.errorOccurred)
+            postError = .network(R.Phrase.errorOccurred)
             print("PostRepository \(type.rawValue) 에러 -> \(failure.self)")
         case .unknown(let statusCode):
             switch statusCode {
             case 400:
                 if type == .uploadPost {
-                    postError = .invalidValue(message: R.Phrase.errorOccurred)
+                    postError = .invalidValue(R.Phrase.errorOccurred)
                 } else if type == .uploadPost {
-                    postError = .badRequest(message: R.Phrase.errorOccurred)
+                    postError = .badRequest(R.Phrase.errorOccurred)
                 } else { // 업로드 이미지
-                    postError = .badRequest(message: "이미지 파일에 대한 형식이 맞지 않습니다.")
+                    postError = .badRequest("이미지 파일에 대한 형식이 맞지 않습니다.")
                 }
             case 401:
-                postError = .invalidToken(message: R.Phrase.errorOccurred)
+                postError = .invalidToken(R.Phrase.errorOccurred)
             case 403:
-                postError = .forbidden(message: R.Phrase.errorOccurred)
+                postError = .forbidden(R.Phrase.errorOccurred)
             case 410:
-                postError = .dbServer(message: "DB서버 장애로 인하여 에러가 발생하였습니다.\n잠시후에 다시 시도 부탁드립니다.")
+                postError = .dbServer("DB서버 장애로 인하여 에러가 발생하였습니다.\n잠시후에 다시 시도 부탁드립니다.")
             case 419:
                 postError = .expiredToken
             default:
-                postError = .unknown(message: R.Phrase.errorOccurred)
+                postError = .unknown(R.Phrase.errorOccurred)
                 
             }
         }
