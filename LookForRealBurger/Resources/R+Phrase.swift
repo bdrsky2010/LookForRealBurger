@@ -18,6 +18,8 @@ extension R.Phrase {
     
     static let errorOccurred = "errorOccurred".localized
     static let networkUnstable = "networkUnstable".localized
+    static let expiredLogin = "expiredLogin".localized
+    static let expiredLoginExplain = "expiredLoginExplain".localized
     
     static func getCongratulation(nick: String) -> String {
         return "congratulation".localized(nick)
