@@ -27,7 +27,7 @@ class BaseViewController: UIViewController {
     func configureUI() { }
 }
 
-extension BaseViewController: RefreshFailable {
+extension BaseViewController {
     func goToLogin() {
         let alert = UIAlertController(
             title: R.Phrase.expiredLogin,
