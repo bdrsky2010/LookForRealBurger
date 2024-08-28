@@ -54,7 +54,6 @@ extension PostResponseDTO {
         return GetBurgerHouse(
             burgerHousePostId: self.postId,
             name: self.title,
-            totalRating: self.price,
             hashtagName: self.content,
             longitude: self.content1,
             latitude: self.content2 ?? "",
@@ -73,7 +72,7 @@ extension PostResponseDTO {
 extension PostResponseDTO {
     func toDomain() -> BurgerHouseReview {
         return BurgerHouseReview(
-            reviewId: self.postId,
+            id: self.postId,
             title: self.title,
             rating: self.price,
             content: self.content,
@@ -85,7 +84,7 @@ extension PostResponseDTO {
             bookmarkUserIds: self.likes2,
             comments: self.comments.map {
                 Comment(
-                    commentId: $0.commentId,
+                    id: $0.commentId,
                     content: $0.content,
                     createdAt: $0.createdAt,
                     creator: .init(userId: $0.creator.userId, nick: $0.creator.nick))
