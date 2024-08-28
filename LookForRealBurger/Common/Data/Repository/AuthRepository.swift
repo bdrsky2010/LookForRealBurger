@@ -9,10 +9,12 @@ import Foundation
 
 enum AuthError: Error {
     // 공통
-    case network(message: String)
-    case missingFields(message: String)
-    case accountVerify(message: String)
-    case unknown(message: String)
+    case network(_ message: String)
+    case missingFields(_ message: String)
+    case accountVerify(_ message: String)
+    case invalidToken(_ message: String)
+    case forbidden(_ message: String)
+    case unknown(_ message: String)
     
     // 회원가입
     case existBlank(_ message: String)
@@ -20,12 +22,20 @@ enum AuthError: Error {
     
     // 이메일 중복확인
     case enable(_ message: String)
+    
+    // AccessToken 갱신
+    case expiredRefreshToken
+    
+    // 탈퇴
+    case expiredAccessToken
 }
 
 enum AuthAPIType: String {
     case join
     case emailValidation
     case login
+    case accessTokenRefresh
+    case withdraw
 }
 
 protocol AuthRepository {
@@ -43,20 +53,21 @@ protocol AuthRepository {
         query: LoginQuery,
         completion: @escaping (Result<LoginUser, AuthError>) -> Void
     )
+    
+    func refreshAccessToken(
+        completion: @escaping (Result<AccessToken, AuthError>) -> Void
+    )
 }
 
 final class DefualtAuthRepository {
     static let shared = DefualtAuthRepository()
     
     private let network: NetworkManager
-    private let accessStorage: AccessStorage
     
     private init(
-        network: NetworkManager = LFRBNetworkManager.shared,
-        accessStorage: AccessStorage = UserDefaultsAccessStorage.shared
+        network: NetworkManager = LFRBNetworkManager.shared
     ) {
         self.network = network
-        self.accessStorage = accessStorage
     }
 }
 
@@ -125,13 +136,27 @@ extension DefualtAuthRepository: AuthRepository {
             guard let self else { return }
             switch result {
             case .success(let success):
-                accessStorage.accessToken = success.accessToken
-                accessStorage.refreshToken = success.refreshToken
-                accessStorage.accessEmail = query.email
-                accessStorage.accessPassword = query.password
                 completion(.success(success.toDomain()))
             case .failure(let failure):
                 let authError = errorHandling(type: .login, failure: failure)
+                completion(.failure(authError))
+            }
+        }
+    }
+    
+    func refreshAccessToken(
+        completion: @escaping (Result<AccessToken, AuthError>) -> Void
+    ) {
+        network.request(
+            AuthRouter.accessTokenRefresh,
+            of: RefreshAccessTokenResponseDTO.self
+        ) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let success):
+                completion(.success(success.toDomain()))
+            case .failure(let failure):
+                let authError = errorHandling(type: .accessTokenRefresh, failure: failure)
                 completion(.failure(authError))
             }
         }
@@ -146,30 +171,40 @@ extension DefualtAuthRepository {
         let authError: AuthError
         switch failure {
         case .requestFailure(let error):
-            authError = .network(message: R.Phrase.errorOccurred)
+            authError = .network(R.Phrase.errorOccurred)
             print("CommentRepository \(type.rawValue) network 에러 발생 -> \(error)")
         case .apiKey, .invalidData, .tooManyRequest, .invalidURL:
-            authError = .network(message: R.Phrase.errorOccurred)
+            authError = .network(R.Phrase.errorOccurred)
             print("CommentRepository \(type.rawValue) network 에러 발생 -> \(failure)")
         case .networkFailure:
-            authError = .network(message: R.Phrase.networkUnstable)
+            authError = .network(R.Phrase.networkUnstable)
             print("CommentRepository \(type.rawValue) network 에러 발생 -> \(failure)")
         case .unknown(let statusCode):
             switch statusCode {
             case 400:
-                authError = .missingFields(message: "입력칸을 채워주세요")
+                authError = .missingFields("입력칸을 채워주세요")
             case 401:
-                authError = .accountVerify(message: "계정을 다시 확인해주세요")
+                if type == .accessTokenRefresh {
+                    authError = .invalidToken(R.Phrase.errorOccurred)
+                } else { // 로그인
+                    authError = .accountVerify("계정을 다시 확인해주세요")
+                }
             case 402:
                 authError = .existBlank("공백이 포함된 닉네임은\n사용할 수 없습니다")
+            case 403:
+                authError = .forbidden(R.Phrase.errorOccurred)
             case 409:
                 if type == .join {
                     authError = .existUser("이미 가입된 계정입니다")
                 } else {
                     authError = .enable("이미 가입된 계정입니다")
                 }
+            case 418:
+                authError = .expiredRefreshToken
+            case 419:
+                authError = .expiredAccessToken
             default:
-                authError = .unknown(message: "알 수 없는 에러 발생")
+                authError = .unknown("알 수 없는 에러 발생")
             }
         }
         print("AuthRepository \(type.rawValue) 에러 -> \(authError)")

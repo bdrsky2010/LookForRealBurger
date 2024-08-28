@@ -13,22 +13,25 @@ enum AuthRouter {
     case join(_ dto: JoinRequestDTO)
     case emailValid(_ dto: EmailValidRequestDTO)
     case login(_ dto: LoginRequestDTO)
+    case accessTokenRefresh
 }
 
 extension AuthRouter: LFRBTargetType {
     var path: String {
         switch self {
-        case .join:        return "v1/users/join"
-        case .emailValid:  return "v1/validation/email"
-        case .login:       return "v1/users/login"
+        case .join:               return "v1/users/join"
+        case .emailValid:         return "v1/validation/email"
+        case .login:              return "v1/users/login"
+        case .accessTokenRefresh: return "v1/auth/refresh"
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .join:        return .post
-        case .emailValid:  return .post
-        case .login:       return .post
+        case .join:               return .post
+        case .emailValid:         return .post
+        case .login:              return .post
+        case .accessTokenRefresh: return .get
         }
     }
     
@@ -45,6 +48,8 @@ extension AuthRouter: LFRBTargetType {
         case .login(let dto):
             parameters = dto.asParameters
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+        case .accessTokenRefresh:
+            return .requestPlain
         }
     }
     
@@ -64,6 +69,12 @@ extension AuthRouter: LFRBTargetType {
             return [
                 LFRBHeader.contentType.rawValue: LFRBHeader.json.rawValue,
                 LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue
+            ]
+        case .accessTokenRefresh:
+            return [
+                LFRBHeader.authorization.rawValue: UserDefaultsAccessStorage.shared.accessToken,
+                LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue,
+                LFRBHeader.refresh.rawValue: UserDefaultsAccessStorage.shared.refreshToken
             ]
         }
     }
