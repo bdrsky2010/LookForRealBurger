@@ -122,7 +122,7 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
         }
         
         uploadPostUseCase.uploadImageExecute(files: files)
-            .asDriver(onErrorJustReturn: .failure(.unknown(message: R.Phrase.errorOccurred)))
+            .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
             .drive(with: self) { owner, result in
                 switch result {
                 case .success(let value):
@@ -197,14 +197,14 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
                 files: files.paths)
             
             uploadPostUseCase.uploadReviewExecute(query: uploadPostQuery)
-                .asDriver(onErrorJustReturn: .failure(.unknown(message: R.Phrase.errorOccurred)))
+                .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
                 .drive(with: self) { owner, result in
                     switch result {
                     case .success(let value):
                         print("리뷰 남기기 성공")
                         owner.registerReviewId(
                             burgerHousePostId: value.burgerHousePostId,
-                            reviewId: value.reviewId
+                            reviewId: value.id
                         )
                     case .failure(let error):
                         switch error {
