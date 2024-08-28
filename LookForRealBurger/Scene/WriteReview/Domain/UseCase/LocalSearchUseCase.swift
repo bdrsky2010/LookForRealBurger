@@ -22,18 +22,23 @@ protocol LocalSearchUseCase {
     func uploadBurgerHouseExecute(
         query: UploadBurgerHouseQuery
     ) -> Single<Result<GetBurgerHouse, PostError>>
+    
+    func refreshAccessTokenExecute() -> Single<Result<AccessToken, AuthError>>
 }
 
 final class DefaultLocalSearchUseCase {
     private let localSearchRepository: LocalSearchRepository
     private let postRepository: PostRepository
+    private let authRepository: AuthRepository
     
     init(
         localSearchRepository: LocalSearchRepository,
-        postRepository: PostRepository
+        postRepository: PostRepository,
+        authRepository: AuthRepository
     ) {
         self.localSearchRepository = localSearchRepository
         self.postRepository = postRepository
+        self.authRepository = authRepository
     }
 }
 
@@ -91,6 +96,24 @@ extension DefaultLocalSearchUseCase: LocalSearchUseCase {
                 return Disposables.create()
             }
             postRepository.uploadBurgerHouse(query: query) { result in
+                switch result {
+                case .success(let value):
+                    single(.success(.success(value)))
+                case .failure(let error):
+                    single(.success(.failure(error)))
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func refreshAccessTokenExecute() -> Single<Result<AccessToken, AuthError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
+                return Disposables.create()
+            }
+            authRepository.refreshAccessToken { result in
                 switch result {
                 case .success(let value):
                     single(.success(.success(value)))

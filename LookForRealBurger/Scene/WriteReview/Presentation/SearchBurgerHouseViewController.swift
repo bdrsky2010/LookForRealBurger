@@ -176,6 +176,12 @@ extension SearchBurgerHouseViewController {
             }
             .disposed(by: disposeBag)
         
+        viewModel.goToLogin
+            .bind(with: self) { owner, _ in
+                owner.goToLogin()
+            }
+            .disposed(by: disposeBag)
+        
         localSearchTableView.rx.prefetchRows
             .withLatestFrom(searchBar.rx.text.orEmpty) { (indexPaths: $0, text: $1) }
             .bind(with: self) { owner, tuple in

@@ -22,7 +22,8 @@ protocol SearchBurgerHouseInput {
     func didChangeText(text: String)
     func searchText(type: RequestType, text: String)
     func modelSelected(item: BurgerHouse)
-    func notExistBurgerHouse(burgerHouse: BurgerHouse)
+    func uploadBurgerHouse(burgerHouse: BurgerHouse)
+    func refreshAccessToken(completion: @escaping () -> Void)
 }
 
 protocol SearchBurgerHouseOutput {
@@ -32,6 +33,8 @@ protocol SearchBurgerHouseOutput {
     var burgerHouses: BehaviorRelay<[BurgerHouse]> { get }
     var toastMessage: PublishRelay<String> { get }
     var selectItem: PublishRelay<BurgerHouse> { get }
+    var goToLogin: PublishRelay<Void> { get }
+    
     var nextPage: Int { get }
     var isEndPage: Bool { get }
 }
@@ -45,21 +48,25 @@ final class DefaultSearchBurgerHouseViewModel: SearchBurgerHouseOutput {
     var burgerHouses = BehaviorRelay<[BurgerHouse]>(value: [])
     var toastMessage = PublishRelay<String>()
     var selectItem = PublishRelay<BurgerHouse>()
+    var goToLogin = PublishRelay<Void>()
     
     private(set) var nextPage = 1
     private(set) var isEndPage = false
     
     private let localSearchUseCase: LocalSearchUseCase
     private let locationManager: LocationManager
+    private let accessStorage: AccessStorage
     private let disposeBag: DisposeBag
     
     init(
         localSearchUseCase: LocalSearchUseCase,
         locationManager: LocationManager,
+        accessStorage: AccessStorage,
         disposeBag: DisposeBag = DisposeBag()
     ) {
         self.localSearchUseCase = localSearchUseCase
         self.locationManager = locationManager
+        self.accessStorage = accessStorage
         self.disposeBag = disposeBag
     }
 }
@@ -178,7 +185,7 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
                         owner.selectItem.accept(result)
                     } else {
                         print("식당 데이터 없음 저장해야 함")
-                        owner.notExistBurgerHouse(burgerHouse: item)
+                        owner.uploadBurgerHouse(burgerHouse: item)
                     }
                 case .failure(let error):
                     switch error {
@@ -208,7 +215,7 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
             .disposed(by: disposeBag)
     }
     
-    func notExistBurgerHouse(burgerHouse: BurgerHouse) {
+    func uploadBurgerHouse(burgerHouse: BurgerHouse) {
         let uploadBurgerHouseQuery = UploadBurgerHouseQuery(
             name: burgerHouse.name,
             totalRating: 0,
@@ -242,7 +249,9 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
                     case .dbServer(let message):
                         owner.toastMessage.accept(message)
                     case .expiredToken:
-                        print("uploadBurgerHouseExecute 액세스 토큰 만료")
+                        owner.refreshAccessToken {
+                            owner.uploadBurgerHouse(burgerHouse: burgerHouse)
+                        }
                     case .unknown(let message):
                         owner.toastMessage.accept(message)
                     case .badRequest(let message):
@@ -253,6 +262,48 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
                 print("uploadBurgerHouseExecute completed")
             } onDisposed: { _ in
                 print("uploadBurgerHouseExecute disposed")
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    func refreshAccessToken(completion: @escaping () -> Void) {
+        localSearchUseCase.refreshAccessTokenExecute()
+            .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
+            .drive(with: self) { owner, result in
+                switch result {
+                case .success(let value):
+                    owner.accessStorage.accessToken = value.accessToken
+                    completion()
+                case .failure(let error):
+                    switch error {
+                    case .network(let message):
+                        owner.toastMessage.accept(message)
+                    case .missingFields:
+                        break
+                    case .accountVerify:
+                        break
+                    case .invalidToken(let message):
+                        owner.toastMessage.accept(message)
+                    case .forbidden(let message):
+                        owner.toastMessage.accept(message)
+                    case .unknown(let message):
+                        owner.toastMessage.accept(message)
+                    case .existBlank:
+                        break
+                    case .existUser:
+                        break
+                    case .enable:
+                        break
+                    case .expiredRefreshToken:
+                        owner.goToLogin.accept(())
+                    case .expiredAccessToken:
+                        break
+                    }
+                }
+            } onCompleted: { _ in
+                print("refreshAccessTokenExecute completed")
+            } onDisposed: { _ in
+                print("refreshAccessTokenExecute disposed")
             }
             .disposed(by: disposeBag)
     }

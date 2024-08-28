@@ -18,13 +18,14 @@ protocol WriteReviewInput {
     func cameraSelect()
     func gallerySelect()
     func saveTap()
-    func confirmedSave(files: [Data])
-    func imageUploadSuccess(uploadedImage: UploadedImage)
+    func uploadImage(files: [Data])
+    func uploadImageSuccess(uploadedImage: UploadedImage)
     func plusRatingTap()
     func minusRatingTap()
     func uploadPost(title: String, content: String, files: UploadedImage)
     func missingField()
     func registerReviewId(burgerHousePostId: String, reviewId: String)
+    func refreshAccessToken(completion: @escaping () -> Void)
 }
 
 protocol WriteReviewOutput {
@@ -39,6 +40,7 @@ protocol WriteReviewOutput {
     var saveConfirm: PublishRelay<Void> { get }
     var uploadImageSuccess: PublishRelay<UploadedImage> { get }
     var didSuccessUploadReview: PublishRelay<Void> { get }
+    var goToLogin: PublishRelay<Void> { get }
 }
 
 typealias WriteReviewViewModel = WriteReviewInput & WriteReviewOutput
@@ -55,19 +57,20 @@ final class DefaultWriteReviewViewModel: WriteReviewOutput {
     var saveConfirm = PublishRelay<Void>()
     var uploadImageSuccess = PublishRelay<UploadedImage>()
     var didSuccessUploadReview = PublishRelay<Void>()
+    var goToLogin = PublishRelay<Void>()
     
     private var burgerHouse: BurgerHouse?
-    private var loginUseCase: LoginUseCase!
+    private let accessStorage: AccessStorage
     private var uploadPostUseCase: UploadPostUseCase!
     private var disposeBag: DisposeBag!
     
     init(
-        loginUseCase: LoginUseCase,
-        postUploadUseCase: UploadPostUseCase,
+        uploadPostUseCase: UploadPostUseCase,
+        accessStorage: AccessStorage,
         disposeBag: DisposeBag = DisposeBag()
     ) {
-        self.loginUseCase = loginUseCase
-        self.uploadPostUseCase = postUploadUseCase
+        self.uploadPostUseCase = uploadPostUseCase
+        self.accessStorage = accessStorage
         self.disposeBag = disposeBag
     }
     
@@ -108,7 +111,7 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
         saveConfirm.accept(())
     }
     
-    func confirmedSave(files: [Data]) {
+    func uploadImage(files: [Data]) {
         guard !files.isEmpty else {
             toastMessage.accept("1장 이상의 사진이 필요합니다")
             return
@@ -124,7 +127,7 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
                 switch result {
                 case .success(let value):
                     print("이미지 업로드 성공")
-                    owner.imageUploadSuccess(uploadedImage: value)
+                    owner.uploadImageSuccess(uploadedImage: value)
                 case .failure(let error):
                     switch error {
                     case .network(let message):
@@ -136,8 +139,9 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
                     case .forbidden(let message):
                         owner.toastMessage.accept(message)
                     case .expiredToken:
-                        // TODO: 토큰 리프레시
-                        print("uploadImageExecute 토큰 리프레시 필요")
+                        owner.refreshAccessToken {
+                            owner.uploadImage(files: files)
+                        }
                     case .unknown(let message):
                         owner.toastMessage.accept(message)
                     case .invalidValue(let message):
@@ -174,7 +178,7 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
         }
     }
     
-    func imageUploadSuccess(uploadedImage: UploadedImage) {
+    func uploadImageSuccess(uploadedImage: UploadedImage) {
         uploadImageSuccess.accept(uploadedImage)
     }
     
@@ -215,8 +219,9 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
                         case .dbServer(let message):
                             owner.toastMessage.accept(message)
                         case .expiredToken:
-                            // TODO: 토큰 리프레시
-                            print("uploadReviewExecute 토큰 리프레시 필요")
+                            owner.refreshAccessToken {
+                                owner.uploadPost(title: title, content: content, files: files)
+                            }
                         case .unknown(let message):
                             owner.toastMessage.accept(message)
                         case .badRequest(let message):
@@ -265,7 +270,9 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
                 case .commentFail(let message):
                     owner.toastMessage.accept(message)
                 case .expiredToken:
-                    print("registerReviewIdExecute 토큰 리프레시 필요")
+                    owner.refreshAccessToken {
+                        owner.registerReviewId(burgerHousePostId: burgerHousePostId, reviewId: reviewId)
+                    }
                 case .unknown(let message):
                     owner.toastMessage.accept(message)
                 }
@@ -276,5 +283,47 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
             print("registerReviewIdExecute disposed")
         }
         .disposed(by: disposeBag)
+    }
+    
+    func refreshAccessToken(completion: @escaping () -> Void) {
+        uploadPostUseCase.refreshAccessTokenExecute()
+            .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
+            .drive(with: self) { owner, result in
+                switch result {
+                case .success(let value):
+                    owner.accessStorage.accessToken = value.accessToken
+                    completion()
+                case .failure(let error):
+                    switch error {
+                    case .network(let message):
+                        owner.toastMessage.accept(message)
+                    case .missingFields:
+                        break
+                    case .accountVerify:
+                        break
+                    case .invalidToken(let message):
+                        owner.toastMessage.accept(message)
+                    case .forbidden(let message):
+                        owner.toastMessage.accept(message)
+                    case .unknown(let message):
+                        owner.toastMessage.accept(message)
+                    case .existBlank:
+                        break
+                    case .existUser:
+                        break
+                    case .enable:
+                        break
+                    case .expiredRefreshToken:
+                        owner.goToLogin.accept(())
+                    case .expiredAccessToken:
+                        break
+                    }
+                }
+            } onCompleted: { _ in
+                print("refreshAccessTokenExecute completed")
+            } onDisposed: { _ in
+                print("refreshAccessTokenExecute disposed")
+            }
+            .disposed(by: disposeBag)
     }
 }
