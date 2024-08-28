@@ -45,7 +45,7 @@ extension DefaultUploadPostUseCase: UploadPostUseCase {
     func uploadImageExecute(files: [Data]) -> Single<Result<UploadedImage, PostError>> {
         return Single.create { [weak self] single -> Disposable in
             guard let self else {
-                single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
+                single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
             postRepository.uploadImageRequest(files: files) { result in
@@ -65,7 +65,7 @@ extension DefaultUploadPostUseCase: UploadPostUseCase {
     ) -> Single<Result<BurgerHouseReview, PostError>> {
         return Single.create { [weak self] single -> Disposable in
             guard let self else {
-                single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
+                single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
             postRepository.uploadBurgerHouseReview(
