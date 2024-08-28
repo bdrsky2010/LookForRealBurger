@@ -21,9 +21,7 @@ private enum TabItem: CaseIterable {
         
         switch self {
         case .map:
-            let locationManager = DefaultLocationManager.shared
-            let viewModel = DefaultBurgerMapViewModel(locationManager: locationManager)
-            view = BurgerMapViewController.create(viewModel: viewModel)
+            view = BurgerMapScene.makeView()
         case .review:
             view = BurgerReviewViewController()
         case .writeReview:
