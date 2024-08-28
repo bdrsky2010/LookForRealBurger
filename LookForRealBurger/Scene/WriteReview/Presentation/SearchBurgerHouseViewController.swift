@@ -42,11 +42,6 @@ final class SearchBurgerHouseViewController: BaseViewController {
         viewModel.viewWillAppear()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        viewModel.viewWillDisAppear()
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()

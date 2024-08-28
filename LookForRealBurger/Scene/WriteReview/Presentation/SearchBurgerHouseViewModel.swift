@@ -17,7 +17,6 @@ enum RequestType {
 
 protocol SearchBurgerHouseInput {
     func viewWillAppear()
-    func viewWillDisAppear()
     func didTapBack()
     func didChangeText(text: String)
     func searchText(type: RequestType, text: String)
@@ -78,10 +77,6 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
             .disposed(by: disposeBag)
         
         locationManager.checkDeviceLocationAuthorization()
-    }
-    
-    func viewWillDisAppear() {
-        locationManager.stopUpdatingLocation()
     }
     
     func didTapBack() {
@@ -175,7 +170,7 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
             productId: LFRBProductID.burgerHouseTest.rawValue
         )
         localSearchUseCase.existBurgerHouseExecute(query: getPostQuery, localId: item.id)
-            .asDriver(onErrorJustReturn: .failure(.unknown(message: R.Phrase.errorOccurred)))
+            .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
             .drive(with: self) { owner, result in
                 switch result {
                 case .success(let value):
@@ -218,7 +213,6 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
     func uploadBurgerHouse(burgerHouse: BurgerHouse) {
         let uploadBurgerHouseQuery = UploadBurgerHouseQuery(
             name: burgerHouse.name,
-            totalRating: 0,
             hashtagName: "#" + burgerHouse.name,
             longitude: burgerHouse.x,
             latitude: burgerHouse.y,
@@ -228,7 +222,7 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
             productId: LFRBProductID.burgerHouseTest.rawValue)
         
         localSearchUseCase.uploadBurgerHouseExecute(query: uploadBurgerHouseQuery)
-            .asDriver(onErrorJustReturn: .failure(.unknown(message: R.Phrase.errorOccurred)))
+            .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
             .drive(with: self) { owner, result in
                 switch result {
                 case .success(let value):
