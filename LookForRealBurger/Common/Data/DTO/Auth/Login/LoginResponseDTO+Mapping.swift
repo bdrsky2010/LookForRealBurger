@@ -28,7 +28,9 @@ extension LoginResponseDTO {
         return LoginUser(
             userId: self.userId,
             email: self.email,
-            nick: self.nick
+            nick: self.nick,
+            accessToken: self.accessToken,
+            refreshToken: self.refreshToken
         )
     }
 }
