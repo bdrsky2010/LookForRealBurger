@@ -74,7 +74,7 @@ extension DefualtAuthRepository: AuthRepository {
         )
         
         network.request(
-            LFRBNetworkRouter.join(requestDTO),
+            AuthRouter.join(requestDTO),
             of: JoinResponseDTO.self
         ) { [weak self] result in
             guard let self else { return }
@@ -95,7 +95,7 @@ extension DefualtAuthRepository: AuthRepository {
         let requestDTO = EmailValidRequestDTO(email: query.email)
         
         network.request(
-            LFRBNetworkRouter.emailValid(requestDTO),
+            AuthRouter.emailValid(requestDTO),
             of: EmailValidResponseDTO.self
         ) { [weak self] result in
             guard let self else { return }
@@ -119,7 +119,7 @@ extension DefualtAuthRepository: AuthRepository {
         )
         
         network.request(
-            LFRBNetworkRouter.login(requestDTO),
+            AuthRouter.login(requestDTO),
             of: LoginResponseDTO.self
         ) { [weak self] result in
             guard let self else { return }

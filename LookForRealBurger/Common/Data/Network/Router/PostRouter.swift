@@ -1,29 +1,23 @@
 //
-//  LFRBNetworkRouter.swift
+//  PostRouter.swift
 //  LookForRealBurger
 //
-//  Created by Minjae Kim on 8/21/24.
+//  Created by Minjae Kim on 8/28/24.
 //
 
 import Foundation
 
 import Moya
 
-enum LFRBNetworkRouter {
-    case join(_ dto: JoinRequestDTO)
-    case emailValid(_ dto: EmailValidRequestDTO)
-    case login(_ dto: LoginRequestDTO)
+enum PostRouter {
     case getPost(_ dto: GetPostRequestDTO)
     case uploadPost(_ dto: UploadPostRequestDTO)
     case imageUpload(_ dto: UploadImageRequestDTO)
 }
 
-extension LFRBNetworkRouter: LFRBTargetType {
+extension PostRouter: LFRBTargetType {
     var path: String {
         switch self {
-        case .join:        return "v1/users/join"
-        case .emailValid:  return "v1/validation/email"
-        case .login:       return "v1/users/login"
         case .getPost:     return "v1/posts"
         case .uploadPost:  return "v1/posts"
         case .imageUpload: return "v1/posts/files"
@@ -32,9 +26,6 @@ extension LFRBNetworkRouter: LFRBTargetType {
     
     var method: Moya.Method {
         switch self {
-        case .join:        return .post
-        case .emailValid:  return .post
-        case .login:       return .post
         case .getPost:     return .get
         case .uploadPost:  return .post
         case .imageUpload: return .post
@@ -45,15 +36,6 @@ extension LFRBNetworkRouter: LFRBTargetType {
         var parameters: [String: Any] = [:]
         
         switch self {
-        case .join(let dto):       
-            parameters = dto.asParameters
-            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
-        case .emailValid(let dto):
-            parameters = dto.asParameters
-            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
-        case .login(let dto):
-            parameters = dto.asParameters
-            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         case .getPost(let dto):
             parameters = dto.asParameters
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
@@ -73,21 +55,6 @@ extension LFRBNetworkRouter: LFRBTargetType {
     
     var headers: [String : String]? {
         switch self {
-        case .join:
-            return [
-                LFRBHeader.contentType.rawValue: LFRBHeader.json.rawValue,
-                LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue
-            ]
-        case .emailValid:
-            return [
-                LFRBHeader.contentType.rawValue: LFRBHeader.json.rawValue,
-                LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue
-            ]
-        case .login:
-            return [
-                LFRBHeader.contentType.rawValue: LFRBHeader.json.rawValue,
-                LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue
-            ]
         case .getPost:
             return [
                 LFRBHeader.authorization.rawValue: UserDefaultsAccessStorage.shared.accessToken,

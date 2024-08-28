@@ -71,7 +71,7 @@ extension DefaultPostRepository: PostRepository {
         ) -> Void) {
         let uploadImageRequestDTO = UploadImageRequestDTO(files: files)
         network.request(
-            LFRBNetworkRouter.imageUpload(uploadImageRequestDTO),
+            PostRouter.imageUpload(uploadImageRequestDTO),
             of: UploadImageResponseDTO.self
         ) { [weak self] result in
             guard let self else { return }
@@ -102,7 +102,7 @@ extension DefaultPostRepository: PostRepository {
             files: nil
         )
         network.request(
-            LFRBNetworkRouter.uploadPost(uploadPostRequestDTO),
+            PostRouter.uploadPost(uploadPostRequestDTO),
             of: PostResponseDTO.self
         ) { [weak self] result in
             guard let self else { return }
@@ -133,7 +133,7 @@ extension DefaultPostRepository: PostRepository {
             files: query.files
         )
         network.request(
-            LFRBNetworkRouter.uploadPost(uploadPostRequestDTO),
+            PostRouter.uploadPost(uploadPostRequestDTO),
             of: PostResponseDTO.self
         ) { [weak self] result in
             guard let self else { return }
@@ -157,7 +157,7 @@ extension DefaultPostRepository: PostRepository {
             productId: query.productId
         )
         network.request(
-            LFRBNetworkRouter.getPost(getPostRequestDTO),
+            PostRouter.getPost(getPostRequestDTO),
             of: GetPostResponseDTO.self) { [weak self] result in
                 guard let self else { return }
                 switch result {
