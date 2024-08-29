@@ -63,6 +63,11 @@ protocol PostRepository {
         query: GetSinglePostQuery,
         completion: @escaping (Result<BurgerHouseReview, PostError>) -> Void
     )
+    
+    func getBurgerHouseReviewRequest(
+        query: GetPostQuery,
+        completion: @escaping (Result<GetBurgerHouseReview, PostError>) -> Void
+    )
 }
 
 final class DefaultPostRepository {
@@ -119,7 +124,7 @@ extension DefaultPostRepository: PostRepository {
             guard let self else { return }
             switch result {
             case .success(let success):
-                completion(.success(success.toDomain()))
+                completion(.success(success.toBurgerHouse()))
             case .failure(let failure):
                 let postError = errorHandling(type: .uploadPost, failure: failure)
                 completion(.failure(postError))
@@ -150,7 +155,7 @@ extension DefaultPostRepository: PostRepository {
             guard let self else { return }
             switch result {
             case .success(let success):
-                completion(.success(success.toDomain()))
+                completion(.success(success.toBurgerHouseReview()))
             case .failure(let failure):
                 let postError = errorHandling(type: .uploadPost, failure: failure)
                 completion(.failure(postError))
@@ -206,8 +211,8 @@ extension DefaultPostRepository: PostRepository {
     
     func getSingleBurgerHouseReviewRequest(
         query: GetSinglePostQuery,
-        completion: @escaping (Result<BurgerHouseReview, PostError>
-        ) -> Void) {
+        completion: @escaping (Result<BurgerHouseReview, PostError>) -> Void
+    ) {
         network.request(
             PostRouter.getSinglePost(query.postId),
             of: PostResponseDTO.self
@@ -215,9 +220,33 @@ extension DefaultPostRepository: PostRepository {
             guard let self else { return }
             switch result {
             case .success(let success):
-                completion(.success(success.toDomain()))
+                completion(.success(success.toBurgerHouseReview()))
             case .failure(let failure):
                 let postError = errorHandling(type: .getSinglePost, failure: failure)
+                completion(.failure(postError))
+            }
+        }
+    }
+    
+    func getBurgerHouseReviewRequest(
+        query: GetPostQuery,
+        completion: @escaping (Result<GetBurgerHouseReview, PostError>) -> Void
+    ) {
+        let getPostRequestDTO = GetPostRequestDTO(
+            next: query.next,
+            limit: query.limit,
+            productId: query.productId
+        )
+        network.request(
+            PostRouter.getPost(getPostRequestDTO),
+            of: GetPostResponseDTO.self
+        ) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let success):
+                completion(.success(success.toDomain()))
+            case .failure(let failure):
+                let postError = errorHandling(type: .getPost, failure: failure)
                 completion(.failure(postError))
             }
         }
