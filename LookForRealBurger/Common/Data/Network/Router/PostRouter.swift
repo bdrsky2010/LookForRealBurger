@@ -43,7 +43,7 @@ extension PostRouter: LFRBTargetType {
             let multipartFormData = dto.files.map {
                 MultipartFormData(provider: .data($0),
                                   name: "files",
-                                  fileName: "LFRB_" + UUID().uuidString,
+                                  fileName: "LFRB_" + UUID().uuidString + ".jpg",
                                   mimeType: "image/jpg")
             }
             return .uploadMultipart(multipartFormData)
