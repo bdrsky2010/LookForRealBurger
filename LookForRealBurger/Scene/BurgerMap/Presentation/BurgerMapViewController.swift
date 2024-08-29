@@ -11,6 +11,7 @@ import MapKit
 
 import RxCocoa
 import RxSwift
+import RxGesture
 import SnapKit
 import Toast
 
@@ -44,11 +45,16 @@ final class BurgerMapViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = false
+        viewModel.viewWillDisappear()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         burgerMapView.delegate = self
+        burgerMapView.register(
+            BurgerAnnotationView.self,
+            forAnnotationViewWithReuseIdentifier: BurgerAnnotationView.identifier
+        )
         bind()
     }
     
@@ -66,7 +72,12 @@ final class BurgerMapViewController: BaseViewController {
 
 extension BurgerMapViewController {
     private func bind() {
-        viewModel.viewDidLoad()
+        burgerMapView.rx.tapGesture()
+            .when(.recognized)
+            .bind(with: self) { owner, recognizer in
+                owner.dismiss(animated: true)
+            }
+            .disposed(by: disposeBag)
         
         viewModel.requestAuthAlert
             .asDriver(onErrorJustReturn: "")
@@ -119,7 +130,27 @@ extension BurgerMapViewController {
         
         viewModel.burgerMapHouses
             .bind(with: self) { owner, burgerMapHouses in
-                dump(burgerMapHouses)
+                let images = (0..<10).map { "burger\($0)" }
+                
+                burgerMapHouses.forEach { burgerHouse in
+                    let annotation = CustomAnnotation(
+                        coordinate: CLLocationCoordinate2D(
+                            latitude: burgerHouse.latitude,
+                            longitude: burgerHouse.longitude
+                        ),
+                        title: burgerHouse.name,
+                        image: images.randomElement(),
+                        burgerMapHouse: burgerHouse
+                    )
+                    owner.burgerMapView.addAnnotation(annotation)
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.showBurgerMapHouseModel
+            .bind(with: self) { owner, burgerMapHouse in
+                let vc = BurgerMapScene.makeView(burgerMapHouse: burgerMapHouse)
+                owner.present(vc, animated: true)
             }
             .disposed(by: disposeBag)
         
@@ -134,6 +165,13 @@ extension BurgerMapViewController {
                 owner.goToLogin()
             }
             .disposed(by: disposeBag)
+        
+        viewModel.removeAnnotations
+            .bind(with: self) { owner, _ in
+                let annotations = owner.burgerMapView.annotations
+                owner.burgerMapView.removeAnnotations(annotations)
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -141,8 +179,21 @@ extension BurgerMapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, viewFor annotation: any MKAnnotation) -> MKAnnotationView? {
         guard !(annotation is MKUserLocation) else { return nil }
         
+        var annotationView: MKAnnotationView?
         
+        // 다운캐스팅이 되면 CustomAnnotation를 갖고 CustomAnnotationView를 생성
+        if let customAnnotation = annotation as? CustomAnnotation {
+            annotationView = mapView.dequeueReusableAnnotationView(
+                withIdentifier: BurgerAnnotationView.identifier,
+                for: customAnnotation
+            )
+        }
         
-        return nil
+        return annotationView
+    }
+    
+    func mapView(_ mapView: MKMapView, didSelect annotation: any MKAnnotation) {
+        guard let annotation = annotation as? CustomAnnotation else { return }
+        viewModel.didSelectBurgerMapHouse(annotation.burgerMapHouse)
     }
 }

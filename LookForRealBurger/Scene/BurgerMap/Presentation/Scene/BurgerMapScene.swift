@@ -25,4 +25,20 @@ enum BurgerMapScene {
         let view = BurgerMapViewController.create(viewModel: viewModel)
         return view
     }
+    
+    static func makeView(burgerMapHouse: BurgerMapHouse) -> BurgerMapHouseViewController {
+        let postRepository = DefaultPostRepository.shared
+        let authRepository = DefualtAuthRepository.shared
+        let burgerMapHouseUseCase = DefaultBurgerMapHouseUseCase(
+            postRepository: postRepository,
+            authRepository: authRepository
+        )
+        let accessStorage = UserDefaultsAccessStorage.shared
+        let viewModel = DefaultBurgerMapHouseViewModel(
+            burgerMapHouseUseCase: burgerMapHouseUseCase,
+            accessStorage: accessStorage,
+            burgerMapHouse: burgerMapHouse)
+        let view = BurgerMapHouseViewController.create(viewModel: viewModel)
+        return view
+    }
 }

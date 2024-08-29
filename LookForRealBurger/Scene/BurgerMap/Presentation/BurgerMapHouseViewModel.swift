@@ -1,95 +1,86 @@
 //
-//  BurgerMapViewModel.swift
+//  BurgerMapHouseViewModel.swift
 //  LookForRealBurger
 //
-//  Created by Minjae Kim on 8/23/24.
+//  Created by Minjae Kim on 8/29/24.
 //
 
 import Foundation
-import CoreLocation
 
 import RxCocoa
 import RxSwift
 
-protocol BurgerMapInput {
-    func viewWillAppear()
-    func viewWillDisappear()
-    func fetchBurgerMapHouse()
+protocol BurgerMapHouseInput {
+    func viewDidLoad()
+    func fetchReviews()
+    func fetchSingleReview(postId: String, completion: @escaping (BurgerHouseReview) -> Void)
     func refreshAccessToken(completion: @escaping () -> Void)
-    func didSelectBurgerMapHouse(_ burgerMapHouse: BurgerMapHouse)
 }
 
-protocol BurgerMapOutput {
-    var requestAuthAlert: PublishRelay<String> { get }
-    var setRegion: PublishRelay<CLLocationCoordinate2D> { get }
-    var burgerMapHouses: PublishRelay<[BurgerMapHouse]> { get }
-    var showBurgerMapHouseModel: PublishRelay<BurgerMapHouse> { get }
+protocol BurgerMapHouseOutput {
+    var burgerHouseReviews: BehaviorSubject<[SectionBurgerHouseReview]> { get }
     var toastMessage: PublishRelay<String> { get }
     var goToLogin: PublishRelay<Void> { get }
-    var removeAnnotations: PublishRelay<Void> { get }
 }
 
-typealias BurgerMapViewModel = BurgerMapInput & BurgerMapOutput
+typealias BurgerMapHouseViewModel = BurgerMapHouseInput & BurgerMapHouseOutput
 
-final class DefaultBurgerMapViewModel: BurgerMapOutput {
-    private let locationManager: LocationManager
-    private let burgerMapUseCase: BurgerMapUseCase
+final class DefaultBurgerMapHouseViewModel: BurgerMapHouseOutput {
+    private let burgerMapHouseUseCase: BurgerMapHouseUseCase
     private let accessStorage: AccessStorage
     private let disposeBag: DisposeBag
+    private var burgerMapHouse: BurgerMapHouse
     
-    var requestAuthAlert = PublishRelay<String>()
-    var setRegion = PublishRelay<CLLocationCoordinate2D>()
-    var burgerMapHouses = PublishRelay<[BurgerMapHouse]>()
-    var showBurgerMapHouseModel = PublishRelay<BurgerMapHouse>()
+    var burgerHouseReviews = BehaviorSubject<[SectionBurgerHouseReview]>(value: [])
     var toastMessage = PublishRelay<String>()
     var goToLogin = PublishRelay<Void>()
-    var removeAnnotations = PublishRelay<Void>()
     
     init(
-        locationManager: LocationManager,
-        burgerMapUseCase: BurgerMapUseCase,
+        burgerMapHouseUseCase: BurgerMapHouseUseCase,
         accessStorage: AccessStorage,
-        disposeBag: DisposeBag = DisposeBag()
+        disposeBag: DisposeBag = DisposeBag(),
+        burgerMapHouse: BurgerMapHouse
     ) {
-        self.locationManager = locationManager
-        self.burgerMapUseCase = burgerMapUseCase
+        self.burgerMapHouseUseCase = burgerMapHouseUseCase
         self.accessStorage = accessStorage
         self.disposeBag = disposeBag
+        self.burgerMapHouse = burgerMapHouse
     }
 }
 
-extension DefaultBurgerMapViewModel: BurgerMapInput {
-    func viewWillAppear() {
-        locationManager.requestAuthAlert
-            .bind(to: requestAuthAlert)
-            .disposed(by: disposeBag)
-        
-        locationManager.checkDeviceLocationAuthorization()
-        
-        locationManager.coordinate
-            .bind(to: setRegion)
-            .disposed(by: disposeBag)
-        
-        fetchBurgerMapHouse()
+extension DefaultBurgerMapHouseViewModel: BurgerMapHouseInput {
+    func viewDidLoad() {
+        fetchReviews()
     }
     
-    func viewWillDisappear() {
-        removeAnnotations.accept(())
+    func fetchReviews() {
+        burgerMapHouse.reviewIds.forEach { postId in
+            fetchSingleReview(postId: postId) { [weak self] review in
+                guard let self else { return }
+                do {
+                    if var reviews = try burgerHouseReviews.value().first {
+                        reviews.items.append(review)
+                        reviews.items = reviews.items.sorted { $0.createdAt > $1.createdAt }
+                        burgerHouseReviews.onNext([reviews])
+                    } else {
+                        burgerHouseReviews.onNext([SectionBurgerHouseReview(items: [review])])
+                    }
+                } catch {
+                    toastMessage.accept("왜 에러가 여기서..?")
+                }
+            }
+        }
     }
     
-    func fetchBurgerMapHouse() {
-        burgerMapUseCase.fetchBurgerHouseExecute(
-            query: .init(
-                next: nil,
-                limit: "300000",
-                productId: LFRBProductID.burgerHouseTest.rawValue
-            )
+    func fetchSingleReview(postId: String, completion: @escaping (BurgerHouseReview) -> Void) {
+        burgerMapHouseUseCase.fetchSinglePostExecute(
+            query: .init(postId: postId)
         )
         .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
         .drive(with: self) { owner, result in
             switch result {
             case .success(let value):
-                owner.burgerMapHouses.accept(value)
+                completion(value)
             case .failure(let error):
                 switch error {
                 case .network(let message):
@@ -102,7 +93,9 @@ extension DefaultBurgerMapViewModel: BurgerMapInput {
                     owner.toastMessage.accept(message)
                 case .expiredToken:
                     owner.refreshAccessToken {
-                        owner.fetchBurgerMapHouse()
+                        owner.fetchSingleReview(postId: postId) {
+                            completion($0)
+                        }
                     }
                 case .unknown(let message):
                     owner.toastMessage.accept(message)
@@ -113,15 +106,15 @@ extension DefaultBurgerMapViewModel: BurgerMapInput {
                 }
             }
         } onCompleted: { _ in
-            print("fetchBurgerHouseExecute completed")
+            print("fetchSinglePostExecute completed")
         } onDisposed: { _ in
-            print("fetchBurgerHouseExecute disposed")
+            print("fetchSinglePostExecute disposed")
         }
         .disposed(by: disposeBag)
     }
     
     func refreshAccessToken(completion: @escaping () -> Void) {
-        burgerMapUseCase.refreshAccessTokenExecute()
+        burgerMapHouseUseCase.refreshAccessTokenExecute()
             .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
             .drive(with: self) { owner, result in
                 switch result {
@@ -160,9 +153,5 @@ extension DefaultBurgerMapViewModel: BurgerMapInput {
                 print("refreshAccessTokenExecute disposed")
             }
             .disposed(by: disposeBag)
-    }
-    
-    func didSelectBurgerMapHouse(_ burgerMapHouse: BurgerMapHouse) {
-        showBurgerMapHouseModel.accept(burgerMapHouse)
     }
 }
