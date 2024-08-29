@@ -11,7 +11,7 @@ struct PostResponseDTO: Decodable {
     let postId: String
     let productId: String
     let title: String
-    let price: Int
+    let price: Int?
     let content: String
     let content1: String
     let content2: String?
@@ -50,7 +50,7 @@ struct PostResponseDTO: Decodable {
 }
 
 extension PostResponseDTO {
-    func toDomain() -> GetBurgerHouse {
+    func toBurgerHouse() -> GetBurgerHouse {
         return GetBurgerHouse(
             burgerHousePostId: self.postId,
             name: self.title,
@@ -70,11 +70,11 @@ extension PostResponseDTO {
 }
 
 extension PostResponseDTO {
-    func toDomain() -> BurgerHouseReview {
+    func toBurgerHouseReview() -> BurgerHouseReview {
         return BurgerHouseReview(
             id: self.postId,
             title: self.title,
-            rating: self.price,
+            rating: self.price ?? 0,
             content: self.content,
             burgerHousePostId: self.content1,
             createdAt: self.createdAt,
