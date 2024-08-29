@@ -18,6 +18,15 @@ struct GetPostResponseDTO: Decodable {
 }
 
 extension GetPostResponseDTO {
+    // 전체 포스트 페이지네이션
+    func toDomain() -> GetBurgerHouseReview {
+        return GetBurgerHouseReview(
+            reviews: self.data.map { $0.toBurgerHouseReview() },
+            nextCursor: self.nextCursor
+        )
+    }
+    
+    // 어디서 쓰니,,?
     func toDomain() -> [GetBurgerHouse] {
         return self.data.map {
             return GetBurgerHouse(
