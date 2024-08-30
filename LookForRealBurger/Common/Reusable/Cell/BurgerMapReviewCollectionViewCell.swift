@@ -12,58 +12,115 @@ import SnapKit
 import Kingfisher
 
 final class BurgerMapReviewCollectionViewCell: BaseCollectionViewCell {
-    let nickLabel: UILabel = {
+    private let headerView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    private let titleView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    private let bottomView: UIView = {
+        let view = UIView()
+        return view
+    }()
+    
+    private let nickLabel: UILabel = {
         let label = UILabel()
+        label.font = R.Font.bold16
+        label.textColor = R.Color.brown
         return label
     }()
     
-    let imageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .createImageLayout())
-    
-    let titleLabel: UILabel = {
+    private let dateLabel: UILabel = {
         let label = UILabel()
+        label.font = R.Font.regular12
+        label.textColor = R.Color.orange
         return label
     }()
     
-    let contentLabel: UILabel = {
+    private let imageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .createImageLayout())
+    
+    private let titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
+        label.font = R.Font.bold16
+        label.textColor = R.Color.brown
         return label
     }()
     
-    var images: [String] = []
+    private let contentLabel: UILabel = {
+        let label = UILabel()
+        label.numberOfLines = 0
+        label.font = R.Font.regular16
+        label.textColor = R.Color.green
+        return label
+    }()
+    
+    private var images: [String] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
     
     override func configureHierarchy() {
-        contentView.addSubview(nickLabel)
+        contentView.addSubview(headerView)
+        headerView.addSubview(nickLabel)
+        headerView.addSubview(dateLabel)
         contentView.addSubview(imageCollectionView)
-        contentView.addSubview(titleLabel)
-        contentView.addSubview(contentLabel)
+        contentView.addSubview(titleView)
+        titleView.addSubview(titleLabel)
+        contentView.addSubview(bottomView)
+        bottomView.addSubview(contentLabel)
     }
     
     override func configureLayout() {
+        headerView.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(50)
+        }
+        
+        nickLabel.setContentHuggingPriority(.init(251), for: .horizontal)
         nickLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.horizontalEdges.equalToSuperview().inset(20)
+            make.leading.equalToSuperview().offset(20)
+            make.centerY.equalToSuperview()
+        }
+        
+        dateLabel.snp.makeConstraints { make in
+            make.leading.equalTo(nickLabel.snp.trailing).offset(12)
+            make.bottom.equalTo(nickLabel.snp.bottom)
+            make.trailing.greaterThanOrEqualToSuperview().offset(-20)
         }
         
         imageCollectionView.snp.makeConstraints { make in
-            make.top.equalTo(nickLabel.snp.bottom).offset(16)
+            make.top.equalTo(headerView.snp.bottom)
             make.horizontalEdges.equalToSuperview()
-            make.height.equalTo(imageCollectionView.snp.width).multipliedBy(1)
+            make.height.equalTo(imageCollectionView.snp.width).multipliedBy(0.6)
+        }
+        
+        titleView.snp.makeConstraints { make in
+            make.top.equalTo(imageCollectionView.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
         }
         
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(imageCollectionView.snp.bottom).offset(16)
             make.horizontalEdges.equalToSuperview().inset(20)
+            make.verticalEdges.equalToSuperview().inset(16)
+        }
+        
+        bottomView.snp.makeConstraints { make in
+            make.top.equalTo(titleView.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
+            make.bottom.equalToSuperview()
         }
         
         contentLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(16)
             make.horizontalEdges.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview().inset(16)
+            make.top.equalToSuperview().inset(8)
+            make.bottom.equalToSuperview()
         }
     }
     
@@ -75,6 +132,14 @@ final class BurgerMapReviewCollectionViewCell: BaseCollectionViewCell {
         imageCollectionView.delegate = self
         imageCollectionView.dataSource = self
         imageCollectionView.backgroundColor = .clear
+    }
+    
+    func configureContents(contents: BurgerHouseReview) {
+        nickLabel.text = contents.creator.nick
+        images = contents.files
+        titleLabel.text = contents.title
+        contentLabel.text = contents.content
+        dateLabel.text = contents.createdAt.convertStringDate
     }
 }
 
