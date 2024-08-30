@@ -7,6 +7,7 @@
 
 import UIKit
 
+import RxSwift
 import SnapKit
 
 final class BurgerMapReviewImageCell: BaseCollectionViewCell {
@@ -43,5 +44,9 @@ final class BurgerMapReviewImageCell: BaseCollectionViewCell {
         multipleImageView.snp.makeConstraints { make in
             make.top.trailing.equalTo(imageView).inset(8)
         }
+    }
+    
+    override func configureUI() {
+        imageView.layer.cornerRadius = 20
     }
 }
