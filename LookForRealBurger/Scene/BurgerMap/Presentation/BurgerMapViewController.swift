@@ -23,6 +23,14 @@ final class BurgerMapViewController: BaseViewController {
         return mapView
     }()
     
+    private let refreshButton: UIButton = {
+        let button = UIButton()
+        button.configuration = .plain()
+        button.configuration?.image = UIImage(systemName: "arrow.clockwise.circle.fill")?.withTintColor(R.Color.red, renderingMode: .alwaysOriginal)
+        button.configuration?.preferredSymbolConfigurationForImage = .init(font: .systemFont(ofSize: 40, weight: .bold))
+        return button
+    }()
+    
     private var viewModel: BurgerMapViewModel!
     private var disposeBag: DisposeBag!
     
@@ -39,13 +47,11 @@ final class BurgerMapViewController: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
-        viewModel.viewWillAppear()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = false
-        viewModel.viewWillDisappear()
     }
     
     override func viewDidLoad() {
@@ -56,16 +62,23 @@ final class BurgerMapViewController: BaseViewController {
             forAnnotationViewWithReuseIdentifier: BurgerAnnotationView.identifier
         )
         bind()
+        viewModel.viewDidLoad()
     }
     
     override func configureHierarchy() {
         view.addSubview(burgerMapView)
+        view.addSubview(refreshButton)
     }
     
     override func configureLayout() {
         burgerMapView.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        
+        refreshButton.snp.makeConstraints { make in
+            make.bottom.trailing.equalTo(view.safeAreaLayoutGuide).inset(24)
+            make.size.equalTo(50)
         }
     }
 }
@@ -76,6 +89,12 @@ extension BurgerMapViewController {
             .when(.recognized)
             .bind(with: self) { owner, recognizer in
                 owner.dismiss(animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        refreshButton.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.viewModel.refreshTap()
             }
             .disposed(by: disposeBag)
         
@@ -120,7 +139,7 @@ extension BurgerMapViewController {
                     latitudinalMeters: 500,
                     longitudinalMeters: 500
                 )
-                owner.burgerMapView.setRegion(region, animated: true)
+                owner.burgerMapView.setRegion(region, animated: false)
             } onCompleted: { _ in
                 print("setRegion completed")
             } onDisposed: { _ in
