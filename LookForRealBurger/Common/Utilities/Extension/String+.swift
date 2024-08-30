@@ -17,3 +17,15 @@ extension String {
         return String(format: self.localized, arguments)
     }
 }
+
+
+extension String {
+    var convertStringDate: String {
+        let formatter = Date.formatter
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        let date = formatter.date(from: self) ?? Date()
+        formatter.locale = .init(identifier: "ko_KR")
+        formatter.dateFormat = "yyyy년 MM월 dd일"
+        return formatter.string(from: date)
+    }
+}
