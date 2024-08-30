@@ -13,6 +13,45 @@ import RxSwift
 import SnapKit
 
 final class BurgerMapHouseViewController: BaseViewController {
+    private let nameLabel: UILabel = {
+        let label = UILabel()
+        label.font = R.Font.chab20
+        label.textColor = R.Color.green
+        return label
+    }()
+    
+    private let roadAddressImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "mappin.and.ellipse.circle")
+        imageView.preferredSymbolConfiguration = .init(font: .systemFont(ofSize: 16))
+        imageView.tintColor = R.Color.red
+        return imageView
+    }()
+    
+    private let phoneImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "phone.down.circle")
+        imageView.preferredSymbolConfiguration = .init(font: .systemFont(ofSize: 16))
+        imageView.tintColor = R.Color.red
+        return imageView
+    }()
+    
+    private let roadAddressLabel: UILabel = {
+        let label = UILabel()
+        label.text = "aslkdjlksajd"
+        label.font = R.Font.bold16
+        label.textColor = R.Color.orange
+        return label
+    }()
+    
+    private let phoneLabel: UILabel = {
+        let label = UILabel()
+        label.text = "aslkdjlksajd"
+        label.font = R.Font.bold16
+        label.textColor = R.Color.orange
+        return label
+    }()
+    
     private let burgerMapReviewCollectionView = UICollectionView(
         frame: .zero,
         collectionViewLayout: createLayout()
@@ -37,7 +76,7 @@ final class BurgerMapHouseViewController: BaseViewController {
             sheetPresentationController.detents = [.medium(), .large()]
             sheetPresentationController.prefersGrabberVisible = true
             sheetPresentationController.largestUndimmedDetentIdentifier = .medium
-            sheetPresentationController.prefersScrollingExpandsWhenScrolledToEdge = false
+            sheetPresentationController.prefersScrollingExpandsWhenScrolledToEdge = true
         }
         
         burgerMapReviewCollectionView.register(
@@ -49,13 +88,52 @@ final class BurgerMapHouseViewController: BaseViewController {
         bind()
     }
     
+    override func configureNavigation() {
+//        navigationItem.title = "BURGER HOUSE"
+    }
+    
     override func configureHierarchy() {
+        view.addSubview(nameLabel)
+        view.addSubview(roadAddressImage)
+        view.addSubview(phoneImage)
+        view.addSubview(roadAddressLabel)
+        view.addSubview(phoneLabel)
         view.addSubview(burgerMapReviewCollectionView)
     }
     
     override func configureLayout() {
+        nameLabel.snp.makeConstraints { make in
+            make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
+        }
+        
+        roadAddressImage.snp.makeConstraints { make in
+            make.top.equalTo(nameLabel.snp.bottom).offset(8)
+            make.leading.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.size.equalTo(20)
+        }
+        
+        phoneImage.snp.makeConstraints { make in
+            make.top.equalTo(roadAddressImage.snp.bottom).offset(8)
+            make.leading.equalTo(view.safeAreaLayoutGuide).inset(20)
+            make.size.equalTo(20)
+        }
+        
+        roadAddressLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(roadAddressImage.snp.centerY)
+            make.leading.equalTo(roadAddressImage.snp.trailing).offset(16)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+        }
+        
+        phoneLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(phoneImage.snp.centerY)
+            make.leading.equalTo(phoneImage.snp.trailing).offset(16)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(20)
+        }
+        
         burgerMapReviewCollectionView.snp.makeConstraints { make in
-            make.horizontalEdges.top.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(phoneImage.snp.bottom).offset(8)
+            make.horizontalEdges.equalTo(view.safeAreaLayoutGuide)
             make.bottom.equalToSuperview()
         }
     }
@@ -70,14 +148,19 @@ extension BurgerMapHouseViewController {
         let dataSource = RxCollectionViewSectionedReloadDataSource<SectionBurgerHouseReview>(
             configureCell: { dataSource, collectionView, indexPath, item in
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BurgerMapReviewCollectionViewCell.identifier, for: indexPath) as? BurgerMapReviewCollectionViewCell else { return UICollectionViewCell() }
-                cell.nickLabel.text = item.creator.nick
-                cell.images = item.files
-                cell.imageCollectionView.reloadData()
-                cell.titleLabel.text = item.title
-                cell.contentLabel.text = item.content
+                cell.configureContents(contents: item)
+                
                 return cell
             }
         )
+        
+        viewModel.setBurgerHouse
+            .bind(with: self) { owner, burgerHouse in
+                owner.nameLabel.text = burgerHouse.name
+                owner.roadAddressLabel.text = burgerHouse.roadAddress
+                owner.phoneLabel.text = burgerHouse.phone
+            }
+            .disposed(by: disposeBag)
         
         viewModel.burgerHouseReviews
             .bind(to: burgerMapReviewCollectionView.rx.items(dataSource: dataSource))
@@ -95,12 +178,11 @@ extension BurgerMapHouseViewController {
     static func createLayout() -> UICollectionViewLayout {
         let itemSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .fractionalHeight(1.0))
+            heightDimension: .estimated(200))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = .init(top: 0, leading: 0, bottom: 30, trailing: 0)
         let groupSize = NSCollectionLayoutSize(
             widthDimension: .fractionalWidth(1.0),
-            heightDimension: .estimated(600)
+            heightDimension: .estimated(200)
         )
         let group = NSCollectionLayoutGroup.vertical(
             layoutSize: groupSize, subitems: [item]
