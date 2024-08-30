@@ -44,7 +44,6 @@ extension DefaultLocationManager: LocationManager {
             if CLLocationManager.locationServicesEnabled() {
                 checkCurrentLocationAuthorization()
             } else {
-                coordinate.accept(.init(latitude: 37.517742, longitude: 126.886463))
                 requestAuthAlert.accept("아이폰 위치 서비스가 켜져있어야 위치 확인이 가능합니다. 설정 -> 개인정보 보호 및 보안 -> 위치 서비스 -> 활성화")
             }
         }
@@ -59,12 +58,10 @@ extension DefaultLocationManager: LocationManager {
         case .notDetermined:
             // 3) notDetermined 상태일 때 권한을 요청
             print("notDetermined")
-            coordinate.accept(.init(latitude: 37.517742, longitude: 126.886463))
             manager.desiredAccuracy = kCLLocationAccuracyBest
             manager.requestWhenInUseAuthorization()
         case .denied:
             print("denied")
-            coordinate.accept(.init(latitude: 37.517742, longitude: 126.886463))
             requestAuthAlert.accept("위치 권한을 허용해야만 위치 확인이 가능합니다.")
         case .authorizedAlways, .authorizedWhenInUse:
             // 4) authorized 상태일 때 위치 정보 업데이트가 시작할 수 있도록 요청
