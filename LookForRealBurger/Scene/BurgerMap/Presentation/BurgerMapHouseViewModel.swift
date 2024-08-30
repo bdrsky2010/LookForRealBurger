@@ -18,6 +18,7 @@ protocol BurgerMapHouseInput {
 }
 
 protocol BurgerMapHouseOutput {
+    var setBurgerHouse: BehaviorRelay<(name: String, roadAddress: String, phone: String)> { get }
     var burgerHouseReviews: BehaviorSubject<[SectionBurgerHouseReview]> { get }
     var toastMessage: PublishRelay<String> { get }
     var goToLogin: PublishRelay<Void> { get }
@@ -31,6 +32,7 @@ final class DefaultBurgerMapHouseViewModel: BurgerMapHouseOutput {
     private let disposeBag: DisposeBag
     private var burgerMapHouse: BurgerMapHouse
     
+    var setBurgerHouse = BehaviorRelay<(name: String, roadAddress: String, phone: String)>(value: ("", "", ""))
     var burgerHouseReviews = BehaviorSubject<[SectionBurgerHouseReview]>(value: [])
     var toastMessage = PublishRelay<String>()
     var goToLogin = PublishRelay<Void>()
@@ -50,6 +52,7 @@ final class DefaultBurgerMapHouseViewModel: BurgerMapHouseOutput {
 
 extension DefaultBurgerMapHouseViewModel: BurgerMapHouseInput {
     func viewDidLoad() {
+        setBurgerHouse.accept((burgerMapHouse.name, burgerMapHouse.roadAddress, burgerMapHouse.phone))
         fetchReviews()
     }
     
