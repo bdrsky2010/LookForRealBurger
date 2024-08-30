@@ -12,9 +12,8 @@ import RxCocoa
 import RxSwift
 
 protocol BurgerMapInput {
-    func viewWillAppear()
-    func viewWillDisappear()
-    func fetchBurgerMapHouse()
+    func viewDidLoad()
+    func refreshTap()
     func refreshAccessToken(completion: @escaping () -> Void)
     func didSelectBurgerMapHouse(_ burgerMapHouse: BurgerMapHouse)
 }
@@ -59,7 +58,18 @@ final class DefaultBurgerMapViewModel: BurgerMapOutput {
 }
 
 extension DefaultBurgerMapViewModel: BurgerMapInput {
-    func viewWillAppear() {
+    func viewDidLoad() {
+        updateLocation()
+        fetchBurgerMapHouse()
+    }
+    
+    func refreshTap() {
+        removeAnnotations.accept(())
+        updateLocation()
+        fetchBurgerMapHouse()
+    }
+    
+    private func updateLocation() {
         locationManager.requestAuthAlert
             .bind(to: requestAuthAlert)
             .disposed(by: disposeBag)
@@ -69,15 +79,9 @@ extension DefaultBurgerMapViewModel: BurgerMapInput {
         locationManager.coordinate
             .bind(to: setRegion)
             .disposed(by: disposeBag)
-        
-        fetchBurgerMapHouse()
     }
     
-    func viewWillDisappear() {
-        removeAnnotations.accept(())
-    }
-    
-    func fetchBurgerMapHouse() {
+    private func fetchBurgerMapHouse() {
         burgerMapUseCase.fetchBurgerHouseExecute(
             query: .init(
                 next: nil,
