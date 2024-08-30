@@ -451,6 +451,7 @@ extension WriteReviewViewController {
         
         viewModel.didSuccessUploadReview
             .bind(with: self) { owner, _ in
+                NotificationCenter.default.post(Notification(name: Notification.Name("UpdateReview")))
                 owner.tabBar?.selectedIndex = 1
                 owner.dismiss(animated: true)
             }
