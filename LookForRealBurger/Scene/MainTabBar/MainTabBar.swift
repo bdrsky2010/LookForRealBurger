@@ -23,7 +23,7 @@ private enum TabItem: CaseIterable {
         case .map:
             view = BurgerMapScene.makeView()
         case .review:
-            view = BurgerReviewViewController()
+            view = BurgerHouseReviewScene.makeView()
         case .writeReview:
             view = EmptyPresentViewController()
         case .profile:
