@@ -27,6 +27,12 @@ final class BurgerMapReviewImageCell: BaseCollectionViewCell {
         return imageView
     }()
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        imageView.image = nil
+        multipleImageView.isHidden = true
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
