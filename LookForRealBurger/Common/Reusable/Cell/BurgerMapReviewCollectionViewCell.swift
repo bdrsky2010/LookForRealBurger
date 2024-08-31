@@ -59,7 +59,11 @@ final class BurgerMapReviewCollectionViewCell: BaseCollectionViewCell {
         return label
     }()
     
-    private var images: [String] = []
+    private var images: [String] = [] {
+        didSet {
+            imageCollectionView.reloadData()
+        }
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
