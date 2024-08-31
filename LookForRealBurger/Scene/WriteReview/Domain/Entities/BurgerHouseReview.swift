@@ -16,9 +16,9 @@ struct BurgerHouseReview: Hashable, Identifiable {
     let createdAt: String
     let creator: Creator
     let files: [String]
-    let likeUserIds: [String]
-    let bookmarkUserIds: [String]
-    let comments: [Comment]
+    var likeUserIds: [String]
+    var bookmarkUserIds: [String]
+    var comments: [Comment]
 }
 
 struct Creator: Hashable {
@@ -28,7 +28,7 @@ struct Creator: Hashable {
 
 struct Comment: Hashable, Identifiable {
     let id: String
-    let content: String
+    var content: String
     let createdAt: String
     let creator: Creator
 }
