@@ -13,6 +13,7 @@ import RxSwift
 protocol BurgerHouseReviewOutput {
     var burgerHouseReviews: BehaviorRelay<[SectionBurgerHouseReview]> { get }
     var pushReviewDetail: PublishRelay<BurgerHouseReview> { get }
+    var endRefreshing: PublishRelay<Void> { get }
     var toastMessage: PublishRelay<String> { get }
     var goToLogin: PublishRelay<Void> { get }
 }
@@ -35,6 +36,7 @@ final class DefaultBurgerHouseReviewViewModel: BurgerHouseReviewOutput {
     
     var burgerHouseReviews = BehaviorRelay<[SectionBurgerHouseReview]>(value: [])
     var pushReviewDetail = PublishRelay<BurgerHouseReview>()
+    var endRefreshing = PublishRelay<Void>()
     var toastMessage = PublishRelay<String>()
     var goToLogin = PublishRelay<Void>()
     
@@ -99,6 +101,7 @@ extension DefaultBurgerHouseReviewViewModel: BurgerHouseReviewInput {
                     break
                 }
             }
+            owner.endRefreshing.accept(())
         } onCompleted: { _ in
             print("fetchBurgerReview completed")
         } onDisposed: { _ in
@@ -150,6 +153,7 @@ extension DefaultBurgerHouseReviewViewModel: BurgerHouseReviewInput {
                     case .expiredAccessToken:
                         break
                     }
+                    
                 }
             } onCompleted: { _ in
                 print("refreshAccessTokenExecute completed")
