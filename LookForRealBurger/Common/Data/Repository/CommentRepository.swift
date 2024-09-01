@@ -18,13 +18,19 @@ enum CommentError: Error {
 }
 
 enum CommentAPIType: String {
-    case registerReviewId
+    case writeComment
+    case deleteComment
 }
 
 protocol CommentRepository {
-    func registerReviewId(
+    func registerReviewIdRequest(
         query: RegisterReviewIdQuery,
         completion: @escaping (Result<RegisteredReview, CommentError>) -> Void
+    )
+    
+    func writeCommentRequest(
+        query: WriteCommentQuery,
+        completion: @escaping (Result<Comment, CommentError>) -> Void
     )
 }
 
@@ -41,23 +47,44 @@ final class DefaultCommentRepository {
 }
 
 extension DefaultCommentRepository: CommentRepository {
-    func registerReviewId(
+    func registerReviewIdRequest(
         query: RegisterReviewIdQuery,
         completion: @escaping (Result<RegisteredReview, CommentError>) -> Void
     ) {
         let requestDTO = CommentRequestDTO(content: query.reviewId)
         networkManager.request(
             CommentRouter.comment(query.postId, requestDTO),
-            of: CommentResponseDTO.self) { [weak self] result in
+            of: CommentResponseDTO.self
+        ) { [weak self] result in
                 guard let self else { return }
                 switch result {
                 case .success(let success):
                     completion(.success(success.toDomain()))
                 case .failure(let failure):
-                    let commentError = errorHandling(type: .registerReviewId, failure: failure)
+                    let commentError = errorHandling(type: .writeComment, failure: failure)
                     completion(.failure(commentError))
                 }
             }
+    }
+    
+    func writeCommentRequest(
+        query: WriteCommentQuery,
+        completion: @escaping (Result<Comment, CommentError>) -> Void
+    ) {
+        let requestDTO = CommentRequestDTO(content: query.content)
+        networkManager.request(
+            CommentRouter.comment(query.postId, requestDTO),
+            of: CommentResponseDTO.self
+        ) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let success):
+                completion(.success(success.toDomain()))
+            case .failure(let failure):
+                let commentError = errorHandling(type: .writeComment, failure: failure)
+                completion(.failure(commentError))
+            }
+        }
     }
 }
 
