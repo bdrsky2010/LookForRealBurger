@@ -84,9 +84,9 @@ extension DefaultBurgerMapViewModel: BurgerMapInput {
     private func fetchBurgerMapHouse() {
         burgerMapUseCase.fetchBurgerHouseExecute(
             query: .init(
+                type: .total,
                 next: nil,
-                limit: "300000",
-                productId: LFRBProductID.burgerHouseTest.rawValue
+                limit: "300000"
             )
         )
         .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
