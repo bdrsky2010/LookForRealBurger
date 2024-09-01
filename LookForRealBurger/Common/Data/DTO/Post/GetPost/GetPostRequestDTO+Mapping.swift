@@ -9,8 +9,8 @@ import Foundation
 
 struct GetPostRequestDTO: Encodable {
     let next: String?
-    let limit: String
-    let productId: String
+    let limit: String?
+    let productId: String?
     
     enum CodingKeys: String, CodingKey {
         case next
