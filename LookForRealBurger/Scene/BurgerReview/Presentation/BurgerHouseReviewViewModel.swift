@@ -23,15 +23,22 @@ protocol BurgerHouseReviewInput {
     func fetchBurgerHouseReview()
     func firstFetchBurgerHouseReview()
     func nextFetchBurgerHouseReview()
-    func refreshAccessToken(completion: @escaping () -> Void)
     func modelSelected(burgerHouseReview: BurgerHouseReview)
 }
 
 typealias BurgerHouseReviewViewModel = BurgerHouseReviewInput & BurgerHouseReviewOutput
 
+enum GetPostType {
+    case total
+    case byUser(_ userId: String)
+    case myLike
+    case myLike2
+}
+
 final class DefaultBurgerHouseReviewViewModel: BurgerHouseReviewOutput {
     private let burgerHouseReviewUseCase: BurgerHouseReviewUseCase
     private let accessStorage: AccessStorage
+    private let getPostType: GetPostType
     private let disposeBag: DisposeBag
     
     var burgerHouseReviews = BehaviorRelay<[SectionBurgerHouseReview]>(value: [])
@@ -46,10 +53,12 @@ final class DefaultBurgerHouseReviewViewModel: BurgerHouseReviewOutput {
     init(
         burgerReviewUseCase: BurgerHouseReviewUseCase,
         accessStorage: AccessStorage,
+        getPostType: GetPostType,
         disposeBag: DisposeBag = DisposeBag()
     ) {
         self.burgerHouseReviewUseCase = burgerReviewUseCase
         self.accessStorage = accessStorage
+        self.getPostType = getPostType
         self.disposeBag = disposeBag
     }
 }
@@ -60,13 +69,13 @@ extension DefaultBurgerHouseReviewViewModel: BurgerHouseReviewInput {
     }
     
     func fetchBurgerHouseReview() {
-        burgerHouseReviewUseCase.fetchBurgerReview(
-            query: GetPostQuery(
-                next: nextCursor,
-                limit: limit,
-                productId: LFRBProductID.reviewTest.rawValue
-            )
+        let query = GetPostQuery(
+            type: getPostType,
+            next: nextCursor,
+            limit: limit
         )
+        
+        burgerHouseReviewUseCase.fetchBurgerReview(query: query)
         .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
         .drive(with: self) { owner, result in
             switch result {
@@ -120,7 +129,13 @@ extension DefaultBurgerHouseReviewViewModel: BurgerHouseReviewInput {
         fetchBurgerHouseReview()
     }
     
-    func refreshAccessToken(completion: @escaping () -> Void) {
+    func modelSelected(burgerHouseReview: BurgerHouseReview) {
+        pushReviewDetail.accept(burgerHouseReview)
+    }
+}
+
+extension DefaultBurgerHouseReviewViewModel {
+    private func refreshAccessToken(completion: @escaping () -> Void) {
         burgerHouseReviewUseCase.refreshAccessTokenExecute()
             .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
             .drive(with: self) { owner, result in
@@ -161,9 +176,5 @@ extension DefaultBurgerHouseReviewViewModel: BurgerHouseReviewInput {
                 print("refreshAccessTokenExecute disposed")
             }
             .disposed(by: disposeBag)
-    }
-    
-    func modelSelected(burgerHouseReview: BurgerHouseReview) {
-        pushReviewDetail.accept(burgerHouseReview)
     }
 }

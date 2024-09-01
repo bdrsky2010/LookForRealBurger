@@ -17,21 +17,10 @@ import Kingfisher
 final class BurgerHouseReviewDetailViewController: BaseViewController {
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    
-    private let headerView: UIView = {
-        let view = UIView()
-        return view
-    }()
-    
-    private let titleView: UIView = {
-        let view = UIView()
-        return view
-    }()
-    
-    private let bottomView: UIView = {
-        let view = UIView()
-        return view
-    }()
+    private let headerView = UIView()
+    private let buttonView = UIView()
+    private let titleView = UIView()
+    private let bottomView = UIView()
     
     private let nickLabel: UILabel = {
         let label = UILabel()
@@ -53,20 +42,42 @@ final class BurgerHouseReviewDetailViewController: BaseViewController {
         return imageView
     }()
     
+    private let likeButton: UIButton = {
+        let button = UIButton()
+        button.configuration = .plain()
+        button.configuration?.image = UIImage(systemName: "hand.thumbsup")?.withTintColor(R.Color.red, renderingMode: .alwaysOriginal)
+        button.configuration?.titleAlignment = .trailing
+        button.configuration?.titlePadding = 4
+        button.configuration?.preferredSymbolConfigurationForImage = .init(font: .systemFont(ofSize: 16, weight: .bold))
+        return button
+    }()
+    
+    private let commentButton: UIButton = {
+        let button = UIButton()
+        button.configuration = .plain()
+        button.configuration?.image = UIImage(systemName: "message")?.withTintColor(R.Color.red, renderingMode: .alwaysOriginal)
+        button.configuration?.titleAlignment = .trailing
+        button.configuration?.titlePadding = 4
+        button.configuration?.preferredSymbolConfigurationForImage = .init(font: .systemFont(ofSize: 16, weight: .bold))
+        return button
+    }()
+    
+    private let bookmarkButton: UIButton = {
+        let button = UIButton()
+        button.configuration = .plain()
+        button.configuration?.image = UIImage(systemName: "bookmark")?.withTintColor(R.Color.red, renderingMode: .alwaysOriginal)
+        button.configuration?.titleAlignment = .trailing
+        button.configuration?.titlePadding = 4
+        button.configuration?.preferredSymbolConfigurationForImage = .init(font: .systemFont(ofSize: 16, weight: .bold))
+        return button
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         label.font = R.Font.bold18
         label.textColor = R.Color.brown
         return label
-    }()
-    
-    private let bookmarkButton: UIButton = {
-        let button = UIButton()
-        button.configuration = .plain()
-        button.configuration?.image = UIImage(systemName: "bookmark")?.withTintColor(R.Color.brown, renderingMode: .alwaysOriginal)
-        button.configuration?.preferredSymbolConfigurationForImage = .init(font: .systemFont(ofSize: 16, weight: .bold))
-        return button
     }()
     
     private let contentLabel: UILabel = {
@@ -121,16 +132,20 @@ final class BurgerHouseReviewDetailViewController: BaseViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(headerView)
+        contentView.addSubview(reviewImageCollectionView)
+        contentView.addSubview(buttonView)
+        contentView.addSubview(titleView)
+        contentView.addSubview(bottomView)
+        
         headerView.addSubview(burgerImage)
         headerView.addSubview(nickLabel)
-        headerView.addSubview(bookmarkButton)
         
-        contentView.addSubview(reviewImageCollectionView)
-        contentView.addSubview(titleView)
+        buttonView.addSubview(likeButton)
+        buttonView.addSubview(commentButton)
+        buttonView.addSubview(bookmarkButton)
         
         titleView.addSubview(titleLabel)
         
-        contentView.addSubview(bottomView)
         bottomView.addSubview(contentLabel)
         bottomView.addSubview(dateLabel)
     }
@@ -163,20 +178,41 @@ final class BurgerHouseReviewDetailViewController: BaseViewController {
             make.center.equalToSuperview()
         }
         
-        bookmarkButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().offset(-20)
-            make.size.equalTo(20)
-        }
-        
         reviewImageCollectionView.snp.makeConstraints { make in
             make.top.equalTo(headerView.snp.bottom)
             make.horizontalEdges.equalToSuperview()
             make.height.equalTo(reviewImageCollectionView.snp.width).multipliedBy(1)
         }
         
-        titleView.snp.makeConstraints { make in
+        buttonView.snp.makeConstraints { make in
             make.top.equalTo(reviewImageCollectionView.snp.bottom)
+            make.horizontalEdges.equalToSuperview()
+            make.height.equalTo(50)
+        }
+        
+        likeButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().offset(20)
+            make.width.equalTo(30)
+            make.height.equalTo(20)
+        }
+        
+        commentButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalTo(likeButton.snp.trailing).offset(20)
+            make.width.equalTo(30)
+            make.height.equalTo(20)
+        }
+        
+        bookmarkButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalTo(commentButton.snp.trailing).offset(20)
+            make.width.equalTo(30)
+            make.height.equalTo(20)
+        }
+        
+        titleView.snp.makeConstraints { make in
+            make.top.equalTo(buttonView.snp.bottom)
             make.horizontalEdges.equalToSuperview()
             make.height.equalTo(50)
         }
@@ -185,8 +221,6 @@ final class BurgerHouseReviewDetailViewController: BaseViewController {
             make.horizontalEdges.equalTo(view.safeAreaLayoutGuide).inset(20)
             make.verticalEdges.equalToSuperview().inset(16)
         }
-        
-        
         
         bottomView.snp.makeConstraints { make in
             make.top.equalTo(titleView.snp.bottom)
@@ -231,6 +265,27 @@ extension BurgerHouseReviewDetailViewController {
             }
             .disposed(by: disposeBag)
         
+        likeButton.rx.tap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .bind(with: self) { owner, _ in
+                owner.viewModel.likeTap()
+            }
+            .disposed(by: disposeBag)
+        
+        commentButton.rx.tap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .bind(with: self) { owner, _ in
+                owner.viewModel.commentTap()
+            }
+            .disposed(by: disposeBag)
+        
+        bookmarkButton.rx.tap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .bind(with: self) { owner, _ in
+                owner.viewModel.bookmarkTap()
+            }
+            .disposed(by: disposeBag)
+        
         viewModel.popViewController
             .bind(with: self) { owner, _ in
                 owner.navigationController?.popViewController(animated: true)
@@ -239,10 +294,11 @@ extension BurgerHouseReviewDetailViewController {
         
         viewModel.configureViewContents
             .bind(with: self) { owner, burgerHouseReview in
-                owner.nickLabel.text = burgerHouseReview.creator.nick
-                owner.titleLabel.text = burgerHouseReview.title
-                owner.contentLabel.text = burgerHouseReview.content
-                owner.dateLabel.text = burgerHouseReview.createdAt.convertStringDate
+                guard let review = burgerHouseReview.first else { return }
+                owner.nickLabel.text = review.creator.nick
+                owner.titleLabel.text = review.title
+                owner.contentLabel.text = review.content
+                owner.dateLabel.text = review.createdAt.convertStringDate
             }
             .disposed(by: disposeBag)
         
@@ -275,6 +331,95 @@ extension BurgerHouseReviewDetailViewController {
         
         viewModel.configureReviewImages
             .bind(to: reviewImageCollectionView.rx.items(dataSource: dataSources))
+            .disposed(by: disposeBag)
+        
+        
+        viewModel.isMyReview
+            .bind(with: self) { owner, isMyReview in
+                if #available(iOS 16.0, *) {
+                    owner.navigationItem.rightBarButtonItem?.isHidden = !isMyReview
+                } else {
+                    owner.navigationItem.rightBarButtonItem?.setValue(!isMyReview, forKey: "hidden")
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.isLike
+            .bind(with: self) { owner, isLike in
+                owner.likeButton.configuration?.image = UIImage(systemName: isLike ? "hand.thumbsup.fill" : "hand.thumbsup")?
+                    .withTintColor(R.Color.red, renderingMode: .alwaysOriginal)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.likeCount
+            .bind(with: self) { owner, count in
+                owner.likeButton.configuration?.attributedTitle = AttributedString(
+                    NSAttributedString(
+                        string: count.formatted(),
+                        attributes: [
+                            .font: R.Font.bold14,
+                            .foregroundColor: R.Color.brown
+                        ]
+                    )
+                )
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.commentCount
+            .bind(with: self) { owner, count in
+                owner.commentButton.configuration?.attributedTitle = AttributedString(
+                    NSAttributedString(
+                        string: count.formatted(),
+                        attributes: [.font: R.Font.bold14, .foregroundColor: R.Color.brown]
+                    )
+                )
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.isBookmark
+            .bind(with: self) { owner, isBookmark in
+                owner.bookmarkButton.configuration?.image = UIImage(systemName: isBookmark ? "bookmark.fill" : "bookmark")?
+                    .withTintColor(R.Color.red, renderingMode: .alwaysOriginal)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.bookmarkCount
+            .bind(with: self) { owner, count in
+                owner.bookmarkButton.configuration?.attributedTitle = AttributedString(
+                    NSAttributedString(
+                        string: count.formatted(),
+                        attributes: [.font: R.Font.bold14, .foregroundColor: R.Color.brown]
+                    )
+                )
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.pushCommentView
+            .bind(with: self) { owner, tuple in
+                let view = BurgerHouseReviewScene.makeView(
+                    postId: tuple.postId,
+                    comments: tuple.comments
+                )
+                
+                view.onChangeComments = { comments in
+                    owner.viewModel.onChangeComments(comments: comments)
+                    NotificationCenter.default.post(Notification(name: Notification.Name("UpdateReview")))
+                }
+                
+                owner.present(view, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.toastMessage
+            .bind(with: self) { owner, message in
+                owner.view.makeToast(message, duration: 1.5)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.goToLogin
+            .bind(with: self) { owner, _ in
+                owner.goToLogin()
+            }
             .disposed(by: disposeBag)
     }
 }
