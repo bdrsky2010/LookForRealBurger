@@ -87,7 +87,7 @@ extension DefaultPostRepository: PostRepository {
         ) -> Void) {
         let uploadImageRequestDTO = UploadImageRequestDTO(files: files)
         network.request(
-            PostRouter.imageUpload(uploadImageRequestDTO),
+            PostRouter.uploadImage(uploadImageRequestDTO),
             of: UploadImageResponseDTO.self
         ) { [weak self] result in
             guard let self else { return }
@@ -170,7 +170,7 @@ extension DefaultPostRepository: PostRepository {
         let getPostRequestDTO = GetPostRequestDTO(
             next: query.next,
             limit: query.limit,
-            productId: query.productId
+            productId: LFRBProductID.reviewTest.rawValue
         )
         network.request(
             PostRouter.getPost(getPostRequestDTO),
@@ -193,7 +193,7 @@ extension DefaultPostRepository: PostRepository {
         let getPostRequestDTO = GetPostRequestDTO(
             next: query.next,
             limit: query.limit,
-            productId: query.productId
+            productId: LFRBProductID.burgerHouseTest.rawValue
         )
         network.request(
             PostRouter.getPost(getPostRequestDTO),
@@ -232,13 +232,24 @@ extension DefaultPostRepository: PostRepository {
         query: GetPostQuery,
         completion: @escaping (Result<GetBurgerHouseReview, PostError>) -> Void
     ) {
-        let getPostRequestDTO = GetPostRequestDTO(
-            next: query.next,
-            limit: query.limit,
-            productId: query.productId
-        )
+        let getPostRequestDTO: GetPostRequestDTO
+        let router: LFRBTargetType
+        switch query.type {
+        case .total:
+            getPostRequestDTO = .init(next: query.next, limit: query.limit, productId: LFRBProductID.reviewTest.rawValue)
+            router = PostRouter.getPost(getPostRequestDTO)
+        case .byUser(let userId):
+            getPostRequestDTO = .init(next: query.next, limit: query.limit, productId: LFRBProductID.reviewTest.rawValue)
+            router = PostRouter.byUserPost(userId, getPostRequestDTO)
+        case .myLike:
+            getPostRequestDTO = .init(next: query.next, limit: query.limit, productId: nil)
+            router = LikeRouter.myLikePost(getPostRequestDTO)
+        case .myLike2:
+            getPostRequestDTO = .init(next: query.next, limit: query.limit, productId: nil)
+            router = LikeRouter.myLikePost2(getPostRequestDTO)
+        }
         network.request(
-            PostRouter.getPost(getPostRequestDTO),
+            router,
             of: GetPostResponseDTO.self
         ) { [weak self] result in
             guard let self else { return }
