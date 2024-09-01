@@ -172,13 +172,13 @@ extension DefualtAuthRepository {
         switch failure {
         case .requestFailure(let error):
             authError = .network(R.Phrase.errorOccurred)
-            print("CommentRepository \(type.rawValue) network 에러 발생 -> \(error)")
+            print("AuthRepository \(type.rawValue) network 에러 발생 -> \(error)")
         case .apiKey, .invalidData, .tooManyRequest, .invalidURL:
             authError = .network(R.Phrase.errorOccurred)
-            print("CommentRepository \(type.rawValue) network 에러 발생 -> \(failure)")
+            print("AuthRepository \(type.rawValue) network 에러 발생 -> \(failure)")
         case .networkFailure:
             authError = .network(R.Phrase.networkUnstable)
-            print("CommentRepository \(type.rawValue) network 에러 발생 -> \(failure)")
+            print("AuthRepository \(type.rawValue) network 에러 발생 -> \(failure)")
         case .unknown(let statusCode):
             switch statusCode {
             case 400:
