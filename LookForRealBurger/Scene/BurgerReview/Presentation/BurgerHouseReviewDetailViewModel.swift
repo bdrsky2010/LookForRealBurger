@@ -21,6 +21,7 @@ protocol BurgerHouseReviewDetailOutput {
     var isBookmark: BehaviorRelay<Bool> { get }
     var bookmarkCount: BehaviorRelay<Int> { get }
     var pushCommentView: PublishRelay<(postId: String, comments: [Comment])> { get }
+    var pushProfileView: PublishRelay<ProfileType> { get }
     var toastMessage: PublishRelay<String> { get }
     var goToLogin: PublishRelay<Void> { get }
 }
@@ -32,6 +33,7 @@ protocol BurgerHouseReviewDetailInput {
     func commentTap()
     func bookmarkTap()
     func onChangeComments(comments: [Comment])
+    func burgerImageTap()
 }
 
 typealias BurgerHouseReviewDetailViewModel = BurgerHouseReviewDetailInput & BurgerHouseReviewDetailOutput
@@ -54,6 +56,7 @@ final class DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailOutp
     var isBookmark = BehaviorRelay<Bool>(value: false)
     var bookmarkCount = BehaviorRelay<Int>(value: 0)
     var pushCommentView = PublishRelay<(postId: String, comments: [Comment])>()
+    var pushProfileView = PublishRelay<ProfileType>()
     var toastMessage = PublishRelay<String>()
     var goToLogin = PublishRelay<Void>()
     
@@ -177,6 +180,15 @@ extension DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailInput 
             print("getIsBookmarkPostExecute disposed")
         }
         .disposed(by: disposeBag)
+    }
+    
+    func burgerImageTap() {
+        guard let myUserId else { return }
+        if myUserId.userId == burgerHouseReview.creator.userId {
+            pushProfileView.accept(.me)
+        } else {
+            pushProfileView.accept(.other(burgerHouseReview.creator.userId))
+        }
     }
     
     private func getMyUserId() {

@@ -52,7 +52,7 @@ final class DefaultProfileViewModel: ProfileOutput {
 
 extension DefaultProfileViewModel: ProfileInput {
     func viewDidLoad() {
-        
+        fetchProfile()
     }
     
     func fetchProfile() {
@@ -63,6 +63,7 @@ extension DefaultProfileViewModel: ProfileInput {
                 .drive(with: self) { owner, result in
                     switch result {
                     case .success(let value):
+                        print(value)
                         owner.setProfile.accept(value)
                     case .failure(let error):
                         switch error {

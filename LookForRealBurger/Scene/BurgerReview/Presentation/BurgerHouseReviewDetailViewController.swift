@@ -9,6 +9,7 @@ import UIKit
 
 import RxCocoa
 import RxDataSources
+import RxGesture
 import RxSwift
 import SnapKit
 import Toast
@@ -265,6 +266,13 @@ extension BurgerHouseReviewDetailViewController {
             }
             .disposed(by: disposeBag)
         
+        burgerImage.rx.tapGesture()
+            .when(.recognized)
+            .bind(with: self) { owner, _ in
+                owner.viewModel.burgerImageTap()
+            }
+            .disposed(by: disposeBag)
+        
         likeButton.rx.tap
             .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .bind(with: self) { owner, _ in
@@ -407,6 +415,13 @@ extension BurgerHouseReviewDetailViewController {
                 }
                 
                 owner.present(view, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.pushProfileView
+            .bind(with: self) { owner, type in
+                let view = ProfileScene.makeView(profileType: type)
+                owner.navigationController?.pushViewController(view, animated: true)
             }
             .disposed(by: disposeBag)
         

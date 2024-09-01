@@ -126,10 +126,11 @@ final class ProfileViewController: BaseViewController {
     static func create(
         viewModel: ProfileViewModel,
         disposeBag: DisposeBag = DisposeBag(),
-        profileType: ProfileType!
+        profileType: ProfileType
     ) -> ProfileViewController {
         let view = ProfileViewController()
         view.viewModel = viewModel
+        view.disposeBag = disposeBag
         view.profileType = profileType
         return view
     }
