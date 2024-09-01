@@ -31,16 +31,7 @@ enum ProfileScene {
     }
     
     static func makeView(myUserId: String, followList: [GetFollow]) -> FollowListViewController {
-        let profileRepository = DefaultProfileRepository.shared
-        let authRepository = DefualtAuthRepository.shared
-        let followListUseCase = DefaultFollowListUseCase(
-            profileRepository: profileRepository,
-            authRepository: authRepository
-        )
-        let accessStorage = UserDefaultsAccessStorage.shared
         let viewModel = DefaultFollowListViewModel(
-            followListUseCase: followListUseCase,
-            accessStorage: accessStorage,
             myUserId: myUserId,
             followList: followList
         )
