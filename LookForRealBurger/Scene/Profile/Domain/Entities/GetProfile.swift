@@ -9,7 +9,7 @@ import Foundation
 
 struct GetProfile {
     let userId: String
-    let nick: String
+    var nick: String
     let followers: [GetFollow]
     let following: [GetFollow]
     let posts: [String]
