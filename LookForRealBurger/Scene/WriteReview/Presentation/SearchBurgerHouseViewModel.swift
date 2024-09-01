@@ -165,9 +165,9 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
     
     func modelSelected(item: BurgerHouse) {
         let getPostQuery = GetPostQuery(
+            type: .total,
             next: nil,
-            limit: "10000",
-            productId: LFRBProductID.burgerHouseTest.rawValue
+            limit: "10000"
         )
         localSearchUseCase.existBurgerHouseExecute(query: getPostQuery, localId: item.id)
             .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
