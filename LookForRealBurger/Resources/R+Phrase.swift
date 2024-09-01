@@ -22,6 +22,7 @@ extension R.Phrase {
     static let expiredLoginExplain = "expiredLoginExplain".localized
     static let failGetMyProfile = "failGetMyProfile".localized
     static let notFoundPost = "notFoundPost".localized
+    static let notFoundUser = "notFoundUser".localized
     
     static func getCongratulation(nick: String) -> String {
         return "congratulation".localized(nick)
