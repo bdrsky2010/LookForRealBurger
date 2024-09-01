@@ -13,6 +13,8 @@ import RxSwift
 import Kingfisher
 import SnapKit
 
+import Lottie
+
 final class BurgerHouseReviewViewController: BaseViewController {
     private let backgroundImageView: UIImageView = {
         let imageView = UIImageView()
@@ -83,10 +85,10 @@ final class BurgerHouseReviewViewController: BaseViewController {
         )
         burgerReviewCollectionView.backgroundColor = .clear
         burgerReviewCollectionView.refreshControl = UIRefreshControl()
+        burgerReviewCollectionView.refreshControl?.tintColor = R.Color.red
         burgerReviewCollectionView.refreshControl?.rx.controlEvent(.valueChanged)
             .bind(with: self) { owner, _ in
                 owner.viewModel.firstFetchBurgerHouseReview()
-                owner.burgerReviewCollectionView.refreshControl?.endRefreshing()
             }
             .disposed(by: disposeBag)
     }
@@ -97,7 +99,7 @@ extension BurgerHouseReviewViewController {
         let dataSource = RxCollectionViewSectionedReloadDataSource<SectionBurgerHouseReview> { dataSource, collectionView, indexPath, item in
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BurgerReviewImageCell.identifier, for: indexPath) as? BurgerReviewImageCell else { return UICollectionViewCell() }
             
-            if indexPath.row == 0, item.files.count > 1 {
+            if item.files.count > 1 {
                 cell.multipleImageView.isHidden = false
             }
             
@@ -143,6 +145,28 @@ extension BurgerHouseReviewViewController {
             .bind(with: self) { owner, burgerHouseReview in
                 let viewController = BurgerHouseReviewScene.makeView(burgerHouseReview: burgerHouseReview)
                 owner.navigationController?.pushViewController(viewController, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.endRefreshing
+            .delay(.seconds(2), scheduler: MainScheduler.instance)
+            .bind(with: self) { owner, _ in
+                if let isRefreshing = owner.burgerReviewCollectionView.refreshControl?.isRefreshing,
+                   isRefreshing {
+                    owner.burgerReviewCollectionView.refreshControl?.endRefreshing()
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.toastMessage
+            .bind(with: self) { owner, message in
+                owner.view.makeToast(message, duration: 1.5)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.goToLogin
+            .bind(with: self) { owner, _ in
+                owner.goToLogin()
             }
             .disposed(by: disposeBag)
     }
