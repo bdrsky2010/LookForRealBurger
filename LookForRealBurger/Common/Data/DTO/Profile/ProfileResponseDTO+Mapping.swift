@@ -55,7 +55,7 @@ extension ProfileResponseDTO {
             userId: self.userId,
             nick: self.nick,
             followers: self.followers.map {
-                GetFollow(userId: $0.userId, nick: $0.userId)
+                GetFollow(userId: $0.userId, nick: $0.nick)
             },
             following: self.following.map {
                 GetFollow(userId: $0.userId, nick: $0.nick)
