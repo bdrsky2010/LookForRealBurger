@@ -17,6 +17,15 @@ extension UIWindowScene {
         }
     }
     
+    static var deviceHeight: CGFloat? {
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene {
+            let height = windowScene.screen.bounds.height
+            return height
+        } else {
+            return nil
+        }
+    }
+    
     static var isSmallDevice: Bool {
         if let deviceWidth, deviceWidth <= 375 {
             return true
