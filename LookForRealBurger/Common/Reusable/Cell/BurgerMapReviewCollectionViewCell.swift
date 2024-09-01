@@ -7,6 +7,8 @@
 
 import UIKit
 
+import RxCocoa
+import RxDataSources
 import RxSwift
 import SnapKit
 import Kingfisher
@@ -59,10 +61,13 @@ final class BurgerMapReviewCollectionViewCell: BaseCollectionViewCell {
         return label
     }()
     
-    private var images: [String] = [] {
-        didSet {
-            imageCollectionView.reloadData()
-        }
+    private var reviewImages: BehaviorRelay<[SectionImageType]> = BehaviorRelay(value: [])
+    
+    var disposeBag = DisposeBag()
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        disposeBag = DisposeBag()
     }
     
     override init(frame: CGRect) {
@@ -133,48 +138,46 @@ final class BurgerMapReviewCollectionViewCell: BaseCollectionViewCell {
             BurgerMapReviewImageCell.self,
             forCellWithReuseIdentifier: BurgerMapReviewImageCell.identifier
         )
-        imageCollectionView.delegate = self
-        imageCollectionView.dataSource = self
         imageCollectionView.backgroundColor = .clear
     }
     
     func configureContents(contents: BurgerHouseReview) {
         nickLabel.text = contents.creator.nick
-        images = contents.files
         titleLabel.text = contents.title
         contentLabel.text = contents.content
         dateLabel.text = contents.createdAt.convertStringDate
-    }
-}
-
-extension BurgerMapReviewCollectionViewCell: UICollectionViewDelegate,
-                                             UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return images.count
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BurgerMapReviewImageCell.identifier, for: indexPath) as? BurgerMapReviewImageCell else { return UICollectionViewCell() }
-        let path = "v1/" + images[indexPath.row]
-        let endPoint = APIURL.lslp.rawValue + path
         
-        let url = URL(string: endPoint)
-        let modifier = AnyModifier { request in
-            var request = request
-            request.addValue(APIKEY.lslp.rawValue, forHTTPHeaderField: LFRBHeader.sesacKey.rawValue)
-            request.addValue(UserDefaultsAccessStorage.shared.accessToken, forHTTPHeaderField: LFRBHeader.authorization.rawValue)
-            return request
-        }
-        cell.imageView.kf.indicatorType = .activity
-        cell.imageView.kf.setImage(with: url, options: [.requestModifier(modifier)]) { result in
-            switch result {
-            case .success(let data):
-                cell.imageView.image = data.image
-            case .failure(let error):
-                cell.imageView.image = UIImage(named: "burger\(Int.random(in: 0...9))")
-                print(error)
+        reviewImages.accept([SectionImageType(items: contents.files)])
+        
+        let dataSources = RxCollectionViewSectionedReloadDataSource<SectionImageType> { dataSources, collectionView, indexPath, item in
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: BurgerMapReviewImageCell.identifier, for: indexPath) as? BurgerMapReviewImageCell else { return UICollectionViewCell() }
+            
+            let path = "v1/" + item
+            let endPoint = APIURL.lslp.rawValue + path
+            
+            let url = URL(string: endPoint)
+            let modifier = AnyModifier { request in
+                var request = request
+                request.addValue(APIKEY.lslp.rawValue, forHTTPHeaderField: LFRBHeader.sesacKey.rawValue)
+                request.addValue(UserDefaultsAccessStorage.shared.accessToken, forHTTPHeaderField: LFRBHeader.authorization.rawValue)
+                return request
             }
+            cell.imageView.kf.indicatorType = .activity
+            cell.imageView.kf.setImage(with: url, options: [.requestModifier(modifier)]) { result in
+                switch result {
+                case .success(let data):
+                    cell.imageView.image = data.image
+                case .failure(let error):
+                    cell.imageView.image = UIImage(named: "burger\(Int.random(in: 0...9))")
+                    print(error)
+                }
+            }
+            
+            return cell
         }
-        return cell
+        
+        reviewImages
+            .bind(to: imageCollectionView.rx.items(dataSource: dataSources))
+            .disposed(by: disposeBag)
     }
 }
