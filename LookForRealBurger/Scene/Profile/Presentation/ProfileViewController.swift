@@ -246,6 +246,12 @@ extension ProfileViewController {
             }
             .disposed(by: disposeBag)
         
+        navigationItem.rightBarButtonItem?.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.navigationController?.pushViewController(MoreViewController(), animated: true)
+            }
+            .disposed(by: disposeBag)
+        
         followerStackView.rx
             .gesture(.tap())
             .when(.recognized)

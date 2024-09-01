@@ -6,3 +6,17 @@
 //
 
 import Foundation
+
+import RxSwift
+
+protocol MoreUseCase {
+    
+}
+
+final class DefaultMoreUseCase {
+    
+}
+
+extension DefaultMoreUseCase: MoreUseCase {
+    
+}
