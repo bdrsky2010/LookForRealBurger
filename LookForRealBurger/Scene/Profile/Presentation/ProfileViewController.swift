@@ -142,6 +142,10 @@ final class ProfileViewController: BaseViewController {
     }
     
     override func configureNavigation() {
+        if let first = navigationController?.viewControllers.first, first != self {
+            setupBackButton()
+        }
+        
         navigationItem.title = "프로필"
         let moreButton = UIBarButtonItem(
             image: UIImage(named: "burger_menu")?.withRenderingMode(.alwaysOriginal),
@@ -206,7 +210,7 @@ final class ProfileViewController: BaseViewController {
             make.top.equalTo(burgerImage.snp.bottom).offset(20)
             make.horizontalEdges.equalToSuperview()
             make.bottom.equalToSuperview()
-            make.height.equalTo(600)
+            make.height.equalTo(550)
         }
         
 //        burgerImage.snp.makeConstraints { make in
@@ -235,12 +239,36 @@ final class ProfileViewController: BaseViewController {
 
 extension ProfileViewController {
     private func bind() {
+        navigationItem.leftBarButtonItem?.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.viewModel.backButtonTap()
+            }
+            .disposed(by: disposeBag)
+        
         viewModel.setProfile
             .bind(with: self) { owner, profile in
                 owner.navigationItem.title = "\(profile.nick)님의 프로필"
                 owner.reviewCountLabel.text = profile.posts.count.formatted()
                 owner.followerCountLabel.text = profile.followers.count.formatted()
                 owner.followingCountLabel.text = profile.following.count.formatted()
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.popPreviousView
+            .bind(with: self) { owner, _ in
+                owner.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.toastMessage
+            .bind(with: self) { owner, message in
+                owner.view.makeToast(message, duration: 1.5)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.goToLogin
+            .bind(with: self) { owner, _ in
+                owner.goToLogin()
             }
             .disposed(by: disposeBag)
     }

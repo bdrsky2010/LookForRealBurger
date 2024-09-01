@@ -28,7 +28,7 @@ extension PostRouter: LFRBTargetType {
         case .getSinglePost(let postId): return "v1/posts/\(postId)"
         case .updatePost(let postId, _): return "v1/posts/\(postId)"
         case .deletePost(let postId):    return "v1/posts/\(postId)"
-        case .byUserPost(let userId):      return "v1/posts/users/\(userId)"
+        case .byUserPost(let userId, _): return "v1/posts/users/\(userId)"
         }
     }
     
@@ -40,7 +40,7 @@ extension PostRouter: LFRBTargetType {
         case .getSinglePost: return .get
         case .updatePost:    return .put
         case .deletePost:    return .delete
-        case .byUserPost:      return .get
+        case .byUserPost:    return .get
         }
     }
     
@@ -71,6 +71,7 @@ extension PostRouter: LFRBTargetType {
             return .requestPlain
         case .byUserPost(_, let dto):
             parameters = dto.asParameters
+            print(parameters)
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
         }
     }

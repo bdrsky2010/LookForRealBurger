@@ -17,12 +17,14 @@ enum ProfileType {
 
 protocol ProfileOutput {
     var setProfile: PublishRelay<GetProfile> { get }
+    var popPreviousView: PublishRelay<Void> { get }
     var toastMessage: PublishRelay<String> { get }
     var goToLogin: PublishRelay<Void> { get }
 }
 
 protocol ProfileInput {
     func viewDidLoad()
+    func backButtonTap()
 }
 
 typealias ProfileViewModel = ProfileInput & ProfileOutput
@@ -34,6 +36,7 @@ final class DefaultProfileViewModel: ProfileOutput {
     private let profileType: ProfileType
     
     var setProfile = PublishRelay<GetProfile>()
+    var popPreviousView = PublishRelay<Void>()
     var toastMessage = PublishRelay<String>()
     var goToLogin = PublishRelay<Void>()
     
@@ -55,7 +58,11 @@ extension DefaultProfileViewModel: ProfileInput {
         fetchProfile()
     }
     
-    func fetchProfile() {
+    func backButtonTap() {
+        popPreviousView.accept(())
+    }
+    
+    private func fetchProfile() {
         switch profileType {
         case .me:
             profileUseCase.getMyProfile()
@@ -63,7 +70,6 @@ extension DefaultProfileViewModel: ProfileInput {
                 .drive(with: self) { owner, result in
                     switch result {
                     case .success(let value):
-                        print(value)
                         owner.setProfile.accept(value)
                     case .failure(let error):
                         switch error {
