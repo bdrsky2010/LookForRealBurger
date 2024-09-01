@@ -187,7 +187,7 @@ extension DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailInput 
         if myUserId.userId == burgerHouseReview.creator.userId {
             pushProfileView.accept(.me)
         } else {
-            pushProfileView.accept(.other(burgerHouseReview.creator.userId))
+            pushProfileView.accept(.other(burgerHouseReview.creator.userId, myUserId.userId))
         }
     }
     

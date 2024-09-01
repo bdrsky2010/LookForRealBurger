@@ -37,7 +37,7 @@ final class ProfileReviewTabViewController: TabmanViewController {
             viewControllers.append(myReview)
             viewControllers.append(myLikeReview)
             viewControllers.append(myBookmarkReview)
-        case .other(let userId):
+        case .other(let userId, _):
             let userReview = BurgerHouseReviewScene.makeView(getPostType: .byUser(userId))
             viewControllers.append(userReview)
         }
@@ -57,7 +57,7 @@ final class ProfileReviewTabViewController: TabmanViewController {
         
         bar.layout.alignment = .centerDistributed
         
-        bar.layout.interButtonSpacing = 12
+        bar.layout.contentMode = .fit
         
         bar.buttons.customize{ (button) in
             button.tintColor = R.Color.brown
@@ -68,8 +68,6 @@ final class ProfileReviewTabViewController: TabmanViewController {
         addBar(bar, dataSource: self, at: .top)
     
         bar.indicator.overscrollBehavior = .bounce
-
-        addBar(bar, dataSource: self, at:.top)
     }
 }
 

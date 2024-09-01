@@ -12,19 +12,29 @@ import RxSwift
 
 enum ProfileType {
     case me
-    case other(_ userId: String)
+    case other(_ userId: String, _ myUserId: String)
 }
 
 protocol ProfileOutput {
     var setProfile: PublishRelay<GetProfile> { get }
+    var setButtonTitle: PublishRelay<String> { get }
     var popPreviousView: PublishRelay<Void> { get }
+    var pushEditNick: PublishRelay<String> { get }
+    var endRefreshing: PublishRelay<Void> { get }
     var toastMessage: PublishRelay<String> { get }
     var goToLogin: PublishRelay<Void> { get }
+    var pushFollowView: PublishRelay<(followType: FollowType,
+                                      myUserId: String,
+                                      followers: [GetFollow],
+                                      followings: [GetFollow])> { get }
 }
 
 protocol ProfileInput {
     func viewDidLoad()
     func backButtonTap()
+    func profileRefresh()
+    func followLabelTap(followType: FollowType)
+    func followOrEditButtonTap()
 }
 
 typealias ProfileViewModel = ProfileInput & ProfileOutput
@@ -35,10 +45,23 @@ final class DefaultProfileViewModel: ProfileOutput {
     private let disposeBag: DisposeBag
     private let profileType: ProfileType
     
+    private var myUserId = ""
+    private var myProfile: GetProfile?
+    private var otherProfile: GetProfile?
+    
     var setProfile = PublishRelay<GetProfile>()
+    var setButtonTitle = PublishRelay<String>()
     var popPreviousView = PublishRelay<Void>()
+    var endRefreshing = PublishRelay<Void>()
+    var pushEditNick = PublishRelay<String>()
     var toastMessage = PublishRelay<String>()
     var goToLogin = PublishRelay<Void>()
+    var pushFollowView = PublishRelay<(
+        followType: FollowType,
+        myUserId: String,
+        followers: [GetFollow],
+        followings: [GetFollow]
+    )>()
     
     init(
         ProfileUseCase: ProfileUseCase,
@@ -62,6 +85,47 @@ extension DefaultProfileViewModel: ProfileInput {
         popPreviousView.accept(())
     }
     
+    func profileRefresh() {
+        fetchProfile()
+    }
+    
+    func followOrEditButtonTap() {
+        switch profileType {
+        case .me:
+            if let myProfile {
+                pushEditNick.accept(myProfile.nick)
+            } else {
+                pushEditNick.accept(myUserId)
+            }
+        case .other(let userId, let myUserId):
+            if let otherProfile {
+                if otherProfile.followers.contains(where: { $0.userId == myUserId }) {
+                    followCancel(userId: userId)
+                } else {
+                    follow(userId: userId)
+                }
+            }
+        }
+    }
+    
+    func followLabelTap(followType: FollowType) {
+        if let myProfile {
+            pushFollowView.accept((
+                followType,
+                myProfile.userId,
+                myProfile.followers,
+                myProfile.following
+            ))
+        } else if let otherProfile {
+            pushFollowView.accept((
+                followType,
+                myUserId,
+                otherProfile.followers,
+                otherProfile.following
+            ))
+        }
+    }
+    
     private func fetchProfile() {
         switch profileType {
         case .me:
@@ -71,6 +135,9 @@ extension DefaultProfileViewModel: ProfileInput {
                     switch result {
                     case .success(let value):
                         owner.setProfile.accept(value)
+                        owner.setButtonTitle.accept("닉네임 수정")
+                        owner.myProfile = value
+                        owner.endRefreshing.accept(())
                     case .failure(let error):
                         switch error {
                         case .network(let message):
@@ -86,6 +153,7 @@ extension DefaultProfileViewModel: ProfileInput {
                         case .unknown(let message):
                             owner.toastMessage.accept(message)
                         }
+                        owner.endRefreshing.accept(())
                     }
                 } onCompleted: { _ in
                     print("getMyProfile completed")
@@ -93,13 +161,22 @@ extension DefaultProfileViewModel: ProfileInput {
                     print("getMyProfile disposed")
                 }
                 .disposed(by: disposeBag)
-        case .other(let userID):
+        case .other(let userID, let myUserId):
             profileUseCase.getOtherProfile(query: .init(userId: userID))
                 .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
                 .drive(with: self) { owner, result in
                     switch result {
                     case .success(let value):
                         owner.setProfile.accept(value)
+                        print(value.following, myUserId)
+                        owner.setButtonTitle.accept(
+                            value
+                                .followers
+                                .contains(where: { $0.userId == myUserId }) ? "팔로우 취소" : "팔로우 하기"
+                        )
+                        owner.myUserId = myUserId
+                        owner.otherProfile = value
+                        owner.endRefreshing.accept(())
                     case .failure(let error):
                         switch error {
                         case .network(let message):
@@ -115,6 +192,7 @@ extension DefaultProfileViewModel: ProfileInput {
                         case .unknown(let message):
                             owner.toastMessage.accept(message)
                         }
+                        owner.endRefreshing.accept(())
                     }
                 } onCompleted: { _ in
                     print("getMyProfile completed")
@@ -123,6 +201,82 @@ extension DefaultProfileViewModel: ProfileInput {
                 }
                 .disposed(by: disposeBag)
         }
+    }
+    
+    private func follow(userId: String) {
+        profileUseCase.followExecute(userId: userId)
+            .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
+            .drive(with: self) { owner, result in
+                switch result {
+                case .success(let value):
+                    owner.setButtonTitle.accept(value.followingStatus ? "팔로우 취소" : "팔로우 하기")
+                    owner.fetchProfile()
+                case .failure(let error):
+                    switch error {
+                    case .network(let message):
+                        owner.toastMessage.accept(message)
+                    case .badRequest(let message):
+                        owner.toastMessage.accept(message)
+                    case .invalidToken(let message):
+                        owner.toastMessage.accept(message)
+                    case .forbidden(let message):
+                        owner.toastMessage.accept(message)
+                    case .alreadyFollowing(let message):
+                        owner.toastMessage.accept(message)
+                    case .notFoundUser(let message):
+                        owner.toastMessage.accept(message)
+                    case .expiredToken:
+                        owner.refreshAccessToken {
+                            owner.follow(userId: userId)
+                        }
+                    case .unknown(let message):
+                        owner.toastMessage.accept(message)
+                    }
+                }
+            } onCompleted: { _ in
+                print("followExecute completed")
+            } onDisposed: { _ in
+                print("followExecute disposed")
+            }
+            .disposed(by: disposeBag)
+    }
+    
+    private func followCancel(userId: String) {
+        profileUseCase.followCancelExecute(userId: userId)
+            .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
+            .drive(with: self) { owner, result in
+                switch result {
+                case .success(let value):
+                    owner.setButtonTitle.accept(value.followingStatus ? "팔로우 취소" : "팔로우 하기")
+                    owner.fetchProfile()
+                case .failure(let error):
+                    switch error {
+                    case .network(let message):
+                        owner.toastMessage.accept(message)
+                    case .badRequest(let message):
+                        owner.toastMessage.accept(message)
+                    case .invalidToken(let message):
+                        owner.toastMessage.accept(message)
+                    case .forbidden(let message):
+                        owner.toastMessage.accept(message)
+                    case .alreadyFollowing(let message):
+                        owner.toastMessage.accept(message)
+                    case .notFoundUser(let message):
+                        owner.toastMessage.accept(message)
+                    case .expiredToken:
+                        owner.refreshAccessToken {
+                            owner.follow(userId: userId)
+                        }
+                    case .unknown(let message):
+                        owner.toastMessage.accept(message)
+                    }
+                }
+            } onCompleted: { _ in
+                print("followCancelExecute completed")
+            } onDisposed: { _ in
+                print("followCancelExecute disposed")
+            }
+            .disposed(by: disposeBag)
     }
 }
 

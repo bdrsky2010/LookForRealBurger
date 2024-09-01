@@ -65,17 +65,5 @@ final class FollowListViewController: BaseViewController {
                 owner.navigationController?.pushViewController(view, animated: true)
             }
             .disposed(by: disposeBag)
-        
-        viewModel.toastMessage
-            .bind(with: self) { owner, message in
-                owner.view.makeToast(message, duration: 1.5)
-            }
-            .disposed(by: disposeBag)
-        
-        viewModel.goToLogin
-            .bind(with: self) { owner, _ in
-                owner.goToLogin()
-            }
-            .disposed(by: disposeBag)
     }
 }

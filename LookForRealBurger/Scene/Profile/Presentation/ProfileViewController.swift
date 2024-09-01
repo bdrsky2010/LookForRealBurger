@@ -117,6 +117,12 @@ final class ProfileViewController: BaseViewController {
         return label
     }()
     
+    private let followOrEditButton = PretendardRoundedButton(
+        title: "",
+        font: R.Font.chab20,
+        backgroudColor: R.Color.orange
+    )
+    
     private lazy var profileReviewTabView = ProfileReviewTabViewController(profileType: profileType)
     
     private var viewModel: ProfileViewModel!
@@ -176,12 +182,8 @@ final class ProfileViewController: BaseViewController {
         scrollView.addSubview(contentView)
         contentView.addSubview(burgerImage)
         contentView.addSubview(infoStackView)
+        contentView.addSubview(followOrEditButton)
         contentView.addSubview(profileReviewTabView.view)
-        
-//        view.addSubview(burgerImage)
-//        view.addSubview(infoStackView)
-//        
-//        view.addSubview(profileReviewTabView.view)
     }
     
     override func configureLayout() {
@@ -201,9 +203,16 @@ final class ProfileViewController: BaseViewController {
         }
         
         infoStackView.snp.makeConstraints { make in
-            make.centerY.equalTo(burgerImage.snp.centerY)
+            make.top.equalTo(burgerImage.snp.top).offset(8)
             make.leading.equalTo(burgerImage.snp.trailing).offset(30)
             make.trailing.equalToSuperview().inset(30)
+        }
+        
+        followOrEditButton.snp.makeConstraints { make in
+            make.leading.equalTo(burgerImage.snp.trailing).offset(30)
+            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(30)
+            make.bottom.equalTo(burgerImage.snp.bottom).offset(-8)
+            make.height.equalTo(infoStackView.snp.height)
         }
         
         profileReviewTabView.view.snp.makeConstraints { make in
@@ -212,28 +221,20 @@ final class ProfileViewController: BaseViewController {
             make.bottom.equalToSuperview()
             make.height.equalTo(550)
         }
-        
-//        burgerImage.snp.makeConstraints { make in
-//            make.top.leading.equalTo(view.safeAreaLayoutGuide).inset(20)
-//            make.size.equalTo(100)
-//        }
-//        
-//        infoStackView.snp.makeConstraints { make in
-//            make.centerY.equalTo(burgerImage.snp.centerY)
-//            make.leading.equalTo(burgerImage.snp.trailing).offset(30)
-//            make.trailing.equalTo(view.safeAreaLayoutGuide).inset(30)
-//        }
-//        
-//        profileReviewTabView.view.snp.makeConstraints { make in
-//            make.top.equalTo(burgerImage.snp.bottom).offset(20)
-//            make.horizontalEdges.bottom.equalTo(view.safeAreaLayoutGuide)
-//        }
     }
     
     override func configureUI() {
         burgerImage.layer.cornerRadius = 20
         burgerImage.layer.borderColor = R.Color.brown.cgColor
         burgerImage.layer.borderWidth = 2
+        
+        scrollView.refreshControl = UIRefreshControl()
+        scrollView.refreshControl?.tintColor = R.Color.red
+        scrollView.refreshControl?.rx.controlEvent(.valueChanged)
+            .bind(with: self) { owner, _ in
+                owner.viewModel.profileRefresh()
+            }
+            .disposed(by: disposeBag)
     }
 }
 
@@ -242,6 +243,29 @@ extension ProfileViewController {
         navigationItem.leftBarButtonItem?.rx.tap
             .bind(with: self) { owner, _ in
                 owner.viewModel.backButtonTap()
+            }
+            .disposed(by: disposeBag)
+        
+        followerStackView.rx
+            .gesture(.tap())
+            .when(.recognized)
+            .bind(with: self) { owner, _ in
+                owner.viewModel.followLabelTap(followType: .follow)
+            }
+            .disposed(by: disposeBag)
+        
+        followingStackView.rx
+            .gesture(.tap())
+            .when(.recognized)
+            .bind(with: self) { owner, _ in
+                owner.viewModel.followLabelTap(followType: .following)
+            }
+            .disposed(by: disposeBag)
+        
+        followOrEditButton.rx.tap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
+            .bind(with: self) { owner, _ in
+                owner.viewModel.followOrEditButtonTap()
             }
             .disposed(by: disposeBag)
         
@@ -254,9 +278,25 @@ extension ProfileViewController {
             }
             .disposed(by: disposeBag)
         
+        viewModel.setButtonTitle
+            .bind(with: self) { owner, title in
+                owner.followOrEditButton.configuration?.title = title
+            }
+            .disposed(by: disposeBag)
+        
         viewModel.popPreviousView
             .bind(with: self) { owner, _ in
                 owner.navigationController?.popViewController(animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.endRefreshing
+            .delay(.seconds(2), scheduler: MainScheduler.instance)
+            .bind(with: self) { owner, _ in
+                if let isRefreshing = owner.scrollView.refreshControl?.isRefreshing,
+                   isRefreshing {
+                    owner.scrollView.refreshControl?.endRefreshing()
+                }
             }
             .disposed(by: disposeBag)
         
@@ -269,6 +309,18 @@ extension ProfileViewController {
         viewModel.goToLogin
             .bind(with: self) { owner, _ in
                 owner.goToLogin()
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.pushFollowView
+            .bind(with: self) { owner, tuple in
+                let view = ProfileScene.makeView(
+                    followType: tuple.followType,
+                    myUserId: tuple.myUserId,
+                    followers: tuple.followers,
+                    followings: tuple.followings
+                )
+                owner.navigationController?.pushViewController(view, animated: true)
             }
             .disposed(by: disposeBag)
     }
