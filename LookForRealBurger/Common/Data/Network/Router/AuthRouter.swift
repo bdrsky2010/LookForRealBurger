@@ -14,6 +14,7 @@ enum AuthRouter {
     case emailValid(_ dto: EmailValidRequestDTO)
     case login(_ dto: LoginRequestDTO)
     case accessTokenRefresh
+    case withdraw
 }
 
 extension AuthRouter: LFRBTargetType {
@@ -23,6 +24,7 @@ extension AuthRouter: LFRBTargetType {
         case .emailValid:         return "v1/validation/email"
         case .login:              return "v1/users/login"
         case .accessTokenRefresh: return "v1/auth/refresh"
+        case .withdraw:           return "v1/users/withdraw"
         }
     }
     
@@ -32,6 +34,7 @@ extension AuthRouter: LFRBTargetType {
         case .emailValid:         return .post
         case .login:              return .post
         case .accessTokenRefresh: return .get
+        case .withdraw:           return .get
         }
     }
     
@@ -49,6 +52,8 @@ extension AuthRouter: LFRBTargetType {
             parameters = dto.asParameters
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         case .accessTokenRefresh:
+            return .requestPlain
+        case .withdraw:
             return .requestPlain
         }
     }
@@ -75,6 +80,11 @@ extension AuthRouter: LFRBTargetType {
                 LFRBHeader.authorization.rawValue: UserDefaultsAccessStorage.shared.accessToken,
                 LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue,
                 LFRBHeader.refresh.rawValue: UserDefaultsAccessStorage.shared.refreshToken
+            ]
+        case .withdraw:
+            return [
+                LFRBHeader.authorization.rawValue: UserDefaultsAccessStorage.shared.accessToken,
+                LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue,
             ]
         }
     }
