@@ -29,8 +29,8 @@ protocol ProfileRepository {
     )
 }
 
-final class DefualtProfileRepository {
-    static let shared = DefualtProfileRepository()
+final class DefaultProfileRepository {
+    static let shared = DefaultProfileRepository()
     
     private let network: NetworkManager
     
@@ -41,7 +41,7 @@ final class DefualtProfileRepository {
     }
 }
 
-extension DefualtProfileRepository: ProfileRepository {
+extension DefaultProfileRepository: ProfileRepository {
     func myUserIdRequest(completion: @escaping (Result<GetMyUserId, ProfileError>) -> Void) {
         network.request(
             ProfileRouter.myProfile,
@@ -94,7 +94,7 @@ extension DefualtProfileRepository: ProfileRepository {
     }
 }
 
-extension DefualtProfileRepository {
+extension DefaultProfileRepository {
     private func errorHandling(
         type: ProfileAPIType,
         failure: NetworkError
