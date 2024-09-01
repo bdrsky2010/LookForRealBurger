@@ -34,3 +34,17 @@ extension CommentResponseDTO {
         )
     }
 }
+
+extension CommentResponseDTO {
+    func toDomain() -> Comment {
+        return Comment(
+            id: self.commentId,
+            content: self.content,
+            createdAt: self.createdAt,
+            creator: .init(
+                userId: self.creator.userId,
+                nick: self.creator.nick
+            )
+        )
+    }
+}
