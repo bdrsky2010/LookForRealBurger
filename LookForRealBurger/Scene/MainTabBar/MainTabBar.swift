@@ -23,11 +23,11 @@ private enum TabItem: CaseIterable {
         case .map:
             view = BurgerMapScene.makeView()
         case .review:
-            view = BurgerHouseReviewScene.makeView()
+            view = BurgerHouseReviewScene.makeView(getPostType: .total)
         case .writeReview:
             view = EmptyPresentViewController()
         case .profile:
-            view = MyProfileViewController()
+            view = ProfileScene.makeView(profileType: .me)
         }
         
         let nav = UINavigationController()

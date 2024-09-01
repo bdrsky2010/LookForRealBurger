@@ -90,7 +90,7 @@ extension DefaultUploadPostUseCase: UploadPostUseCase {
                 single(.success(.failure(.unknown(message: R.Phrase.errorOccurred))))
                 return Disposables.create()
             }
-            commentRepository.registerReviewId(
+            commentRepository.registerReviewIdRequest(
                 query: query
             ) { result in
                 switch result {
