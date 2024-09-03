@@ -73,6 +73,20 @@ final class BurgerHouseReviewDetailViewController: BaseViewController {
         return button
     }()
     
+    private let starImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal)
+        imageView.preferredSymbolConfiguration = .init(font: .systemFont(ofSize: 18, weight: .bold))
+        return imageView
+    }()
+    
+    private let ratingLabel: UILabel = {
+        let label = UILabel()
+        label.font = R.Font.bold14
+        label.textColor = R.Color.brown
+        return label
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -95,6 +109,8 @@ final class BurgerHouseReviewDetailViewController: BaseViewController {
         label.textColor = R.Color.orange
         return label
     }()
+    
+    private let burgerHouseButton = PretendardRoundedButton(title: "", subtitle: "으로 이동", font: R.Font.chab20, subFont: R.Font.bold16, backgroudColor: R.Color.red)
     
     private var viewModel: BurgerHouseReviewDetailViewModel!
     private var disposeBag: DisposeBag!
@@ -144,11 +160,14 @@ final class BurgerHouseReviewDetailViewController: BaseViewController {
         buttonView.addSubview(likeButton)
         buttonView.addSubview(commentButton)
         buttonView.addSubview(bookmarkButton)
+        buttonView.addSubview(starImage)
+        buttonView.addSubview(ratingLabel)
         
         titleView.addSubview(titleLabel)
         
         bottomView.addSubview(contentLabel)
         bottomView.addSubview(dateLabel)
+        bottomView.addSubview(burgerHouseButton)
     }
     
     override func configureLayout() {
@@ -212,6 +231,19 @@ final class BurgerHouseReviewDetailViewController: BaseViewController {
             make.height.equalTo(20)
         }
         
+        starImage.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalTo(bookmarkButton.snp.trailing).offset(16)
+            make.width.equalTo(20)
+            make.height.equalTo(20)
+        }
+        
+        ratingLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalTo(starImage.snp.trailing).offset(4)
+            make.trailing.equalToSuperview().inset(20)
+        }
+        
         titleView.snp.makeConstraints { make in
             make.top.equalTo(buttonView.snp.bottom)
             make.horizontalEdges.equalToSuperview()
@@ -237,6 +269,13 @@ final class BurgerHouseReviewDetailViewController: BaseViewController {
         dateLabel.snp.makeConstraints { make in
             make.top.greaterThanOrEqualTo(contentLabel.snp.bottom).offset(8)
             make.horizontalEdges.equalToSuperview().inset(20)
+        }
+        
+        burgerHouseButton.snp.makeConstraints { make in
+            make.top.equalTo(dateLabel.snp.bottom).offset(8)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(300)
+            make.height.equalTo(50)
             make.bottom.equalToSuperview().inset(8)
         }
     }
@@ -294,6 +333,12 @@ extension BurgerHouseReviewDetailViewController {
             }
             .disposed(by: disposeBag)
         
+        burgerHouseButton.rx.tap
+            .bind(with: self) { owner, _ in
+                owner.viewModel.burgerHouseTap()
+            }
+            .disposed(by: disposeBag)
+        
         viewModel.popViewController
             .bind(with: self) { owner, _ in
                 owner.navigationController?.popViewController(animated: true)
@@ -341,6 +386,19 @@ extension BurgerHouseReviewDetailViewController {
             .bind(to: reviewImageCollectionView.rx.items(dataSource: dataSources))
             .disposed(by: disposeBag)
         
+        viewModel.configureBurgerHouseButton
+            .bind(with: self) { owner, title in
+                owner.burgerHouseButton.configuration?.attributedTitle = AttributedString(
+                    NSAttributedString(
+                        string: title,
+                        attributes: [
+                            NSAttributedString.Key.font: R.Font.chab20,
+                            NSAttributedString.Key.foregroundColor: R.Color.background
+                        ]
+                    )
+                )
+            }
+            .disposed(by: disposeBag)
         
         viewModel.isMyReview
             .bind(with: self) { owner, isMyReview in
@@ -402,6 +460,12 @@ extension BurgerHouseReviewDetailViewController {
             }
             .disposed(by: disposeBag)
         
+        viewModel.ratingCount
+            .bind(with: self) { owner, rating in
+                owner.ratingLabel.text = rating.formatted()
+            }
+            .disposed(by: disposeBag)
+        
         viewModel.pushCommentView
             .bind(with: self) { owner, tuple in
                 let view = BurgerHouseReviewScene.makeView(
@@ -415,6 +479,13 @@ extension BurgerHouseReviewDetailViewController {
                 }
                 
                 owner.present(view, animated: true)
+            }
+            .disposed(by: disposeBag)
+        
+        viewModel.changeBurgerMapTap
+            .bind(with: self) { owner, burgerHouse in
+                NotificationCenter.default.post(name: Notification.Name("MoveMap"), object: burgerHouse)
+                owner.tabBarController?.selectedIndex = 0
             }
             .disposed(by: disposeBag)
         

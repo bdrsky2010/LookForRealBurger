@@ -63,6 +63,22 @@ final class BurgerMapViewController: BaseViewController {
         )
         bind()
         viewModel.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(moveMap),
+            name: Notification.Name("MoveMap"),
+            object: nil
+        )
+    }
+    
+    @objc
+    private func moveMap(_ notification: Notification) {
+        guard let burgerHouse = notification.object as? GetBurgerHouse else { return }
+        guard let latitude = Double(burgerHouse.latitude), let longitude = Double(burgerHouse.longitude) else {  return}
+        let coordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        let region = MKCoordinateRegion(center: coordinate, latitudinalMeters: 500, longitudinalMeters: 500)
+        burgerMapView.setRegion(region, animated: false)
     }
     
     override func configureHierarchy() {

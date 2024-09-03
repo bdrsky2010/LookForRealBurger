@@ -13,6 +13,9 @@ protocol BurgerHouseReviewDetailUseCase {
     func getMyUserIdExecute() -> Single<Result<GetMyUserId, ProfileError>>
     func getIsLikePostExecute(query: LikeRequestQuery) -> Single<Result<GetIsLikePost, LikeError>>
     func getIsBookmarkPostExecute(query: BookmarkRequestQuery) -> Single<Result<GetIsBookmarkPost, LikeError>>
+    func getSingleBurgerHouseExecute(
+        query: GetSingleBurgerHouseQuery
+    ) -> Single<Result<GetBurgerHouse, PostError>>
     func refreshAccessTokenExecute() -> Single<Result<AccessToken, AuthError>>
 }
 
@@ -83,6 +86,28 @@ extension DefaultBurgerHouseReviewDetailUseCase: BurgerHouseReviewDetailUseCase 
                 return Disposables.create()
             }
             likeRepository.bookmarkRequest(query: query) { result in
+                switch result {
+                case .success(let success):
+                    single(.success(.success(success)))
+                case .failure(let failure):
+                    single(.success(.failure(failure)))
+                }
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func getSingleBurgerHouseExecute(
+        query: GetSingleBurgerHouseQuery
+    ) -> Single<Result<GetBurgerHouse, PostError>> {
+        return Single.create { [weak self] single -> Disposable in
+            guard let self else {
+                single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
+                return Disposables.create()
+            }
+            postRepository.getSingleBurgerHouseRequest(
+                query: query
+            ) { result in
                 switch result {
                 case .success(let success):
                     single(.success(.success(success)))

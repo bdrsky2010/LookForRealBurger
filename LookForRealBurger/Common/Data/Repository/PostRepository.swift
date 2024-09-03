@@ -59,6 +59,11 @@ protocol PostRepository {
         completion: @escaping (Result<[BurgerMapHouse], PostError>) -> Void
     )
     
+    func getSingleBurgerHouseRequest(
+        query: GetSingleBurgerHouseQuery,
+        completion: @escaping (Result<GetBurgerHouse, PostError>) -> Void
+    )
+    
     func getSingleBurgerHouseReviewRequest(
         query: GetSinglePostQuery,
         completion: @escaping (Result<BurgerHouseReview, PostError>) -> Void
@@ -184,6 +189,25 @@ extension DefaultPostRepository: PostRepository {
                     completion(.failure(postError))
                 }
             }
+    }
+    
+    func getSingleBurgerHouseRequest(
+        query: GetSingleBurgerHouseQuery,
+        completion: @escaping (Result<GetBurgerHouse, PostError>) -> Void
+    ) {
+        network.request(
+            PostRouter.getSinglePost(query.burgerHouseId),
+            of: PostResponseDTO.self
+        ) { [weak self] result in
+            guard let self else { return }
+            switch result {
+            case .success(let success):
+                completion(.success(success.toBurgerHouse()))
+            case .failure(let failure):
+                let postError = errorHandling(type: .getSinglePost, failure: failure)
+                completion(.failure(postError))
+            }
+        }
     }
     
     func getBurgerMapHouseRequest(

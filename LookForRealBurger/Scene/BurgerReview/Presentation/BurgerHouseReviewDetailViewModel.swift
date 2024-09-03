@@ -14,13 +14,16 @@ protocol BurgerHouseReviewDetailOutput {
     var popViewController: PublishRelay<Void> { get }
     var configureViewContents: BehaviorRelay<[BurgerHouseReview]> { get }
     var configureReviewImages: PublishRelay<[SectionImageType]> { get }
+    var configureBurgerHouseButton: PublishRelay<String> { get }
     var isMyReview: PublishRelay<Bool> { get }
     var isLike: BehaviorRelay<Bool> { get }
     var likeCount: BehaviorRelay<Int> { get }
     var commentCount: PublishRelay<Int> { get }
     var isBookmark: BehaviorRelay<Bool> { get }
     var bookmarkCount: BehaviorRelay<Int> { get }
+    var ratingCount: BehaviorRelay<Int> { get }
     var pushCommentView: PublishRelay<(postId: String, comments: [Comment])> { get }
+    var changeBurgerMapTap: PublishRelay<GetBurgerHouse> { get }
     var pushProfileView: PublishRelay<ProfileType> { get }
     var toastMessage: PublishRelay<String> { get }
     var goToLogin: PublishRelay<Void> { get }
@@ -32,6 +35,7 @@ protocol BurgerHouseReviewDetailInput {
     func likeTap()
     func commentTap()
     func bookmarkTap()
+    func burgerHouseTap()
     func onChangeComments(comments: [Comment])
     func burgerImageTap()
 }
@@ -44,18 +48,22 @@ final class DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailOutp
     private let disposeBag: DisposeBag
     
     private var burgerHouseReview: BurgerHouseReview
+    private var burgerHouse: GetBurgerHouse?
     private var myUserId: GetMyUserId?
     
     var popViewController = PublishRelay<Void>()
     var configureViewContents = BehaviorRelay<[BurgerHouseReview]>(value: [])
     var configureReviewImages = PublishRelay<[SectionImageType]>()
+    var configureBurgerHouseButton = PublishRelay<String>()
     var isMyReview = PublishRelay<Bool>()
     var isLike = BehaviorRelay<Bool>(value: false)
     var likeCount = BehaviorRelay<Int>(value: 0)
     var commentCount = PublishRelay<Int>()
     var isBookmark = BehaviorRelay<Bool>(value: false)
     var bookmarkCount = BehaviorRelay<Int>(value: 0)
+    var ratingCount = BehaviorRelay<Int>(value: 0)
     var pushCommentView = PublishRelay<(postId: String, comments: [Comment])>()
+    var changeBurgerMapTap = PublishRelay<GetBurgerHouse>()
     var pushProfileView = PublishRelay<ProfileType>()
     var toastMessage = PublishRelay<String>()
     var goToLogin = PublishRelay<Void>()
@@ -79,11 +87,13 @@ extension DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailInput 
     }
     
     func viewDidLoad() {
+        getBurgerHouse()
         configureViewContents.accept([burgerHouseReview])
         configureReviewImages.accept([SectionImageType(items: burgerHouseReview.files)])
         likeCount.accept(burgerHouseReview.likeUserIds.count)
         commentCount.accept(burgerHouseReview.comments.count)
         bookmarkCount.accept(burgerHouseReview.bookmarkUserIds.count)
+        ratingCount.accept(burgerHouseReview.rating)
         getMyUserId()
     }
     
@@ -189,6 +199,51 @@ extension DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailInput 
         } else {
             pushProfileView.accept(.other(burgerHouseReview.creator.userId, myUserId.userId))
         }
+    }
+    
+    func burgerHouseTap() {
+        guard let burgerHouse else { return }
+        changeBurgerMapTap.accept(burgerHouse)
+    }
+    
+    private func getBurgerHouse() {
+        burgerHouseReviewDetailUseCase.getSingleBurgerHouseExecute(
+            query: .init(burgerHouseId: burgerHouseReview.burgerHousePostId)
+        )
+        .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
+        .drive(with: self) { owner, result in
+            switch result {
+            case .success(let value):
+                owner.burgerHouse = value
+                owner.configureBurgerHouseButton.accept(value.name)
+            case .failure(let error):
+                switch error {
+                case .network(_):
+                    owner.toastMessage.accept("식당 정보를 가져오지 못하였습니다.")
+                case .badRequest(_):
+                    owner.toastMessage.accept("식당 정보를 가져오지 못하였습니다.")
+                case .invalidToken(_):
+                    owner.toastMessage.accept("식당 정보를 가져오지 못하였습니다.")
+                case .forbidden(_):
+                    owner.toastMessage.accept("식당 정보를 가져오지 못하였습니다.")
+                case .expiredToken:
+                    owner.refreshAccessToken {
+                        owner.getBurgerHouse()
+                    }
+                case .unknown(_):
+                    owner.toastMessage.accept("식당 정보를 가져오지 못하였습니다.")
+                case .invalidValue(_):
+                    owner.toastMessage.accept("식당 정보를 가져오지 못하였습니다.")
+                case .dbServer(_):
+                    owner.toastMessage.accept("식당 정보를 가져오지 못하였습니다.")
+                }
+            }
+        } onCompleted: { _ in
+            print("getSingleBurgerHouseExecute completed")
+        } onDisposed: { _ in
+            print("getSingleBurgerHouseExecute disposed")
+        }
+        .disposed(by: disposeBag)
     }
     
     private func getMyUserId() {

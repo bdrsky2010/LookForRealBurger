@@ -45,6 +45,20 @@ final class BurgerMapReviewCollectionViewCell: BaseCollectionViewCell {
     
     private let imageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: .createImageLayout())
     
+    private let starImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(systemName: "star.fill")?.withRenderingMode(.alwaysOriginal)
+        imageView.preferredSymbolConfiguration = .init(font: .systemFont(ofSize: 14, weight: .bold))
+        return imageView
+    }()
+    
+    private let ratingLabel: UILabel = {
+        let label = UILabel()
+        label.font = R.Font.bold14
+        label.textColor = R.Color.brown
+        return label
+    }()
+    
     private let titleLabel: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
@@ -82,6 +96,8 @@ final class BurgerMapReviewCollectionViewCell: BaseCollectionViewCell {
         contentView.addSubview(titleView)
         titleView.addSubview(titleLabel)
         contentView.addSubview(bottomView)
+        bottomView.addSubview(starImage)
+        bottomView.addSubview(ratingLabel)
         bottomView.addSubview(contentLabel)
     }
     
@@ -126,9 +142,21 @@ final class BurgerMapReviewCollectionViewCell: BaseCollectionViewCell {
             make.bottom.equalToSuperview()
         }
         
+        starImage.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.leading.equalToSuperview().inset(20)
+            make.size.equalTo(20)
+        }
+        
+        ratingLabel.snp.makeConstraints { make in
+            make.leading.equalTo(starImage.snp.trailing).offset(4)
+            make.centerY.equalTo(starImage.snp.centerY)
+            make.trailing.equalToSuperview().inset(20)
+        }
+        
         contentLabel.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(20)
-            make.top.equalToSuperview().inset(8)
+            make.top.equalTo(starImage.snp.bottom).offset(8)
             make.bottom.equalToSuperview()
         }
     }
@@ -143,9 +171,10 @@ final class BurgerMapReviewCollectionViewCell: BaseCollectionViewCell {
     
     func configureContents(contents: BurgerHouseReview) {
         nickLabel.text = contents.creator.nick
-        titleLabel.text = contents.title
-        contentLabel.text = contents.content
         dateLabel.text = contents.createdAt.convertStringDate
+        titleLabel.text = contents.title
+        ratingLabel.text = contents.rating.formatted()
+        contentLabel.text = contents.content
         
         reviewImages.accept([SectionImageType(items: contents.files)])
         
