@@ -175,7 +175,7 @@ extension DefaultPostRepository: PostRepository {
         let getPostRequestDTO = GetPostRequestDTO(
             next: query.next,
             limit: query.limit,
-            productId: LFRBProductID.reviewTest.rawValue
+            productId: LFRBProductID.burgerHouseTest.rawValue
         )
         network.request(
             PostRouter.getPost(getPostRequestDTO),

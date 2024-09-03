@@ -76,6 +76,7 @@ extension DefaultLocalSearchUseCase: LocalSearchUseCase {
                 switch result {
                 case .success(let value):
                     let filteredList = value.filter { $0.localId == localId }
+                    print(value, filteredList)
                     let burgerHousePostId = filteredList.first?.burgerHousePostId
                     let isExist = !filteredList.isEmpty
                     single(.success(.success(.init(burgerHousePostId: burgerHousePostId, isExist: isExist))))

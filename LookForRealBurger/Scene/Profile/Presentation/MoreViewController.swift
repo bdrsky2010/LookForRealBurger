@@ -7,16 +7,18 @@
 
 import UIKit
 
+import iamport_ios
 import RxCocoa
 import RxGesture
 import RxSwift
 import SnapKit
+import Toast
 
 final class MoreViewController: BaseViewController {
-    private let disposeBag = DisposeBag()
-    
     private let logoutButton = CapsuleButton(title: "로그아웃", font: R.Font.chab20, backgroudColor: R.Color.red)
     private let withdrawButton = CapsuleButton(title: "회원탈퇴", font: R.Font.chab20, backgroudColor: R.Color.green)
+    private let supportButton = CapsuleButton(title: "후원하기", font: R.Font.chab20, backgroudColor: R.Color.orange)
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,18 +32,24 @@ final class MoreViewController: BaseViewController {
     override func configureHierarchy() {
         view.addSubview(logoutButton)
         view.addSubview(withdrawButton)
+        view.addSubview(supportButton)
     }
     
     override func configureLayout() {
         logoutButton.snp.makeConstraints { make in
             make.centerX.equalTo(view.safeAreaLayoutGuide)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.centerY).offset(-50)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.centerY).offset(-70)
             make.size.equalTo(100)
         }
         
         withdrawButton.snp.makeConstraints { make in
+            make.center.equalTo(view.safeAreaLayoutGuide)
+            make.size.equalTo(100)
+        }
+        
+        supportButton.snp.makeConstraints { make in
             make.centerX.equalTo(view.safeAreaLayoutGuide)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.centerY).offset(50)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.centerY).offset(70)
             make.size.equalTo(100)
         }
     }
@@ -86,6 +94,54 @@ extension MoreViewController {
             .asLocation(in: .superview)
             .bind(with: self) { owner, point in
                 owner.updateButtonPosition(button: owner.withdrawButton, point: point)
+            }
+            .disposed(by: disposeBag)
+        
+        supportButton.rx
+            .panGesture()
+            .when(.changed)
+            .asLocation(in: .superview)
+            .bind(with: self) { owner, point in
+                owner.updateButtonPosition(button: owner.supportButton, point: point)
+            }
+            .disposed(by: disposeBag)
+        
+        supportButton.rx.tap
+            .bind(with: self) { owner, _ in
+                let payment = IamportPayment(
+                    pg: PG.html5_inicis.makePgRawName(pgId: "INIpayTest"),
+                    merchant_uid: "ios_\(APIKEY.lslp.rawValue)_\(Int(Date().timeIntervalSince1970))",
+                    amount: "100").then {
+                        $0.pay_method = PayMethod.card.rawValue
+                        $0.name = "꺼어어어억~ 맛있다~"
+                        $0.buyer_name = "김민재"
+                        $0.app_scheme = "kmj"
+                    }
+                
+                Iamport.shared.payment(
+                    navController: owner.navigationController ?? UINavigationController(),
+                    userCode: "imp57573124",
+                    payment: payment
+                ) { response in
+                    if let success = response?.success, success, let impUid = response?.imp_uid {
+                        LFRBNetworkManager.shared.request(
+                            PaymentRouter.payments(
+                                .init(impUid: impUid, postId: "66d6c7cedfc6560142283221")
+                            ),
+                            of: PaymentResponseDTO.self
+                        ) { result in
+                            switch result {
+                            case .success(_):
+                                owner.view.makeToast("결제를 성공하였습니다.")
+                            case .failure(let failure):
+                                print(failure)
+                                owner.view.makeToast(R.Phrase.errorOccurred)
+                            }
+                        }
+                    } else if let error_msg = response?.error_msg {
+                        owner.view.makeToast("결제에 실패하였습니다.")
+                    }
+                }
             }
             .disposed(by: disposeBag)
     }
