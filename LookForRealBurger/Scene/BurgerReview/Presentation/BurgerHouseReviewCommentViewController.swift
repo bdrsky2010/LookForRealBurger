@@ -119,7 +119,7 @@ final class BurgerHouseReviewCommentViewController: BaseViewController {
     
     override func configureUI() {
         commentTextView.layer.borderWidth = 1
-        commentTextView.layer.borderColor = UIColor.systemGray.cgColor
+        commentTextView.layer.borderColor = R.Color.orange.cgColor
         commentTextView.layer.cornerRadius = 10
     }
     

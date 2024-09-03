@@ -19,12 +19,11 @@ final class WriteReviewViewController: BaseViewController {
     private let contentView = UIView()
     private let saveButton = CapsuleButton(title: "저장", backgroudColor: R.Color.red)
     
-    private let burgerHouseSearchBar: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .roundedRect
-        textField.placeholder = "탭하면 햄버거집 검색할 수 있어요"
-        return textField
-    }()
+    private let burgerHouseSearchBar = BorderRoundedSearchBar(
+        borderWidth: 1,
+        borderColor: R.Color.brown,
+        placeholder: "탭하면 햄버거집 검색할 수 있어요"
+    )
     
     private let searchBarCover: UIView = {
         let view = UIView()
@@ -32,12 +31,11 @@ final class WriteReviewViewController: BaseViewController {
         return view
     }()
     
-    private let titleTextField: UITextField = {
-        let textField = UITextField()
-        textField.borderStyle = .roundedRect
-        textField.placeholder = "제목"
-        return textField
-    }()
+    private let titleTextField = BorderRoundedSearchBar(
+        borderWidth: 1,
+        borderColor: R.Color.green,
+        placeholder: "제목"
+    )
     
     private lazy var contentTextView: UITextView = {
         let textView = UITextView()
@@ -117,11 +115,15 @@ final class WriteReviewViewController: BaseViewController {
             $0.snp.makeConstraints { make in
                 make.size.equalTo(120)
             }
+            
             if $0 == addImageView {
-                $0.backgroundColor = .gray
-                $0.image = UIImage(systemName: "plus.square.fill.on.square.fill")
+                $0.image = UIImage(systemName: "plus.app.fill")?.withTintColor(R.Color.red, renderingMode: .alwaysOriginal)
             } else {
-                $0.backgroundColor = R.Color.brown
+                $0.clipsToBounds = true
+                $0.layer.cornerRadius = 15
+                $0.layer.borderColor = R.Color.brown.cgColor
+                $0.layer.borderWidth = 1
+                $0.isHidden = true
             }
         }
         
@@ -219,7 +221,12 @@ final class WriteReviewViewController: BaseViewController {
     }
     
     override func configureUI() {
+        burgerHouseSearchBar.backgroundColor = R.Color.white
+        titleTextField.backgroundColor = R.Color.white
         
+        contentTextView.layer.borderWidth = 1
+        contentTextView.layer.borderColor = R.Color.orange.cgColor
+        contentTextView.layer.cornerRadius = 10
     }
 }
 
@@ -266,6 +273,7 @@ extension WriteReviewViewController {
             .bind(with: self) { owner, _ in
                 if owner.firstImageView.image != .none {
                     owner.firstImageView.image = nil
+                    owner.firstImageView.isHidden = true
                     if owner.addImageView.isHidden {
                         owner.addImageView.isHidden = false
                     }
@@ -279,6 +287,7 @@ extension WriteReviewViewController {
             .bind(with: self) { owner, _ in
                 if owner.secondImageView.image != .none {
                     owner.secondImageView.image = nil
+                    owner.secondImageView.isHidden = true
                     if owner.addImageView.isHidden {
                         owner.addImageView.isHidden = false
                     }
@@ -292,6 +301,35 @@ extension WriteReviewViewController {
             .bind(with: self) { owner, _ in
                 if owner.thirdImageView.image != .none {
                     owner.thirdImageView.image = nil
+                    owner.thirdImageView.isHidden = true
+                    if owner.addImageView.isHidden {
+                        owner.addImageView.isHidden = false
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        fourthImageView.rx
+            .tapGesture()
+            .when(.recognized)
+            .bind(with: self) { owner, _ in
+                if owner.fourthImageView.image != .none {
+                    owner.fourthImageView.image = nil
+                    owner.fourthImageView.isHidden = true
+                    if owner.addImageView.isHidden {
+                        owner.addImageView.isHidden = false
+                    }
+                }
+            }
+            .disposed(by: disposeBag)
+        
+        fifthImageView.rx
+            .tapGesture()
+            .when(.recognized)
+            .bind(with: self) { owner, _ in
+                if owner.fifthImageView.image != .none {
+                    owner.fifthImageView.image = nil
+                    owner.fifthImageView.isHidden = true
                     if owner.addImageView.isHidden {
                         owner.addImageView.isHidden = false
                     }
@@ -478,6 +516,7 @@ extension WriteReviewViewController: UINavigationControllerDelegate,
                 for imageView in imageViewList.suffix(5) {
                     if imageView.image == .none {
                         imageView.image = image
+                        imageView.isHidden = false
                         break
                     }
                 }
@@ -504,6 +543,7 @@ extension WriteReviewViewController: PHPickerViewControllerDelegate {
                             for imageView in imageViewList.suffix(5) {
                                 if imageView.image == .none {
                                     imageView.image = image
+                                    imageView.isHidden = false
                                     break
                                 }
                             }
