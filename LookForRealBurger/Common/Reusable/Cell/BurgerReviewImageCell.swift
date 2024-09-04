@@ -31,6 +31,8 @@ final class BurgerReviewImageCell: BaseCollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
+        imageView.image = nil
+        multipleImageView.isHidden = true
         disposeBag = DisposeBag()
     }
     
