@@ -49,7 +49,6 @@ final class DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailOutp
     
     private var burgerHouseReview: BurgerHouseReview
     private var burgerHouse: GetBurgerHouse?
-    private var myUserId: GetMyUserId?
     
     var popViewController = PublishRelay<Void>()
     var configureViewContents = BehaviorRelay<[BurgerHouseReview]>(value: [])
@@ -94,7 +93,11 @@ extension DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailInput 
         commentCount.accept(burgerHouseReview.comments.count)
         bookmarkCount.accept(burgerHouseReview.bookmarkUserIds.count)
         ratingCount.accept(burgerHouseReview.rating)
-        getMyUserId()
+        
+        let myUserId = UserDefaultsAccessStorage.shared.loginUserId
+        isMyReview.accept(myUserId == burgerHouseReview.creator.userId)
+        isLike.accept(burgerHouseReview.likeUserIds.contains(myUserId))
+        isBookmark.accept(burgerHouseReview.bookmarkUserIds.contains(myUserId))
     }
     
     func likeTap() {
@@ -113,6 +116,8 @@ extension DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailInput 
                 owner.isLike.accept(value.isLike)
                 owner.likeCount.accept(value.isLike ? owner.likeCount.value + 1 : owner.likeCount.value - 1)
             case .failure(let error):
+                let isLikeValue = !owner.isLike.value
+                owner.isLike.accept(isLikeValue)
                 switch error {
                 case .network(message: let message):
                     owner.toastMessage.accept(message)
@@ -165,6 +170,8 @@ extension DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailInput 
                 owner.isBookmark.accept(value.isBookmark)
                 owner.bookmarkCount.accept(value.isBookmark ? owner.bookmarkCount.value + 1 : owner.bookmarkCount.value - 1)
             case .failure(let error):
+                let isBookmarkValue = !owner.isBookmark.value
+                owner.isBookmark.accept(isBookmarkValue)
                 switch error {
                 case .network(message: let message):
                     owner.toastMessage.accept(message)
@@ -193,11 +200,11 @@ extension DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailInput 
     }
     
     func burgerImageTap() {
-        guard let myUserId else { return }
-        if myUserId.userId == burgerHouseReview.creator.userId {
-            pushProfileView.accept(.me)
+        let myUserId = UserDefaultsAccessStorage.shared.loginUserId
+        if myUserId == burgerHouseReview.creator.userId {
+            pushProfileView.accept(.me(myUserId))
         } else {
-            pushProfileView.accept(.other(burgerHouseReview.creator.userId, myUserId.userId))
+            pushProfileView.accept(.other(burgerHouseReview.creator.userId, myUserId))
         }
     }
     
@@ -244,40 +251,6 @@ extension DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailInput 
             print("getSingleBurgerHouseExecute disposed")
         }
         .disposed(by: disposeBag)
-    }
-    
-    private func getMyUserId() {
-        burgerHouseReviewDetailUseCase.getMyUserIdExecute()
-            .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
-            .drive(with: self) { owner, result in
-                switch result {
-                case .success(let value):
-                    owner.myUserId = value
-                    owner.isMyReview.accept(value.userId == owner.burgerHouseReview.creator.userId)
-                    owner.isLike.accept(owner.burgerHouseReview.likeUserIds.contains(value.userId))
-                    owner.isBookmark.accept(owner.burgerHouseReview.bookmarkUserIds.contains(value.userId))
-                case .failure(let error):
-                    switch error {
-                    case .network(let message):
-                        owner.toastMessage.accept(message)
-                    case .invalidToken(let message):
-                        owner.toastMessage.accept(message)
-                    case .forbidden(let message):
-                        owner.toastMessage.accept(message)
-                    case .expiredToken:
-                        owner.refreshAccessToken {
-                            owner.getMyUserId()
-                        }
-                    case .unknown(let message):
-                        owner.toastMessage.accept(message)
-                    }
-                }
-            } onCompleted: { _ in
-                print("getMyUserIdExecute completed")
-            } onDisposed: { _ in
-                print("getMyUserIdExecute disposed")
-            }
-            .disposed(by: disposeBag)
     }
     
     private func refreshAccessToken(completion: @escaping () -> Void) {

@@ -21,7 +21,6 @@ enum ProfileAPIType: String {
 }
 
 protocol ProfileRepository {
-    func myUserIdRequest(completion: @escaping (Result<GetMyUserId, ProfileError>) -> Void)
     func myProfileRequest(completion: @escaping (Result<GetProfile, ProfileError>) -> Void)
     func getOtherProfileRequest(
         query: GetOtherProfileQuery,
@@ -42,22 +41,6 @@ final class DefaultProfileRepository {
 }
 
 extension DefaultProfileRepository: ProfileRepository {
-    func myUserIdRequest(completion: @escaping (Result<GetMyUserId, ProfileError>) -> Void) {
-        network.request(
-            ProfileRouter.myProfile,
-            of: ProfileResponseDTO.self
-        ) { [weak self] result in
-            guard let self else { return }
-            switch result {
-            case .success(let success):
-                completion(.success(success.toDomain()))
-            case .failure(let failure):
-                let profileError = errorHandling(type: .profile, failure: failure)
-                completion(.failure(profileError))
-            }
-        }
-    }
-    
     func myProfileRequest(completion: @escaping (Result<GetProfile, ProfileError>) -> Void) {
         network.request(
             ProfileRouter.myProfile,

@@ -28,12 +28,10 @@ enum BurgerHouseReviewScene {
     static func makeView(burgerHouseReview: BurgerHouseReview) -> BurgerHouseReviewDetailViewController {
         let postRepository = DefaultPostRepository.shared
         let authRepository = DefualtAuthRepository.shared
-        let profileRepository = DefaultProfileRepository.shared
         let likeRepository = DefaultLikeRepository.shared
         let burgerHouseReviewDetailUseCase = DefaultBurgerHouseReviewDetailUseCase(
             postRepository: postRepository,
             authRepository: authRepository,
-            profileRepository: profileRepository,
             likeRepository: likeRepository
         )
         let accessStorage = UserDefaultsAccessStorage.shared

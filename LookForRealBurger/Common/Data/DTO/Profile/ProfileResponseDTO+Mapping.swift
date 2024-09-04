@@ -44,12 +44,6 @@ struct ProfileResponseDTO: Decodable {
 }
 
 extension ProfileResponseDTO {
-    func toDomain() -> GetMyUserId {
-        return GetMyUserId(userId: self.userId)
-    }
-}
-
-extension ProfileResponseDTO {
     func toDomain() -> GetProfile {
         return GetProfile(
             userId: self.userId,
