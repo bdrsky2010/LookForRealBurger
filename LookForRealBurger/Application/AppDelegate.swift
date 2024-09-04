@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import iamport_ios
 import IQKeyboardManagerSwift
 
 @main
@@ -14,6 +15,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         AppAppearance.setupAppearance()
         IQKeyboardManager.shared.enable = true
+        return true
+    }
+    
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
+        Iamport.shared.receivedURL(url)
         return true
     }
 
