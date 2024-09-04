@@ -83,6 +83,7 @@ final class BurgerHouseReviewViewController: BaseViewController {
             BurgerReviewImageCell.self,
             forCellWithReuseIdentifier: BurgerReviewImageCell.identifier
         )
+        burgerReviewCollectionView.delegate = self
         burgerReviewCollectionView.backgroundColor = .clear
         burgerReviewCollectionView.refreshControl = UIRefreshControl()
         burgerReviewCollectionView.refreshControl?.tintColor = R.Color.red
@@ -91,6 +92,14 @@ final class BurgerHouseReviewViewController: BaseViewController {
                 owner.viewModel.firstFetchBurgerHouseReview()
             }
             .disposed(by: disposeBag)
+    }
+}
+
+extension BurgerHouseReviewViewController: UICollectionViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView.contentOffset.y > scrollView.contentSize.height - scrollView.bounds.size.height {
+            viewModel.nextFetchBurgerHouseReview()
+        }
     }
 }
 

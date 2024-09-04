@@ -20,7 +20,6 @@ protocol BurgerHouseReviewOutput {
 
 protocol BurgerHouseReviewInput {
     func viewDidLoad()
-    func fetchBurgerHouseReview()
     func firstFetchBurgerHouseReview()
     func nextFetchBurgerHouseReview()
     func modelSelected(burgerHouseReview: BurgerHouseReview)
@@ -47,8 +46,9 @@ final class DefaultBurgerHouseReviewViewModel: BurgerHouseReviewOutput {
     var toastMessage = PublishRelay<String>()
     var goToLogin = PublishRelay<Void>()
     
+    private var isFetching = false
     private var nextCursor: String?
-    private let limit = "15"
+    private let limit = "21"
     
     init(
         burgerReviewUseCase: BurgerHouseReviewUseCase,
@@ -68,12 +68,13 @@ extension DefaultBurgerHouseReviewViewModel: BurgerHouseReviewInput {
         firstFetchBurgerHouseReview()
     }
     
-    func fetchBurgerHouseReview() {
+    private func fetchBurgerHouseReview() {
         let query = GetPostQuery(
             type: getPostType,
             next: nextCursor,
             limit: limit
         )
+        isFetching = true
         
         burgerHouseReviewUseCase.fetchBurgerReview(query: query)
         .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
@@ -110,6 +111,7 @@ extension DefaultBurgerHouseReviewViewModel: BurgerHouseReviewInput {
                     break
                 }
             }
+            owner.isFetching = false
             owner.endRefreshing.accept(())
         } onCompleted: { _ in
             print("fetchBurgerReview completed")
@@ -125,7 +127,7 @@ extension DefaultBurgerHouseReviewViewModel: BurgerHouseReviewInput {
     }
     
     func nextFetchBurgerHouseReview() {
-        guard let nextCursor, nextCursor != "0" else { return }
+        guard let nextCursor, nextCursor != "0", !isFetching else { return }
         fetchBurgerHouseReview()
     }
     
