@@ -10,6 +10,7 @@ import Foundation
 protocol AccessStorage: AnyObject {
     var accessToken: String { get set }
     var refreshToken: String { get set }
+    var loginUserId: String { get set }
     var accessEmail: String { get set }
     var accessPassword: String { get set }
     
@@ -21,6 +22,7 @@ final class UserDefaultsAccessStorage {
     
     private let accessTokenKey = "LookForRealBurgerAccess"
     private let refreshTokenKey = "LookForRealBurgerRefresh"
+    private let loginUserIdKey = "LookForRealBurgerLoginUserId"
     private let accessEmailKey = "LookForRealBurgerEmail"
     private let accessPasswordKey = "LookForRealBurgerPassword"
     private let userDefaults: UserDefaults
@@ -46,6 +48,10 @@ extension UserDefaultsAccessStorage: AccessStorage {
     var refreshToken: String {
         get { userDefaults.string(forKey: refreshTokenKey) ?? "" }
         set { userDefaults.set(newValue, forKey: refreshTokenKey) }
+    }
+    var loginUserId: String {
+        get { userDefaults.string(forKey: loginUserIdKey) ?? "" }
+        set { userDefaults.set(newValue, forKey: loginUserIdKey) }
     }
     var accessEmail: String {
         get { userDefaults.string(forKey: accessEmailKey) ?? "" }
