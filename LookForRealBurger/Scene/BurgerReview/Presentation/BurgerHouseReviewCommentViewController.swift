@@ -135,6 +135,7 @@ extension BurgerHouseReviewCommentViewController {
         sendButton.rx.tap
             .withLatestFrom(commentTextView.rx.text.orEmpty)
             .bind(with: self) { owner, text in
+                guard !text.isEmpty else { return }
                 owner.viewModel.sendButtonTap(text: text)
                 
                 owner.commentTextView.text = nil
