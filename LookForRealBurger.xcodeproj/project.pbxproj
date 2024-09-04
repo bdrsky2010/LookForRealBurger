@@ -7,6 +7,94 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B7BAC2C2C86C4C80045695C /* iamport-ios in Frameworks */ = {isa = PBXBuildFile; productRef = 7B7BAC2B2C86C4C80045695C /* iamport-ios */; };
+		7B7BAC2E2C8704270045695C /* PaymentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BAC2D2C8704270045695C /* PaymentRouter.swift */; };
+		7B7BAC312C8706160045695C /* PaymentRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BAC302C8706160045695C /* PaymentRequestDTO+Mapping.swift */; };
+		7B7BAC332C8706220045695C /* PaymentResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BAC322C8706220045695C /* PaymentResponseDTO+Mapping.swift */; };
+		7B83500D2C771D9800785049 /* MainTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83500C2C771D9800785049 /* MainTabBar.swift */; };
+		7B83501E2C774FFC00785049 /* KakaoLocalRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83501D2C774FFC00785049 /* KakaoLocalRequestDTO+Mapping.swift */; };
+		7B8350202C77504100785049 /* SearchBurgerHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83501F2C77504100785049 /* SearchBurgerHouseViewController.swift */; };
+		7B8350222C77585E00785049 /* KakaoLocalResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350212C77585E00785049 /* KakaoLocalResponseDTO+Mapping.swift */; };
+		7B8350252C77605D00785049 /* RxCoreLocation in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8350242C77605D00785049 /* RxCoreLocation */; };
+		7B8350272C77672400785049 /* BurgerHouseReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350262C77672400785049 /* BurgerHouseReviewViewController.swift */; };
+		7B8350292C77673C00785049 /* BurgerMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350282C77673C00785049 /* BurgerMapViewController.swift */; };
+		7B83502B2C77691800785049 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83502A2C77691800785049 /* ProfileViewController.swift */; };
+		7B83502D2C78CF1100785049 /* BurgerMapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83502C2C78CF1100785049 /* BurgerMapViewModel.swift */; };
+		7B83502F2C78E20400785049 /* EmptyPresentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83502E2C78E20400785049 /* EmptyPresentViewController.swift */; };
+		7B8350312C78F38100785049 /* UITabBarController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350302C78F38100785049 /* UITabBarController+.swift */; };
+		7B8350342C7A166C00785049 /* BurgerHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350332C7A166C00785049 /* BurgerHouse.swift */; };
+		7B8350362C7A28F400785049 /* WriteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350352C7A28F400785049 /* WriteReviewViewController.swift */; };
+		7B8350392C7A2DDA00785049 /* RxGesture in Frameworks */ = {isa = PBXBuildFile; productRef = 7B8350382C7A2DDA00785049 /* RxGesture */; };
+		7B83503C2C7A3C2B00785049 /* LocalSearchRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83503B2C7A3C2B00785049 /* LocalSearchRepository.swift */; };
+		7B83503F2C7B08DB00785049 /* LocalSearchQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83503E2C7B08DB00785049 /* LocalSearchQuery.swift */; };
+		7B8350412C7B18EF00785049 /* LocalSearchUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350402C7B18EF00785049 /* LocalSearchUseCase.swift */; };
+		7B8350432C7B1F0A00785049 /* SearchBurgerHouseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350422C7B1F0A00785049 /* SearchBurgerHouseViewModel.swift */; };
+		7B8350452C7B1F1500785049 /* WriteReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350442C7B1F1500785049 /* WriteReviewViewModel.swift */; };
+		7B8350472C7B24D600785049 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350462C7B24D600785049 /* LocationManager.swift */; };
+		7B83504A2C7B534F00785049 /* LocalSearchTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350492C7B534F00785049 /* LocalSearchTableViewCell.swift */; };
+		7B83504C2C7B537B00785049 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83504B2C7B537B00785049 /* BaseTableViewCell.swift */; };
+		7B83504E2C7B53C100785049 /* NSObject+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83504D2C7B53C100785049 /* NSObject+.swift */; };
+		7B8350512C7B5E3B00785049 /* WriteReviewScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350502C7B5E3B00785049 /* WriteReviewScene.swift */; };
+		7B8350572C7C757A00785049 /* UploadImageResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350562C7C757A00785049 /* UploadImageResponseDTO+Mapping.swift */; };
+		7B83505F2C7C7ACC00785049 /* UploadPostUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83505E2C7C7ACC00785049 /* UploadPostUseCase.swift */; };
+		7B8350612C7C84DB00785049 /* UploadedImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350602C7C84DB00785049 /* UploadedImage.swift */; };
+		7B8350632C7C9EBD00785049 /* UIWindowScene+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350622C7C9EBD00785049 /* UIWindowScene+.swift */; };
+		7B8350662C7CAF8600785049 /* walking_burger.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B8350652C7CAF8600785049 /* walking_burger.json */; };
+		7B83506A2C7CC40700785049 /* LFRBProductID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350692C7CC40700785049 /* LFRBProductID.swift */; };
+		7B83506E2C7CCCC900785049 /* GetPostRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83506D2C7CCCC900785049 /* GetPostRequestDTO+Mapping.swift */; };
+		7B8350702C7CCD6800785049 /* GetPostResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83506F2C7CCD6800785049 /* GetPostResponseDTO+Mapping.swift */; };
+		7B8350722C7CD86D00785049 /* GetPostQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350712C7CD86D00785049 /* GetPostQuery.swift */; };
+		7B8350742C7CD94400785049 /* ExistBurgerHouseData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350732C7CD94400785049 /* ExistBurgerHouseData.swift */; };
+		7B8350762C7CDBCC00785049 /* GetBurgerHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350752C7CDBCC00785049 /* GetBurgerHouse.swift */; };
+		7B83507A2C7CF4B700785049 /* UploadBurgerHouseQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350792C7CF4B700785049 /* UploadBurgerHouseQuery.swift */; };
+		7B83507C2C7CF57900785049 /* UploadPostRequstDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83507B2C7CF57900785049 /* UploadPostRequstDTO+Mapping.swift */; };
+		7B83507E2C7CF58900785049 /* PostResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83507D2C7CF58900785049 /* PostResponseDTO+Mapping.swift */; };
+		7B8350802C7CF72F00785049 /* CommentResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83507F2C7CF72F00785049 /* CommentResponseDTO+Mapping.swift */; };
+		7B8350822C7CF77000785049 /* CreatorResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350812C7CF77000785049 /* CreatorResponseDTO.swift */; };
+		7B8350842C7D1CBC00785049 /* UploadBurgerHouseReviewQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350832C7D1CBC00785049 /* UploadBurgerHouseReviewQuery.swift */; };
+		7B8350862C7D392100785049 /* BurgerHouseReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350852C7D392100785049 /* BurgerHouseReview.swift */; };
+		7B83508A2C7D48A500785049 /* CommentRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350892C7D48A500785049 /* CommentRepository.swift */; };
+		7B83508F2C7D4BF000785049 /* CommentRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B83508E2C7D4BF000785049 /* CommentRequestDTO+Mapping.swift */; };
+		7B8350912C7D581A00785049 /* RegisterReviewIdQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350902C7D581A00785049 /* RegisterReviewIdQuery.swift */; };
+		7B8350932C7D585C00785049 /* RegisteredReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350922C7D585C00785049 /* RegisteredReview.swift */; };
+		7B8350962C7D5C0300785049 /* CommentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350952C7D5C0300785049 /* CommentRouter.swift */; };
+		7B8350A92C7E18B600785049 /* AuthRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350A82C7E18B600785049 /* AuthRepository.swift */; };
+		7B8350AB2C7E18C700785049 /* PostRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350AA2C7E18C700785049 /* PostRepository.swift */; };
+		7B8350AD2C7E18EE00785049 /* LikeRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350AC2C7E18EE00785049 /* LikeRepository.swift */; };
+		7B8350AF2C7E18FD00785049 /* FollowRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350AE2C7E18FD00785049 /* FollowRepository.swift */; };
+		7B8350B12C7E190300785049 /* ProfileRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350B02C7E190300785049 /* ProfileRepository.swift */; };
+		7B8350BE2C7E42B700785049 /* EmailValidRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350BD2C7E42B700785049 /* EmailValidRequestDTO+Mapping.swift */; };
+		7B8350C02C7E42C300785049 /* EmailValidResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350BF2C7E42C300785049 /* EmailValidResponseDTO+Mapping.swift */; };
+		7B8350C22C7E4DCF00785049 /* UploadImageRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350C12C7E4DCF00785049 /* UploadImageRequestDTO.swift */; };
+		7B8350CF2C7EEDFD00785049 /* AuthRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350CE2C7EEDFD00785049 /* AuthRouter.swift */; };
+		7B8350D12C7EEE0800785049 /* PostRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350D02C7EEE0800785049 /* PostRouter.swift */; };
+		7B8350D32C7EEE1100785049 /* LikeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350D22C7EEE1100785049 /* LikeRouter.swift */; };
+		7B8350D52C7EEE1900785049 /* FollowRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350D42C7EEE1900785049 /* FollowRouter.swift */; };
+		7B8350D72C7EEE1F00785049 /* ProfileRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350D62C7EEE1F00785049 /* ProfileRouter.swift */; };
+		7B8350D92C7EF55800785049 /* RefreshAccessTokenResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350D82C7EF55800785049 /* RefreshAccessTokenResponseDTO+Mapping.swift */; };
+		7B8350DC2C7EFB0100785049 /* AccessToken.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350DB2C7EFB0100785049 /* AccessToken.swift */; };
+		7B8350E22C7F247100785049 /* BurgerMapScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350E12C7F247100785049 /* BurgerMapScene.swift */; };
+		7B8350E42C7F37DB00785049 /* CustomAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350E32C7F37DB00785049 /* CustomAnnotation.swift */; };
+		7B8350E82C7F382100785049 /* BurgerMapUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350E72C7F382100785049 /* BurgerMapUseCase.swift */; };
+		7B8350EA2C7F3B6100785049 /* BurgerMapHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350E92C7F3B6100785049 /* BurgerMapHouse.swift */; };
+		7B8350EC2C7F3DE700785049 /* SectionBurgerHouseReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350EB2C7F3DE700785049 /* SectionBurgerHouseReview.swift */; };
+		7B8350EE2C7F539100785049 /* GetSinglePostQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350ED2C7F539100785049 /* GetSinglePostQuery.swift */; };
+		7B8350F02C7F549E00785049 /* GetSinglePostRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350EF2C7F549E00785049 /* GetSinglePostRequestDTO.swift */; };
+		7B8350F22C7F72AA00785049 /* BurgerAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350F12C7F72AA00785049 /* BurgerAnnotationView.swift */; };
+		7B8350F42C7F899B00785049 /* BurgerMapHouseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350F32C7F899B00785049 /* BurgerMapHouseViewController.swift */; };
+		7B8350F62C7F9AC800785049 /* BurgerMapHouseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350F52C7F9AC800785049 /* BurgerMapHouseViewModel.swift */; };
+		7B8350F82C7F9B7000785049 /* BurgerMapHouseUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350F72C7F9B7000785049 /* BurgerMapHouseUseCase.swift */; };
+		7B8350FA2C7FB41700785049 /* BurgerMapReviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350F92C7FB41700785049 /* BurgerMapReviewCollectionViewCell.swift */; };
+		7B8350FC2C7FB46300785049 /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350FB2C7FB46300785049 /* BaseCollectionViewCell.swift */; };
+		7B8350FE2C7FB8BE00785049 /* BurgerMapReviewImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350FD2C7FB8BE00785049 /* BurgerMapReviewImageCell.swift */; };
+		7B8351002C7FD7F600785049 /* BurgerHouseReviewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8350FF2C7FD7F600785049 /* BurgerHouseReviewViewModel.swift */; };
+		7B8351042C7FD89600785049 /* BurgerHouseReviewUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8351032C7FD89600785049 /* BurgerHouseReviewUseCase.swift */; };
+		7B8351072C7FD91F00785049 /* BurgerHouseReviewScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8351062C7FD91F00785049 /* BurgerHouseReviewScene.swift */; };
+		7B8351092C7FEB7000785049 /* GetBurgerHouseReview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8351082C7FEB7000785049 /* GetBurgerHouseReview.swift */; };
+		7B8351112C80606900785049 /* BurgerHouseReviewDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8351102C80606900785049 /* BurgerHouseReviewDetailViewController.swift */; };
+		7B8351132C8063E000785049 /* BurgerHouseReviewDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8351122C8063E000785049 /* BurgerHouseReviewDetailViewModel.swift */; };
+		7B8351152C80661600785049 /* BurgerHouseReviewDetailUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8351142C80661600785049 /* BurgerHouseReviewDetailUseCase.swift */; };
+		7B8351172C806C5F00785049 /* UICollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8351162C806C5F00785049 /* UICollectionViewLayout.swift */; };
 		7B91C1C62C6C7CE30019C51F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1C52C6C7CE30019C51F /* AppDelegate.swift */; };
 		7B91C1C82C6C7CE30019C51F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1C72C6C7CE30019C51F /* SceneDelegate.swift */; };
 		7B91C1CA2C6C7CE30019C51F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1C92C6C7CE30019C51F /* ViewController.swift */; };
@@ -31,18 +119,15 @@
 		7B91C2162C6CFC0F0019C51F /* IQKeyboardManagerSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C2152C6CFC0F0019C51F /* IQKeyboardManagerSwift */; };
 		7B91C2192C6CFC430019C51F /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C2182C6CFC430019C51F /* Moya */; };
 		7B91C21C2C6CFCB30019C51F /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 7B91C21B2C6CFCB30019C51F /* Lottie */; };
-		7B91C21F2C6E3EAE0019C51F /* UserDefaultsAccessTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C21E2C6E3EAE0019C51F /* UserDefaultsAccessTokenStorage.swift */; };
-		7B91C2222C6E46630019C51F /* AccessTokenStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2212C6E46630019C51F /* AccessTokenStorage.swift */; };
+		7B91C2222C6E46630019C51F /* AccessStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2212C6E46630019C51F /* AccessStorage.swift */; };
 		7B91C2352C70DB630019C51F /* LFRBHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2342C70DB630019C51F /* LFRBHeader.swift */; };
 		7B91C2462C70E5D40019C51F /* LFRBRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2452C70E5D40019C51F /* LFRBRequestDTO.swift */; };
-		7B91C2482C70E5EA0019C51F /* LFRBResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2472C70E5EA0019C51F /* LFRBResponseDTO.swift */; };
-		7B91C24A2C70E7EA0019C51F /* JoinRequestDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2492C70E7EA0019C51F /* JoinRequestDTO.swift */; };
+		7B91C24A2C70E7EA0019C51F /* JoinRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2492C70E7EA0019C51F /* JoinRequestDTO+Mapping.swift */; };
 		7B91C24C2C70E7F00019C51F /* JoinResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C24B2C70E7F00019C51F /* JoinResponseDTO+Mapping.swift */; };
 		7B91C2502C71F3210019C51F /* LFRBNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C24F2C71F3210019C51F /* LFRBNetworkManager.swift */; };
-		7B91C2562C7210F60019C51F /* JoinRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2552C7210F60019C51F /* JoinRouter.swift */; };
 		7B91C2582C7211470019C51F /* LFRBTargetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2572C7211470019C51F /* LFRBTargetType.swift */; };
-		7B91C25A2C723F400019C51F /* LFRBJoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2592C723F400019C51F /* LFRBJoinViewController.swift */; };
-		7B91C25C2C723F460019C51F /* LFRBJoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C25B2C723F460019C51F /* LFRBJoinViewModel.swift */; };
+		7B91C25A2C723F400019C51F /* JoinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2592C723F400019C51F /* JoinViewController.swift */; };
+		7B91C25C2C723F460019C51F /* JoinViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C25B2C723F460019C51F /* JoinViewModel.swift */; };
 		7B91C25F2C723F720019C51F /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C25E2C723F720019C51F /* BaseViewController.swift */; };
 		7B91C2612C7242000019C51F /* chab.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2602C7242000019C51F /* chab.ttf */; };
 		7B91C26B2C7242100019C51F /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2622C7242100019C51F /* Pretendard-Bold.otf */; };
@@ -57,8 +142,6 @@
 		7B91C2752C7249290019C51F /* much_burger.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2742C7249290019C51F /* much_burger.png */; };
 		7B91C2792C724C0A0019C51F /* LookForRealBurgerTitle.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2782C724C0A0019C51F /* LookForRealBurgerTitle.png */; };
 		7B91C27B2C72CA2A0019C51F /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C27A2C72CA2A0019C51F /* BaseViewModel.swift */; };
-		7B91C2872C733E8E0019C51F /* JoinRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2862C733E8E0019C51F /* JoinRepository.swift */; };
-		7B91C2892C733E980019C51F /* EmailValidRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2882C733E980019C51F /* EmailValidRepository.swift */; };
 		7B91C28B2C733EE10019C51F /* JoinUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C28A2C733EE10019C51F /* JoinUseCase.swift */; };
 		7B91C28D2C7340E80019C51F /* JoinUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C28C2C7340E80019C51F /* JoinUser.swift */; };
 		7B91C28F2C7341530019C51F /* EmailValidMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C28E2C7341530019C51F /* EmailValidMessage.swift */; };
@@ -71,9 +154,145 @@
 		7B91C29E2C7377EB0019C51F /* LookForRealBurgerBrown.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C29D2C7377EB0019C51F /* LookForRealBurgerBrown.png */; };
 		7B91C2A02C7379CB0019C51F /* UIViewController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C29F2C7379CB0019C51F /* UIViewController+.swift */; };
 		7B91C2A22C73862F0019C51F /* CapsuleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2A12C73862F0019C51F /* CapsuleButton.swift */; };
+		7B91C2A72C739DFF0019C51F /* fireworkAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C2A62C739DFF0019C51F /* fireworkAnimation.json */; };
+		7B91C2AB2C74D8960019C51F /* JoinCompleteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2AA2C74D8960019C51F /* JoinCompleteViewController.swift */; };
+		7B91C2C72C75E0C40019C51F /* PretendardRoundedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2C62C75E0C40019C51F /* PretendardRoundedButton.swift */; };
+		7B91C2CE2C7600630019C51F /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2CD2C7600630019C51F /* LoginViewController.swift */; };
+		7B91C2D02C7600DE0019C51F /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2CF2C7600DE0019C51F /* LoginViewModel.swift */; };
+		7B91C2D42C7605170019C51F /* JoinScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2D32C7605170019C51F /* JoinScene.swift */; };
+		7B91C2D62C7606AF0019C51F /* LoginScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2D52C7606AF0019C51F /* LoginScene.swift */; };
+		7B91C2DB2C762A180019C51F /* LoginRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2DA2C762A180019C51F /* LoginRequestDTO+Mapping.swift */; };
+		7B91C2DD2C762A3B0019C51F /* LoginResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2DC2C762A3B0019C51F /* LoginResponseDTO+Mapping.swift */; };
+		7B91C2E32C763D710019C51F /* LoginUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2E22C763D710019C51F /* LoginUseCase.swift */; };
+		7B91C2E52C763F6F0019C51F /* LoginUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2E42C763F6F0019C51F /* LoginUser.swift */; };
+		7B91C2E72C763F8B0019C51F /* LoginQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2E62C763F8B0019C51F /* LoginQuery.swift */; };
+		7B91C2E92C76A6E20019C51F /* UINavigationController+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C2E82C76A6E20019C51F /* UINavigationController+.swift */; };
+		7BA672E72C809A6200D4F792 /* Date+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA672E62C809A6200D4F792 /* Date+.swift */; };
+		7BA672EB2C81DBB700D4F792 /* BurgerReviewImageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA672EA2C81DBB700D4F792 /* BurgerReviewImageCell.swift */; };
+		7BA672ED2C81E7D900D4F792 /* SectionImageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA672EC2C81E7D900D4F792 /* SectionImageType.swift */; };
+		7BA672EF2C8214B900D4F792 /* ProfileResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA672EE2C8214B900D4F792 /* ProfileResponseDTO+Mapping.swift */; };
+		7BA672F42C837E3C00D4F792 /* UpdateProfileRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA672F32C837E3C00D4F792 /* UpdateProfileRequestDTO+Mapping.swift */; };
+		7BA672FD2C8387E400D4F792 /* GetMyLikePostRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA672FC2C8387E400D4F792 /* GetMyLikePostRequestDTO+Mapping.swift */; };
+		7BA672FF2C84366D00D4F792 /* GetIsLikePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA672FE2C84366D00D4F792 /* GetIsLikePost.swift */; };
+		7BA673012C84367500D4F792 /* GetIsBookmarkPost.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673002C84367500D4F792 /* GetIsBookmarkPost.swift */; };
+		7BA673032C84385200D4F792 /* LikeRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673022C84385200D4F792 /* LikeRequestDTO+Mapping.swift */; };
+		7BA673052C8438A500D4F792 /* LikeResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673042C8438A500D4F792 /* LikeResponseDTO+Mapping.swift */; };
+		7BA673072C84394100D4F792 /* LikeRequestQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673062C84394100D4F792 /* LikeRequestQuery.swift */; };
+		7BA673092C84395100D4F792 /* BookmarkRequestQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673082C84395100D4F792 /* BookmarkRequestQuery.swift */; };
+		7BA6730B2C8448EA00D4F792 /* ReviewCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6730A2C8448EA00D4F792 /* ReviewCommentTableViewCell.swift */; };
+		7BA6730D2C844BE400D4F792 /* BurgerHouseReviewCommentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6730C2C844BE400D4F792 /* BurgerHouseReviewCommentViewController.swift */; };
+		7BA6730F2C844F7100D4F792 /* BurgerHouseReviewCommentUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6730E2C844F7100D4F792 /* BurgerHouseReviewCommentUseCase.swift */; };
+		7BA673112C845C5D00D4F792 /* BurgerHouseReviewCommentViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673102C845C5D00D4F792 /* BurgerHouseReviewCommentViewModel.swift */; };
+		7BA673132C845D9700D4F792 /* WriteCommentQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673122C845D9700D4F792 /* WriteCommentQuery.swift */; };
+		7BA673172C84750D00D4F792 /* FollowResponseDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673162C84750D00D4F792 /* FollowResponseDTO+Mapping.swift */; };
+		7BA6731E2C84786C00D4F792 /* MoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6731D2C84786C00D4F792 /* MoreViewController.swift */; };
+		7BA673202C8479A500D4F792 /* ProfileUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6731F2C8479A500D4F792 /* ProfileUseCase.swift */; };
+		7BA673222C8479AB00D4F792 /* MoreUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673212C8479AB00D4F792 /* MoreUseCase.swift */; };
+		7BA673262C84865D00D4F792 /* ProfileScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673252C84865D00D4F792 /* ProfileScene.swift */; };
+		7BA673292C8491CA00D4F792 /* Tabman in Frameworks */ = {isa = PBXBuildFile; productRef = 7BA673282C8491CA00D4F792 /* Tabman */; };
+		7BA6732B2C8492F000D4F792 /* ProfileReviewTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6732A2C8492F000D4F792 /* ProfileReviewTabViewController.swift */; };
+		7BA6732F2C84A67500D4F792 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6732E2C84A67500D4F792 /* ProfileViewModel.swift */; };
+		7BA673312C84A80400D4F792 /* GetProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673302C84A80400D4F792 /* GetProfile.swift */; };
+		7BA673332C84A91900D4F792 /* GetFollow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673322C84A91900D4F792 /* GetFollow.swift */; };
+		7BA673352C84ABC300D4F792 /* GetOtherProfileQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673342C84ABC300D4F792 /* GetOtherProfileQuery.swift */; };
+		7BA673372C84FB7700D4F792 /* FollowQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673362C84FB7700D4F792 /* FollowQuery.swift */; };
+		7BA673392C84FF9100D4F792 /* GetFollowStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673382C84FF9100D4F792 /* GetFollowStatus.swift */; };
+		7BA6733B2C85073F00D4F792 /* FollowListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6733A2C85073F00D4F792 /* FollowListTableViewCell.swift */; };
+		7BA6733D2C85094600D4F792 /* FollowListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA6733C2C85094600D4F792 /* FollowListViewController.swift */; };
+		7BA673412C850B7A00D4F792 /* FollowListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673402C850B7A00D4F792 /* FollowListViewModel.swift */; };
+		7BA673432C85137A00D4F792 /* FollowListTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673422C85137A00D4F792 /* FollowListTabViewController.swift */; };
+		7BA673452C85168C00D4F792 /* FollowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673442C85168C00D4F792 /* FollowViewController.swift */; };
+		7BA673472C852EDE00D4F792 /* MoreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673462C852EDE00D4F792 /* MoreViewModel.swift */; };
+		7BA673952C86897900D4F792 /* GetSingleBurgerHouseQuery.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673942C86897900D4F792 /* GetSingleBurgerHouseQuery.swift */; };
+		7BA673972C8689A700D4F792 /* GetSingleBurgerHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673962C8689A700D4F792 /* GetSingleBurgerHouse.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7B7BAC2D2C8704270045695C /* PaymentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRouter.swift; sourceTree = "<group>"; };
+		7B7BAC302C8706160045695C /* PaymentRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B7BAC322C8706220045695C /* PaymentResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B83500C2C771D9800785049 /* MainTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBar.swift; sourceTree = "<group>"; };
+		7B83501D2C774FFC00785049 /* KakaoLocalRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KakaoLocalRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B83501F2C77504100785049 /* SearchBurgerHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBurgerHouseViewController.swift; sourceTree = "<group>"; };
+		7B8350212C77585E00785049 /* KakaoLocalResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "KakaoLocalResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B8350262C77672400785049 /* BurgerHouseReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerHouseReviewViewController.swift; sourceTree = "<group>"; };
+		7B8350282C77673C00785049 /* BurgerMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerMapViewController.swift; sourceTree = "<group>"; };
+		7B83502A2C77691800785049 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		7B83502C2C78CF1100785049 /* BurgerMapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerMapViewModel.swift; sourceTree = "<group>"; };
+		7B83502E2C78E20400785049 /* EmptyPresentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyPresentViewController.swift; sourceTree = "<group>"; };
+		7B8350302C78F38100785049 /* UITabBarController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITabBarController+.swift"; sourceTree = "<group>"; };
+		7B8350332C7A166C00785049 /* BurgerHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerHouse.swift; sourceTree = "<group>"; };
+		7B8350352C7A28F400785049 /* WriteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewViewController.swift; sourceTree = "<group>"; };
+		7B83503B2C7A3C2B00785049 /* LocalSearchRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSearchRepository.swift; sourceTree = "<group>"; };
+		7B83503E2C7B08DB00785049 /* LocalSearchQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSearchQuery.swift; sourceTree = "<group>"; };
+		7B8350402C7B18EF00785049 /* LocalSearchUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSearchUseCase.swift; sourceTree = "<group>"; };
+		7B8350422C7B1F0A00785049 /* SearchBurgerHouseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBurgerHouseViewModel.swift; sourceTree = "<group>"; };
+		7B8350442C7B1F1500785049 /* WriteReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewViewModel.swift; sourceTree = "<group>"; };
+		7B8350462C7B24D600785049 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		7B8350492C7B534F00785049 /* LocalSearchTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalSearchTableViewCell.swift; sourceTree = "<group>"; };
+		7B83504B2C7B537B00785049 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		7B83504D2C7B53C100785049 /* NSObject+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSObject+.swift"; sourceTree = "<group>"; };
+		7B8350502C7B5E3B00785049 /* WriteReviewScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewScene.swift; sourceTree = "<group>"; };
+		7B8350562C7C757A00785049 /* UploadImageResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadImageResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B83505E2C7C7ACC00785049 /* UploadPostUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadPostUseCase.swift; sourceTree = "<group>"; };
+		7B8350602C7C84DB00785049 /* UploadedImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadedImage.swift; sourceTree = "<group>"; };
+		7B8350622C7C9EBD00785049 /* UIWindowScene+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindowScene+.swift"; sourceTree = "<group>"; };
+		7B8350652C7CAF8600785049 /* walking_burger.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = walking_burger.json; sourceTree = "<group>"; };
+		7B8350692C7CC40700785049 /* LFRBProductID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRBProductID.swift; sourceTree = "<group>"; };
+		7B83506D2C7CCCC900785049 /* GetPostRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GetPostRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B83506F2C7CCD6800785049 /* GetPostResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GetPostResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B8350712C7CD86D00785049 /* GetPostQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetPostQuery.swift; sourceTree = "<group>"; };
+		7B8350732C7CD94400785049 /* ExistBurgerHouseData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistBurgerHouseData.swift; sourceTree = "<group>"; };
+		7B8350752C7CDBCC00785049 /* GetBurgerHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBurgerHouse.swift; sourceTree = "<group>"; };
+		7B8350792C7CF4B700785049 /* UploadBurgerHouseQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadBurgerHouseQuery.swift; sourceTree = "<group>"; };
+		7B83507B2C7CF57900785049 /* UploadPostRequstDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UploadPostRequstDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B83507D2C7CF58900785049 /* PostResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PostResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B83507F2C7CF72F00785049 /* CommentResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommentResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B8350812C7CF77000785049 /* CreatorResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreatorResponseDTO.swift; sourceTree = "<group>"; };
+		7B8350832C7D1CBC00785049 /* UploadBurgerHouseReviewQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadBurgerHouseReviewQuery.swift; sourceTree = "<group>"; };
+		7B8350852C7D392100785049 /* BurgerHouseReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerHouseReview.swift; sourceTree = "<group>"; };
+		7B8350892C7D48A500785049 /* CommentRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRepository.swift; sourceTree = "<group>"; };
+		7B83508E2C7D4BF000785049 /* CommentRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CommentRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B8350902C7D581A00785049 /* RegisterReviewIdQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterReviewIdQuery.swift; sourceTree = "<group>"; };
+		7B8350922C7D585C00785049 /* RegisteredReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisteredReview.swift; sourceTree = "<group>"; };
+		7B8350952C7D5C0300785049 /* CommentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentRouter.swift; sourceTree = "<group>"; };
+		7B8350A82C7E18B600785049 /* AuthRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRepository.swift; sourceTree = "<group>"; };
+		7B8350AA2C7E18C700785049 /* PostRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRepository.swift; sourceTree = "<group>"; };
+		7B8350AC2C7E18EE00785049 /* LikeRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeRepository.swift; sourceTree = "<group>"; };
+		7B8350AE2C7E18FD00785049 /* FollowRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRepository.swift; sourceTree = "<group>"; };
+		7B8350B02C7E190300785049 /* ProfileRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRepository.swift; sourceTree = "<group>"; };
+		7B8350BD2C7E42B700785049 /* EmailValidRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EmailValidRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B8350BF2C7E42C300785049 /* EmailValidResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EmailValidResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B8350C12C7E4DCF00785049 /* UploadImageRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadImageRequestDTO.swift; sourceTree = "<group>"; };
+		7B8350CE2C7EEDFD00785049 /* AuthRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthRouter.swift; sourceTree = "<group>"; };
+		7B8350D02C7EEE0800785049 /* PostRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRouter.swift; sourceTree = "<group>"; };
+		7B8350D22C7EEE1100785049 /* LikeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeRouter.swift; sourceTree = "<group>"; };
+		7B8350D42C7EEE1900785049 /* FollowRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowRouter.swift; sourceTree = "<group>"; };
+		7B8350D62C7EEE1F00785049 /* ProfileRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileRouter.swift; sourceTree = "<group>"; };
+		7B8350D82C7EF55800785049 /* RefreshAccessTokenResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RefreshAccessTokenResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B8350DB2C7EFB0100785049 /* AccessToken.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessToken.swift; sourceTree = "<group>"; };
+		7B8350E12C7F247100785049 /* BurgerMapScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerMapScene.swift; sourceTree = "<group>"; };
+		7B8350E32C7F37DB00785049 /* CustomAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAnnotation.swift; sourceTree = "<group>"; };
+		7B8350E72C7F382100785049 /* BurgerMapUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerMapUseCase.swift; sourceTree = "<group>"; };
+		7B8350E92C7F3B6100785049 /* BurgerMapHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerMapHouse.swift; sourceTree = "<group>"; };
+		7B8350EB2C7F3DE700785049 /* SectionBurgerHouseReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionBurgerHouseReview.swift; sourceTree = "<group>"; };
+		7B8350ED2C7F539100785049 /* GetSinglePostQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSinglePostQuery.swift; sourceTree = "<group>"; };
+		7B8350EF2C7F549E00785049 /* GetSinglePostRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSinglePostRequestDTO.swift; sourceTree = "<group>"; };
+		7B8350F12C7F72AA00785049 /* BurgerAnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerAnnotationView.swift; sourceTree = "<group>"; };
+		7B8350F32C7F899B00785049 /* BurgerMapHouseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerMapHouseViewController.swift; sourceTree = "<group>"; };
+		7B8350F52C7F9AC800785049 /* BurgerMapHouseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerMapHouseViewModel.swift; sourceTree = "<group>"; };
+		7B8350F72C7F9B7000785049 /* BurgerMapHouseUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerMapHouseUseCase.swift; sourceTree = "<group>"; };
+		7B8350F92C7FB41700785049 /* BurgerMapReviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerMapReviewCollectionViewCell.swift; sourceTree = "<group>"; };
+		7B8350FB2C7FB46300785049 /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
+		7B8350FD2C7FB8BE00785049 /* BurgerMapReviewImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerMapReviewImageCell.swift; sourceTree = "<group>"; };
+		7B8350FF2C7FD7F600785049 /* BurgerHouseReviewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerHouseReviewViewModel.swift; sourceTree = "<group>"; };
+		7B8351032C7FD89600785049 /* BurgerHouseReviewUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerHouseReviewUseCase.swift; sourceTree = "<group>"; };
+		7B8351062C7FD91F00785049 /* BurgerHouseReviewScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerHouseReviewScene.swift; sourceTree = "<group>"; };
+		7B8351082C7FEB7000785049 /* GetBurgerHouseReview.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetBurgerHouseReview.swift; sourceTree = "<group>"; };
+		7B8351102C80606900785049 /* BurgerHouseReviewDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerHouseReviewDetailViewController.swift; sourceTree = "<group>"; };
+		7B8351122C8063E000785049 /* BurgerHouseReviewDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerHouseReviewDetailViewModel.swift; sourceTree = "<group>"; };
+		7B8351142C80661600785049 /* BurgerHouseReviewDetailUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerHouseReviewDetailUseCase.swift; sourceTree = "<group>"; };
+		7B8351162C806C5F00785049 /* UICollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewLayout.swift; sourceTree = "<group>"; };
 		7B91C1C22C6C7CE30019C51F /* LookForRealBurger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LookForRealBurger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B91C1C52C6C7CE30019C51F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B91C1C72C6C7CE30019C51F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -96,18 +315,15 @@
 		7B91C1FA2C6C96160019C51F /* R.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = R.swift; sourceTree = "<group>"; };
 		7B91C1FC2C6C967E0019C51F /* R+Font.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Font.swift"; sourceTree = "<group>"; };
 		7B91C1FE2C6C983A0019C51F /* R+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "R+Color.swift"; sourceTree = "<group>"; };
-		7B91C21E2C6E3EAE0019C51F /* UserDefaultsAccessTokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsAccessTokenStorage.swift; sourceTree = "<group>"; };
-		7B91C2212C6E46630019C51F /* AccessTokenStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessTokenStorage.swift; sourceTree = "<group>"; };
+		7B91C2212C6E46630019C51F /* AccessStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessStorage.swift; sourceTree = "<group>"; };
 		7B91C2342C70DB630019C51F /* LFRBHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRBHeader.swift; sourceTree = "<group>"; };
 		7B91C2452C70E5D40019C51F /* LFRBRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRBRequestDTO.swift; sourceTree = "<group>"; };
-		7B91C2472C70E5EA0019C51F /* LFRBResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRBResponseDTO.swift; sourceTree = "<group>"; };
-		7B91C2492C70E7EA0019C51F /* JoinRequestDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRequestDTO.swift; sourceTree = "<group>"; };
+		7B91C2492C70E7EA0019C51F /* JoinRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JoinRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
 		7B91C24B2C70E7F00019C51F /* JoinResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JoinResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
 		7B91C24F2C71F3210019C51F /* LFRBNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRBNetworkManager.swift; sourceTree = "<group>"; };
-		7B91C2552C7210F60019C51F /* JoinRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRouter.swift; sourceTree = "<group>"; };
 		7B91C2572C7211470019C51F /* LFRBTargetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRBTargetType.swift; sourceTree = "<group>"; };
-		7B91C2592C723F400019C51F /* LFRBJoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRBJoinViewController.swift; sourceTree = "<group>"; };
-		7B91C25B2C723F460019C51F /* LFRBJoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LFRBJoinViewModel.swift; sourceTree = "<group>"; };
+		7B91C2592C723F400019C51F /* JoinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewController.swift; sourceTree = "<group>"; };
+		7B91C25B2C723F460019C51F /* JoinViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinViewModel.swift; sourceTree = "<group>"; };
 		7B91C25E2C723F720019C51F /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		7B91C2602C7242000019C51F /* chab.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = chab.ttf; sourceTree = "<group>"; };
 		7B91C2622C7242100019C51F /* Pretendard-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Bold.otf"; sourceTree = "<group>"; };
@@ -122,8 +338,6 @@
 		7B91C2742C7249290019C51F /* much_burger.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = much_burger.png; sourceTree = "<group>"; };
 		7B91C2782C724C0A0019C51F /* LookForRealBurgerTitle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LookForRealBurgerTitle.png; sourceTree = "<group>"; };
 		7B91C27A2C72CA2A0019C51F /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
-		7B91C2862C733E8E0019C51F /* JoinRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRepository.swift; sourceTree = "<group>"; };
-		7B91C2882C733E980019C51F /* EmailValidRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidRepository.swift; sourceTree = "<group>"; };
 		7B91C28A2C733EE10019C51F /* JoinUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinUseCase.swift; sourceTree = "<group>"; };
 		7B91C28C2C7340E80019C51F /* JoinUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinUser.swift; sourceTree = "<group>"; };
 		7B91C28E2C7341530019C51F /* EmailValidMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailValidMessage.swift; sourceTree = "<group>"; };
@@ -136,6 +350,56 @@
 		7B91C29D2C7377EB0019C51F /* LookForRealBurgerBrown.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = LookForRealBurgerBrown.png; sourceTree = "<group>"; };
 		7B91C29F2C7379CB0019C51F /* UIViewController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+.swift"; sourceTree = "<group>"; };
 		7B91C2A12C73862F0019C51F /* CapsuleButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CapsuleButton.swift; sourceTree = "<group>"; };
+		7B91C2A62C739DFF0019C51F /* fireworkAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = fireworkAnimation.json; sourceTree = "<group>"; };
+		7B91C2AA2C74D8960019C51F /* JoinCompleteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCompleteViewController.swift; sourceTree = "<group>"; };
+		7B91C2C62C75E0C40019C51F /* PretendardRoundedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PretendardRoundedButton.swift; sourceTree = "<group>"; };
+		7B91C2CD2C7600630019C51F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		7B91C2CF2C7600DE0019C51F /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		7B91C2D32C7605170019C51F /* JoinScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinScene.swift; sourceTree = "<group>"; };
+		7B91C2D52C7606AF0019C51F /* LoginScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginScene.swift; sourceTree = "<group>"; };
+		7B91C2DA2C762A180019C51F /* LoginRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B91C2DC2C762A3B0019C51F /* LoginResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LoginResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7B91C2E22C763D710019C51F /* LoginUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUseCase.swift; sourceTree = "<group>"; };
+		7B91C2E42C763F6F0019C51F /* LoginUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUser.swift; sourceTree = "<group>"; };
+		7B91C2E62C763F8B0019C51F /* LoginQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginQuery.swift; sourceTree = "<group>"; };
+		7B91C2E82C76A6E20019C51F /* UINavigationController+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+.swift"; sourceTree = "<group>"; };
+		7BA672E62C809A6200D4F792 /* Date+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+.swift"; sourceTree = "<group>"; };
+		7BA672EA2C81DBB700D4F792 /* BurgerReviewImageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerReviewImageCell.swift; sourceTree = "<group>"; };
+		7BA672EC2C81E7D900D4F792 /* SectionImageType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionImageType.swift; sourceTree = "<group>"; };
+		7BA672EE2C8214B900D4F792 /* ProfileResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7BA672F32C837E3C00D4F792 /* UpdateProfileRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UpdateProfileRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7BA672FC2C8387E400D4F792 /* GetMyLikePostRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GetMyLikePostRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7BA672FE2C84366D00D4F792 /* GetIsLikePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIsLikePost.swift; sourceTree = "<group>"; };
+		7BA673002C84367500D4F792 /* GetIsBookmarkPost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetIsBookmarkPost.swift; sourceTree = "<group>"; };
+		7BA673022C84385200D4F792 /* LikeRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LikeRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7BA673042C8438A500D4F792 /* LikeResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LikeResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7BA673062C84394100D4F792 /* LikeRequestQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeRequestQuery.swift; sourceTree = "<group>"; };
+		7BA673082C84395100D4F792 /* BookmarkRequestQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookmarkRequestQuery.swift; sourceTree = "<group>"; };
+		7BA6730A2C8448EA00D4F792 /* ReviewCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewCommentTableViewCell.swift; sourceTree = "<group>"; };
+		7BA6730C2C844BE400D4F792 /* BurgerHouseReviewCommentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerHouseReviewCommentViewController.swift; sourceTree = "<group>"; };
+		7BA6730E2C844F7100D4F792 /* BurgerHouseReviewCommentUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerHouseReviewCommentUseCase.swift; sourceTree = "<group>"; };
+		7BA673102C845C5D00D4F792 /* BurgerHouseReviewCommentViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerHouseReviewCommentViewModel.swift; sourceTree = "<group>"; };
+		7BA673122C845D9700D4F792 /* WriteCommentQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteCommentQuery.swift; sourceTree = "<group>"; };
+		7BA673162C84750D00D4F792 /* FollowResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FollowResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
+		7BA6731D2C84786C00D4F792 /* MoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewController.swift; sourceTree = "<group>"; };
+		7BA6731F2C8479A500D4F792 /* ProfileUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileUseCase.swift; sourceTree = "<group>"; };
+		7BA673212C8479AB00D4F792 /* MoreUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreUseCase.swift; sourceTree = "<group>"; };
+		7BA673252C84865D00D4F792 /* ProfileScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScene.swift; sourceTree = "<group>"; };
+		7BA6732A2C8492F000D4F792 /* ProfileReviewTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileReviewTabViewController.swift; sourceTree = "<group>"; };
+		7BA6732E2C84A67500D4F792 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		7BA673302C84A80400D4F792 /* GetProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetProfile.swift; sourceTree = "<group>"; };
+		7BA673322C84A91900D4F792 /* GetFollow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFollow.swift; sourceTree = "<group>"; };
+		7BA673342C84ABC300D4F792 /* GetOtherProfileQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetOtherProfileQuery.swift; sourceTree = "<group>"; };
+		7BA673362C84FB7700D4F792 /* FollowQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowQuery.swift; sourceTree = "<group>"; };
+		7BA673382C84FF9100D4F792 /* GetFollowStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetFollowStatus.swift; sourceTree = "<group>"; };
+		7BA6733A2C85073F00D4F792 /* FollowListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListTableViewCell.swift; sourceTree = "<group>"; };
+		7BA6733C2C85094600D4F792 /* FollowListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListViewController.swift; sourceTree = "<group>"; };
+		7BA673402C850B7A00D4F792 /* FollowListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListViewModel.swift; sourceTree = "<group>"; };
+		7BA673422C85137A00D4F792 /* FollowListTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowListTabViewController.swift; sourceTree = "<group>"; };
+		7BA673442C85168C00D4F792 /* FollowViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowViewController.swift; sourceTree = "<group>"; };
+		7BA673462C852EDE00D4F792 /* MoreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoreViewModel.swift; sourceTree = "<group>"; };
+		7BA673942C86897900D4F792 /* GetSingleBurgerHouseQuery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSingleBurgerHouseQuery.swift; sourceTree = "<group>"; };
+		7BA673962C8689A700D4F792 /* GetSingleBurgerHouse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetSingleBurgerHouse.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,15 +407,19 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BA673292C8491CA00D4F792 /* Tabman in Frameworks */,
+				7B8350252C77605D00785049 /* RxCoreLocation in Frameworks */,
 				7B91C2102C6CFBF90019C51F /* RxSwift in Frameworks */,
 				7B91C2162C6CFC0F0019C51F /* IQKeyboardManagerSwift in Frameworks */,
 				7B91C2192C6CFC430019C51F /* Moya in Frameworks */,
+				7B7BAC2C2C86C4C80045695C /* iamport-ios in Frameworks */,
 				7B91C20B2C6CFBD90019C51F /* Kingfisher in Frameworks */,
 				7B91C2082C6CFBCD0019C51F /* Toast in Frameworks */,
 				7B91C21C2C6CFCB30019C51F /* Lottie in Frameworks */,
 				7B91C2132C6CFC060019C51F /* SnapKit in Frameworks */,
 				7B91C20E2C6CFBF90019C51F /* RxCocoa in Frameworks */,
 				7B91C2032C6CFBC10019C51F /* Differentiator in Frameworks */,
+				7B8350392C7A2DDA00785049 /* RxGesture in Frameworks */,
 				7B91C2052C6CFBC10019C51F /* RxDataSources in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -159,6 +427,482 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B7BAC2F2C8705F50045695C /* Payment */ = {
+			isa = PBXGroup;
+			children = (
+				7B7BAC302C8706160045695C /* PaymentRequestDTO+Mapping.swift */,
+				7B7BAC322C8706220045695C /* PaymentResponseDTO+Mapping.swift */,
+			);
+			path = Payment;
+			sourceTree = "<group>";
+		};
+		7B8350082C77181600785049 /* MainTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				7B83500C2C771D9800785049 /* MainTabBar.swift */,
+			);
+			path = MainTabBar;
+			sourceTree = "<group>";
+		};
+		7B8350092C77183F00785049 /* BurgerMap */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350102C77246E00785049 /* Data */,
+				7B83500F2C77246C00785049 /* Domain */,
+				7B83500E2C77246A00785049 /* Presentation */,
+			);
+			path = BurgerMap;
+			sourceTree = "<group>";
+		};
+		7B83500A2C77184B00785049 /* BurgerReview */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350132C77247600785049 /* Data */,
+				7B8350122C77247400785049 /* Domain */,
+				7B8350112C77247200785049 /* Presentation */,
+			);
+			path = BurgerReview;
+			sourceTree = "<group>";
+		};
+		7B83500B2C771CF600785049 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350162C77248200785049 /* Data */,
+				7B8350152C77247F00785049 /* Domain */,
+				7B8350142C77247A00785049 /* Presentation */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		7B83500E2C77246A00785049 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350E02C7F245D00785049 /* Scene */,
+				7B8350282C77673C00785049 /* BurgerMapViewController.swift */,
+				7B8350F32C7F899B00785049 /* BurgerMapHouseViewController.swift */,
+				7B83502C2C78CF1100785049 /* BurgerMapViewModel.swift */,
+				7B8350F52C7F9AC800785049 /* BurgerMapHouseViewModel.swift */,
+				7B8350F12C7F72AA00785049 /* BurgerAnnotationView.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		7B83500F2C77246C00785049 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350E62C7F380400785049 /* Entities */,
+				7B8350E52C7F380100785049 /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		7B8350102C77246E00785049 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		7B8350112C77247200785049 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				7B8351052C7FD91000785049 /* Scene */,
+				7B8350262C77672400785049 /* BurgerHouseReviewViewController.swift */,
+				7B8351102C80606900785049 /* BurgerHouseReviewDetailViewController.swift */,
+				7BA6730C2C844BE400D4F792 /* BurgerHouseReviewCommentViewController.swift */,
+				7B8350FF2C7FD7F600785049 /* BurgerHouseReviewViewModel.swift */,
+				7B8351122C8063E000785049 /* BurgerHouseReviewDetailViewModel.swift */,
+				7BA673102C845C5D00D4F792 /* BurgerHouseReviewCommentViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		7B8350122C77247400785049 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				7B8351022C7FD87A00785049 /* Entities */,
+				7B8351012C7FD86F00785049 /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		7B8350132C77247600785049 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		7B8350142C77247A00785049 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				7BA6731A2C84780C00D4F792 /* Scene */,
+				7B83502A2C77691800785049 /* ProfileViewController.swift */,
+				7BA6732A2C8492F000D4F792 /* ProfileReviewTabViewController.swift */,
+				7BA673442C85168C00D4F792 /* FollowViewController.swift */,
+				7BA6733C2C85094600D4F792 /* FollowListViewController.swift */,
+				7BA673422C85137A00D4F792 /* FollowListTabViewController.swift */,
+				7BA6731D2C84786C00D4F792 /* MoreViewController.swift */,
+				7BA6732E2C84A67500D4F792 /* ProfileViewModel.swift */,
+				7BA673402C850B7A00D4F792 /* FollowListViewModel.swift */,
+				7BA673462C852EDE00D4F792 /* MoreViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		7B8350152C77247F00785049 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				7BA673192C8477FC00D4F792 /* Entities */,
+				7BA673182C8477F900D4F792 /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		7B8350162C77248200785049 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		7B8350172C77249500785049 /* WriteReview */ = {
+			isa = PBXGroup;
+			children = (
+				7B83501A2C7724BC00785049 /* Data */,
+				7B8350192C7724BA00785049 /* Domain */,
+				7B8350182C7724B700785049 /* Presentation */,
+			);
+			path = WriteReview;
+			sourceTree = "<group>";
+		};
+		7B8350182C7724B700785049 /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350642C7CAF6500785049 /* Lottie */,
+				7B83504F2C7B5E2A00785049 /* Scene */,
+				7B83502E2C78E20400785049 /* EmptyPresentViewController.swift */,
+				7B8350352C7A28F400785049 /* WriteReviewViewController.swift */,
+				7B83501F2C77504100785049 /* SearchBurgerHouseViewController.swift */,
+				7B8350442C7B1F1500785049 /* WriteReviewViewModel.swift */,
+				7B8350422C7B1F0A00785049 /* SearchBurgerHouseViewModel.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		7B8350192C7724BA00785049 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350322C7A0CE800785049 /* Entities */,
+				7B83503D2C7A3C3700785049 /* UseCase */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		7B83501A2C7724BC00785049 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7B83501C2C774FC400785049 /* DTO */,
+				7B83503A2C7A3BEB00785049 /* Repository */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		7B83501C2C774FC400785049 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				7B83501D2C774FFC00785049 /* KakaoLocalRequestDTO+Mapping.swift */,
+				7B8350212C77585E00785049 /* KakaoLocalResponseDTO+Mapping.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		7B8350322C7A0CE800785049 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350332C7A166C00785049 /* BurgerHouse.swift */,
+				7B83503E2C7B08DB00785049 /* LocalSearchQuery.swift */,
+				7B8350712C7CD86D00785049 /* GetPostQuery.swift */,
+				7B8350752C7CDBCC00785049 /* GetBurgerHouse.swift */,
+				7B8350732C7CD94400785049 /* ExistBurgerHouseData.swift */,
+				7B8350792C7CF4B700785049 /* UploadBurgerHouseQuery.swift */,
+				7B8350832C7D1CBC00785049 /* UploadBurgerHouseReviewQuery.swift */,
+				7B8350902C7D581A00785049 /* RegisterReviewIdQuery.swift */,
+				7B8350922C7D585C00785049 /* RegisteredReview.swift */,
+				7B8350852C7D392100785049 /* BurgerHouseReview.swift */,
+				7B8350602C7C84DB00785049 /* UploadedImage.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		7B83503A2C7A3BEB00785049 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				7B83503B2C7A3C2B00785049 /* LocalSearchRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		7B83503D2C7A3C3700785049 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350402C7B18EF00785049 /* LocalSearchUseCase.swift */,
+				7B83505E2C7C7ACC00785049 /* UploadPostUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		7B8350482C7B533E00785049 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350492C7B534F00785049 /* LocalSearchTableViewCell.swift */,
+				7B8350FD2C7FB8BE00785049 /* BurgerMapReviewImageCell.swift */,
+				7BA672EA2C81DBB700D4F792 /* BurgerReviewImageCell.swift */,
+				7B8350F92C7FB41700785049 /* BurgerMapReviewCollectionViewCell.swift */,
+				7BA6730A2C8448EA00D4F792 /* ReviewCommentTableViewCell.swift */,
+				7BA6733A2C85073F00D4F792 /* FollowListTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		7B83504F2C7B5E2A00785049 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350502C7B5E3B00785049 /* WriteReviewScene.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		7B8350642C7CAF6500785049 /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350652C7CAF8600785049 /* walking_burger.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
+		7B83508B2C7D49FB00785049 /* Repository */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350A82C7E18B600785049 /* AuthRepository.swift */,
+				7B8350AA2C7E18C700785049 /* PostRepository.swift */,
+				7B8350892C7D48A500785049 /* CommentRepository.swift */,
+				7B8350AC2C7E18EE00785049 /* LikeRepository.swift */,
+				7B8350AE2C7E18FD00785049 /* FollowRepository.swift */,
+				7B8350B02C7E190300785049 /* ProfileRepository.swift */,
+			);
+			path = Repository;
+			sourceTree = "<group>";
+		};
+		7B83508C2C7D4BA400785049 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350B62C7E39F700785049 /* Auth */,
+				7B8350B52C7E39F400785049 /* Post */,
+				7B83508D2C7D4BB400785049 /* Comment */,
+				7B8350B42C7E39EF00785049 /* Like */,
+				7B8350B32C7E39E700785049 /* Follow */,
+				7B8350B22C7E39E000785049 /* Profile */,
+				7BA672F02C82154700D4F792 /* Common */,
+				7B7BAC2F2C8705F50045695C /* Payment */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
+		7B83508D2C7D4BB400785049 /* Comment */ = {
+			isa = PBXGroup;
+			children = (
+				7B83508E2C7D4BF000785049 /* CommentRequestDTO+Mapping.swift */,
+				7B83507F2C7CF72F00785049 /* CommentResponseDTO+Mapping.swift */,
+			);
+			path = Comment;
+			sourceTree = "<group>";
+		};
+		7B8350942C7D5BF600785049 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350CE2C7EEDFD00785049 /* AuthRouter.swift */,
+				7B8350D02C7EEE0800785049 /* PostRouter.swift */,
+				7B8350952C7D5C0300785049 /* CommentRouter.swift */,
+				7B8350D22C7EEE1100785049 /* LikeRouter.swift */,
+				7B8350D42C7EEE1900785049 /* FollowRouter.swift */,
+				7B8350D62C7EEE1F00785049 /* ProfileRouter.swift */,
+				7B7BAC2D2C8704270045695C /* PaymentRouter.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		7B8350B22C7E39E000785049 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				7BA672F32C837E3C00D4F792 /* UpdateProfileRequestDTO+Mapping.swift */,
+				7BA672EE2C8214B900D4F792 /* ProfileResponseDTO+Mapping.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		7B8350B32C7E39E700785049 /* Follow */ = {
+			isa = PBXGroup;
+			children = (
+				7BA673162C84750D00D4F792 /* FollowResponseDTO+Mapping.swift */,
+			);
+			path = Follow;
+			sourceTree = "<group>";
+		};
+		7B8350B42C7E39EF00785049 /* Like */ = {
+			isa = PBXGroup;
+			children = (
+				7BA672FC2C8387E400D4F792 /* GetMyLikePostRequestDTO+Mapping.swift */,
+				7BA673022C84385200D4F792 /* LikeRequestDTO+Mapping.swift */,
+				7BA673042C8438A500D4F792 /* LikeResponseDTO+Mapping.swift */,
+			);
+			path = Like;
+			sourceTree = "<group>";
+		};
+		7B8350B52C7E39F400785049 /* Post */ = {
+			isa = PBXGroup;
+			children = (
+				7BA672F52C8381C700D4F792 /* UploadImage */,
+				7BA672F82C8381DE00D4F792 /* UploadPost */,
+				7BA672F72C8381DA00D4F792 /* GetPost */,
+				7BA672F62C8381D600D4F792 /* GetSinglePost */,
+				7B83507D2C7CF58900785049 /* PostResponseDTO+Mapping.swift */,
+				7B8350812C7CF77000785049 /* CreatorResponseDTO.swift */,
+			);
+			path = Post;
+			sourceTree = "<group>";
+		};
+		7B8350B62C7E39F700785049 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350BB2C7E420F00785049 /* Join */,
+				7B8350BA2C7E41DE00785049 /* EmailValidation */,
+				7B8350B72C7E41BE00785049 /* Login */,
+				7B8350B92C7E41DA00785049 /* RefreshAccessToken */,
+				7B8350B82C7E41D000785049 /* WithDraw */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		7B8350B72C7E41BE00785049 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2DA2C762A180019C51F /* LoginRequestDTO+Mapping.swift */,
+				7B91C2DC2C762A3B0019C51F /* LoginResponseDTO+Mapping.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		7B8350B82C7E41D000785049 /* WithDraw */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = WithDraw;
+			sourceTree = "<group>";
+		};
+		7B8350B92C7E41DA00785049 /* RefreshAccessToken */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350D82C7EF55800785049 /* RefreshAccessTokenResponseDTO+Mapping.swift */,
+			);
+			path = RefreshAccessToken;
+			sourceTree = "<group>";
+		};
+		7B8350BA2C7E41DE00785049 /* EmailValidation */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350BD2C7E42B700785049 /* EmailValidRequestDTO+Mapping.swift */,
+				7B8350BF2C7E42C300785049 /* EmailValidResponseDTO+Mapping.swift */,
+			);
+			path = EmailValidation;
+			sourceTree = "<group>";
+		};
+		7B8350BB2C7E420F00785049 /* Join */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2492C70E7EA0019C51F /* JoinRequestDTO+Mapping.swift */,
+				7B91C24B2C70E7F00019C51F /* JoinResponseDTO+Mapping.swift */,
+			);
+			path = Join;
+			sourceTree = "<group>";
+		};
+		7B8350DA2C7EFADE00785049 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350DB2C7EFB0100785049 /* AccessToken.swift */,
+				7BA672EC2C81E7D900D4F792 /* SectionImageType.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		7B8350DD2C7F0E3B00785049 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		7B8350E02C7F245D00785049 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350E12C7F247100785049 /* BurgerMapScene.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		7B8350E52C7F380100785049 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350E72C7F382100785049 /* BurgerMapUseCase.swift */,
+				7B8350F72C7F9B7000785049 /* BurgerMapHouseUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		7B8350E62C7F380400785049 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350E92C7F3B6100785049 /* BurgerMapHouse.swift */,
+				7B8350EB2C7F3DE700785049 /* SectionBurgerHouseReview.swift */,
+				7B8350ED2C7F539100785049 /* GetSinglePostQuery.swift */,
+				7B8350E32C7F37DB00785049 /* CustomAnnotation.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		7B8351012C7FD86F00785049 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				7B8351032C7FD89600785049 /* BurgerHouseReviewUseCase.swift */,
+				7B8351142C80661600785049 /* BurgerHouseReviewDetailUseCase.swift */,
+				7BA6730E2C844F7100D4F792 /* BurgerHouseReviewCommentUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		7B8351022C7FD87A00785049 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				7B8351082C7FEB7000785049 /* GetBurgerHouseReview.swift */,
+				7BA672FE2C84366D00D4F792 /* GetIsLikePost.swift */,
+				7BA673942C86897900D4F792 /* GetSingleBurgerHouseQuery.swift */,
+				7BA673962C8689A700D4F792 /* GetSingleBurgerHouse.swift */,
+				7BA673062C84394100D4F792 /* LikeRequestQuery.swift */,
+				7BA673002C84367500D4F792 /* GetIsBookmarkPost.swift */,
+				7BA673082C84395100D4F792 /* BookmarkRequestQuery.swift */,
+				7BA673122C845D9700D4F792 /* WriteCommentQuery.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		7B8351052C7FD91000785049 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				7B8351062C7FD91F00785049 /* BurgerHouseReviewScene.swift */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
 		7B91C1B92C6C7CE30019C51F = {
 			isa = PBXGroup;
 			children = (
@@ -232,24 +976,21 @@
 			children = (
 				7B91C1F62C6C90770019C51F /* UIFont+.swift */,
 				7B91C29F2C7379CB0019C51F /* UIViewController+.swift */,
+				7B91C2E82C76A6E20019C51F /* UINavigationController+.swift */,
+				7B8350302C78F38100785049 /* UITabBarController+.swift */,
+				7B8351162C806C5F00785049 /* UICollectionViewLayout.swift */,
+				7B8350622C7C9EBD00785049 /* UIWindowScene+.swift */,
+				7B83504D2C7B53C100785049 /* NSObject+.swift */,
 				7B91C1F82C6C93900019C51F /* String+.swift */,
+				7BA672E62C809A6200D4F792 /* Date+.swift */,
 			);
 			path = Extension;
-			sourceTree = "<group>";
-		};
-		7B91C21D2C6E3DF60019C51F /* UserDefaultsStorage */ = {
-			isa = PBXGroup;
-			children = (
-				7B91C21E2C6E3EAE0019C51F /* UserDefaultsAccessTokenStorage.swift */,
-			);
-			path = UserDefaultsStorage;
 			sourceTree = "<group>";
 		};
 		7B91C2202C6E46300019C51F /* AccessTokenStorage */ = {
 			isa = PBXGroup;
 			children = (
-				7B91C2212C6E46630019C51F /* AccessTokenStorage.swift */,
-				7B91C21D2C6E3DF60019C51F /* UserDefaultsStorage */,
+				7B91C2212C6E46630019C51F /* AccessStorage.swift */,
 			);
 			path = AccessTokenStorage;
 			sourceTree = "<group>";
@@ -267,10 +1008,11 @@
 		7B91C2362C70E2460019C51F /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				7B8350DD2C7F0E3B00785049 /* Protocol */,
 				7B91C25D2C723F600019C51F /* Base */,
 				7B91C2962C7368930019C51F /* Reusable */,
 				7B91C2392C70E3360019C51F /* Data */,
-				7B91C2442C70E56A0019C51F /* Repository */,
+				7B91C2442C70E56A0019C51F /* Location */,
 				7B91C23A2C70E35C0019C51F /* Utilities */,
 			);
 			path = Common;
@@ -281,6 +1023,11 @@
 			children = (
 				7B91C23B2C70E3C60019C51F /* Login */,
 				7B91C23C2C70E3DC0019C51F /* Join */,
+				7B8350082C77181600785049 /* MainTabBar */,
+				7B8350092C77183F00785049 /* BurgerMap */,
+				7B83500A2C77184B00785049 /* BurgerReview */,
+				7B8350172C77249500785049 /* WriteReview */,
+				7B83500B2C771CF600785049 /* Profile */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -288,9 +1035,11 @@
 		7B91C2382C70E2CF0019C51F /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				7B8350942C7D5BF600785049 /* Router */,
 				7B91C2342C70DB630019C51F /* LFRBHeader.swift */,
 				7B91C2572C7211470019C51F /* LFRBTargetType.swift */,
 				7B91C24F2C71F3210019C51F /* LFRBNetworkManager.swift */,
+				7B8350692C7CC40700785049 /* LFRBProductID.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -300,6 +1049,9 @@
 			children = (
 				7B91C2432C70E5420019C51F /* Models */,
 				7B91C2382C70E2CF0019C51F /* Network */,
+				7B83508C2C7D4BA400785049 /* DTO */,
+				7B8350DA2C7EFADE00785049 /* Entity */,
+				7B83508B2C7D49FB00785049 /* Repository */,
 				7B91C2202C6E46300019C51F /* AccessTokenStorage */,
 			);
 			path = Data;
@@ -316,7 +1068,6 @@
 		7B91C23B2C70E3C60019C51F /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				7B91C23F2C70E46F0019C51F /* Data */,
 				7B91C23E2C70E46C0019C51F /* Domain */,
 				7B91C23D2C70E46A0019C51F /* Presentation */,
 			);
@@ -326,7 +1077,6 @@
 		7B91C23C2C70E3DC0019C51F /* Join */ = {
 			isa = PBXGroup;
 			children = (
-				7B91C2422C70E4790019C51F /* Data */,
 				7B91C2412C70E4760019C51F /* Domain */,
 				7B91C2402C70E4730019C51F /* Presentation */,
 			);
@@ -336,6 +1086,9 @@
 		7B91C23D2C70E46A0019C51F /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				7B91C2D12C76048F0019C51F /* MakeView */,
+				7B91C2CD2C7600630019C51F /* LoginViewController.swift */,
+				7B91C2CF2C7600DE0019C51F /* LoginViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -343,22 +1096,20 @@
 		7B91C23E2C70E46C0019C51F /* Domain */ = {
 			isa = PBXGroup;
 			children = (
+				7B91C2CC2C76003D0019C51F /* Entities */,
+				7B91C2CB2C76003A0019C51F /* UseCase */,
 			);
 			path = Domain;
-			sourceTree = "<group>";
-		};
-		7B91C23F2C70E46F0019C51F /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		7B91C2402C70E4730019C51F /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				7B91C2592C723F400019C51F /* LFRBJoinViewController.swift */,
-				7B91C25B2C723F460019C51F /* LFRBJoinViewModel.swift */,
+				7B91C2D22C7604A00019C51F /* MakeView */,
+				7B91C2A32C739A780019C51F /* Lottie */,
+				7B91C2592C723F400019C51F /* JoinViewController.swift */,
+				7B91C2AA2C74D8960019C51F /* JoinCompleteViewController.swift */,
+				7B91C25B2C723F460019C51F /* JoinViewModel.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -372,30 +1123,20 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		7B91C2422C70E4790019C51F /* Data */ = {
-			isa = PBXGroup;
-			children = (
-				7B91C2532C7210D40019C51F /* DTO */,
-				7B91C2542C7210E20019C51F /* Network */,
-				7B91C2842C733CEF0019C51F /* Repository */,
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		7B91C2432C70E5420019C51F /* Models */ = {
 			isa = PBXGroup;
 			children = (
 				7B91C2452C70E5D40019C51F /* LFRBRequestDTO.swift */,
-				7B91C2472C70E5EA0019C51F /* LFRBResponseDTO.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
 		};
-		7B91C2442C70E56A0019C51F /* Repository */ = {
+		7B91C2442C70E56A0019C51F /* Location */ = {
 			isa = PBXGroup;
 			children = (
+				7B8350462C7B24D600785049 /* LocationManager.swift */,
 			);
-			path = Repository;
+			path = Location;
 			sourceTree = "<group>";
 		};
 		7B91C2512C720EA50019C51F /* Entities */ = {
@@ -417,48 +1158,137 @@
 			path = UseCase;
 			sourceTree = "<group>";
 		};
-		7B91C2532C7210D40019C51F /* DTO */ = {
-			isa = PBXGroup;
-			children = (
-				7B91C2492C70E7EA0019C51F /* JoinRequestDTO.swift */,
-				7B91C24B2C70E7F00019C51F /* JoinResponseDTO+Mapping.swift */,
-			);
-			path = DTO;
-			sourceTree = "<group>";
-		};
-		7B91C2542C7210E20019C51F /* Network */ = {
-			isa = PBXGroup;
-			children = (
-				7B91C2552C7210F60019C51F /* JoinRouter.swift */,
-			);
-			path = Network;
-			sourceTree = "<group>";
-		};
 		7B91C25D2C723F600019C51F /* Base */ = {
 			isa = PBXGroup;
 			children = (
 				7B91C25E2C723F720019C51F /* BaseViewController.swift */,
+				7B83504B2C7B537B00785049 /* BaseTableViewCell.swift */,
+				7B8350FB2C7FB46300785049 /* BaseCollectionViewCell.swift */,
 				7B91C27A2C72CA2A0019C51F /* BaseViewModel.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
 		};
-		7B91C2842C733CEF0019C51F /* Repository */ = {
-			isa = PBXGroup;
-			children = (
-				7B91C2862C733E8E0019C51F /* JoinRepository.swift */,
-				7B91C2882C733E980019C51F /* EmailValidRepository.swift */,
-			);
-			path = Repository;
-			sourceTree = "<group>";
-		};
 		7B91C2962C7368930019C51F /* Reusable */ = {
 			isa = PBXGroup;
 			children = (
+				7B8350482C7B533E00785049 /* Cell */,
 				7B91C2972C7370FE0019C51F /* BorderRoundedSearchBar.swift */,
 				7B91C2A12C73862F0019C51F /* CapsuleButton.swift */,
+				7B91C2C62C75E0C40019C51F /* PretendardRoundedButton.swift */,
 			);
 			path = Reusable;
+			sourceTree = "<group>";
+		};
+		7B91C2A32C739A780019C51F /* Lottie */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2A62C739DFF0019C51F /* fireworkAnimation.json */,
+			);
+			path = Lottie;
+			sourceTree = "<group>";
+		};
+		7B91C2CB2C76003A0019C51F /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2E22C763D710019C51F /* LoginUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		7B91C2CC2C76003D0019C51F /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2E42C763F6F0019C51F /* LoginUser.swift */,
+				7B91C2E62C763F8B0019C51F /* LoginQuery.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		7B91C2D12C76048F0019C51F /* MakeView */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2D52C7606AF0019C51F /* LoginScene.swift */,
+			);
+			path = MakeView;
+			sourceTree = "<group>";
+		};
+		7B91C2D22C7604A00019C51F /* MakeView */ = {
+			isa = PBXGroup;
+			children = (
+				7B91C2D32C7605170019C51F /* JoinScene.swift */,
+			);
+			path = MakeView;
+			sourceTree = "<group>";
+		};
+		7BA672F02C82154700D4F792 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		7BA672F52C8381C700D4F792 /* UploadImage */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350C12C7E4DCF00785049 /* UploadImageRequestDTO.swift */,
+				7B8350562C7C757A00785049 /* UploadImageResponseDTO+Mapping.swift */,
+			);
+			path = UploadImage;
+			sourceTree = "<group>";
+		};
+		7BA672F62C8381D600D4F792 /* GetSinglePost */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350EF2C7F549E00785049 /* GetSinglePostRequestDTO.swift */,
+			);
+			path = GetSinglePost;
+			sourceTree = "<group>";
+		};
+		7BA672F72C8381DA00D4F792 /* GetPost */ = {
+			isa = PBXGroup;
+			children = (
+				7B83506D2C7CCCC900785049 /* GetPostRequestDTO+Mapping.swift */,
+				7B83506F2C7CCD6800785049 /* GetPostResponseDTO+Mapping.swift */,
+			);
+			path = GetPost;
+			sourceTree = "<group>";
+		};
+		7BA672F82C8381DE00D4F792 /* UploadPost */ = {
+			isa = PBXGroup;
+			children = (
+				7B83507B2C7CF57900785049 /* UploadPostRequstDTO+Mapping.swift */,
+			);
+			path = UploadPost;
+			sourceTree = "<group>";
+		};
+		7BA673182C8477F900D4F792 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				7BA6731F2C8479A500D4F792 /* ProfileUseCase.swift */,
+				7BA673212C8479AB00D4F792 /* MoreUseCase.swift */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		7BA673192C8477FC00D4F792 /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				7BA673302C84A80400D4F792 /* GetProfile.swift */,
+				7BA673322C84A91900D4F792 /* GetFollow.swift */,
+				7BA673342C84ABC300D4F792 /* GetOtherProfileQuery.swift */,
+				7BA673362C84FB7700D4F792 /* FollowQuery.swift */,
+				7BA673382C84FF9100D4F792 /* GetFollowStatus.swift */,
+			);
+			path = Entities;
+			sourceTree = "<group>";
+		};
+		7BA6731A2C84780C00D4F792 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				7BA673252C84865D00D4F792 /* ProfileScene.swift */,
+			);
+			path = Scene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -488,6 +1318,10 @@
 				7B91C2152C6CFC0F0019C51F /* IQKeyboardManagerSwift */,
 				7B91C2182C6CFC430019C51F /* Moya */,
 				7B91C21B2C6CFCB30019C51F /* Lottie */,
+				7B8350242C77605D00785049 /* RxCoreLocation */,
+				7B8350382C7A2DDA00785049 /* RxGesture */,
+				7BA673282C8491CA00D4F792 /* Tabman */,
+				7B7BAC2B2C86C4C80045695C /* iamport-ios */,
 			);
 			productName = LookForRealBurger;
 			productReference = 7B91C1C22C6C7CE30019C51F /* LookForRealBurger.app */;
@@ -528,6 +1362,10 @@
 				7B91C2142C6CFC0F0019C51F /* XCRemoteSwiftPackageReference "IQKeyboardManager" */,
 				7B91C2172C6CFC430019C51F /* XCRemoteSwiftPackageReference "Moya" */,
 				7B91C21A2C6CFCB20019C51F /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				7B8350232C77605D00785049 /* XCRemoteSwiftPackageReference "RxCoreLocation" */,
+				7B8350372C7A2DDA00785049 /* XCRemoteSwiftPackageReference "RxGesture" */,
+				7BA673272C8491CA00D4F792 /* XCRemoteSwiftPackageReference "Tabman" */,
+				7B7BAC2A2C86C4C80045695C /* XCRemoteSwiftPackageReference "iamport-ios" */,
 			);
 			productRefGroup = 7B91C1C32C6C7CE30019C51F /* Products */;
 			projectDirPath = "";
@@ -557,11 +1395,13 @@
 				7B91C1CF2C6C7CE40019C51F /* Assets.xcassets in Resources */,
 				7B91C2722C7242100019C51F /* Pretendard-Thin.otf in Resources */,
 				7B91C2712C7242100019C51F /* Pretendard-ExtraBold.otf in Resources */,
+				7B91C2A72C739DFF0019C51F /* fireworkAnimation.json in Resources */,
 				7B91C26C2C7242100019C51F /* Pretendard-Regular.otf in Resources */,
 				7B91C2732C7242100019C51F /* Pretendard-ExtraLight.otf in Resources */,
 				7B91C1D22C6C7CE40019C51F /* Base in Resources */,
 				7B91C1E72C6C8D3F0019C51F /* InfoPlist.strings in Resources */,
 				7B91C29E2C7377EB0019C51F /* LookForRealBurgerBrown.png in Resources */,
+				7B8350662C7CAF8600785049 /* walking_burger.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -572,41 +1412,169 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7BA673172C84750D00D4F792 /* FollowResponseDTO+Mapping.swift in Sources */,
+				7B8350202C77504100785049 /* SearchBurgerHouseViewController.swift in Sources */,
+				7B83504A2C7B534F00785049 /* LocalSearchTableViewCell.swift in Sources */,
+				7BA673352C84ABC300D4F792 /* GetOtherProfileQuery.swift in Sources */,
+				7B8350D12C7EEE0800785049 /* PostRouter.swift in Sources */,
 				7B91C28D2C7340E80019C51F /* JoinUser.swift in Sources */,
-				7B91C2482C70E5EA0019C51F /* LFRBResponseDTO.swift in Sources */,
 				7B91C2952C7365840019C51F /* R+Phrase.swift in Sources */,
+				7B8350742C7CD94400785049 /* ExistBurgerHouseData.swift in Sources */,
+				7B8350FA2C7FB41700785049 /* BurgerMapReviewCollectionViewCell.swift in Sources */,
+				7B8350612C7C84DB00785049 /* UploadedImage.swift in Sources */,
+				7B8350EA2C7F3B6100785049 /* BurgerMapHouse.swift in Sources */,
+				7B91C2E32C763D710019C51F /* LoginUseCase.swift in Sources */,
+				7B8350962C7D5C0300785049 /* CommentRouter.swift in Sources */,
+				7BA673432C85137A00D4F792 /* FollowListTabViewController.swift in Sources */,
+				7B8350762C7CDBCC00785049 /* GetBurgerHouse.swift in Sources */,
 				7B91C29A2C7374250019C51F /* AppAppearance.swift in Sources */,
-				7B91C25C2C723F460019C51F /* LFRBJoinViewModel.swift in Sources */,
+				7B91C2DD2C762A3B0019C51F /* LoginResponseDTO+Mapping.swift in Sources */,
+				7B91C25C2C723F460019C51F /* JoinViewModel.swift in Sources */,
+				7B83506E2C7CCCC900785049 /* GetPostRequestDTO+Mapping.swift in Sources */,
 				7B91C1CA2C6C7CE30019C51F /* ViewController.swift in Sources */,
-				7B91C2892C733E980019C51F /* EmailValidRepository.swift in Sources */,
-				7B91C2562C7210F60019C51F /* JoinRouter.swift in Sources */,
+				7B8350C22C7E4DCF00785049 /* UploadImageRequestDTO.swift in Sources */,
+				7B8350412C7B18EF00785049 /* LocalSearchUseCase.swift in Sources */,
+				7B8351002C7FD7F600785049 /* BurgerHouseReviewViewModel.swift in Sources */,
+				7BA673012C84367500D4F792 /* GetIsBookmarkPost.swift in Sources */,
+				7B8351092C7FEB7000785049 /* GetBurgerHouseReview.swift in Sources */,
+				7B8350362C7A28F400785049 /* WriteReviewViewController.swift in Sources */,
+				7B8350AF2C7E18FD00785049 /* FollowRepository.swift in Sources */,
+				7B8350842C7D1CBC00785049 /* UploadBurgerHouseReviewQuery.swift in Sources */,
+				7B8350472C7B24D600785049 /* LocationManager.swift in Sources */,
+				7B83503F2C7B08DB00785049 /* LocalSearchQuery.swift in Sources */,
+				7B8350D52C7EEE1900785049 /* FollowRouter.swift in Sources */,
+				7B8351132C8063E000785049 /* BurgerHouseReviewDetailViewModel.swift in Sources */,
 				7B91C28B2C733EE10019C51F /* JoinUseCase.swift in Sources */,
+				7BA6732B2C8492F000D4F792 /* ProfileReviewTabViewController.swift in Sources */,
 				7B91C28F2C7341530019C51F /* EmailValidMessage.swift in Sources */,
+				7B8351152C80661600785049 /* BurgerHouseReviewDetailUseCase.swift in Sources */,
+				7B8350632C7C9EBD00785049 /* UIWindowScene+.swift in Sources */,
+				7B83502B2C77691800785049 /* ProfileViewController.swift in Sources */,
+				7B8350FC2C7FB46300785049 /* BaseCollectionViewCell.swift in Sources */,
+				7B8350822C7CF77000785049 /* CreatorResponseDTO.swift in Sources */,
 				7B91C1C62C6C7CE30019C51F /* AppDelegate.swift in Sources */,
+				7B83500D2C771D9800785049 /* MainTabBar.swift in Sources */,
+				7BA673072C84394100D4F792 /* LikeRequestQuery.swift in Sources */,
+				7B8350DC2C7EFB0100785049 /* AccessToken.swift in Sources */,
+				7B8350222C77585E00785049 /* KakaoLocalResponseDTO+Mapping.swift in Sources */,
+				7BA673412C850B7A00D4F792 /* FollowListViewModel.swift in Sources */,
+				7BA6733D2C85094600D4F792 /* FollowListViewController.swift in Sources */,
+				7B8350912C7D581A00785049 /* RegisterReviewIdQuery.swift in Sources */,
+				7B8350862C7D392100785049 /* BurgerHouseReview.swift in Sources */,
 				7B91C2502C71F3210019C51F /* LFRBNetworkManager.swift in Sources */,
+				7B8350932C7D585C00785049 /* RegisteredReview.swift in Sources */,
+				7B83504C2C7B537B00785049 /* BaseTableViewCell.swift in Sources */,
 				7B91C1F72C6C90770019C51F /* UIFont+.swift in Sources */,
+				7B8350512C7B5E3B00785049 /* WriteReviewScene.swift in Sources */,
+				7BA673132C845D9700D4F792 /* WriteCommentQuery.swift in Sources */,
 				7B91C1FD2C6C967E0019C51F /* R+Font.swift in Sources */,
+				7B8350AB2C7E18C700785049 /* PostRepository.swift in Sources */,
+				7BA673332C84A91900D4F792 /* GetFollow.swift in Sources */,
+				7BA672EF2C8214B900D4F792 /* ProfileResponseDTO+Mapping.swift in Sources */,
+				7BA672F42C837E3C00D4F792 /* UpdateProfileRequestDTO+Mapping.swift in Sources */,
 				7B91C1FF2C6C983A0019C51F /* R+Color.swift in Sources */,
-				7B91C25A2C723F400019C51F /* LFRBJoinViewController.swift in Sources */,
+				7BA673952C86897900D4F792 /* GetSingleBurgerHouseQuery.swift in Sources */,
+				7BA673052C8438A500D4F792 /* LikeResponseDTO+Mapping.swift in Sources */,
+				7B83507A2C7CF4B700785049 /* UploadBurgerHouseQuery.swift in Sources */,
+				7B91C2DB2C762A180019C51F /* LoginRequestDTO+Mapping.swift in Sources */,
+				7B8350EC2C7F3DE700785049 /* SectionBurgerHouseReview.swift in Sources */,
+				7B91C25A2C723F400019C51F /* JoinViewController.swift in Sources */,
+				7BA673472C852EDE00D4F792 /* MoreViewModel.swift in Sources */,
+				7BA673312C84A80400D4F792 /* GetProfile.swift in Sources */,
+				7BA673202C8479A500D4F792 /* ProfileUseCase.swift in Sources */,
+				7B8350D72C7EEE1F00785049 /* ProfileRouter.swift in Sources */,
+				7BA6730F2C844F7100D4F792 /* BurgerHouseReviewCommentUseCase.swift in Sources */,
 				7B91C1DC2C6C7D820019C51F /* APIKEY.swift in Sources */,
+				7B91C2AB2C74D8960019C51F /* JoinCompleteViewController.swift in Sources */,
+				7B91C2E52C763F6F0019C51F /* LoginUser.swift in Sources */,
+				7B8350BE2C7E42B700785049 /* EmailValidRequestDTO+Mapping.swift in Sources */,
+				7B83502D2C78CF1100785049 /* BurgerMapViewModel.swift in Sources */,
 				7B91C2A02C7379CB0019C51F /* UIViewController+.swift in Sources */,
 				7B91C2912C7345210019C51F /* JoinQuery.swift in Sources */,
 				7B91C2982C7370FE0019C51F /* BorderRoundedSearchBar.swift in Sources */,
 				7B91C1F92C6C93900019C51F /* String+.swift in Sources */,
+				7B8350F22C7F72AA00785049 /* BurgerAnnotationView.swift in Sources */,
+				7B8350FE2C7FB8BE00785049 /* BurgerMapReviewImageCell.swift in Sources */,
+				7B91C2D42C7605170019C51F /* JoinScene.swift in Sources */,
+				7B8350432C7B1F0A00785049 /* SearchBurgerHouseViewModel.swift in Sources */,
+				7B8351172C806C5F00785049 /* UICollectionViewLayout.swift in Sources */,
 				7B91C2932C7345260019C51F /* EmailQuery.swift in Sources */,
-				7B91C2222C6E46630019C51F /* AccessTokenStorage.swift in Sources */,
+				7B8350702C7CCD6800785049 /* GetPostResponseDTO+Mapping.swift in Sources */,
+				7B91C2222C6E46630019C51F /* AccessStorage.swift in Sources */,
+				7B8350EE2C7F539100785049 /* GetSinglePostQuery.swift in Sources */,
+				7B8350F62C7F9AC800785049 /* BurgerMapHouseViewModel.swift in Sources */,
+				7B91C2CE2C7600630019C51F /* LoginViewController.swift in Sources */,
 				7B91C25F2C723F720019C51F /* BaseViewController.swift in Sources */,
+				7B8350C02C7E42C300785049 /* EmailValidResponseDTO+Mapping.swift in Sources */,
+				7B8350292C77673C00785049 /* BurgerMapViewController.swift in Sources */,
+				7B8350802C7CF72F00785049 /* CommentResponseDTO+Mapping.swift in Sources */,
+				7B8350272C77672400785049 /* BurgerHouseReviewViewController.swift in Sources */,
+				7BA673092C84395100D4F792 /* BookmarkRequestQuery.swift in Sources */,
+				7B8350D32C7EEE1100785049 /* LikeRouter.swift in Sources */,
+				7BA672E72C809A6200D4F792 /* Date+.swift in Sources */,
+				7B8350D92C7EF55800785049 /* RefreshAccessTokenResponseDTO+Mapping.swift in Sources */,
 				7B91C27B2C72CA2A0019C51F /* BaseViewModel.swift in Sources */,
-				7B91C2872C733E8E0019C51F /* JoinRepository.swift in Sources */,
+				7B83508F2C7D4BF000785049 /* CommentRequestDTO+Mapping.swift in Sources */,
+				7B91C2C72C75E0C40019C51F /* PretendardRoundedButton.swift in Sources */,
+				7BA672EB2C81DBB700D4F792 /* BurgerReviewImageCell.swift in Sources */,
+				7BA673372C84FB7700D4F792 /* FollowQuery.swift in Sources */,
+				7BA673972C8689A700D4F792 /* GetSingleBurgerHouse.swift in Sources */,
+				7BA6730B2C8448EA00D4F792 /* ReviewCommentTableViewCell.swift in Sources */,
+				7BA672FF2C84366D00D4F792 /* GetIsLikePost.swift in Sources */,
+				7B8350E82C7F382100785049 /* BurgerMapUseCase.swift in Sources */,
+				7BA672ED2C81E7D900D4F792 /* SectionImageType.swift in Sources */,
+				7B91C2E92C76A6E20019C51F /* UINavigationController+.swift in Sources */,
+				7B8350722C7CD86D00785049 /* GetPostQuery.swift in Sources */,
 				7B91C2352C70DB630019C51F /* LFRBHeader.swift in Sources */,
+				7B8351042C7FD89600785049 /* BurgerHouseReviewUseCase.swift in Sources */,
+				7B8350E22C7F247100785049 /* BurgerMapScene.swift in Sources */,
+				7BA673392C84FF9100D4F792 /* GetFollowStatus.swift in Sources */,
+				7B83501E2C774FFC00785049 /* KakaoLocalRequestDTO+Mapping.swift in Sources */,
+				7B8350F02C7F549E00785049 /* GetSinglePostRequestDTO.swift in Sources */,
+				7B8350572C7C757A00785049 /* UploadImageResponseDTO+Mapping.swift in Sources */,
+				7B83502F2C78E20400785049 /* EmptyPresentViewController.swift in Sources */,
 				7B91C24C2C70E7F00019C51F /* JoinResponseDTO+Mapping.swift in Sources */,
+				7B8351112C80606900785049 /* BurgerHouseReviewDetailViewController.swift in Sources */,
 				7B91C2A22C73862F0019C51F /* CapsuleButton.swift in Sources */,
-				7B91C24A2C70E7EA0019C51F /* JoinRequestDTO.swift in Sources */,
+				7BA6732F2C84A67500D4F792 /* ProfileViewModel.swift in Sources */,
+				7BA673112C845C5D00D4F792 /* BurgerHouseReviewCommentViewModel.swift in Sources */,
+				7B8350E42C7F37DB00785049 /* CustomAnnotation.swift in Sources */,
+				7B8350F82C7F9B7000785049 /* BurgerMapHouseUseCase.swift in Sources */,
+				7B91C24A2C70E7EA0019C51F /* JoinRequestDTO+Mapping.swift in Sources */,
+				7BA6731E2C84786C00D4F792 /* MoreViewController.swift in Sources */,
+				7B7BAC312C8706160045695C /* PaymentRequestDTO+Mapping.swift in Sources */,
+				7BA673262C84865D00D4F792 /* ProfileScene.swift in Sources */,
+				7B8351072C7FD91F00785049 /* BurgerHouseReviewScene.swift in Sources */,
+				7B7BAC2E2C8704270045695C /* PaymentRouter.swift in Sources */,
+				7B91C2D62C7606AF0019C51F /* LoginScene.swift in Sources */,
+				7BA673452C85168C00D4F792 /* FollowViewController.swift in Sources */,
+				7BA672FD2C8387E400D4F792 /* GetMyLikePostRequestDTO+Mapping.swift in Sources */,
+				7B8350312C78F38100785049 /* UITabBarController+.swift in Sources */,
+				7B91C2E72C763F8B0019C51F /* LoginQuery.swift in Sources */,
+				7B83507E2C7CF58900785049 /* PostResponseDTO+Mapping.swift in Sources */,
+				7B83505F2C7C7ACC00785049 /* UploadPostUseCase.swift in Sources */,
+				7B83506A2C7CC40700785049 /* LFRBProductID.swift in Sources */,
 				7B91C2462C70E5D40019C51F /* LFRBRequestDTO.swift in Sources */,
+				7BA673032C84385200D4F792 /* LikeRequestDTO+Mapping.swift in Sources */,
+				7B8350AD2C7E18EE00785049 /* LikeRepository.swift in Sources */,
+				7B8350A92C7E18B600785049 /* AuthRepository.swift in Sources */,
 				7B91C1C82C6C7CE30019C51F /* SceneDelegate.swift in Sources */,
-				7B91C21F2C6E3EAE0019C51F /* UserDefaultsAccessTokenStorage.swift in Sources */,
+				7B83504E2C7B53C100785049 /* NSObject+.swift in Sources */,
 				7B91C2582C7211470019C51F /* LFRBTargetType.swift in Sources */,
+				7B83508A2C7D48A500785049 /* CommentRepository.swift in Sources */,
+				7BA6733B2C85073F00D4F792 /* FollowListTableViewCell.swift in Sources */,
+				7B8350342C7A166C00785049 /* BurgerHouse.swift in Sources */,
+				7B91C2D02C7600DE0019C51F /* LoginViewModel.swift in Sources */,
+				7B8350B12C7E190300785049 /* ProfileRepository.swift in Sources */,
 				7B91C1FB2C6C96160019C51F /* R.swift in Sources */,
+				7B7BAC332C8706220045695C /* PaymentResponseDTO+Mapping.swift in Sources */,
+				7BA6730D2C844BE400D4F792 /* BurgerHouseReviewCommentViewController.swift in Sources */,
+				7B8350F42C7F899B00785049 /* BurgerMapHouseViewController.swift in Sources */,
+				7B8350452C7B1F1500785049 /* WriteReviewViewModel.swift in Sources */,
+				7BA673222C8479AB00D4F792 /* MoreUseCase.swift in Sources */,
+				7B83503C2C7A3C2B00785049 /* LocalSearchRepository.swift in Sources */,
+				7B8350CF2C7EEDFD00785049 /* AuthRouter.swift in Sources */,
+				7B83507C2C7CF57900785049 /* UploadPostRequstDTO+Mapping.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -777,11 +1745,15 @@
 				DEVELOPMENT_TEAM = T62JF6T7Q4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/LookForRealBurger/Resources/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -810,11 +1782,15 @@
 				DEVELOPMENT_TEAM = T62JF6T7Q4;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/LookForRealBurger/Resources/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "";
+				INFOPLIST_KEY_NSCameraUsageDescription = "";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UIUserInterfaceStyle = Light;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -857,6 +1833,30 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7B7BAC2A2C86C4C80045695C /* XCRemoteSwiftPackageReference "iamport-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/iamport/iamport-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.4.2;
+			};
+		};
+		7B8350232C77605D00785049 /* XCRemoteSwiftPackageReference "RxCoreLocation" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxCoreLocation.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.5.1;
+			};
+		};
+		7B8350372C7A2DDA00785049 /* XCRemoteSwiftPackageReference "RxGesture" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/RxSwiftCommunity/RxGesture.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.0.4;
+			};
+		};
 		7B91C2012C6CFBC10019C51F /* XCRemoteSwiftPackageReference "RxDataSources" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/RxSwiftCommunity/RxDataSources.git";
@@ -921,9 +1921,32 @@
 				minimumVersion = 4.5.0;
 			};
 		};
+		7BA673272C8491CA00D4F792 /* XCRemoteSwiftPackageReference "Tabman" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/uias/Tabman.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.2.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7B7BAC2B2C86C4C80045695C /* iamport-ios */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B7BAC2A2C86C4C80045695C /* XCRemoteSwiftPackageReference "iamport-ios" */;
+			productName = "iamport-ios";
+		};
+		7B8350242C77605D00785049 /* RxCoreLocation */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B8350232C77605D00785049 /* XCRemoteSwiftPackageReference "RxCoreLocation" */;
+			productName = RxCoreLocation;
+		};
+		7B8350382C7A2DDA00785049 /* RxGesture */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7B8350372C7A2DDA00785049 /* XCRemoteSwiftPackageReference "RxGesture" */;
+			productName = RxGesture;
+		};
 		7B91C2022C6CFBC10019C51F /* Differentiator */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 7B91C2012C6CFBC10019C51F /* XCRemoteSwiftPackageReference "RxDataSources" */;
@@ -973,6 +1996,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7B91C21A2C6CFCB20019C51F /* XCRemoteSwiftPackageReference "lottie-ios" */;
 			productName = Lottie;
+		};
+		7BA673282C8491CA00D4F792 /* Tabman */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7BA673272C8491CA00D4F792 /* XCRemoteSwiftPackageReference "Tabman" */;
+			productName = Tabman;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
