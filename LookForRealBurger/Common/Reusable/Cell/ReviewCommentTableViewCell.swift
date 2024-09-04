@@ -29,6 +29,7 @@ final class ReviewCommentTableViewCell: BaseTableViewCell {
         let label = UILabel()
         label.font = R.Font.regular14
         label.textColor = R.Color.brown
+        label.numberOfLines = 0
         return label
     }()
     
