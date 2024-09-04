@@ -27,7 +27,7 @@ private enum TabItem: CaseIterable {
         case .writeReview:
             view = EmptyPresentViewController()
         case .profile:
-            view = ProfileScene.makeView(profileType: .me)
+            view = ProfileScene.makeView(profileType: .me(UserDefaultsAccessStorage.shared.loginUserId))
         }
         
         let nav = UINavigationController()

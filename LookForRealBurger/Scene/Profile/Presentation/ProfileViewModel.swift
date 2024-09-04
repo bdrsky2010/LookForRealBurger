@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 
 enum ProfileType {
-    case me
+    case me(_ myUserId: String)
     case other(_ userId: String, _ myUserId: String)
 }
 
@@ -44,8 +44,8 @@ final class DefaultProfileViewModel: ProfileOutput {
     private let accessStorage: AccessStorage
     private let disposeBag: DisposeBag
     private let profileType: ProfileType
+    private let myUserId = UserDefaultsAccessStorage.shared.loginUserId
     
-    private var myUserId = ""
     private var myProfile: GetProfile?
     private var otherProfile: GetProfile?
     
@@ -174,7 +174,6 @@ extension DefaultProfileViewModel: ProfileInput {
                                 .followers
                                 .contains(where: { $0.userId == myUserId }) ? "팔로우 취소" : "팔로우 하기"
                         )
-                        owner.myUserId = myUserId
                         owner.otherProfile = value
                         owner.endRefreshing.accept(())
                     case .failure(let error):

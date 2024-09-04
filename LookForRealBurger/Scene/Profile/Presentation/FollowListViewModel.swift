@@ -49,7 +49,7 @@ extension DefaultFollowListViewModel: FollowListInput {
     func modelSelected(follow: GetFollow) {
         print(follow, myUserId)
         if follow.userId == myUserId {
-            pushProfileView.accept(.me)
+            pushProfileView.accept(.me(myUserId))
         } else {
             pushProfileView.accept(.other(follow.userId, myUserId))
         }

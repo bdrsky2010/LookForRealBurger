@@ -31,7 +31,7 @@ final class ProfileReviewTabViewController: TabmanViewController {
         super.viewDidLoad()
         switch profileType {
         case .me:
-            let myReview = BurgerHouseReviewScene.makeView(getPostType: .total)
+            let myReview = BurgerHouseReviewScene.makeView(getPostType: .byUser(UserDefaultsAccessStorage.shared.loginUserId))
             let myLikeReview = BurgerHouseReviewScene.makeView(getPostType: .myLike)
             let myBookmarkReview = BurgerHouseReviewScene.makeView(getPostType: .myLike2)
             viewControllers.append(myReview)
