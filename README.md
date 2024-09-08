@@ -15,7 +15,7 @@
 </p>
 <br> 
 
-# 프로젝트 소개
+# 앱 한 줄 소개
 `🍔 진짜 맛있는 햄버거를 찾기 위해 유저들과 함께 리뷰를 작성하여 지도를 채워나가는 앱`
 
 <br>
@@ -34,3 +34,92 @@
   - 2024.08.14 - 2024.09.01 (약 19일)
 - 버전
   -  iOS 15.0 +
+
+<br>
+
+# 프로젝트 기술스택
+- 활용기술
+  - UIKit, Mapkit
+  - MVVM, Input-Output, Clean Architecture
+  - CodeBasedUI
+- 라이브러리
+
+|라이브러리|사용목적|
+|-|-|
+|RxSwift|반응형 프로그래밍, 코드 가독성 향상 및 일관성 유지|
+|RxCocoa|UI와 관련된 반응형 프로그래밍, 코드 가독성 향상 및 일관성 유지|
+|RxDataSources|RxSwift 및 RxCocoa와 함께 일관성있는 컴포넌트 구성|
+|RxGesture|RxSwift 및 RxCocoa와 함께 일관성있는 Gesture 처리|
+|RxCoreLocation|RxSwift 및 RxCocoa와 함께 일관성있는 위치 데이터 관리|
+|Snapkit|CodeBasedUI를 좀 더 편하고 빠르게 구성|
+|Moya|추상화된 네트워크 통신 활용|
+|Toast|간편한 토스트 메시지UI 구성|
+|Lottie|간편하면서 적절한 애니메이션 적용|
+|Tabman|간편하고 빠르게 Paging 탭바를 구성|
+|iamport-ios|WebView 기반의 간편결제 적용|
+|IQKeyboardManagerSwift|키보드 처리 활용|
+|Kingfisher|API 이미지 처리|
+
+<br>
+
+# 앱 아키텍쳐
+<p align="center"> 
+    <img src="https://github.com/user-attachments/assets/c7f6422b-0567-4e39-b0e1-709988e41a5d" align="center" width="80%"> 
+</p>
+
+> MVVM(Input/Output) + Clean Architecture
+- Input/Output 패턴을 활용하여 양방향 데이터바인딩
+- ViewModel, UseCase, Repository 로 나눠지는 역할에 따른 로직 모듈화
+- Router 패턴을 활용하여 반복되는 네트워크 작업을 추상화
+- DIP(의존성 역전 원칙)을 준수
+  - 추상화된 Protocol을 채택하여 객체의 생성과 사용을 분리
+  - 이를 통하여 하위모듈에서 구현체가 아닌 추상화된 타입에 의존 
+
+<br>
+
+# 트러블 슈팅
+> 1. 하위 ViewController 모두 뷰 계층구조에서 사라지는 상황
+
+<p align="center"> 
+    <img src="https://github.com/user-attachments/assets/78a7ff4f-4cf3-470b-b690-8ae5a6238b23" align="center" width="80%"> 
+</p>
+
+- `TabBarController` 의 세번째 탭을 탭하게 되면 `EmptyViewContoller` 즉 빈 ViewController가 load가 되고 해당 ViewController가 로드되면 Modal이 Present 되는 상황
+- Modal이 Present 가 된 상황에서 뷰의 계층구조를 Xcode Hierarchy 확인해보니 하위 ViewController 모두 뷰의 계층구조에서 사라진 상황
+- 그리고 위 경고 message가 Console 에 출력
+- 경고 message를 부족한 영어실력으로 해석해보면
+  -  먼저 `EmptyPresentViewController` 가 뷰의 계층구조에서 분리되었다!
+  - 이 분리된 뷰컨트롤러에서 `UINavigationController` 를 Present 하는 것을 좀 아닌 것 같다.
+  - 손상된 결과물이 보여질 수 있다.
+  - 그러니 `EmptyViewController`가 보여지기 전에 뷰의 계층구조에 있는지부터 확인해라
+  - 안그러면 먼훗날 언젠가 `hard exception`이 일어나 앱이 crash 될 수 있다.
+
+<br>
+<p align="center"> 
+    <img src="https://github.com/user-attachments/assets/1e2b8ea8-d8fc-42c9-a758-3b0072720b8b" align="center" width="80%"> 
+</p>
+<br>
+
+- 위 경고 message를 해석한 후 `Modal`이 `Present` 되는 위치를 확인해보니
+- `viewWillAppear(_ animated: Bool)` 생명주기 메서드 내에 작성
+- 해당 코드를 보며 생각해봤을 때, `viewWillAppear(_ animated: Bool)` 에서 `ViewController` 를 `Present` 하게되면 뷰가 다 보여지지 않은 상태에서 `Modal`에서 보여지는 `ViewController`가 계층구조에 올라가는 것이 아닐까 라는 생각이 들며
+- 이러한 이유로 `EmptyViewController` 가 뷰의 계층구조에서 사라진 것이 아닌 뷰의 계층구조에 올라가기도 전에 분리가 되어 버린 것이라고 생각됨
+
+<br>
+<p align="center"> 
+    <img src="https://github.com/user-attachments/assets/a465474f-925e-4e9b-bc9c-38e6c2fd548b" align="center" width="80%"> 
+</p>
+<br>
+
+- 그렇다면 `ViewController` 가 다 보여진 상태에서 `Modal` 을 `Present` 하게되면 해결될 것이라는 확신이 들었으며
+- `Modal` 이 `Present` 되는 코드를 `viewDidAppear(_ animated: Bool)` 내에 작성
+- 그 후, 빌드해서 확인해보니 에러 message가 사라지고 뷰의 계층구조도 잘 올라가있는 것을 확인할 수 있었음
+
+<br>
+
+> 느낀점
+> 뷰의 생명주기 메서드를 활용할 땐, 생각을 좀 하면서 해야겠다 라고 생각했음.
+
+<br>
+
+# 회고
