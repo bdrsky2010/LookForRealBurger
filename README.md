@@ -7,9 +7,6 @@
 </div>
 <br>
 
-![Pasted image 20240828171318](https://github.com/user-attachments/assets/58fbfdd0-65cb-4540-8b43-e6fb42229c22)
-
-
 <p align="center"> 
     <img src="https://github.com/user-attachments/assets/2a4a9358-1622-426c-ac35-d886884a6848" align="center" width="19%">
     <img src="https://github.com/user-attachments/assets/e6d659bb-a25c-4a62-a6e6-776eafd2312f" align="center" width="19%"> 
