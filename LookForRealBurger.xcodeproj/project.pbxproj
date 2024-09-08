@@ -447,7 +447,6 @@
 		7B8350092C77183F00785049 /* BurgerMap */ = {
 			isa = PBXGroup;
 			children = (
-				7B8350102C77246E00785049 /* Data */,
 				7B83500F2C77246C00785049 /* Domain */,
 				7B83500E2C77246A00785049 /* Presentation */,
 			);
@@ -457,7 +456,6 @@
 		7B83500A2C77184B00785049 /* BurgerReview */ = {
 			isa = PBXGroup;
 			children = (
-				7B8350132C77247600785049 /* Data */,
 				7B8350122C77247400785049 /* Domain */,
 				7B8350112C77247200785049 /* Presentation */,
 			);
@@ -467,7 +465,6 @@
 		7B83500B2C771CF600785049 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
-				7B8350162C77248200785049 /* Data */,
 				7B8350152C77247F00785049 /* Domain */,
 				7B8350142C77247A00785049 /* Presentation */,
 			);
@@ -496,13 +493,6 @@
 			path = Domain;
 			sourceTree = "<group>";
 		};
-		7B8350102C77246E00785049 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
-			sourceTree = "<group>";
-		};
 		7B8350112C77247200785049 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
@@ -524,13 +514,6 @@
 				7B8351012C7FD86F00785049 /* UseCase */,
 			);
 			path = Domain;
-			sourceTree = "<group>";
-		};
-		7B8350132C77247600785049 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		7B8350142C77247A00785049 /* Presentation */ = {
@@ -557,13 +540,6 @@
 				7BA673182C8477F900D4F792 /* UseCase */,
 			);
 			path = Domain;
-			sourceTree = "<group>";
-		};
-		7B8350162C77248200785049 /* Data */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Data;
 			sourceTree = "<group>";
 		};
 		7B8350172C77249500785049 /* WriteReview */ = {
