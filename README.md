@@ -65,7 +65,7 @@
 
 # 앱 아키텍쳐
 <p align="center"> 
-    <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/80156515/365423772-c7f6422b-0567-4e39-b0e1-709988e41a5d.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240908%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240908T233024Z&X-Amz-Expires=300&X-Amz-Signature=be868e3f46f394705d41d76c9665d308f06d354aac82a3f7b345fc20a10375b7&X-Amz-SignedHeaders=host&actor_id=80156515&key_id=0&repo_id=809332124" align="center" width="80%"> 
+    <img src="./images/error.png" align="center" width="80%"> 
 </p>
 
 > MVVM(Input/Output) + Clean Architecture
