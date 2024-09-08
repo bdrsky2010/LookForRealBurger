@@ -78,7 +78,7 @@
 <br>
 
 # 트러블 슈팅
-> 1. 하위 ViewController 모두 뷰 계층구조에서 사라지는 상황
+### 1. 하위 ViewController 모두 뷰 계층구조에서 사라지는 상황
 
 <p align="center"> 
     <img src="https://github.com/user-attachments/assets/78a7ff4f-4cf3-470b-b690-8ae5a6238b23" align="center" width="80%"> 
@@ -119,6 +119,47 @@
 
 > 느낀점
 > 뷰의 생명주기 메서드를 활용할 땐, 생각을 좀 하면서 해야겠다 라고 생각했음.
+
+<br>
+
+### 2. Pull To Refresh 기능에 대한 고민...?
+
+<br>
+<p align="center"> 
+     <img src="https://github.com/user-attachments/assets/d188e995-13b9-4bb0-bbda-230b996b8b6c" align="center" width="34%">
+</p>
+<br>
+
+- 전체 리뷰 게시글을 확인하는 화면에서 `Pull To Refresh` 기능을 구성해놓은 상황
+- 이 기능을 내가 사용자의 입장에서 계속해서 사용해본 경험으로는 게시글이 `Refresh` 가 되고 있는 지 아닌 지 구분이 되지 않을 정도로 너무 빠르게 사라짐
+- 이 부분이 내 입장에서는 어색함과 답답함이 느껴졌음
+
+<br>
+<p align="center"> 
+    <img src="https://github.com/user-attachments/assets/d6ca1e3b-37e3-44a4-8e2d-b9420d83baa2" align="center" width="80%"> 
+</p>
+<br>
+
+- 물론 코드를 내가 그렇게 작동하도록 구현을 해놨음
+- 즉, 데이터에 대한 패치를 요청하고 바로 Refreshing을 끝내버렸음
+- 그래서 API 통신이 완료되면 end Refreshing 되도록 로직을 수정해봐도 데이터 패치 속도가 빨라 애니메이션이 끝나는 시점이 거의 유사했음
+
+<br>
+<p align="center"> 
+    <img src="https://github.com/user-attachments/assets/708a59de-5a47-488e-9d4d-54e240039fd1" align="center" width="80%"> 
+</p>
+<br>
+
+- 결국에는 `refreshing` 을 끝내라는 `Output Action` 이 일어나게 되면 `2초 Delay` 를 주고 `End Refreshing` 되도록 변경
+- 물론 이건 너무 억지라고 할 수도 있지만 어쨌든 개발자도 사용자의 입장에서 생각을 해봐야 한다고 생각해봤을 때 이게 더 나은 선택이라고 느껴졌음.
+
+<br>
+<p align="center">  
+    <img src="https://github.com/user-attachments/assets/04b90e6d-211a-49f6-aae4-03749048a7b7" align="center" width="34%">
+</p>
+<br>
+
+- 실 기기에 빌드해 본 결과 어색함과 답답함은 해소가 되었음.
 
 <br>
 
