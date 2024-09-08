@@ -65,7 +65,7 @@
 
 # 앱 아키텍쳐
 <p align="center"> 
-    <img src="https://github.com/user-attachments/assets/c7f6422b-0567-4e39-b0e1-709988e41a5d" align="center" width="80%"> 
+    <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/80156515/365423772-c7f6422b-0567-4e39-b0e1-709988e41a5d.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240908%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240908T233024Z&X-Amz-Expires=300&X-Amz-Signature=be868e3f46f394705d41d76c9665d308f06d354aac82a3f7b345fc20a10375b7&X-Amz-SignedHeaders=host&actor_id=80156515&key_id=0&repo_id=809332124" align="center" width="80%"> 
 </p>
 
 > MVVM(Input/Output) + Clean Architecture
@@ -82,7 +82,7 @@
 ### 1. 하위 ViewController 모두 뷰 계층구조에서 사라지는 상황
 
 <p align="center"> 
-    <img src="https://github.com/user-attachments/assets/78a7ff4f-4cf3-470b-b690-8ae5a6238b23" align="center" width="80%"> 
+    <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/80156515/365425923-78a7ff4f-4cf3-470b-b690-8ae5a6238b23.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240908%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240908T233039Z&X-Amz-Expires=300&X-Amz-Signature=4fd8e9eaaf49bd3c5dd92b1d2fa7a7ff856d1449d84f51f8ca174d13aa3ebd48&X-Amz-SignedHeaders=host&actor_id=80156515&key_id=0&repo_id=809332124" align="center" width="80%"> 
 </p>
 
 - `TabBarController` 의 세번째 탭을 탭하게 되면 `EmptyViewContoller` 즉 빈 ViewController가 load가 되고 해당 ViewController가 로드되면 Modal이 Present 되는 상황
@@ -97,7 +97,7 @@
 
 <br>
 <p align="center"> 
-    <img src="https://github.com/user-attachments/assets/1e2b8ea8-d8fc-42c9-a758-3b0072720b8b" align="center" width="80%"> 
+    <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/80156515/365425926-a465474f-925e-4e9b-bc9c-38e6c2fd548b.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240908%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240908T233102Z&X-Amz-Expires=300&X-Amz-Signature=96e583fbdc2f5607883a95c337d74d5e48ab981ca49fc3f6efdb2b5ba7dba52f&X-Amz-SignedHeaders=host&actor_id=80156515&key_id=0&repo_id=809332124" align="center" width="80%"> 
 </p>
 <br>
 
@@ -108,7 +108,7 @@
 
 <br>
 <p align="center"> 
-    <img src="https://github.com/user-attachments/assets/a465474f-925e-4e9b-bc9c-38e6c2fd548b" align="center" width="80%"> 
+    <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/80156515/365449454-29c61585-47fc-420b-918c-14037683f628.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240908%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240908T233113Z&X-Amz-Expires=300&X-Amz-Signature=16e8a5811c5483915c1ab1f99ec299193d4f997257992683d89d9539ffa978cd&X-Amz-SignedHeaders=host&actor_id=80156515&key_id=0&repo_id=809332124" align="center" width="80%"> 
 </p>
 <br>
 
@@ -127,7 +127,7 @@
 
 <br>
 <p align="center"> 
-     <img src="https://github.com/user-attachments/assets/29c61585-47fc-420b-918c-14037683f628" align="center" width="34%">
+     <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/80156515/365429152-d6ca1e3b-37e3-44a4-8e2d-b9420d83baa2.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240908%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240908T233126Z&X-Amz-Expires=300&X-Amz-Signature=35d857cd25ace023140ff0e8d6a72703b90d376e4a2d889251ca43623bceb5c9&X-Amz-SignedHeaders=host&actor_id=80156515&key_id=0&repo_id=809332124" align="center" width="34%">
 </p>
 <br>
 
@@ -137,7 +137,7 @@
 
 <br>
 <p align="center"> 
-    <img src="https://github.com/user-attachments/assets/d6ca1e3b-37e3-44a4-8e2d-b9420d83baa2" align="center" width="80%"> 
+    <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/80156515/365429153-708a59de-5a47-488e-9d4d-54e240039fd1.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240908%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240908T233135Z&X-Amz-Expires=300&X-Amz-Signature=76cf922f676073b42929e699a579842779b4b8adf21b9b9d1fd52765970a51f4&X-Amz-SignedHeaders=host&actor_id=80156515&key_id=0&repo_id=809332124" align="center" width="80%"> 
 </p>
 <br>
 
@@ -147,7 +147,7 @@
 
 <br>
 <p align="center"> 
-    <img src="https://github.com/user-attachments/assets/708a59de-5a47-488e-9d4d-54e240039fd1" align="center" width="80%"> 
+    <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/80156515/365449404-86fdce47-176b-4b4c-99a6-92ce8bb89772.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240908%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240908T233147Z&X-Amz-Expires=300&X-Amz-Signature=305bf3d53b7dde4639b4d6bc6b3bd572109159414dc1bdd2883fa5dc7b44933a&X-Amz-SignedHeaders=host&actor_id=80156515&key_id=0&repo_id=809332124" align="center" width="80%"> 
 </p>
 <br>
 
@@ -156,7 +156,7 @@
 
 <br>
 <p align="center">  
-    <img src="https://github.com/user-attachments/assets/86fdce47-176b-4b4c-99a6-92ce8bb89772" align="center" width="34%">
+    <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/80156515/365449404-86fdce47-176b-4b4c-99a6-92ce8bb89772.gif?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAVCODYLSA53PQK4ZA%2F20240908%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20240908T233214Z&X-Amz-Expires=300&X-Amz-Signature=287d35ab04833bfe7a17f99eca7193dddb8256eecdda4e835e195833313eac5c&X-Amz-SignedHeaders=host&actor_id=80156515&key_id=0&repo_id=809332124" align="center" width="34%">
 </p>
 <br>
 
