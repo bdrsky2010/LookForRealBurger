@@ -277,7 +277,7 @@ extension ProfileViewController {
         
         viewModel.setProfile
             .bind(with: self) { owner, profile in
-                owner.navigationItem.title = "\(profile.nick)님의 프로필"
+                owner.navigationItem.title = R.Phrase.getProfileComment(nick: profile.nick)
                 owner.reviewCountLabel.text = profile.posts.count.formatted()
                 owner.followerCountLabel.text = profile.followers.count.formatted()
                 owner.followingCountLabel.text = profile.following.count.formatted()

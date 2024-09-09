@@ -17,12 +17,12 @@ import Toast
 final class WriteReviewViewController: BaseViewController {
     private let mainScrollView = UIScrollView()
     private let contentView = UIView()
-    private let saveButton = CapsuleButton(title: "저장", backgroudColor: R.Color.red)
+    private let saveButton = CapsuleButton(title: R.Phrase.save, backgroudColor: R.Color.red)
     
     private let burgerHouseSearchBar = BorderRoundedSearchBar(
         borderWidth: 1,
         borderColor: R.Color.brown,
-        placeholder: "탭하면 햄버거집 검색할 수 있어요"
+        placeholder: R.Phrase.tappedBurgerHouseComment
     )
     
     private let searchBarCover: UIView = {
@@ -34,7 +34,7 @@ final class WriteReviewViewController: BaseViewController {
     private let titleTextField = BorderRoundedSearchBar(
         borderWidth: 1,
         borderColor: R.Color.green,
-        placeholder: "제목"
+        placeholder: R.Phrase.title
     )
     
     private lazy var contentTextView: UITextView = {
@@ -60,7 +60,7 @@ final class WriteReviewViewController: BaseViewController {
     private let ratingStackView = UIStackView()
     private lazy var ratingViewList = [UIImageView(), UIImageView(), UIImageView(), UIImageView(), UIImageView()]
     
-    private let placeholder = "리뷰를 작성해주세요."
+    private let placeholder = R.Phrase.plzWriteReview
     
     private var viewModel: WriteReviewViewModel!
     private var disposeBag: DisposeBag!
@@ -92,7 +92,7 @@ final class WriteReviewViewController: BaseViewController {
             action: nil
         )
         navigationItem.leftBarButtonItem = leftBarButtonItem
-        navigationItem.title = "리뷰작성"
+        navigationItem.title = R.Phrase.writeReview
     }
     
     override func configureHierarchy() {
@@ -400,17 +400,17 @@ extension WriteReviewViewController {
         viewModel.presentAddPhotoAction
             .bind(with: self) { owner, _ in
                 let alert = UIAlertController(
-                    title: "사진 추가",
+                    title: R.Phrase.addImage,
                     message: nil,
                     preferredStyle: .actionSheet
                 )
-                let camera = UIAlertAction(title: "촬영", style: .default) { _ in
+                let camera = UIAlertAction(title: R.Phrase.camera, style: .default) { _ in
                     owner.viewModel.cameraSelect()
                 }
-                let gallery = UIAlertAction(title: "앨범", style: .default) { _ in
+                let gallery = UIAlertAction(title: R.Phrase.gallery, style: .default) { _ in
                     owner.viewModel.gallerySelect()
                 }
-                let cancel = UIAlertAction(title: "취소", style: .cancel)
+                let cancel = UIAlertAction(title: R.Phrase.cancel, style: .cancel)
                 alert.addAction(camera)
                 alert.addAction(gallery)
                 alert.addAction(cancel)
@@ -459,15 +459,15 @@ extension WriteReviewViewController {
         viewModel.saveConfirm
             .bind(with: self) { owner, _ in
                 let alert = UIAlertController(
-                    title: "저장하시겠습니까?",
+                    title: R.Phrase.saveComment,
                     message: nil,
                     preferredStyle: .alert
                 )
-                let save = UIAlertAction(title: "저장", style: .default) { _ in
+                let save = UIAlertAction(title: R.Phrase.save, style: .default) { _ in
                     let imageData = owner.imageViewList.suffix(5).compactMap { $0.image?.jpegData(compressionQuality: 0.4) }
                     owner.viewModel.uploadImage(files: imageData)
                 }
-                let cancel = UIAlertAction(title: "취소", style: .cancel)
+                let cancel = UIAlertAction(title: R.Phrase.cancel, style: .cancel)
                 alert.addAction(save)
                 alert.addAction(cancel)
                 owner.present(alert, animated: true)

@@ -179,7 +179,6 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
                         result.burgerHousePostId = value.burgerHousePostId
                         owner.selectItem.accept(result)
                     } else {
-                        print("식당 데이터 없음 저장해야 함")
                         owner.uploadBurgerHouse(burgerHouse: item)
                     }
                 case .failure(let error):
@@ -226,7 +225,6 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
             .drive(with: self) { owner, result in
                 switch result {
                 case .success(let value):
-                    print("\(value.name) 서버 저장 완료")
                     var result = burgerHouse
                     result.burgerHousePostId = value.burgerHousePostId
                     owner.selectItem.accept(result)

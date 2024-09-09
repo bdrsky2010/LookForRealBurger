@@ -113,11 +113,11 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
     
     func uploadImage(files: [Data]) {
         guard !files.isEmpty else {
-            toastMessage.accept("1장 이상의 사진이 필요합니다")
+            toastMessage.accept(R.Phrase.plzImageUpload)
             return
         }
         guard files.reduce(0, { $0 + $1.count }) < 5000000 else {
-            toastMessage.accept("사진 용량 제한: 5MB 제한")
+            toastMessage.accept(R.Phrase.limitImageSize)
             return
         }
         
@@ -126,7 +126,6 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
             .drive(with: self) { owner, result in
                 switch result {
                 case .success(let value):
-                    print("이미지 업로드 성공")
                     owner.uploadImageSuccess(uploadedImage: value)
                 case .failure(let error):
                     switch error {
@@ -164,7 +163,7 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
             rating = rating < 5 ? (rating + 1) : rating
             burgerHouseRating.onNext(rating)
         } catch {
-            toastMessage.accept("왜 여기서 에러가...?")
+            toastMessage.accept(R.Phrase.whyErrorHere)
         }
     }
     
@@ -174,7 +173,7 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
             rating = rating > 1 ? (rating - 1) : rating
             burgerHouseRating.onNext(rating)
         } catch {
-            toastMessage.accept("왜 여기서 에러가...?")
+            toastMessage.accept(R.Phrase.whyErrorHere)
         }
     }
     
@@ -184,7 +183,7 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
     
     func uploadPost(title: String, content: String, files: UploadedImage) {
         guard let burgerHouseId = burgerHouse?.burgerHousePostId else {
-            toastMessage.accept("햄버거집을 선택해주세요.")
+            toastMessage.accept(R.Phrase.plzSelectBurgerHouse)
             return
         }
         do {
@@ -201,7 +200,6 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
                 .drive(with: self) { owner, result in
                     switch result {
                     case .success(let value):
-                        print("리뷰 남기기 성공")
                         owner.registerReviewId(
                             burgerHousePostId: value.burgerHousePostId,
                             reviewId: value.id
@@ -235,12 +233,12 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
                 }
                 .disposed(by: disposeBag)
         } catch {
-            toastMessage.accept("왜 여기서 에러가...?")
+            toastMessage.accept(R.Phrase.whyErrorHere)
         }
     }
     
     func missingField() {
-        toastMessage.accept("리뷰 항목을 모두 작성해주세요.")
+        toastMessage.accept(R.Phrase.missingReviewField)
     }
     
     func registerReviewId(burgerHousePostId: String, reviewId: String) {
@@ -254,8 +252,6 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
         .drive(with: self) { owner, result in
             switch result {
             case .success(let value):
-                print("햄버거 식당에 리뷰 id 등록 성공적")
-                dump(value)
                 owner.didSuccessUploadReview.accept(())
             case .failure(let error):
                 switch error {

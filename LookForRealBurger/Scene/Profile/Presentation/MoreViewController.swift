@@ -15,9 +15,9 @@ import SnapKit
 import Toast
 
 final class MoreViewController: BaseViewController {
-    private let logoutButton = CapsuleButton(title: "로그아웃", font: R.Font.chab20, backgroudColor: R.Color.red)
-    private let withdrawButton = CapsuleButton(title: "회원탈퇴", font: R.Font.chab20, backgroudColor: R.Color.green)
-    private let supportButton = CapsuleButton(title: "후원하기", font: R.Font.chab20, backgroudColor: R.Color.orange)
+    private let logoutButton = CapsuleButton(title: R.Phrase.logout, font: R.Font.chab20, backgroudColor: R.Color.red)
+    private let withdrawButton = CapsuleButton(title: R.Phrase.withdraw, font: R.Font.chab20, backgroudColor: R.Color.green)
+    private let supportButton = CapsuleButton(title: R.Phrase.support, font: R.Font.chab20, backgroudColor: R.Color.orange)
     private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -74,14 +74,14 @@ extension MoreViewController {
         
         logoutButton.rx.tap
             .bind(with: self) { owner, _ in
-                let alert = UIAlertController(title: "로그아웃 하시겠습니까?", message: "", preferredStyle: .alert)
-                let check = UIAlertAction(title: "확인", style: .default) { _ in
+                let alert = UIAlertController(title: R.Phrase.logoutComment, message: "", preferredStyle: .alert)
+                let check = UIAlertAction(title: R.Phrase.check, style: .default) { _ in
                     let view = LoginScene.makeView()
                     let nav = UINavigationController()
                     nav.pushViewController(view, animated: false)
                     owner.changeRootViewController(nav)
                 }
-                let cancel = UIAlertAction(title: "취소", style: .cancel)
+                let cancel = UIAlertAction(title: R.Phrase.cancel, style: .cancel)
                 alert.addAction(check)
                 alert.addAction(cancel)
                 owner.present(alert, animated: true)
@@ -132,14 +132,14 @@ extension MoreViewController {
                         ) { result in
                             switch result {
                             case .success(_):
-                                owner.view.makeToast("결제를 성공하였습니다.")
+                                owner.view.makeToast(R.Phrase.successfulPayment)
                             case .failure(let failure):
                                 print(failure)
                                 owner.view.makeToast(R.Phrase.errorOccurred)
                             }
                         }
                     } else if let error_msg = response?.error_msg {
-                        owner.view.makeToast("결제에 실패하였습니다.")
+                        owner.view.makeToast(R.Phrase.failedPayment)
                     }
                 }
             }

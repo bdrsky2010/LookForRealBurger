@@ -77,11 +77,11 @@ extension ProfileReviewTabViewController: PageboyViewControllerDataSource, TMBar
         case .me:
             switch index {
             case 0:
-                return TMBarItem(title: "리뷰")
+                return TMBarItem(title: R.Phrase.review)
             case 1:
-                return TMBarItem(title: "좋아요")
+                return TMBarItem(title: R.Phrase.like)
             case 2:
-                return TMBarItem(title: "북마크")
+                return TMBarItem(title: R.Phrase.bookmark)
             default:
                 let title = "Page \(index)"
                 return TMBarItem(title: title)
@@ -89,7 +89,7 @@ extension ProfileReviewTabViewController: PageboyViewControllerDataSource, TMBar
         case .other:
             switch index {
             case 0:
-                return TMBarItem(title: "리뷰")
+                return TMBarItem(title: R.Phrase.review)
             default:
                 let title = "Page \(index)"
                 return TMBarItem(title: title)

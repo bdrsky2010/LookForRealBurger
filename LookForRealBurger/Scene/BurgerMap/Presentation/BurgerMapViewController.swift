@@ -117,7 +117,7 @@ extension BurgerMapViewController {
         viewModel.requestAuthAlert
             .asDriver(onErrorJustReturn: "")
             .drive(with: self) { owner, message in
-                let title = "위치 권한 설정"
+                let title = R.Phrase.setLocationAccess
                 let message = message
                 let alert = UIAlertController(title: title,
                                               message: message,
@@ -132,8 +132,8 @@ extension BurgerMapViewController {
                 }
                 
                 // 2. alert button 구성
-                let move = UIAlertAction(title: "이동", style: .default, handler: moveSetting)
-                let cancel = UIAlertAction(title: "취소", style: .cancel)
+                let move = UIAlertAction(title: R.Phrase.move, style: .default, handler: moveSetting)
+                let cancel = UIAlertAction(title: R.Phrase.cancel, style: .cancel)
                 
                 // 3. alert에 button 추가
                 alert.addAction(move)

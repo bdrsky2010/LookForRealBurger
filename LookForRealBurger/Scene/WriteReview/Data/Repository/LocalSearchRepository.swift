@@ -55,40 +55,40 @@ final class KakaoLocalSearchRepository: LocalSearchRepository {
                             let result = value.toDomain(query: query.query, nextPage: query.page + 1)
                             completion(.success(result))
                         } else {
-                            completion(.failure(.noData(message: "검색 결과가 없습니다")))
+                            completion(.failure(.noData(message: R.Phrase.noSearchResult)))
                         }
                     case .failure(let error):
                         switch response.response?.statusCode {
                         case 400:
                             print("error status code 400, \(error.localizedDescription)")
-                            completion(.failure(.badRequest(message: "잘못된 검색어입니다")))
+                            completion(.failure(.badRequest(message: R.Phrase.wrongSearchText)))
                         case 401:
                             print("error status code 401, \(error.localizedDescription)")
-                            completion(.failure(.unauthorized(message: "에러가 발생했습니다")))
+                            completion(.failure(.unauthorized(message: R.Phrase.errorOccurred)))
                         case 403:
                             print("error status code 403, \(error.localizedDescription)")
-                            completion(.failure(.forbidden(message: "에러가 발생했습니다")))
+                            completion(.failure(.forbidden(message: R.Phrase.errorOccurred)))
                         case 429:
                             print("error status code 429, \(error.localizedDescription)")
-                            completion(.failure(.tooManyRequest(message: "에러가 발생했습니다")))
+                            completion(.failure(.tooManyRequest(message: R.Phrase.errorOccurred)))
                         case 500:
                             print("error status code 500, \(error.localizedDescription)")
-                            completion(.failure(.internalServerError(message: "에러가 발생했습니다")))
+                            completion(.failure(.internalServerError(message: R.Phrase.errorOccurred)))
                         case 502:
                             print("error status code 502, \(error.localizedDescription)")
-                            completion(.failure(.badGateway(message: "인터넷 연결이 불안정합니다")))
+                            completion(.failure(.badGateway(message: R.Phrase.unstableConnection)))
                         case 503:
                             print("error status code 503, \(error.localizedDescription)")
-                            completion(.failure(.serviceUnavilable(message: "검색 서비스 점검 상태")))
+                            completion(.failure(.serviceUnavilable(message: R.Phrase.checkSearchService)))
                         default:
                             print("unknown error, \(error.localizedDescription)")
-                            completion(.failure(.unknown(message: "에러가 발생했습니다")))
+                            completion(.failure(.unknown(message: R.Phrase.errorOccurred)))
                         }
                     }
                 }
         } catch {
             print("invalid url error, \(error.localizedDescription)")
-            completion(.failure(.invalidURL(message: "에러가 발생했습니다")))
+            completion(.failure(.invalidURL(message: R.Phrase.errorOccurred)))
         }
     }
 }

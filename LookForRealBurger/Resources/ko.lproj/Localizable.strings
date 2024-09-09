@@ -17,4 +17,81 @@
 "notFoundPost" = "게시글이 존재하지 않습니다.";
 "notFoundUser" = "존재하지 않는 유저입니다.";
 
+"missingFieldError" = "입력칸을 채워주세요";
+"existBlankNick" = "공백이 포함된 닉네임은\n사용할 수 없습니다";
+"alreadyAccount" = "이미 가입된 계정입니다";
+"accountVerifyError" = "계정을 다시 확인해주세요";
+
+"notCorrectFileType" = "이미지 파일에 대한 형식이 맞지 않습니다.";
+"serverErrorOccurred" = "DB서버 장애로 인하여 에러가 발생하였습니다.\n잠시후에 다시 시도 부탁드립니다.";
+
+"missingReviewField" = "리뷰 항목을 모두 작성해주세요.";
+"whyErrorHere" = "왜 여기서 에러가...?";
+"plzSelectBurgerHouse" = "햄버거집을 선택해주세요.";
+"plzImageUpload" = "1장 이상의 사진이 필요합니다";
+"limitImageSize" = "사진 용량 제한: 5MB 제한";
+
 "congratulation" = "%@ 님, 회원가입을\n진심으로 축하드립니다";
+
+"followRequest" = "팔로우 하기";
+"followCancel" = "팔로우 취소";
+"modifyNick" = "닉네임 수정";
+
+"logout" = "로그아웃";
+"withdraw" = "회원탈퇴";
+"support" = "후원하기";
+"successfulPayment" = "결제를 성공하였습니다.";
+"failedPayment" = "결제에 실패하였습니다.";
+
+"logoutComment" = "로그아웃 하시겠습니까?";
+"check" = "취소";
+"cancel" = "확인";
+"follower" = "팔로워";
+"following" = "팔로잉";
+"review" = "리뷰";
+"like" = "좋아요";
+"bookmark" = "북마크";
+"profileComment" = "%@ 님의 프로필";
+
+"setLocationAccess" = "위치 권한 설정";
+"move" = "이동";
+
+"saveComment" = "저장하시겠습니까?";
+"save" = "저장";
+
+"addImage" = "사진 추가";
+"camera" = "촬영";
+"gallery" = "앨범";
+
+"tappedBurgerHouseComment" = "탭하면 햄버거집 검색할 수 있어요.";
+"title" = "제목";
+"plzWriteReview" = "리뷰를 작성해주세요.";
+"writeReview" = "리뷰작성";
+
+"noSearchResult" = "검색 결과가 없습니다";
+"wrongSearchText" = "잘못된 검색어입니다";
+"unstableConnection" = "인터넷 연결이 불안정합니다";
+"checkSearchService" = "검색 서비스 점검 상태";
+
+"failedGetBurgerHouse" = "식당 정보를 가져오지 못하였습니다.";
+
+"comment" = "댓글";
+"send" = "전송";
+"addComment" = "댓글 추가";
+
+"moveTo" = "으로 이동";
+
+"burgerReview" = "버거리뷰";
+
+"burgerMap" = "버거맵";
+"profile" = "프로필";
+
+"goToLogin" = "로그인 하러가기";
+
+"joinCheck" = "가입확인";
+"joinCheckComment" = "가입을 하시겠습니까?";
+"join" = "가입";
+"joinTitle" = "회원가입";
+"emailValidTitle" = "이메일 중복검사";
+
+"login" = "로그인";

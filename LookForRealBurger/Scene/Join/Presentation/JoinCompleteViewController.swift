@@ -31,7 +31,7 @@ final class JoinCompleteViewController: BaseViewController {
     }()
     
     private let goToLoginButton = PretendardRoundedButton(
-        title: "로그인 하러가기", backgroudColor: R.Color.red
+        title: R.Phrase.goToLogin, backgroudColor: R.Color.red
     )
     
     private var user: JoinUser!

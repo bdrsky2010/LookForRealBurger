@@ -60,7 +60,7 @@ final class BurgerHouseReviewViewController: BaseViewController {
     }
     
     override func configureNavigation() {
-        navigationItem.title = "버거리뷰"
+        navigationItem.title = R.Phrase.burgerReview
     }
     
     override func configureHierarchy() {

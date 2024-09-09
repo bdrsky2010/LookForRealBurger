@@ -55,10 +55,10 @@ private enum TabItem: CaseIterable {
     
     var title: String {
         switch self {
-        case .map:         "버거맵"
-        case .review:      "리뷰"
-        case .writeReview: "리뷰추가"
-        case .profile:     "프로필"
+        case .map:         R.Phrase.burgerMap
+        case .review:      R.Phrase.review
+        case .writeReview: R.Phrase.writeReview
+        case .profile:     R.Phrase.profile
         }
     }
 }

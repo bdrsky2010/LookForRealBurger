@@ -15,7 +15,7 @@ import Toast
 final class BurgerHouseReviewCommentViewController: BaseViewController {
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "댓글"
+        label.text = R.Phrase.comment
         label.font = R.Font.chab20
         label.textColor = R.Color.brown
         label.textAlignment = .center
@@ -32,10 +32,10 @@ final class BurgerHouseReviewCommentViewController: BaseViewController {
         textView.font = R.Font.regular14
         return textView
     }()
-    private let sendButton = CapsuleButton(title: "전송", font: R.Font.bold14, backgroudColor: R.Color.green)
+    private let sendButton = CapsuleButton(title: R.Phrase.send, font: R.Font.bold14, backgroudColor: R.Color.green)
     private let textViewCoverLable = UILabel()
     
-    private let placeholder = "댓글 추가"
+    private let placeholder = R.Phrase.addComment
     
     private var viewModel: BurgerHouseReviewCommentViewModel!
     private var disposeBag: DisposeBag!
@@ -67,7 +67,7 @@ final class BurgerHouseReviewCommentViewController: BaseViewController {
     }
     
     override func configureNavigation() {
-        navigationItem.title = "댓글"
+        navigationItem.title = R.Phrase.comment
     }
     
     override func configureHierarchy() {

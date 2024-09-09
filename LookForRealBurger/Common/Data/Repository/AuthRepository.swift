@@ -182,29 +182,29 @@ extension DefualtAuthRepository {
         case .unknown(let statusCode):
             switch statusCode {
             case 400:
-                authError = .missingFields("입력칸을 채워주세요")
+                authError = .missingFields(R.Phrase.missingFieldError)
             case 401:
                 if type == .accessTokenRefresh {
                     authError = .invalidToken(R.Phrase.errorOccurred)
                 } else { // 로그인
-                    authError = .accountVerify("계정을 다시 확인해주세요")
+                    authError = .accountVerify(R.Phrase.accountVerifyError)
                 }
             case 402:
-                authError = .existBlank("공백이 포함된 닉네임은\n사용할 수 없습니다")
+                authError = .existBlank(R.Phrase.existBlankNick)
             case 403:
                 authError = .forbidden(R.Phrase.errorOccurred)
             case 409:
                 if type == .join {
-                    authError = .existUser("이미 가입된 계정입니다")
+                    authError = .existUser(R.Phrase.alreadyAccount)
                 } else {
-                    authError = .enable("이미 가입된 계정입니다")
+                    authError = .enable(R.Phrase.alreadyAccount)
                 }
             case 418:
                 authError = .expiredRefreshToken
             case 419:
                 authError = .expiredAccessToken
             default:
-                authError = .unknown("알 수 없는 에러 발생")
+                authError = .unknown(R.Phrase.errorOccurred)
             }
         }
         print("AuthRepository \(type.rawValue) 에러 -> \(authError)")

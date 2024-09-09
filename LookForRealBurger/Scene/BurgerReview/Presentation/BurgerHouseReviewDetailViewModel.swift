@@ -226,23 +226,23 @@ extension DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailInput 
             case .failure(let error):
                 switch error {
                 case .network(_):
-                    owner.toastMessage.accept("식당 정보를 가져오지 못하였습니다.")
+                    owner.toastMessage.accept(R.Phrase.failedGetBurgerHouse)
                 case .badRequest(_):
-                    owner.toastMessage.accept("식당 정보를 가져오지 못하였습니다.")
+                    owner.toastMessage.accept(R.Phrase.failedGetBurgerHouse)
                 case .invalidToken(_):
-                    owner.toastMessage.accept("식당 정보를 가져오지 못하였습니다.")
+                    owner.toastMessage.accept(R.Phrase.failedGetBurgerHouse)
                 case .forbidden(_):
-                    owner.toastMessage.accept("식당 정보를 가져오지 못하였습니다.")
+                    owner.toastMessage.accept(R.Phrase.failedGetBurgerHouse)
                 case .expiredToken:
                     owner.refreshAccessToken {
                         owner.getBurgerHouse()
                     }
                 case .unknown(_):
-                    owner.toastMessage.accept("식당 정보를 가져오지 못하였습니다.")
+                    owner.toastMessage.accept(R.Phrase.failedGetBurgerHouse)
                 case .invalidValue(_):
-                    owner.toastMessage.accept("식당 정보를 가져오지 못하였습니다.")
+                    owner.toastMessage.accept(R.Phrase.failedGetBurgerHouse)
                 case .dbServer(_):
-                    owner.toastMessage.accept("식당 정보를 가져오지 못하였습니다.")
+                    owner.toastMessage.accept(R.Phrase.failedGetBurgerHouse)
                 }
             }
         } onCompleted: { _ in

@@ -42,7 +42,7 @@ final class JoinViewController: BaseViewController {
         borderWidth: 4, borderColor: R.Color.green, placeholder: R.Phrase.emailPlaceholder
     )
     private let emailValidButton = CapsuleButton(
-        title: "이메일 중복 검사", backgroudColor: R.Color.red
+        title: R.Phrase.emailValidTitle, backgroudColor: R.Color.red
     )
     private let passwordSearchBar = BorderRoundedSearchBar(
         borderWidth: 4, borderColor: R.Color.yellow, placeholder: R.Phrase.passwordPlaceholder
@@ -51,7 +51,7 @@ final class JoinViewController: BaseViewController {
         borderWidth: 4, borderColor: R.Color.brown, placeholder: R.Phrase.nickPlaceholder
     )
     private let joinButton = CapsuleButton(
-        title: "회원가입", backgroudColor: R.Color.green
+        title: R.Phrase.joinTitle, backgroudColor: R.Color.green
     )
     
     private let bunDownImageView: UIImageView = {
@@ -149,7 +149,7 @@ final class JoinViewController: BaseViewController {
     }
     
     override func configureUI() {
-        navigationItem.title = "회원가입"
+        navigationItem.title = R.Phrase.joinTitle
         setupBackButton()
         emailSearchBar.keyboardType = .emailAddress
         passwordSearchBar.isSecureTextEntry = true
@@ -215,14 +215,14 @@ extension JoinViewController {
             .map { JoinQuery(email: $0.0, password: $0.1, nick: $0.2) }
             .bind(with: self) { owner, query in
                 let alert = UIAlertController(
-                    title: "가입확인",
-                    message: "가입을 하시겠습니까?",
+                    title: R.Phrase.joinCheck,
+                    message: R.Phrase.joinCheckComment,
                     preferredStyle: .alert
                 )
-                let join = UIAlertAction(title: "가입", style: .default) { _ in
+                let join = UIAlertAction(title: R.Phrase.join, style: .default) { _ in
                     owner.viewModel.didTapJoin(query: query)
                 }
-                let cancel = UIAlertAction(title: "취소", style: .cancel)
+                let cancel = UIAlertAction(title: R.Phrase.cancel, style: .cancel)
                 alert.addAction(join)
                 alert.addAction(cancel)
                 owner.present(alert, animated: true)

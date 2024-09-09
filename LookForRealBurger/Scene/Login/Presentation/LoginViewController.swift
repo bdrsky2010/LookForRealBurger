@@ -47,11 +47,11 @@ final class LoginViewController: BaseViewController {
     )
     
     private let loginButton = CapsuleButton(
-        title: "로그인", backgroudColor: R.Color.green
+        title: R.Phrase.login, backgroudColor: R.Color.green
     )
     
     private let joinButton = CapsuleButton(
-        title: "회원가입", backgroudColor: R.Color.brown
+        title: R.Phrase.joinTitle, backgroudColor: R.Color.brown
     )
     
     private let bunDownImageView: UIImageView = {
@@ -155,7 +155,7 @@ extension LoginViewController {
          "timmy2@timmy.com"
          "timmy"
          */
-        Observable.just("timmy@timmy.com")
+        Observable.just("timmy@timmy.co.kr")
             .bind(to: emailSearchBar.rx.text)
             .disposed(by: disposeBag)
         

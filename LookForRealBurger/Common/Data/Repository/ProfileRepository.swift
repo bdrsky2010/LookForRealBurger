@@ -102,7 +102,7 @@ extension DefaultProfileRepository {
             case 419:
                 profileError = .expiredToken
             default:
-                profileError = .unknown("알 수 없는 에러 발생")
+                profileError = .unknown(R.Phrase.errorOccurred)
             }
         }
         print("ProfileRepository \(type.rawValue) 에러 -> \(profileError)")

@@ -40,10 +40,8 @@ extension DefaultJoinUseCase: JoinUseCase {
             authRepository.emailValidRequest(query: .init(email: email)) { result in
                 switch result {
                 case .success(let value):
-                    print("성공")
                     single(.success(.success(value)))
                 case .failure(let error):
-                    print("에러")
                     single(.success(.failure(error)))
                 }
             }

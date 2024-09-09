@@ -110,7 +110,7 @@ final class BurgerHouseReviewDetailViewController: BaseViewController {
         return label
     }()
     
-    private let burgerHouseButton = PretendardRoundedButton(title: "", subtitle: "으로 이동", font: R.Font.chab20, subFont: R.Font.bold16, backgroudColor: R.Color.red)
+    private let burgerHouseButton = PretendardRoundedButton(title: "", subtitle: R.Phrase.moveTo, font: R.Font.chab20, subFont: R.Font.bold16, backgroudColor: R.Color.red)
     
     private var viewModel: BurgerHouseReviewDetailViewModel!
     private var disposeBag: DisposeBag!

@@ -69,7 +69,7 @@ extension DefaultBurgerMapHouseViewModel: BurgerMapHouseInput {
                         burgerHouseReviews.onNext([SectionBurgerHouseReview(items: [review])])
                     }
                 } catch {
-                    toastMessage.accept("왜 에러가 여기서..?")
+                    toastMessage.accept(R.Phrase.whyErrorHere)
                 }
             }
         }

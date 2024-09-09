@@ -84,9 +84,9 @@ extension FollowListTabViewController: PageboyViewControllerDataSource, TMBarDat
     func barItem(for bar: any Tabman.TMBar, at index: Int) -> any Tabman.TMBarItemable {
         switch index {
         case 0:
-            return TMBarItem(title: "팔로워")
+            return TMBarItem(title: R.Phrase.follower)
         case 1:
-            return TMBarItem(title: "팔로잉")
+            return TMBarItem(title: R.Phrase.following)
         default:
             let title = "Page \(index)"
             return TMBarItem(title: title)

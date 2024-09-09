@@ -135,7 +135,7 @@ extension DefaultProfileViewModel: ProfileInput {
                     switch result {
                     case .success(let value):
                         owner.setProfile.accept(value)
-                        owner.setButtonTitle.accept("닉네임 수정")
+                        owner.setButtonTitle.accept(R.Phrase.modifyNick)
                         owner.myProfile = value
                         owner.endRefreshing.accept(())
                     case .failure(let error):
@@ -172,7 +172,7 @@ extension DefaultProfileViewModel: ProfileInput {
                         owner.setButtonTitle.accept(
                             value
                                 .followers
-                                .contains(where: { $0.userId == myUserId }) ? "팔로우 취소" : "팔로우 하기"
+                                .contains(where: { $0.userId == myUserId }) ? R.Phrase.followCancel : R.Phrase.followRequest
                         )
                         owner.otherProfile = value
                         owner.endRefreshing.accept(())
@@ -208,7 +208,7 @@ extension DefaultProfileViewModel: ProfileInput {
             .drive(with: self) { owner, result in
                 switch result {
                 case .success(let value):
-                    owner.setButtonTitle.accept(value.followingStatus ? "팔로우 취소" : "팔로우 하기")
+                    owner.setButtonTitle.accept(value.followingStatus ? R.Phrase.followCancel : R.Phrase.followRequest)
                     owner.fetchProfile()
                 case .failure(let error):
                     switch error {

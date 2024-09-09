@@ -306,14 +306,14 @@ extension DefaultPostRepository {
                 } else if type == .uploadPost {
                     postError = .badRequest(R.Phrase.errorOccurred)
                 } else { // 업로드 이미지
-                    postError = .badRequest("이미지 파일에 대한 형식이 맞지 않습니다.")
+                    postError = .badRequest(R.Phrase.notCorrectFileType)
                 }
             case 401:
                 postError = .invalidToken(R.Phrase.errorOccurred)
             case 403:
                 postError = .forbidden(R.Phrase.errorOccurred)
             case 410:
-                postError = .dbServer("DB서버 장애로 인하여 에러가 발생하였습니다.\n잠시후에 다시 시도 부탁드립니다.")
+                postError = .dbServer(R.Phrase.serverErrorOccurred)
             case 419:
                 postError = .expiredToken
             default:
