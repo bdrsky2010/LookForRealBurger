@@ -127,7 +127,7 @@
 
 <br>
 <p align="center"> 
-     <img src="./images/refreshing.gif" align="center" width="34%">
+     <img src="./images/endRefreshing.gif" align="center" width="34%">
 </p>
 <br>
 
@@ -156,7 +156,7 @@
 
 <br>
 <p align="center">  
-    <img src="./images/updateRefreshing.gif" align="center" width="34%">
+    <img src="./images/delayEndRefreshing.gif" align="center" width="34%">
 </p>
 <br>
 
