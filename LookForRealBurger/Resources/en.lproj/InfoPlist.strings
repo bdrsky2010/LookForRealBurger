@@ -5,3 +5,6 @@
   Created by Minjae Kim on 8/14/24.
   
 */
+CFBundleDisplayName = "Towards the Burger";
+NSLocationWhenInUseUsageDescription = "We need your location data\nto show nearby burger places.";
+NSCameraUsageDescription = "Please allow camera access\nfor taking pictures.";

@@ -5,3 +5,6 @@
   Created by Minjae Kim on 8/14/24.
   
 */
+CFBundleDisplayName = "バーガーを目指して";
+NSLocationWhenInUseUsageDescription = "近くのハンバーガーの名店をお知らせするために\n位置情報が必要です。";
+NSCameraUsageDescription = "撮影のために\nカメラのアクセスを許可してください。";

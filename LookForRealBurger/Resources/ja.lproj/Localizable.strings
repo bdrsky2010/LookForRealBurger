@@ -5,3 +5,93 @@
   Created by Minjae Kim on 8/14/24.
   
 */
+"emailPlaceholder" = "メールID";
+"passwordPlaceholder" = "パスワード";
+"nickPlaceholder" = "ニックネーム";
+
+"errorOccurred" = "エラーが発生しました。\nしばらくしてから再度お試しください。";
+"networkUnstable" = "インターネット接続が不安定です。";
+"expiredLogin" = "ログインの有効期限が切れました";
+"expiredLoginExplain" = "ログインの有効期限が切れましたので、ログイン画面に移動します。";
+"failGetMyProfile" = "ユーザー情報の取得に失敗しました。";
+"notFoundPost" = "投稿が存在しません。";
+"notFoundUser" = "ユーザーが存在しません。";
+
+"missingFieldError" = "すべてのフィールドに入力してください。";
+"existBlankNick" = "空白を含むニックネームは\n使用できません。";
+"alreadyAccount" = "このアカウントは既に登録されています。";
+"accountVerifyError" = "アカウントを再確認してください。";
+
+"notCorrectFileType" = "画像ファイルの形式が正しくありません。";
+"serverErrorOccurred" = "DBサーバーの障害によりエラーが発生しました。\nしばらくしてから再度お試しください。";
+
+"missingReviewField" = "すべてのレビュー項目を記入してください。";
+"whyErrorHere" = "ここでエラーが発生する理由は...？";
+"plzSelectBurgerHouse" = "バーガー店を選択してください。";
+"plzImageUpload" = "少なくとも1枚の写真が必要です。";
+"limitImageSize" = "写真のサイズ制限：5MBまで。";
+
+"congratulation" = "%@ さん、会員登録\nおめでとうございます。";
+
+"followRequest" = "フォローする";
+"followCancel" = "フォロー解除";
+"modifyNick" = "ニックネームを編集";
+
+"logout" = "ログアウト";
+"withdraw" = "退会";
+"support" = "サポート";
+"successfulPayment" = "支払いに成功しました。";
+"failedPayment" = "支払いに失敗しました。";
+
+"logoutComment" = "ログアウトしますか？";
+"check" = "キャンセル";
+"cancel" = "確認";
+"follower" = "フォロワー";
+"following" = "フォロー中";
+"review" = "レビュー";
+"like" = "いいね";
+"bookmark" = "ブックマーク";
+"profileComment" = "%@ さんのプロフィール";
+
+"setLocationAccess" = "位置情報のアクセス設定";
+"move" = "移動";
+
+"saveComment" = "保存しますか？";
+"save" = "保存";
+
+"addImage" = "写真を追加";
+"camera" = "カメラ";
+"gallery" = "アルバム";
+
+"tappedBurgerHouseComment" = "タップしてバーガー店を検索できます。";
+"title" = "タイトル";
+"plzWriteReview" = "レビューを書いてください。";
+"writeReview" = "レビューを書く";
+
+"noSearchResult" = "検索結果がありません。";
+"wrongSearchText" = "無効な検索キーワードです。";
+"unstableConnection" = "インターネット接続が不安定です。";
+"checkSearchService" = "検索サービスの状態を確認してください。";
+
+"failedGetBurgerHouse" = "レストラン情報の取得に失敗しました。";
+
+"comment" = "コメント";
+"send" = "送信";
+"addComment" = "コメントを追加";
+
+"moveTo" = "に移動";
+
+"burgerReview" = "バーガーレビュー";
+
+"burgerMap" = "バーガーマップ";
+"profile" = "プロフィール";
+
+"goToLogin" = "ログインに移動";
+
+"joinCheck" = "登録確認";
+"joinCheckComment" = "登録しますか？";
+"join" = "登録";
+"joinTitle" = "新規登録";
+"emailValidTitle" = "メール重複チェック";
+
+"login" = "ログイン";

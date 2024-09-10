@@ -5,3 +5,93 @@
   Created by Minjae Kim on 8/14/24.
   
 */
+"emailPlaceholder" = "Email ID";
+"passwordPlaceholder" = "Password";
+"nickPlaceholder" = "Nickname";
+
+"errorOccurred" = "An error occurred.\nPlease try again later.";
+"networkUnstable" = "Internet connection is unstable.";
+"expiredLogin" = "Login expired";
+"expiredLoginExplain" = "Your login has expired. You will be redirected to the login screen.";
+"failGetMyProfile" = "Failed to retrieve user information.";
+"notFoundPost" = "The post does not exist.";
+"notFoundUser" = "User does not exist.";
+
+"missingFieldError" = "Please fill in all fields.";
+"existBlankNick" = "Nicknames with spaces\ncannot be used.";
+"alreadyAccount" = "The account is already registered.";
+"accountVerifyError" = "Please verify your account again.";
+
+"notCorrectFileType" = "The file type of the image is incorrect.";
+"serverErrorOccurred" = "A server error occurred due to a DB issue.\nPlease try again later.";
+
+"missingReviewField" = "Please complete all review fields.";
+"whyErrorHere" = "Why is there an error here...?";
+"plzSelectBurgerHouse" = "Please select a burger place.";
+"plzImageUpload" = "At least one photo is required.";
+"limitImageSize" = "Photo size limit: 5MB.";
+
+"congratulation" = "Congratulations, %@!\nYou have successfully registered.";
+
+"followRequest" = "Follow";
+"followCancel" = "Unfollow";
+"modifyNick" = "Edit Nickname";
+
+"logout" = "Logout";
+"withdraw" = "Withdraw";
+"support" = "Support";
+"successfulPayment" = "Payment was successful.";
+"failedPayment" = "Payment failed.";
+
+"logoutComment" = "Are you sure you want to log out?";
+"check" = "Cancel";
+"cancel" = "Confirm";
+"follower" = "Follower";
+"following" = "Following";
+"review" = "Review";
+"like" = "Like";
+"bookmark" = "Bookmark";
+"profileComment" = "%@'s Profile";
+
+"setLocationAccess" = "Set Location Access";
+"move" = "Move";
+
+"saveComment" = "Do you want to save?";
+"save" = "Save";
+
+"addImage" = "Add Image";
+"camera" = "Camera";
+"gallery" = "Gallery";
+
+"tappedBurgerHouseComment" = "Tap to search for burger places.";
+"title" = "Title";
+"plzWriteReview" = "Please write a review.";
+"writeReview" = "Write Review";
+
+"noSearchResult" = "No search results found.";
+"wrongSearchText" = "Invalid search term.";
+"unstableConnection" = "Internet connection is unstable.";
+"checkSearchService" = "Check the search service status.";
+
+"failedGetBurgerHouse" = "Failed to retrieve restaurant information.";
+
+"comment" = "Comment";
+"send" = "Send";
+"addComment" = "Add Comment";
+
+"moveTo" = "Move to";
+
+"burgerReview" = "Burger Review";
+
+"burgerMap" = "Burger Map";
+"profile" = "Profile";
+
+"goToLogin" = "Go to Login";
+
+"joinCheck" = "Join Confirmation";
+"joinCheckComment" = "Do you want to sign up?";
+"join" = "Join";
+"joinTitle" = "Sign Up";
+"emailValidTitle" = "Email Verification";
+
+"login" = "Login";
