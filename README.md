@@ -46,6 +46,7 @@
   - UIKit, Mapkit
   - MVVM, Input-Output, Clean Architecture
   - CodeBasedUI
+  - Cursor Based Pagination
 - 라이브러리
 
 |라이브러리|사용목적|
@@ -82,7 +83,52 @@
 <br>
 
 # 트러블 슈팅
-### 1. 하위 ViewController 모두 뷰 계층구조에서 사라지는 상황
+<details>
+<summary>Access Token 자동갱신</summary>
+<div>
+
+### Access Token 자동갱신
+
+해당 프로젝트의 모든 API(게시물, 팔로잉/팔로우 등등)는
+로그인 API를 통해 발급받은 Access Token을 요구한다.
+
+이 Access Token의 유효 시간은 약 5분으로 짧았는데
+그로 인해 사용자는 계속 Access Token이 만료되는 문제를 직면하게 된다.
+
+이 문제를 해결하기 위해 두 가지 방법을 고민하게 되었다.
+1. Access Token이 만료될 때마다 재로그인을 하는 방식
+2. Refresh Token을 통해 Access Token을 자동으로 갱신하는 방식
+
+<p align="center"> 
+    <img src="./images/token_1.png" align="center" width="80%"> 
+</p>
+
+이 두 방식이 고민이 됐던 이유는 Access Token을 갱신하는데 필요한 Refresh Token도 만료되는 경우 다시 로그인을 해야하기 때문에 바로 재로그인을 하는 것이 어떨까 라는 고민을 했던 것이다.
+
+그렇다면 이 부분에서 또 고민을 해야했던 부분이 두 가지가 더 존재했다.
+1. 재로그인 방식: Access Token이 만료될 때마다 사용자가 직접 재로그인하게 한다면 사용자의 경험이 매우 나빠질 것이다.
+2. 자동 로그인 구현: 자동 로그인의 경우 유저의 아이디와 비밀번호를 저장해줘야 하지만 이를 UserDefaults인 로컬 저장소에 저장하는 것은 보안상으로 매우 위험하다고 판단이 됐다.
+
+결론적으로, 재로그인을 하더라도 사용자가 직접 로그인을 해야하기 때문에 Access Token이 만료될 때마다 재로그인을 하게 하는 것 또한 사용자에게 엄청난 불편함을 줄 수 있기 때문에 Refresh Token을 통한 Access Token 자동 갱신 방식을 선택하게 되었다.
+
+결론적으로, 사용자가 직접 재로그인하는 불편함을 줄이기 위해 Refresh Token을 통한 자동 갱신 방식을 선택하였다. 즉, Refresh Token이 만료될 경우에만 사용자에게 재로그인을 요구함으로써 보안과 사용자 경험의 균형을 맞추게 되었다.
+
+최종적으로 작성된 로직은 아래 코드와 같다.
+<p align="center"> 
+    <img src="./images/token_2.png" align="center" width="80%"> 
+</p>
+<p align="center"> 
+    <img src="./images/token_3.png" align="center" width="80%"> 
+</p>
+
+</div>
+</details>
+
+<details>
+<summary>하위 ViewController 모두 뷰 계층구조에서 사라지는 상황</summary>
+<div>
+
+### 하위 ViewController 모두 뷰 계층구조에서 사라지는 상황
 
 <p align="center"> 
     <img src="./images/error.png" align="center" width="80%"> 
@@ -126,7 +172,14 @@
 
 <br>
 
-### 2. Pull To Refresh 기능에 대한 고민...?
+</div>
+</details>
+
+<details>
+<summary>Pull To Refresh</summary>
+<div>
+
+### Pull To Refresh
 
 <br>
 <p align="center"> 
@@ -166,6 +219,9 @@
 - 실 기기에 빌드해 본 결과 어색함과 답답함은 해소가 되었음.
 
 <br>
+
+</div>
+</details>
 
 # 회고
 
