@@ -26,7 +26,7 @@
     - `Mapkit`의 `MKMapViewDelegate` 및 `Custom MKAnnotationView`를 활용한 지도 화면 구현
 - `Cursor Based Pagination`을 활용한 전체리뷰 조회화면 구현
 - 리뷰 작성, 리뷰 좋아요/북마크, 댓글 작성
-    - 리뷰 작성 시, `HTTP Request(Post)`의 `Content-type`을 `multipart/form-data`로 설정하고, `JPEG`로 압축한 이미지 데이터를 `HTTP Request`의 `Body`에 포함하여 서버에 업로드
+    - 리뷰 작성 시, `HTTP Request(Post)`의 `Content-type`을 `multipart/form-data`로 설정하고, `JPEG`로 압축한 이미지 데이터를 `HTTP Request`의 `Body`에 포함하여 서버에 업로드
 - 유저 팔로우/팔로잉, 다른 유저 프로필 및 피드 확인
 - 다국어 지원
     - 이 앱은 한국어, 영어, 일본어를 지원하며, 모든 주요 텍스트가 각 언어로 번역되어 있음.
