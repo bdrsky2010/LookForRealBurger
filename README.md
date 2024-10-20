@@ -49,6 +49,7 @@
   - Cursor Based Pagination을 활용
 - 리뷰 작성 및 상호작용
   - HTTP Request(Post)의 Content-type을 multipart/form-data로 설정, 
+  
   이미지를 JPEG로 압축 후 HTTP Request의 Body에 포함하여 서버에 업로드
 <br>
 
