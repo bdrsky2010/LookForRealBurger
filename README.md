@@ -42,7 +42,6 @@
 
 # 주요기능
 - 지도에서 햄버거 식당을 선택해 유저들의 리뷰를 확인
-  - CoreLocation 활용하여 사용자의 위치 확인
   - Mapkit의 MKMapViewDelegate 활용
   - Custom MKAnnotationView로 지도 위 커스터마이징된 핀 표시
 - 전체 리뷰 조회
