@@ -22,16 +22,33 @@
 <br>
 
 # 주요기능
-- 지도에서 햄버거 식당을 선택해 작성되어 있는 유저들의 리뷰를 확인
-    - `Mapkit`의 `MKMapViewDelegate` 및 `Custom MKAnnotationView`를 활용한 지도 화면 구현
-- `Cursor Based Pagination`을 활용한 전체리뷰 조회화면 구현
-- 리뷰 작성, 리뷰 좋아요/북마크, 댓글 작성
-    - 리뷰 작성 시, `HTTP Request(Post)`의 `Content-type`을 `multipart/form-data`로 설정하고, `JPEG`로 압축한 이미지 데이터를 `HTTP Request`의 `Body`에 포함하여 서버에 업로드
-- 유저 팔로우/팔로잉, 다른 유저 프로필 및 피드 확인
+- 지도에서 햄버거 식당을 선택해 유저들의 리뷰를 확인
+  - 지도 위에 등록되어 있는 햄버거 식당(햄버거 이미지)을 선택
+  - 해당 식당에 대한 유저들의 리뷰를 확인
+- 전체 리뷰 조회
+  - 스크롤하여 더 많은 리뷰를 조회
+- 리뷰 작성 및 상호작용
+  - 리뷰 작성
+  - 리뷰에 좋아요/북마크
+  - 리뷰에 댓글 작성
+- 유저 프로필
+  - 유저 팔로우/팔로잉
+  - 다른 유저 프로필(피드) 확인
+  - 팔로우/팔로잉 유저 프로필(피드) 확인
 - 다국어 지원
-    - 이 앱은 한국어, 영어, 일본어를 지원하며, 모든 주요 텍스트가 각 언어로 번역되어 있음.
-    - 사용자의 설정된 국가에 맞게 언어가 번역되어 출력됨.
+  - 한국어, 영어, 일본어 다국어 지원
+  - 사용자의 국가에 맞는 앱 언어 자동 설정
+<br>
 
+# 주요기능
+- 지도에서 햄버거 식당을 선택해 유저들의 리뷰를 확인
+  - CoreLocation 활용하여 사용자의 위치 확인
+  - Mapkit의 MKMapViewDelegate 활용
+  - Custom MKAnnotationView로 지도 위 커스터마이징된 핀 표시
+- 전체 리뷰 조회
+  - Cursor Based Pagination을 활용
+- 리뷰 작성 및 상호작용
+  - HTTP Request(Post)의 Content-type을 multipart/form-data로 설정, 이미지를 JPEG로 압축 후 HTTP Request의 Body에 포함하여 서버에 업로드
 <br>
 
 # 프로젝트 환경
