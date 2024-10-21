@@ -40,7 +40,7 @@
   - 사용자의 국가에 맞는 앱 언어 자동 설정
 <br>
 
-# 주요기능
+# 주요기술
 - 지도에서 햄버거 식당을 선택해 유저들의 리뷰를 확인
   - Mapkit의 MKMapViewDelegate 활용
   - Custom MKAnnotationView로 지도 위 커스터마이징된 핀 표시
