@@ -6,6 +6,9 @@
     <img src="https://img.shields.io/badge/iOS-15.0+-F05138?style=plastic&logo=apple&logoColor=#000000">
 </div>
 <br>
+<p align="center">
+    <img src="./images/icon.png"> 
+</p>
 
 <p align="center"> 
     <img src="./images/map.gif" align="center" width="19%">
