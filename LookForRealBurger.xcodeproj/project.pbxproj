@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B700DA02CC7DD710020AF46 /* LookForRealBurgerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700D9F2CC7DD710020AF46 /* LookForRealBurgerTests.swift */; };
+		7B700DA72CC7DE7E0020AF46 /* LoginTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DA62CC7DE7E0020AF46 /* LoginTest.swift */; };
 		7B7BAC2C2C86C4C80045695C /* iamport-ios in Frameworks */ = {isa = PBXBuildFile; productRef = 7B7BAC2B2C86C4C80045695C /* iamport-ios */; };
 		7B7BAC2E2C8704270045695C /* PaymentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BAC2D2C8704270045695C /* PaymentRouter.swift */; };
 		7B7BAC312C8706160045695C /* PaymentRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BAC302C8706160045695C /* PaymentRequestDTO+Mapping.swift */; };
@@ -97,7 +99,6 @@
 		7B8351172C806C5F00785049 /* UICollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B8351162C806C5F00785049 /* UICollectionViewLayout.swift */; };
 		7B91C1C62C6C7CE30019C51F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1C52C6C7CE30019C51F /* AppDelegate.swift */; };
 		7B91C1C82C6C7CE30019C51F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1C72C6C7CE30019C51F /* SceneDelegate.swift */; };
-		7B91C1CA2C6C7CE30019C51F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B91C1C92C6C7CE30019C51F /* ViewController.swift */; };
 		7B91C1CF2C6C7CE40019C51F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C1CE2C6C7CE40019C51F /* Assets.xcassets */; };
 		7B91C1D22C6C7CE40019C51F /* Base in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C1D12C6C7CE40019C51F /* Base */; };
 		7B91C1DA2C6C7D3D0019C51F /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 7B91C1D92C6C7D3D0019C51F /* .gitignore */; };
@@ -207,7 +208,20 @@
 		7BA673972C8689A700D4F792 /* GetSingleBurgerHouse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7BA673962C8689A700D4F792 /* GetSingleBurgerHouse.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		7B700DA12CC7DD710020AF46 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7B91C1BA2C6C7CE30019C51F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7B91C1C12C6C7CE30019C51F;
+			remoteInfo = LookForRealBurger;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
+		7B700D9D2CC7DD710020AF46 /* LookForRealBurgerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LookForRealBurgerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7B700D9F2CC7DD710020AF46 /* LookForRealBurgerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookForRealBurgerTests.swift; sourceTree = "<group>"; };
+		7B700DA62CC7DE7E0020AF46 /* LoginTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTest.swift; sourceTree = "<group>"; };
 		7B7BAC2D2C8704270045695C /* PaymentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRouter.swift; sourceTree = "<group>"; };
 		7B7BAC302C8706160045695C /* PaymentRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
 		7B7BAC322C8706220045695C /* PaymentResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
@@ -296,7 +310,6 @@
 		7B91C1C22C6C7CE30019C51F /* LookForRealBurger.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LookForRealBurger.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B91C1C52C6C7CE30019C51F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7B91C1C72C6C7CE30019C51F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		7B91C1C92C6C7CE30019C51F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		7B91C1CE2C6C7CE40019C51F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7B91C1D12C6C7CE40019C51F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7B91C1D32C6C7CE40019C51F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -403,6 +416,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		7B700D9A2CC7DD710020AF46 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7B91C1BF2C6C7CE30019C51F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -427,6 +447,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B700D9E2CC7DD710020AF46 /* LookForRealBurgerTests */ = {
+			isa = PBXGroup;
+			children = (
+				7B700D9F2CC7DD710020AF46 /* LookForRealBurgerTests.swift */,
+				7B700DA62CC7DE7E0020AF46 /* LoginTest.swift */,
+			);
+			path = LookForRealBurgerTests;
+			sourceTree = "<group>";
+		};
 		7B7BAC2F2C8705F50045695C /* Payment */ = {
 			isa = PBXGroup;
 			children = (
@@ -884,6 +913,7 @@
 			children = (
 				7B91C1D92C6C7D3D0019C51F /* .gitignore */,
 				7B91C1C42C6C7CE30019C51F /* LookForRealBurger */,
+				7B700D9E2CC7DD710020AF46 /* LookForRealBurgerTests */,
 				7B91C1C32C6C7CE30019C51F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -892,6 +922,7 @@
 			isa = PBXGroup;
 			children = (
 				7B91C1C22C6C7CE30019C51F /* LookForRealBurger.app */,
+				7B700D9D2CC7DD710020AF46 /* LookForRealBurgerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -903,7 +934,6 @@
 				7B91C2362C70E2460019C51F /* Common */,
 				7B91C2372C70E2AC0019C51F /* Scene */,
 				7B91C1DD2C6C8BF80019C51F /* Resources */,
-				7B91C1C92C6C7CE30019C51F /* ViewController.swift */,
 			);
 			path = LookForRealBurger;
 			sourceTree = "<group>";
@@ -1270,6 +1300,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		7B700D9C2CC7DD710020AF46 /* LookForRealBurgerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7B700DA32CC7DD710020AF46 /* Build configuration list for PBXNativeTarget "LookForRealBurgerTests" */;
+			buildPhases = (
+				7B700D992CC7DD710020AF46 /* Sources */,
+				7B700D9A2CC7DD710020AF46 /* Frameworks */,
+				7B700D9B2CC7DD710020AF46 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7B700DA22CC7DD710020AF46 /* PBXTargetDependency */,
+			);
+			name = LookForRealBurgerTests;
+			productName = LookForRealBurgerTests;
+			productReference = 7B700D9D2CC7DD710020AF46 /* LookForRealBurgerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		7B91C1C12C6C7CE30019C51F /* LookForRealBurger */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7B91C1D62C6C7CE40019C51F /* Build configuration list for PBXNativeTarget "LookForRealBurger" */;
@@ -1313,6 +1361,10 @@
 				LastSwiftUpdateCheck = 1540;
 				LastUpgradeCheck = 1540;
 				TargetAttributes = {
+					7B700D9C2CC7DD710020AF46 = {
+						CreatedOnToolsVersion = 15.4;
+						TestTargetID = 7B91C1C12C6C7CE30019C51F;
+					};
 					7B91C1C12C6C7CE30019C51F = {
 						CreatedOnToolsVersion = 15.4;
 					};
@@ -1348,11 +1400,19 @@
 			projectRoot = "";
 			targets = (
 				7B91C1C12C6C7CE30019C51F /* LookForRealBurger */,
+				7B700D9C2CC7DD710020AF46 /* LookForRealBurgerTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		7B700D9B2CC7DD710020AF46 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7B91C1C02C6C7CE30019C51F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1384,6 +1444,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		7B700D992CC7DD710020AF46 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7B700DA02CC7DD710020AF46 /* LookForRealBurgerTests.swift in Sources */,
+				7B700DA72CC7DE7E0020AF46 /* LoginTest.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		7B91C1BE2C6C7CE30019C51F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1407,7 +1476,6 @@
 				7B91C2DD2C762A3B0019C51F /* LoginResponseDTO+Mapping.swift in Sources */,
 				7B91C25C2C723F460019C51F /* JoinViewModel.swift in Sources */,
 				7B83506E2C7CCCC900785049 /* GetPostRequestDTO+Mapping.swift in Sources */,
-				7B91C1CA2C6C7CE30019C51F /* ViewController.swift in Sources */,
 				7B8350C22C7E4DCF00785049 /* UploadImageRequestDTO.swift in Sources */,
 				7B8350412C7B18EF00785049 /* LocalSearchUseCase.swift in Sources */,
 				7B8351002C7FD7F600785049 /* BurgerHouseReviewViewModel.swift in Sources */,
@@ -1556,6 +1624,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		7B700DA22CC7DD710020AF46 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7B91C1C12C6C7CE30019C51F /* LookForRealBurger */;
+			targetProxy = 7B700DA12CC7DD710020AF46 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		7B91C1D02C6C7CE40019C51F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -1590,6 +1666,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		7B700DA42CC7DD710020AF46 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M68VBL2UR9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.kmj.LookForRealBurgerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LookForRealBurger.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LookForRealBurger";
+			};
+			name = Debug;
+		};
+		7B700DA52CC7DD710020AF46 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M68VBL2UR9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.kmj.LookForRealBurgerTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LookForRealBurger.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/LookForRealBurger";
+			};
+			name = Release;
+		};
 		7B91C1D42C6C7CE40019C51F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1788,6 +1910,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		7B700DA32CC7DD710020AF46 /* Build configuration list for PBXNativeTarget "LookForRealBurgerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7B700DA42CC7DD710020AF46 /* Debug */,
+				7B700DA52CC7DD710020AF46 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		7B91C1BD2C6C7CE30019C51F /* Build configuration list for PBXProject "LookForRealBurger" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
