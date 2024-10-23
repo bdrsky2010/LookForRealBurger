@@ -14,6 +14,8 @@ import RxSwift
 protocol BurgerMapInput {
     func viewDidLoad()
     func refreshTap()
+    func updateLocation()
+    func fetchBurgerMapHouse()
     func refreshAccessToken(completion: @escaping () -> Void)
     func didSelectBurgerMapHouse(_ burgerMapHouse: BurgerMapHouse)
 }
@@ -69,19 +71,19 @@ extension DefaultBurgerMapViewModel: BurgerMapInput {
         fetchBurgerMapHouse()
     }
     
-    private func updateLocation() {
+    func updateLocation() {
         locationManager.requestAuthAlert
             .bind(to: requestAuthAlert)
             .disposed(by: disposeBag)
         
-        locationManager.checkDeviceLocationAuthorization()
-        
         locationManager.coordinate
             .bind(to: setRegion)
             .disposed(by: disposeBag)
+        
+        locationManager.checkDeviceLocationAuthorization()
     }
     
-    private func fetchBurgerMapHouse() {
+    func fetchBurgerMapHouse() {
         burgerMapUseCase.fetchBurgerHouseExecute(
             query: .init(
                 type: .total,
