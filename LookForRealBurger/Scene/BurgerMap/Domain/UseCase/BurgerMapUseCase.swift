@@ -70,3 +70,48 @@ extension DefaultBurgerMapUseCase: BurgerMapUseCase {
         }
     }
 }
+
+extension BurgerMapUseCase {
+    func setSuccessFetch(_ flag: Bool) { }
+    func setSuccessRefresh(_ flag: Bool) { }
+}
+
+final class MockBurgerMapUseCase: BurgerMapUseCase {
+    private var isSuccessFetch = false
+    private var isSuccessRefresh = false
+    
+    func fetchBurgerHouseExecute(query: GetPostQuery) -> Single<Result<[BurgerMapHouse], PostError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(""))))
+                return Disposables.create()
+            }
+            
+            if isSuccessFetch {
+                single(.success(.success([])))
+            } else {
+                single(.success(.failure(.unknown(""))))
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func refreshAccessTokenExecute() -> Single<Result<AccessToken, AuthError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(""))))
+                return Disposables.create()
+            }
+            
+            if isSuccessRefresh {
+                single(.success(.success(AccessToken(accessToken: ""))))
+            } else {
+                single(.success(.failure(.unknown(""))))
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func setSuccessFetch(_ flag: Bool) { isSuccessFetch = flag }
+    func setSuccessRefresh(_ flag: Bool) { isSuccessRefresh = flag }
+}
