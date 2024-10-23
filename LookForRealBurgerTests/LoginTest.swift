@@ -6,24 +6,57 @@
 //
 
 import XCTest
+import RxSwift
 @testable import LookForRealBurger
 
 final class LoginTest: XCTestCase {
-
+    var sut: LoginViewModel!
+    
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        sut = DefaultLoginViewModel(loginUseCase: MockLoginUseCase(), accessStorage: MockAccessStorage())
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
+    func testLoginSuccess() {
+        var success = false
+        let disposeBag = DisposeBag()
+        // given
+        let query = LoginQuery(email: "pass", password: "")
+        
+        // when
+        sut.goToMain
+            .bind(with: self) { owner, _ in
+                success = true
+            }
+            .disposed(by: disposeBag)
+        
+        sut.didLoginTap(query: query)
+        
+        // then
+        XCTAssertTrue(success, "로그인 성공 테스트 성공")
+    }
+    
+    func testLoginFailure() {
+        var failure = false
+        let disposeBag = DisposeBag()
+        
+        // given
+        let query = LoginQuery(email: "error", password: "")
+        
+        // when
+        sut.toastMessage
+            .bind(with: self) { owner, _ in
+                failure = true
+            }
+            .disposed(by: disposeBag)
+        
+        sut.didLoginTap(query: query)
+        
+        // then
+        XCTAssertTrue(failure, "로그인 실패 테스트 성공")
     }
 
     func testPerformanceExample() throws {
