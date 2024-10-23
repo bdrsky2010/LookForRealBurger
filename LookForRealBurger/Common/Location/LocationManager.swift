@@ -88,3 +88,25 @@ extension DefaultLocationManager: LocationManager {
             .disposed(by: disposeBag)
     }
 }
+
+extension LocationManager {
+    func setAuthrized(_ flag: Bool) { }
+}
+
+final class MockLocationManager: LocationManager {
+    private let disposeBag = DisposeBag()
+    private var isAuthorized = false
+    
+    var requestAuthAlert = PublishRelay<String>()
+    var coordinate = BehaviorRelay<CLLocationCoordinate2D>(value: CLLocationCoordinate2D(latitude: 0, longitude: 0))
+    
+    func checkDeviceLocationAuthorization() {
+        if isAuthorized {
+            requestAuthAlert.accept("")
+        } else {
+            coordinate.accept(CLLocationCoordinate2D(latitude: 1, longitude: 1))
+        }
+    }
+    
+    func setAuthrized(_ flag: Bool) { isAuthorized = flag }
+}
