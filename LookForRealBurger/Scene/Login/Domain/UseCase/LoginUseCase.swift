@@ -42,3 +42,20 @@ extension DefaultLoginUseCase: LoginUseCase {
         }
     }
 }
+
+final class MockLoginUseCase: LoginUseCase {
+    func loginExecute(query: LoginQuery) -> Single<Result<LoginUser, AuthError>> {
+        Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
+                return Disposables.create()
+            }
+            if query.email == "pass" {
+                single(.success(.success(LoginUser(userId: "", email: "", nick: "", accessToken: "", refreshToken: ""))))
+            } else if query.email == "error" {
+                single(.success(.failure(.unknown(""))))
+            }
+            return Disposables.create()
+        }
+    }
+}
