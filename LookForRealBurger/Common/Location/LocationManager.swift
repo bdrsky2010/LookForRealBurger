@@ -13,12 +13,9 @@ import RxSwift
 
 protocol LocationManager {
     var requestAuthAlert: PublishRelay<String> { get }
-    var isAuthorized: BehaviorRelay<Bool> { get }
     var coordinate: BehaviorRelay<CLLocationCoordinate2D> { get }
     
     func checkDeviceLocationAuthorization()
-    func checkCurrentLocationAuthorization()
-    func bind()
 }
 
 final class DefaultLocationManager {
@@ -28,7 +25,6 @@ final class DefaultLocationManager {
     private let disposeBag = DisposeBag()
     
     var requestAuthAlert = PublishRelay<String>()
-    var isAuthorized = BehaviorRelay<Bool>(value: false)
     var coordinate = BehaviorRelay<CLLocationCoordinate2D>(value: .init(latitude: 37.517742, longitude: 126.886463))
     
     private init() {
@@ -50,7 +46,7 @@ extension DefaultLocationManager: LocationManager {
     }
     
     // 2) 현재 사용자 위치 권한 상태 확인
-    func checkCurrentLocationAuthorization() {
+    private func checkCurrentLocationAuthorization() {
         print(#function)
         let status = manager.authorizationStatus
         
@@ -72,7 +68,7 @@ extension DefaultLocationManager: LocationManager {
         }
     }
     
-    func bind() {
+    private func bind() {
         manager.rx
             .didUpdateLocations
             .bind(with: self) { owner, locations in
