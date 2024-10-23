@@ -66,3 +66,30 @@ extension UserDefaultsAccessStorage: AccessStorage {
         resetUserDefaults()
     }
 }
+
+final class MockAccessStorage: AccessStorage {
+    var accessToken: String {
+        get { "" }
+        set {  }
+    }
+    var refreshToken: String {
+        get { "" }
+        set {  }
+    }
+    var loginUserId: String {
+        get { "" }
+        set {  }
+    }
+    var accessEmail: String {
+        get { "" }
+        set {  }
+    }
+    var accessPassword: String {
+        get { "" }
+        set {  }
+    }
+    
+    func removeToken() {
+        
+    }
+}
