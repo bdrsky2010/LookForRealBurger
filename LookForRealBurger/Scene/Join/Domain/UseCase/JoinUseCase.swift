@@ -67,3 +67,33 @@ extension DefaultJoinUseCase: JoinUseCase {
         }
     }
 }
+
+final class MockJoinUsecase: JoinUseCase {
+    func isValidEmail(_ email: String) -> Bool {
+        let emailRegEx = "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,64}"
+        let emailTest = NSPredicate(format:"SELF MATCHES %@", emailRegEx)
+        return emailTest.evaluate(with: email)
+    }
+    
+    func checkValidEmail(email: String) -> Single<Result<EmailValidMessage, AuthError>> {
+        Single.create { single in
+            if email == "notDuplicate" {
+                single(.success(.success(EmailValidMessage(message: ""))))
+            } else if email == "duplicate" {
+                single(.success(.failure(.unknown(""))))
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func joinMembership(query: JoinQuery) -> Single<Result<JoinUser, AuthError>> {
+        Single.create { single in
+            if query.email == "pass" {
+                single(.success(.success(JoinUser(nick: ""))))
+            } else if query.email == "error" {
+                single(.success(.failure(.unknown(""))))
+            }
+            return Disposables.create()
+        }
+    }
+}
