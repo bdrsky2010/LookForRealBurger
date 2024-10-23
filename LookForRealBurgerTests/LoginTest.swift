@@ -28,7 +28,7 @@ final class LoginTest: XCTestCase {
         
         // when
         sut.goToMain
-            .bind(with: self) { owner, _ in
+            .bind { _ in
                 success = true
             }
             .disposed(by: disposeBag)
@@ -36,7 +36,7 @@ final class LoginTest: XCTestCase {
         sut.didLoginTap(query: query)
         
         // then
-        XCTAssertTrue(success, "로그인 성공 테스트 성공")
+        XCTAssertTrue(success, "로그인 성공 테스트 실패")
     }
     
     func testLoginFailure() {
@@ -48,7 +48,7 @@ final class LoginTest: XCTestCase {
         
         // when
         sut.toastMessage
-            .bind(with: self) { owner, _ in
+            .bind { _ in
                 failure = true
             }
             .disposed(by: disposeBag)
@@ -56,7 +56,7 @@ final class LoginTest: XCTestCase {
         sut.didLoginTap(query: query)
         
         // then
-        XCTAssertTrue(failure, "로그인 실패 테스트 성공")
+        XCTAssertTrue(failure, "로그인 실패 테스트 실패")
     }
 
     func testPerformanceExample() throws {
