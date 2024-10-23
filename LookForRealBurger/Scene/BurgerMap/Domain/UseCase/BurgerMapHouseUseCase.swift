@@ -70,3 +70,40 @@ extension DefaultBurgerMapHouseUseCase: BurgerMapHouseUseCase {
         }
     }
 }
+
+// MARK: Test용도의 success 프로퍼티 set 메서드 추가 구성
+extension BurgerMapHouseUseCase {
+    func setSuccessRefresh(_ flag: Bool) { }
+}
+
+final class MockBurgerMapHouseUseCase: BurgerMapHouseUseCase {
+    private var isSuccessRefresh = false
+    
+    func fetchSinglePostExecute(query: GetSinglePostQuery) -> Single<Result<BurgerHouseReview, PostError>> {
+        return Single.create { single in
+            if query.postId == "id" {
+                single(.success(.success(BurgerHouseReview(id: "", title: "", rating: 0, content: "", burgerHousePostId: "", createdAt: "", creator: Creator(userId: "", nick: ""), files: [], likeUserIds: [], bookmarkUserIds: [], comments: []))))
+            } else {
+                single(.success(.failure(.unknown(""))))
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func refreshAccessTokenExecute() -> Single<Result<AccessToken, AuthError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(""))))
+                return Disposables.create()
+            }
+            if isSuccessRefresh {
+                single(.success(.success(AccessToken(accessToken: ""))))
+            } else {
+                single(.success(.failure(.unknown(""))))
+            }
+            return Disposables.create()
+        }
+    }
+    
+    func setSuccessRefresh(_ flag: Bool) { isSuccessRefresh = flag }
+}
