@@ -138,7 +138,7 @@ extension MoreViewController {
                                 owner.view.makeToast(R.Phrase.errorOccurred)
                             }
                         }
-                    } else if let error_msg = response?.error_msg {
+                    } else if let _ = response?.error_msg {
                         owner.view.makeToast(R.Phrase.failedPayment)
                     }
                 }

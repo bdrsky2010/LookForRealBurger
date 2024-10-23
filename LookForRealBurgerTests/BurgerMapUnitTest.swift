@@ -110,7 +110,6 @@ final class BurgerMapUnitTest: XCTestCase {
     }
     
     func testRefreshAccessTokenSuccess() {
-        let disposeBag = DisposeBag()
         var success = false
         
         // given

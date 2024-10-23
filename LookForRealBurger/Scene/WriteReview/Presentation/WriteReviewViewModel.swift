@@ -251,7 +251,7 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
         .asDriver(onErrorJustReturn: .failure(.commentFail(message: R.Phrase.errorOccurred)))
         .drive(with: self) { owner, result in
             switch result {
-            case .success(let value):
+            case .success(_):
                 owner.didSuccessUploadReview.accept(())
             case .failure(let error):
                 switch error {
