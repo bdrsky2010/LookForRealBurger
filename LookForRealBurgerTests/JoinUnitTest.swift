@@ -9,7 +9,7 @@ import XCTest
 import RxSwift
 @testable import LookForRealBurger
 
-final class JoinTest: XCTestCase {
+final class JoinUnitTest: XCTestCase {
     var sut: JoinViewModel!
     
     override func setUpWithError() throws {

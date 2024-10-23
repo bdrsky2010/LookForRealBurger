@@ -9,7 +9,7 @@ import XCTest
 import RxSwift
 @testable import LookForRealBurger
 
-final class LoginTest: XCTestCase {
+final class LoginUnitTest: XCTestCase {
     var sut: LoginViewModel!
     
     override func setUpWithError() throws {
