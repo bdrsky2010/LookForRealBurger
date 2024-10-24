@@ -10,19 +10,21 @@ import UIKit
 import RxCocoa
 import RxSwift
 
+protocol BurgerHouseReviewInput {
+    func viewDidLoad()
+    func firstFetchBurgerHouseReview()
+    func nextFetchBurgerHouseReview()
+    func modelSelected(burgerHouseReview: BurgerHouseReview)
+    func refreshAccessToken(completion: @escaping () -> Void)
+}
+
 protocol BurgerHouseReviewOutput {
     var burgerHouseReviews: BehaviorRelay<[SectionBurgerHouseReview]> { get }
     var pushReviewDetail: PublishRelay<BurgerHouseReview> { get }
     var endRefreshing: PublishRelay<Void> { get }
     var toastMessage: PublishRelay<String> { get }
     var goToLogin: PublishRelay<Void> { get }
-}
-
-protocol BurgerHouseReviewInput {
-    func viewDidLoad()
-    func firstFetchBurgerHouseReview()
-    func nextFetchBurgerHouseReview()
-    func modelSelected(burgerHouseReview: BurgerHouseReview)
+    var nextCursor: String? { get }
 }
 
 typealias BurgerHouseReviewViewModel = BurgerHouseReviewInput & BurgerHouseReviewOutput
@@ -47,7 +49,7 @@ final class DefaultBurgerHouseReviewViewModel: BurgerHouseReviewOutput {
     var goToLogin = PublishRelay<Void>()
     
     private var isFetching = false
-    private var nextCursor: String?
+    private(set) var nextCursor: String?
     private let limit = "21"
     
     init(
@@ -137,7 +139,7 @@ extension DefaultBurgerHouseReviewViewModel: BurgerHouseReviewInput {
 }
 
 extension DefaultBurgerHouseReviewViewModel {
-    private func refreshAccessToken(completion: @escaping () -> Void) {
+    func refreshAccessToken(completion: @escaping () -> Void) {
         burgerHouseReviewUseCase.refreshAccessTokenExecute()
             .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
             .drive(with: self) { owner, result in
