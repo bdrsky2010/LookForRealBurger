@@ -68,3 +68,57 @@ extension DefaultBurgerHouseReviewUseCase: BurgerHouseReviewUseCase {
         }
     }
 }
+
+extension BurgerHouseReviewUseCase {
+    func setSuccessFetch(_ flag: Bool) { }
+    func setSuccessRefresh(_ flag: Bool) { }
+}
+
+final class MockBurgerHouseReviewUseCase: BurgerHouseReviewUseCase {
+    var isSuccessFetch = false
+    var isSuccessRefresh = false
+    
+    func fetchBurgerReview(query: GetPostQuery) -> Single<Result<GetBurgerHouseReview, PostError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
+                return Disposables.create()
+            }
+            
+            if isSuccessFetch {
+                if query.next == nil {
+                    single(.success(.success(GetBurgerHouseReview(reviews: [], nextCursor: "next"))))
+                } else if query.next == "next" {
+                    single(.success(.success(GetBurgerHouseReview(reviews: [], nextCursor: "0"))))
+                } else if query.next == "0" {
+                    single(.success(.success(GetBurgerHouseReview(reviews: [], nextCursor: "X"))))
+                }
+                
+            } else {
+                single(.success(.failure(.unknown(""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func refreshAccessTokenExecute() -> Single<Result<AccessToken, AuthError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(R.Phrase.errorOccurred))))
+                return Disposables.create()
+            }
+            
+            if isSuccessRefresh {
+                single(.success(.success(AccessToken(accessToken: ""))))
+            } else {
+                single(.success(.failure(.unknown(""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func setSuccessFetch(_ flag: Bool) { isSuccessFetch = flag }
+    func setSuccessRefresh(_ flag: Bool) { isSuccessRefresh = flag }
+}
