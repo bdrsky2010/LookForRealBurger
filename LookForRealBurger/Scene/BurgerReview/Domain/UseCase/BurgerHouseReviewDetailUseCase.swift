@@ -124,5 +124,77 @@ extension DefaultBurgerHouseReviewDetailUseCase: BurgerHouseReviewDetailUseCase 
     }
 }
 
+extension BurgerHouseReviewDetailUseCase {
+    func setSuccessFetch(_ flag: Bool) { }
+}
+
+final class MockBurgerHouseReviewDetailUseCase: BurgerHouseReviewDetailUseCase {
+    var isSuccessFetch = false
+    
+    func getIsLikePostExecute(query: LikeRequestQuery) -> Single<Result<GetIsLikePost, LikeError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(message: ""))))
+                return Disposables.create()
+            }
+            
+            if isSuccessFetch {
+                single(.success(.success(GetIsLikePost(isLike: query.likeStatus))))
+            } else {
+                single(.success(.failure(.unknown(message: ""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    func getIsBookmarkPostExecute(query: BookmarkRequestQuery) -> Single<Result<GetIsBookmarkPost, LikeError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(message: ""))))
+                return Disposables.create()
+            }
+            
+            if isSuccessFetch {
+                single(.success(.success(GetIsBookmarkPost(isBookmark: query.bookmarkStatus))))
+            } else {
+                single(.success(.failure(.unknown(message: ""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    func getSingleBurgerHouseExecute(
+        query: GetSingleBurgerHouseQuery
+    ) -> Single<Result<GetBurgerHouse, PostError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(""))))
+                return Disposables.create()
+            }
+            
+            if isSuccessFetch {
+                single(.success(.success(GetBurgerHouse.dummy)))
+            } else {
+                single(.success(.failure(.unknown(""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func judgeTheReviewCreator(_ creator: Creator, myUserId: String) -> ProfileType {
+        if creator.userId == myUserId {
+            return .me(myUserId)
+        }
+        return .other(creator.userId, myUserId)
+    }
+    
+    func refreshAccessTokenExecute() -> Single<Result<AccessToken, AuthError>> {
+        return Single.create { single in
+            single(.success(.success(AccessToken(accessToken: ""))))
+            return Disposables.create()
+        }
+    }
+    
     func setSuccessFetch(_ flag: Bool) { isSuccessFetch = flag }
 }
