@@ -19,6 +19,8 @@ struct BurgerHouseReview: Hashable, Identifiable {
     var likeUserIds: [String]
     var bookmarkUserIds: [String]
     var comments: [Comment]
+    
+    static let dummy = BurgerHouseReview(id: "", title: "", rating: 0, content: "", burgerHousePostId: "", createdAt: "", creator: Creator(userId: "me", nick: ""), files: [], likeUserIds: ["me"], bookmarkUserIds: ["me"], comments: [])
 }
 
 struct Creator: Hashable {
