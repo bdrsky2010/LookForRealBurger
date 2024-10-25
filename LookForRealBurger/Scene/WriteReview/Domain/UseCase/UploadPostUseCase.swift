@@ -122,3 +122,71 @@ extension DefaultUploadPostUseCase: UploadPostUseCase {
         }
     }
 }
+
+extension UploadPostUseCase {
+    func setSuccessUpload(_ flag: Bool) { }
+}
+
+final class MockUploadPostUseCase: UploadPostUseCase {
+    var isSuccessUpload = false
+    
+    func uploadImageExecute(files: [Data]) -> Single<Result<UploadedImage, PostError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(""))))
+                return Disposables.create()
+            }
+            
+            if isSuccessUpload {
+                single(.success(.success(UploadedImage(paths: []))))
+            } else {
+                single(.success(.failure(.unknown(""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func uploadReviewExecute(query: UploadBurgerHouseReviewQuery) -> Single<Result<BurgerHouseReview, PostError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(""))))
+                return Disposables.create()
+            }
+            
+            if isSuccessUpload {
+                single(.success(.success(BurgerHouseReview.dummy)))
+            } else {
+                single(.success(.failure(.unknown(""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func registerReviewIdExecute(query: RegisterReviewIdQuery) -> Single<Result<RegisteredReview, CommentError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(message: ""))))
+                return Disposables.create()
+            }
+            
+            if isSuccessUpload {
+                single(.success(.success(RegisteredReview.dummy)))
+            } else {
+                single(.success(.failure(.unknown(message: ""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func refreshAccessTokenExecute() -> Single<Result<AccessToken, AuthError>> {
+        return Single.create { single in
+            single(.success(.success(AccessToken(accessToken: ""))))
+            return Disposables.create()
+        }
+    }
+    
+    func setSuccessUpload(_ flag: Bool) { isSuccessUpload = flag }
+}
