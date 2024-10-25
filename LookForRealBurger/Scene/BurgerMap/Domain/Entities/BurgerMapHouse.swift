@@ -23,4 +23,6 @@ struct BurgerMapHouse {
     let reviewIds: [String]
     
     var reviews: [BurgerHouseReview]
+    
+    static let dummy = BurgerMapHouse(burgerHousePostId: "", name: "", hashtagName: "", longitude: 0, latitude: 0, roadAddress: "", phone: "", localId: "", productId: "", eatenUserIds: [], plannedUserIds: [], hashTags: [], reviewIds: [], reviews: [])
 }
