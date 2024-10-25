@@ -13,7 +13,10 @@ final class LoginUnitTest: XCTestCase {
     var sut: LoginViewModel!
     
     override func setUpWithError() throws {
-        sut = DefaultLoginViewModel(loginUseCase: MockLoginUseCase(), accessStorage: MockAccessStorage())
+        sut = DefaultLoginViewModel(
+            loginUseCase: MockLoginUseCase(),
+            accessStorage: MockAccessStorage()
+        )
     }
 
     override func tearDownWithError() throws {
