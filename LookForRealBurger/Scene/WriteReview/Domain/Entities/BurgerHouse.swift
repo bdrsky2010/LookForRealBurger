@@ -18,6 +18,8 @@ struct BurgerHouse: Hashable, Identifiable {
     let y: String
     
     var burgerHousePostId: String?
+    
+    static let dummy = BurgerHouse(id: "house", name: "", placeUrl: "", address: "", roadAddress: "", phone: "", x: "", y: "", burgerHousePostId: "postId")
 }
 
 struct BurgerPage: Hashable {

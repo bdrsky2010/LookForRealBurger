@@ -12,4 +12,6 @@ struct RegisteredReview {
     let reviewID: String
     let createdAt: String
     let reviewer: Creator
+    
+    static let dummy = RegisteredReview(registerId: "", reviewID: "", createdAt: "", reviewer: Creator(userId: "me", nick: ""))
 }
