@@ -71,3 +71,37 @@ extension DefaultBurgerHouseReviewCommentUseCase: BurgerHouseReviewCommentUseCas
         }
     }
 }
+
+extension BurgerHouseReviewCommentUseCase {
+    func setSuccessFetch(_ flag: Bool) { }
+}
+
+final class MockBurgerHouseReviewCommentUseCase: BurgerHouseReviewCommentUseCase {
+    var isSuccessFetch = false
+    
+    func writeCommentExecute(query: WriteCommentQuery) -> Single<Result<Comment, CommentError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(message: ""))))
+                return Disposables.create()
+            }
+            
+            if isSuccessFetch {
+                single(.success(.success(Comment(id: "", content: query.content, createdAt: "", creator: Creator(userId: "me", nick: "")))))
+            } else {
+                single(.success(.failure(.unknown(message: ""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func refreshAccessTokenExecute() -> Single<Result<AccessToken, AuthError>> {
+        return Single.create { single in
+            single(.success(.success(AccessToken(accessToken: ""))))
+            return Disposables.create()
+        }
+    }
+    
+    func setSuccessFetch(_ flag: Bool) { isSuccessFetch = flag }
+}
