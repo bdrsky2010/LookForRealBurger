@@ -19,13 +19,11 @@ protocol WriteReviewInput {
     func gallerySelect()
     func saveTap()
     func uploadImage(files: [Data])
-    func uploadImageSuccess(uploadedImage: UploadedImage)
     func plusRatingTap()
     func minusRatingTap()
     func uploadPost(title: String, content: String, files: UploadedImage)
     func missingField()
     func registerReviewId(burgerHousePostId: String, reviewId: String)
-    func refreshAccessToken(completion: @escaping () -> Void)
 }
 
 protocol WriteReviewOutput {
@@ -35,7 +33,7 @@ protocol WriteReviewOutput {
     var presentAddPhotoAction: PublishRelay<Void> { get }
     var presentCamera: PublishRelay<Void> { get }
     var presentGallery: PublishRelay<Void> { get }
-    var burgerHouseRating: BehaviorSubject<Int> { get }
+    var burgerHouseRating: BehaviorRelay<Int> { get }
     var toastMessage: PublishRelay<String> { get }
     var saveConfirm: PublishRelay<Void> { get }
     var uploadImageSuccess: PublishRelay<UploadedImage> { get }
@@ -52,7 +50,7 @@ final class DefaultWriteReviewViewModel: WriteReviewOutput {
     var presentAddPhotoAction = PublishRelay<Void>()
     var presentCamera = PublishRelay<Void>()
     var presentGallery = PublishRelay<Void>()
-    var burgerHouseRating = BehaviorSubject<Int>(value: 5)
+    var burgerHouseRating = BehaviorRelay<Int>(value: 5)
     var toastMessage = PublishRelay<String>()
     var saveConfirm = PublishRelay<Void>()
     var uploadImageSuccess = PublishRelay<UploadedImage>()
@@ -116,7 +114,8 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
             toastMessage.accept(R.Phrase.plzImageUpload)
             return
         }
-        guard files.reduce(0, { $0 + $1.count }) < 5000000 else {
+        guard files.reduce(0, { $0 + $1.count }) < 5000000,
+              files.count <= 5 else {
             toastMessage.accept(R.Phrase.limitImageSize)
             return
         }
@@ -126,7 +125,7 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
             .drive(with: self) { owner, result in
                 switch result {
                 case .success(let value):
-                    owner.uploadImageSuccess(uploadedImage: value)
+                    owner.uploadImageSuccess.accept(value)
                 case .failure(let error):
                     switch error {
                     case .network(let message):
@@ -158,27 +157,15 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
     }
     
     func plusRatingTap() {
-        do {
-            var rating = try burgerHouseRating.value()
-            rating = rating < 5 ? (rating + 1) : rating
-            burgerHouseRating.onNext(rating)
-        } catch {
-            toastMessage.accept(R.Phrase.whyErrorHere)
-        }
+        var rating = burgerHouseRating.value
+        rating = rating < 5 ? (rating + 1) : rating
+        burgerHouseRating.accept(rating)
     }
     
     func minusRatingTap() {
-        do {
-            var rating = try burgerHouseRating.value()
-            rating = rating > 1 ? (rating - 1) : rating
-            burgerHouseRating.onNext(rating)
-        } catch {
-            toastMessage.accept(R.Phrase.whyErrorHere)
-        }
-    }
-    
-    func uploadImageSuccess(uploadedImage: UploadedImage) {
-        uploadImageSuccess.accept(uploadedImage)
+        var rating = burgerHouseRating.value
+        rating = rating > 1 ? (rating - 1) : rating
+        burgerHouseRating.accept(rating)
     }
     
     func uploadPost(title: String, content: String, files: UploadedImage) {
@@ -186,55 +173,53 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
             toastMessage.accept(R.Phrase.plzSelectBurgerHouse)
             return
         }
-        do {
-            let rating = try burgerHouseRating.value()
-            let uploadPostQuery = UploadBurgerHouseReviewQuery(
-                title: title,
-                rating: rating,
-                content: content,
-                burgerHousePostId: burgerHouseId,
-                files: files.paths)
-            
-            uploadPostUseCase.uploadReviewExecute(query: uploadPostQuery)
-                .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
-                .drive(with: self) { owner, result in
-                    switch result {
-                    case .success(let value):
-                        owner.registerReviewId(
-                            burgerHousePostId: value.burgerHousePostId,
-                            reviewId: value.id
-                        )
-                    case .failure(let error):
-                        switch error {
-                        case .network(let message):
-                            owner.toastMessage.accept(message)
-                        case .invalidValue(let message):
-                            owner.toastMessage.accept(message)
-                        case .invalidToken(let message):
-                            owner.toastMessage.accept(message)
-                        case .forbidden(let message):
-                            owner.toastMessage.accept(message)
-                        case .dbServer(let message):
-                            owner.toastMessage.accept(message)
-                        case .expiredToken:
-                            owner.refreshAccessToken {
-                                owner.uploadPost(title: title, content: content, files: files)
-                            }
-                        case .unknown(let message):
-                            owner.toastMessage.accept(message)
-                        case .badRequest(let message):
-                            owner.toastMessage.accept(message)
+        
+        let rating = burgerHouseRating.value
+        let uploadPostQuery = UploadBurgerHouseReviewQuery(
+            title: title,
+            rating: rating,
+            content: content,
+            burgerHousePostId: burgerHouseId,
+            files: files.paths)
+        
+        uploadPostUseCase.uploadReviewExecute(query: uploadPostQuery)
+            .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
+            .drive(with: self) { owner, result in
+                switch result {
+                case .success(let value):
+                    print(value)
+                    owner.registerReviewId(
+                        burgerHousePostId: value.burgerHousePostId,
+                        reviewId: value.id
+                    )
+                case .failure(let error):
+                    switch error {
+                    case .network(let message):
+                        owner.toastMessage.accept(message)
+                    case .invalidValue(let message):
+                        owner.toastMessage.accept(message)
+                    case .invalidToken(let message):
+                        owner.toastMessage.accept(message)
+                    case .forbidden(let message):
+                        owner.toastMessage.accept(message)
+                    case .dbServer(let message):
+                        owner.toastMessage.accept(message)
+                    case .expiredToken:
+                        owner.refreshAccessToken {
+                            owner.uploadPost(title: title, content: content, files: files)
                         }
+                    case .unknown(let message):
+                        owner.toastMessage.accept(message)
+                    case .badRequest(let message):
+                        owner.toastMessage.accept(message)
                     }
-                } onCompleted: { _ in
-                    print("uploadReviewExecute completed")
-                } onDisposed: { _ in
-                    print("uploadReviewExecute disposed")
                 }
-                .disposed(by: disposeBag)
-        } catch {
-            toastMessage.accept(R.Phrase.whyErrorHere)
-        }
+            } onCompleted: { _ in
+                print("uploadReviewExecute completed")
+            } onDisposed: { _ in
+                print("uploadReviewExecute disposed")
+            }
+            .disposed(by: disposeBag)
     }
     
     func missingField() {
@@ -280,8 +265,10 @@ extension DefaultWriteReviewViewModel: WriteReviewInput {
         }
         .disposed(by: disposeBag)
     }
-    
-    func refreshAccessToken(completion: @escaping () -> Void) {
+}
+
+extension DefaultWriteReviewViewModel {
+    private func refreshAccessToken(completion: @escaping () -> Void) {
         uploadPostUseCase.refreshAccessTokenExecute()
             .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
             .drive(with: self) { owner, result in
