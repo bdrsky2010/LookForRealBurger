@@ -182,7 +182,7 @@ final class MockBurgerHouseReviewDetailUseCase: BurgerHouseReviewDetailUseCase {
         }
     }
     
-    func judgeTheReviewCreator(_ creator: Creator, myUserId: String) -> ProfileType {
+    func judgeTheReviewCreator(creator: Creator, myUserId: String) -> ProfileType {
         if creator.userId == myUserId {
             return .me(myUserId)
         }
