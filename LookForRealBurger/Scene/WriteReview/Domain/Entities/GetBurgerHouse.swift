@@ -21,4 +21,6 @@ struct GetBurgerHouse {
     let plannedUserIds: [String]
     let hashTags: [String]
     let reviewIds: [String]
+    
+    static let dummy = GetBurgerHouse(burgerHousePostId: "", name: "", hashtagName: "", longitude: "", latitude: "", roadAddress: "", phone: "", localId: "", productId: "", eatenUserIds: [], plannedUserIds: [], hashTags: [], reviewIds: [])
 }
