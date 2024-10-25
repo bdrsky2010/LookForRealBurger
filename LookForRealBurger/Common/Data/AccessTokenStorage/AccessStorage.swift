@@ -77,7 +77,7 @@ final class MockAccessStorage: AccessStorage {
         set {  }
     }
     var loginUserId: String {
-        get { "" }
+        get { "me" }
         set {  }
     }
     var accessEmail: String {
