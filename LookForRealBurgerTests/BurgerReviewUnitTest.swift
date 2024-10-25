@@ -15,7 +15,11 @@ final class BurgerReviewUnitTest: XCTestCase {
     let mockBurgerHouseReviewUseCase = MockBurgerHouseReviewUseCase()
     
     override func setUpWithError() throws {
-        sut = DefaultBurgerHouseReviewViewModel(burgerReviewUseCase: mockBurgerHouseReviewUseCase, accessStorage: MockAccessStorage(), getPostType: .total)
+        sut = DefaultBurgerHouseReviewViewModel(
+            burgerReviewUseCase: mockBurgerHouseReviewUseCase,
+            accessStorage: MockAccessStorage(),
+            getPostType: .total
+        )
     }
 
     override func tearDownWithError() throws {
