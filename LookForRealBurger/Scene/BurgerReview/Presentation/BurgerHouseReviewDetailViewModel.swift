@@ -10,6 +10,17 @@ import Foundation
 import RxCocoa
 import RxSwift
 
+protocol BurgerHouseReviewDetailInput {
+    func tapBackButton()
+    func viewDidLoad()
+    func likeTap()
+    func commentTap()
+    func bookmarkTap()
+    func burgerHouseTap()
+    func onChangeComments(comments: [Comment])
+    func burgerImageTap()
+}
+
 protocol BurgerHouseReviewDetailOutput {
     var popViewController: PublishRelay<Void> { get }
     var configureViewContents: BehaviorRelay<[BurgerHouseReview]> { get }
@@ -27,17 +38,6 @@ protocol BurgerHouseReviewDetailOutput {
     var pushProfileView: PublishRelay<ProfileType> { get }
     var toastMessage: PublishRelay<String> { get }
     var goToLogin: PublishRelay<Void> { get }
-}
-
-protocol BurgerHouseReviewDetailInput {
-    func tapBackButton()
-    func viewDidLoad()
-    func likeTap()
-    func commentTap()
-    func bookmarkTap()
-    func burgerHouseTap()
-    func onChangeComments(comments: [Comment])
-    func burgerImageTap()
 }
 
 typealias BurgerHouseReviewDetailViewModel = BurgerHouseReviewDetailInput & BurgerHouseReviewDetailOutput
@@ -94,7 +94,7 @@ extension DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailInput 
         bookmarkCount.accept(burgerHouseReview.bookmarkUserIds.count)
         ratingCount.accept(burgerHouseReview.rating)
         
-        let myUserId = UserDefaultsAccessStorage.shared.loginUserId
+        let myUserId = accessStorage.loginUserId
         isMyReview.accept(myUserId == burgerHouseReview.creator.userId)
         isLike.accept(burgerHouseReview.likeUserIds.contains(myUserId))
         isBookmark.accept(burgerHouseReview.bookmarkUserIds.contains(myUserId))
@@ -200,12 +200,11 @@ extension DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailInput 
     }
     
     func burgerImageTap() {
-        let myUserId = UserDefaultsAccessStorage.shared.loginUserId
-        if myUserId == burgerHouseReview.creator.userId {
-            pushProfileView.accept(.me(myUserId))
-        } else {
-            pushProfileView.accept(.other(burgerHouseReview.creator.userId, myUserId))
-        }
+        let profileType = burgerHouseReviewDetailUseCase.judgeTheReviewCreator(
+            creator: burgerHouseReview.creator,
+            myUserId: accessStorage.loginUserId
+        )
+        pushProfileView.accept(profileType)
     }
     
     func burgerHouseTap() {
@@ -223,6 +222,7 @@ extension DefaultBurgerHouseReviewDetailViewModel: BurgerHouseReviewDetailInput 
             case .success(let value):
                 owner.burgerHouse = value
                 owner.configureBurgerHouseButton.accept(value.name)
+                
             case .failure(let error):
                 switch error {
                 case .network(_):

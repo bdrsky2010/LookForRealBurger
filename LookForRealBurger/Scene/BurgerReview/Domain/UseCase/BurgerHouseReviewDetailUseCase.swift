@@ -15,6 +15,7 @@ protocol BurgerHouseReviewDetailUseCase {
     func getSingleBurgerHouseExecute(
         query: GetSingleBurgerHouseQuery
     ) -> Single<Result<GetBurgerHouse, PostError>>
+    func judgeTheReviewCreator(creator: Creator, myUserId: String) -> ProfileType
     func refreshAccessTokenExecute() -> Single<Result<AccessToken, AuthError>>
 }
 
@@ -97,6 +98,13 @@ extension DefaultBurgerHouseReviewDetailUseCase: BurgerHouseReviewDetailUseCase 
         }
     }
     
+    func judgeTheReviewCreator(creator: Creator, myUserId: String) -> ProfileType {
+        if creator.userId == myUserId {
+            return .me(myUserId)
+        }
+        return .other(creator.userId, myUserId)
+    }
+    
     func refreshAccessTokenExecute() -> Single<Result<AccessToken, AuthError>> {
         return Single.create { [weak self] single -> Disposable in
             guard let self else {
@@ -116,3 +124,5 @@ extension DefaultBurgerHouseReviewDetailUseCase: BurgerHouseReviewDetailUseCase 
     }
 }
 
+    func setSuccessFetch(_ flag: Bool) { isSuccessFetch = flag }
+}
