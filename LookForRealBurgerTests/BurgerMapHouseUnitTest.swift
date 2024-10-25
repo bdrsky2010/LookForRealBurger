@@ -15,7 +15,11 @@ final class BurgerMapHouseUnitTest: XCTestCase {
     let mockBurgerMapHouseUseCase = MockBurgerMapHouseUseCase()
     
     override func setUpWithError() throws {
-        sut = DefaultBurgerMapHouseViewModel(burgerMapHouseUseCase: mockBurgerMapHouseUseCase, accessStorage: MockAccessStorage(), burgerMapHouse: BurgerMapHouse(burgerHousePostId: "", name: "", hashtagName: "", longitude: 0, latitude: 0, roadAddress: "", phone: "", localId: "", productId: "", eatenUserIds: [], plannedUserIds: [], hashTags: [], reviewIds: [], reviews: []))
+        sut = DefaultBurgerMapHouseViewModel(
+            burgerMapHouseUseCase: mockBurgerMapHouseUseCase,
+            accessStorage: MockAccessStorage(),
+            burgerMapHouse: BurgerMapHouse.dummy
+        )
     }
 
     override func tearDownWithError() throws {
