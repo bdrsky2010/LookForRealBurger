@@ -142,7 +142,11 @@ final class MockLocalSearchUseCase: LocalSearchUseCase {
             }
             
             if isSuccessExecute {
-                single(.success(.success(BurgerPage(nextPage: 0, isEndPage: true, burgerHouses: []))))
+                if query.page == 1 {
+                    single(.success(.success(BurgerPage(nextPage: 2, isEndPage: false, burgerHouses: [BurgerHouse(id: "start", name: "", placeUrl: "", address: "", roadAddress: "", phone: "", x: "", y: "")]))))
+                } else {
+                    single(.success(.success(BurgerPage(nextPage: 3, isEndPage: true, burgerHouses: [BurgerHouse(id: "end", name: "", placeUrl: "", address: "", roadAddress: "", phone: "", x: "", y: "")]))))
+                }
             } else {
                 single(.success(.failure(.unknown(message: ""))))
             }
