@@ -126,3 +126,75 @@ extension DefaultLocalSearchUseCase: LocalSearchUseCase {
         }
     }
 }
+
+extension LocalSearchUseCase {
+    func setSuccessExecute(_ flag: Bool) { }
+}
+
+final class MockLocalSearchUseCase: LocalSearchUseCase {
+    private var isSuccessExecute = false
+    
+    func localSearchExecute(query: LocalSearchQuery) -> Single<Result<BurgerPage, KakaoAPIError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(message: ""))))
+                return Disposables.create()
+            }
+            
+            if isSuccessExecute {
+                single(.success(.success(BurgerPage(nextPage: 0, isEndPage: true, burgerHouses: []))))
+            } else {
+                single(.success(.failure(.unknown(message: ""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func existBurgerHouseExecute(query: GetPostQuery, localId: String) -> Single<Result<ExistBurgerHouseData, PostError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(""))))
+                return Disposables.create()
+            }
+            
+            if isSuccessExecute {
+                if localId == "exist" {
+                    single(.success(.success(ExistBurgerHouseData(burgerHousePostId: "exist", isExist: true))))
+                } else {
+                    single(.success(.success(ExistBurgerHouseData(burgerHousePostId: "notExist", isExist: false))))
+                }
+            } else {
+                single(.success(.failure(.unknown(""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func uploadBurgerHouseExecute(query: UploadBurgerHouseQuery) -> Single<Result<GetBurgerHouse, PostError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(""))))
+                return Disposables.create()
+            }
+            
+            if isSuccessExecute {
+                single(.success(.success(GetBurgerHouse.dummy)))
+            } else {
+                single(.success(.failure(.unknown(""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func refreshAccessTokenExecute() -> Single<Result<AccessToken, AuthError>> {
+        return Single.create { single in
+            single(.success(.success(AccessToken(accessToken: ""))))
+            return Disposables.create()
+        }
+    }
+    
+    func setSuccessExecute(_ flag: Bool) { isSuccessExecute = flag }
+}
