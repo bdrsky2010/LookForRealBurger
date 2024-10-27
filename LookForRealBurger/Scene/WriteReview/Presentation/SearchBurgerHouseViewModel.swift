@@ -21,8 +21,6 @@ protocol SearchBurgerHouseInput {
     func didChangeText(text: String)
     func searchText(type: RequestType, text: String)
     func modelSelected(item: BurgerHouse)
-    func uploadBurgerHouse(burgerHouse: BurgerHouse)
-    func refreshAccessToken(completion: @escaping () -> Void)
 }
 
 protocol SearchBurgerHouseOutput {
@@ -209,7 +207,7 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
             .disposed(by: disposeBag)
     }
     
-    func uploadBurgerHouse(burgerHouse: BurgerHouse) {
+    private func uploadBurgerHouse(burgerHouse: BurgerHouse) {
         let uploadBurgerHouseQuery = UploadBurgerHouseQuery(
             name: burgerHouse.name,
             hashtagName: "#" + burgerHouse.name,
@@ -258,7 +256,7 @@ extension DefaultSearchBurgerHouseViewModel: SearchBurgerHouseInput {
             .disposed(by: disposeBag)
     }
     
-    func refreshAccessToken(completion: @escaping () -> Void) {
+    private func refreshAccessToken(completion: @escaping () -> Void) {
         localSearchUseCase.refreshAccessTokenExecute()
             .asDriver(onErrorJustReturn: .failure(.unknown(R.Phrase.errorOccurred)))
             .drive(with: self) { owner, result in
