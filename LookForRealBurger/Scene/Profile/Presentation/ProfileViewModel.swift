@@ -15,6 +15,14 @@ enum ProfileType {
     case other(_ userId: String, _ myUserId: String)
 }
 
+protocol ProfileInput {
+    func viewDidLoad()
+    func backButtonTap()
+    func profileRefresh()
+    func followLabelTap(followType: FollowType)
+    func followOrEditButtonTap()
+}
+
 protocol ProfileOutput {
     var setProfile: PublishRelay<GetProfile> { get }
     var setButtonTitle: PublishRelay<String> { get }
@@ -27,14 +35,6 @@ protocol ProfileOutput {
                                       myUserId: String,
                                       followers: [GetFollow],
                                       followings: [GetFollow])> { get }
-}
-
-protocol ProfileInput {
-    func viewDidLoad()
-    func backButtonTap()
-    func profileRefresh()
-    func followLabelTap(followType: FollowType)
-    func followOrEditButtonTap()
 }
 
 typealias ProfileViewModel = ProfileInput & ProfileOutput
