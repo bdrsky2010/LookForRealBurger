@@ -130,3 +130,88 @@ extension DefaultProfileUseCase: ProfileUseCase {
         }
     }
 }
+
+extension ProfileUseCase {
+    func setSuccess(_ flag: Bool) { }
+}
+
+final class MockProfileUseCase: ProfileUseCase {
+    private var isSuccess = false
+    
+    func getMyProfile() -> Single<Result<GetProfile, ProfileError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(""))))
+                return Disposables.create()
+            }
+            
+            if isSuccess {
+                single(.success(.success(GetProfile(userId: "me", nick: "", followers: [], following: [], posts: []))))
+            } else {
+                single(.success(.failure(.unknown(""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func getOtherProfile(query: GetOtherProfileQuery) -> Single<Result<GetProfile, ProfileError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(""))))
+                return Disposables.create()
+            }
+            
+            if isSuccess {
+                single(.success(.success(GetProfile(userId: "other", nick: "", followers: [], following: [], posts: []))))
+            } else {
+                single(.success(.failure(.unknown(""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func followExecute(userId: String) -> Single<Result<GetFollowStatus, FollowError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(""))))
+                return Disposables.create()
+            }
+            
+            if isSuccess {
+                single(.success(.success(GetFollowStatus(followingStatus: true))))
+            } else {
+                single(.success(.failure(.unknown(""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func followCancelExecute(userId: String) -> Single<Result<GetFollowStatus, FollowError>> {
+        return Single.create { [weak self] single in
+            guard let self else {
+                single(.success(.failure(.unknown(""))))
+                return Disposables.create()
+            }
+            
+            if isSuccess {
+                single(.success(.success(GetFollowStatus(followingStatus: false))))
+            } else {
+                single(.success(.failure(.unknown(""))))
+            }
+            
+            return Disposables.create()
+        }
+    }
+    
+    func refreshAccessTokenExecute() -> Single<Result<AccessToken, AuthError>> {
+        return Single.create { single in
+            single(.success(.success(AccessToken(accessToken: ""))))
+            return Disposables.create()
+        }
+    }
+    
+    func setSuccess(_ flag: Bool) { isSuccess = flag }
+}
