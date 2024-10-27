@@ -184,7 +184,7 @@ final class MockLocalSearchUseCase: LocalSearchUseCase {
             }
             
             if isSuccessExecute {
-                single(.success(.success(GetBurgerHouse.dummy)))
+                single(.success(.success(GetBurgerHouse(burgerHousePostId: "notExist", name: "", hashtagName: "", longitude: "", latitude: "", roadAddress: "", phone: "", localId: "", productId: "", eatenUserIds: [], plannedUserIds: [], hashTags: [], reviewIds: []))))
             } else {
                 single(.success(.failure(.unknown(""))))
             }
