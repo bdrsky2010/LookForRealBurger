@@ -44,7 +44,7 @@ final class DefaultProfileViewModel: ProfileOutput {
     private let accessStorage: AccessStorage
     private let disposeBag: DisposeBag
     private let profileType: ProfileType
-    private let myUserId = UserDefaultsAccessStorage.shared.loginUserId
+    private let myUserId: String
     
     private var myProfile: GetProfile?
     private var otherProfile: GetProfile?
@@ -73,6 +73,7 @@ final class DefaultProfileViewModel: ProfileOutput {
         self.accessStorage = accessStorage
         self.disposeBag = disposeBag
         self.profileType = profileType
+        self.myUserId = accessStorage.loginUserId
     }
 }
 
@@ -168,7 +169,6 @@ extension DefaultProfileViewModel: ProfileInput {
                     switch result {
                     case .success(let value):
                         owner.setProfile.accept(value)
-                        print(value.following, myUserId)
                         owner.setButtonTitle.accept(
                             value
                                 .followers
@@ -194,9 +194,9 @@ extension DefaultProfileViewModel: ProfileInput {
                         owner.endRefreshing.accept(())
                     }
                 } onCompleted: { _ in
-                    print("getMyProfile completed")
+                    print("getOtherProfile completed")
                 } onDisposed: { _ in
-                    print("getMyProfile disposed")
+                    print("getOtherProfile disposed")
                 }
                 .disposed(by: disposeBag)
         }
@@ -208,7 +208,6 @@ extension DefaultProfileViewModel: ProfileInput {
             .drive(with: self) { owner, result in
                 switch result {
                 case .success(let value):
-                    owner.setButtonTitle.accept(value.followingStatus ? R.Phrase.followCancel : R.Phrase.followRequest)
                     owner.fetchProfile()
                 case .failure(let error):
                     switch error {
@@ -246,7 +245,6 @@ extension DefaultProfileViewModel: ProfileInput {
             .drive(with: self) { owner, result in
                 switch result {
                 case .success(let value):
-                    owner.setButtonTitle.accept(value.followingStatus ? "팔로우 취소" : "팔로우 하기")
                     owner.fetchProfile()
                 case .failure(let error):
                     switch error {
