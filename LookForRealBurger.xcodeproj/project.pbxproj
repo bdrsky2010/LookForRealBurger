@@ -7,8 +7,17 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7B700DA02CC7DD710020AF46 /* LookForRealBurgerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700D9F2CC7DD710020AF46 /* LookForRealBurgerTests.swift */; };
-		7B700DA72CC7DE7E0020AF46 /* LoginTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DA62CC7DE7E0020AF46 /* LoginTest.swift */; };
+		7B700DA72CC7DE7E0020AF46 /* LoginUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DA62CC7DE7E0020AF46 /* LoginUnitTest.swift */; };
+		7B700DA92CC8BE080020AF46 /* JoinUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DA82CC8BE080020AF46 /* JoinUnitTest.swift */; };
+		7B700DAC2CC8D2170020AF46 /* BurgerMapUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DAB2CC8D2170020AF46 /* BurgerMapUnitTest.swift */; };
+		7B700DAE2CC8D21F0020AF46 /* BurgerMapHouseUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DAD2CC8D21F0020AF46 /* BurgerMapHouseUnitTest.swift */; };
+		7B700DB02CC9420D0020AF46 /* BurgerReviewUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DAF2CC9420D0020AF46 /* BurgerReviewUnitTest.swift */; };
+		7B700DB22CC942190020AF46 /* BurgerReviewDetailUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DB12CC942190020AF46 /* BurgerReviewDetailUnitTest.swift */; };
+		7B700DB42CC942270020AF46 /* BurgerReviewCommentUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DB32CC942270020AF46 /* BurgerReviewCommentUnitTest.swift */; };
+		7B700DBA2CCBBCA00020AF46 /* WriteReviewUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DB92CCBBCA00020AF46 /* WriteReviewUnitTest.swift */; };
+		7B700DBC2CCBBCB30020AF46 /* SearchBurgerHouseUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DBB2CCBBCB30020AF46 /* SearchBurgerHouseUnitTest.swift */; };
+		7B700DBE2CCE52A30020AF46 /* MyProfileUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DBD2CCE52A30020AF46 /* MyProfileUnitTest.swift */; };
+		7B700DC02CCE52B40020AF46 /* OtherProfileUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DBF2CCE52B40020AF46 /* OtherProfileUnitTest.swift */; };
 		7B7BAC2C2C86C4C80045695C /* iamport-ios in Frameworks */ = {isa = PBXBuildFile; productRef = 7B7BAC2B2C86C4C80045695C /* iamport-ios */; };
 		7B7BAC2E2C8704270045695C /* PaymentRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BAC2D2C8704270045695C /* PaymentRouter.swift */; };
 		7B7BAC312C8706160045695C /* PaymentRequestDTO+Mapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7BAC302C8706160045695C /* PaymentRequestDTO+Mapping.swift */; };
@@ -220,8 +229,17 @@
 
 /* Begin PBXFileReference section */
 		7B700D9D2CC7DD710020AF46 /* LookForRealBurgerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LookForRealBurgerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7B700D9F2CC7DD710020AF46 /* LookForRealBurgerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookForRealBurgerTests.swift; sourceTree = "<group>"; };
-		7B700DA62CC7DE7E0020AF46 /* LoginTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginTest.swift; sourceTree = "<group>"; };
+		7B700DA62CC7DE7E0020AF46 /* LoginUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUnitTest.swift; sourceTree = "<group>"; };
+		7B700DA82CC8BE080020AF46 /* JoinUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinUnitTest.swift; sourceTree = "<group>"; };
+		7B700DAB2CC8D2170020AF46 /* BurgerMapUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerMapUnitTest.swift; sourceTree = "<group>"; };
+		7B700DAD2CC8D21F0020AF46 /* BurgerMapHouseUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerMapHouseUnitTest.swift; sourceTree = "<group>"; };
+		7B700DAF2CC9420D0020AF46 /* BurgerReviewUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerReviewUnitTest.swift; sourceTree = "<group>"; };
+		7B700DB12CC942190020AF46 /* BurgerReviewDetailUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerReviewDetailUnitTest.swift; sourceTree = "<group>"; };
+		7B700DB32CC942270020AF46 /* BurgerReviewCommentUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurgerReviewCommentUnitTest.swift; sourceTree = "<group>"; };
+		7B700DB92CCBBCA00020AF46 /* WriteReviewUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewUnitTest.swift; sourceTree = "<group>"; };
+		7B700DBB2CCBBCB30020AF46 /* SearchBurgerHouseUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBurgerHouseUnitTest.swift; sourceTree = "<group>"; };
+		7B700DBD2CCE52A30020AF46 /* MyProfileUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileUnitTest.swift; sourceTree = "<group>"; };
+		7B700DBF2CCE52B40020AF46 /* OtherProfileUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OtherProfileUnitTest.swift; sourceTree = "<group>"; };
 		7B7BAC2D2C8704270045695C /* PaymentRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentRouter.swift; sourceTree = "<group>"; };
 		7B7BAC302C8706160045695C /* PaymentRequestDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentRequestDTO+Mapping.swift"; sourceTree = "<group>"; };
 		7B7BAC322C8706220045695C /* PaymentResponseDTO+Mapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PaymentResponseDTO+Mapping.swift"; sourceTree = "<group>"; };
@@ -450,10 +468,27 @@
 		7B700D9E2CC7DD710020AF46 /* LookForRealBurgerTests */ = {
 			isa = PBXGroup;
 			children = (
-				7B700D9F2CC7DD710020AF46 /* LookForRealBurgerTests.swift */,
-				7B700DA62CC7DE7E0020AF46 /* LoginTest.swift */,
+				7B700DA62CC7DE7E0020AF46 /* LoginUnitTest.swift */,
+				7B700DA82CC8BE080020AF46 /* JoinUnitTest.swift */,
+				7B700DAB2CC8D2170020AF46 /* BurgerMapUnitTest.swift */,
+				7B700DAD2CC8D21F0020AF46 /* BurgerMapHouseUnitTest.swift */,
+				7B700DAF2CC9420D0020AF46 /* BurgerReviewUnitTest.swift */,
+				7B700DB12CC942190020AF46 /* BurgerReviewDetailUnitTest.swift */,
+				7B700DB32CC942270020AF46 /* BurgerReviewCommentUnitTest.swift */,
+				7B700DB92CCBBCA00020AF46 /* WriteReviewUnitTest.swift */,
+				7B700DBB2CCBBCB30020AF46 /* SearchBurgerHouseUnitTest.swift */,
+				7B700DBD2CCE52A30020AF46 /* MyProfileUnitTest.swift */,
+				7B700DBF2CCE52B40020AF46 /* OtherProfileUnitTest.swift */,
 			);
 			path = LookForRealBurgerTests;
+			sourceTree = "<group>";
+		};
+		7B700DAA2CC8D1EE0020AF46 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				7B8350F12C7F72AA00785049 /* BurgerAnnotationView.swift */,
+			);
+			path = Custom;
 			sourceTree = "<group>";
 		};
 		7B7BAC2F2C8705F50045695C /* Payment */ = {
@@ -503,12 +538,12 @@
 		7B83500E2C77246A00785049 /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				7B700DAA2CC8D1EE0020AF46 /* Custom */,
 				7B8350E02C7F245D00785049 /* Scene */,
 				7B8350282C77673C00785049 /* BurgerMapViewController.swift */,
 				7B8350F32C7F899B00785049 /* BurgerMapHouseViewController.swift */,
 				7B83502C2C78CF1100785049 /* BurgerMapViewModel.swift */,
 				7B8350F52C7F9AC800785049 /* BurgerMapHouseViewModel.swift */,
-				7B8350F12C7F72AA00785049 /* BurgerAnnotationView.swift */,
 			);
 			path = Presentation;
 			sourceTree = "<group>";
@@ -1448,8 +1483,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7B700DA02CC7DD710020AF46 /* LookForRealBurgerTests.swift in Sources */,
-				7B700DA72CC7DE7E0020AF46 /* LoginTest.swift in Sources */,
+				7B700DB22CC942190020AF46 /* BurgerReviewDetailUnitTest.swift in Sources */,
+				7B700DBE2CCE52A30020AF46 /* MyProfileUnitTest.swift in Sources */,
+				7B700DBC2CCBBCB30020AF46 /* SearchBurgerHouseUnitTest.swift in Sources */,
+				7B700DBA2CCBBCA00020AF46 /* WriteReviewUnitTest.swift in Sources */,
+				7B700DAE2CC8D21F0020AF46 /* BurgerMapHouseUnitTest.swift in Sources */,
+				7B700DAC2CC8D2170020AF46 /* BurgerMapUnitTest.swift in Sources */,
+				7B700DA72CC7DE7E0020AF46 /* LoginUnitTest.swift in Sources */,
+				7B700DB02CC9420D0020AF46 /* BurgerReviewUnitTest.swift in Sources */,
+				7B700DB42CC942270020AF46 /* BurgerReviewCommentUnitTest.swift in Sources */,
+				7B700DC02CCE52B40020AF46 /* OtherProfileUnitTest.swift in Sources */,
+				7B700DA92CC8BE080020AF46 /* JoinUnitTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
