@@ -133,10 +133,12 @@ extension DefaultProfileUseCase: ProfileUseCase {
 
 extension ProfileUseCase {
     func setSuccess(_ flag: Bool) { }
+    func setFollow(_ flag: Bool) { }
 }
 
 final class MockProfileUseCase: ProfileUseCase {
     private var isSuccess = false
+    private var isFollow = false
     
     func getMyProfile() -> Single<Result<GetProfile, ProfileError>> {
         return Single.create { [weak self] single in
@@ -146,7 +148,7 @@ final class MockProfileUseCase: ProfileUseCase {
             }
             
             if isSuccess {
-                single(.success(.success(GetProfile(userId: "me", nick: "", followers: [], following: [], posts: []))))
+                single(.success(.success(GetProfile(userId: "me", nick: "", followers: [GetFollow(userId: "other", nick: ""), GetFollow(userId: "another", nick: "")], following: [GetFollow(userId: "other", nick: "")], posts: []))))
             } else {
                 single(.success(.failure(.unknown(""))))
             }
@@ -163,7 +165,11 @@ final class MockProfileUseCase: ProfileUseCase {
             }
             
             if isSuccess {
-                single(.success(.success(GetProfile(userId: "other", nick: "", followers: [], following: [], posts: []))))
+                if isFollow {
+                    single(.success(.success(GetProfile(userId: "other", nick: "", followers: [GetFollow(userId: "me", nick: "")], following: [], posts: []))))
+                } else {
+                    single(.success(.success(GetProfile(userId: "other", nick: "", followers: [], following: [], posts: []))))
+                }
             } else {
                 single(.success(.failure(.unknown(""))))
             }
@@ -214,4 +220,5 @@ final class MockProfileUseCase: ProfileUseCase {
     }
     
     func setSuccess(_ flag: Bool) { isSuccess = flag }
+    func setFollow(_ flag: Bool) { isFollow = flag }
 }
