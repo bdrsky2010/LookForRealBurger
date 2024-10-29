@@ -16,10 +16,6 @@ enum ProfileError: Error {
     case unknown(_ message: String)
 }
 
-enum ProfileAPIType: String {
-    case profile
-}
-
 protocol ProfileRepository {
     func myProfileRequest(completion: @escaping (Result<GetProfile, ProfileError>) -> Void)
     func getOtherProfileRequest(
@@ -51,7 +47,7 @@ extension DefaultProfileRepository: ProfileRepository {
             case .success(let success):
                 completion(.success(success.toDomain()))
             case .failure(let failure):
-                let profileError = errorHandling(type: .profile, failure: failure)
+                let profileError = errorHandling(failure: failure)
                 completion(.failure(profileError))
             }
         }
@@ -70,7 +66,7 @@ extension DefaultProfileRepository: ProfileRepository {
             case .success(let success):
                 completion(.success(success.toDomain()))
             case .failure(let failure):
-                let profileError = errorHandling(type: .profile, failure: failure)
+                let profileError = errorHandling(failure: failure)
                 completion(.failure(profileError))
             }
         }
@@ -78,21 +74,18 @@ extension DefaultProfileRepository: ProfileRepository {
 }
 
 extension DefaultProfileRepository {
-    private func errorHandling(
-        type: ProfileAPIType,
-        failure: NetworkError
-    ) -> ProfileError {
+    private func errorHandling(failure: NetworkError) -> ProfileError {
         let profileError: ProfileError
         switch failure {
         case .requestFailure(let error):
             profileError = .network(R.Phrase.errorOccurred)
-            print("ProfileRepository \(type.rawValue) network 에러 발생 -> \(error)")
+            print("ProfileRepository network 에러 발생 -> \(error)")
         case .apiKey, .invalidData, .tooManyRequest, .invalidURL:
             profileError = .network(R.Phrase.errorOccurred)
-            print("ProfileRepository \(type.rawValue) network 에러 발생 -> \(failure)")
+            print("ProfileRepository network 에러 발생 -> \(failure)")
         case .networkFailure:
             profileError = .network(R.Phrase.errorOccurred)
-            print("ProfileRepository \(type.rawValue) network 에러 발생 -> \(failure)")
+            print("ProfileRepository network 에러 발생 -> \(failure)")
         case .unknown(let statusCode):
             switch statusCode {
             case 401:
@@ -105,7 +98,7 @@ extension DefaultProfileRepository {
                 profileError = .unknown(R.Phrase.errorOccurred)
             }
         }
-        print("ProfileRepository \(type.rawValue) 에러 -> \(profileError)")
+        print("ProfileRepository 에러 -> \(profileError)")
         return profileError
     }
 }
