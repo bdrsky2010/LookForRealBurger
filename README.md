@@ -112,7 +112,7 @@
 - **Network**
     - Network Manager와 Network Router를 활용하여 실질적으로 네트워크를 담당하는 계층 
     - Network Manager: Moya의 MoyaProvider를 활용하여 네트워크 요청을 보내 응답을 받아 데이터를 반환하는 객체 
-    - Network Router: Moya의 TargetType을 더 추상화한 형태의 TargetType을 새로 정의하여 채택한 enum의 case와 연관값을 활용하여<br>API의 BaseURL, HTTPMethod, Parameter, Header 등을 설정
+    - Network Router: Moya의 TargetType을 더 추상화한 형태의 TargetType을 새로 정의하여 채택한<br>enum의 case와 연관값을 활용하여 API의 BaseURL, HTTPMethod, Parameter, Header 등을 설정
     - RequestDTO와 ResposeDTO를 통해 데이터를 요청 및 응답
     
 - **Data Storage**
@@ -122,28 +122,28 @@
 ### 2. 의존성 역전 원칙
 - 하위 모듈을 프로토콜 타입으로서 의존성을 외부에서 주입하여 의존성의 방향을 역전시켰으며,<br>그로인한 유지보수성이 좋고 Testable한 코드를 작성이 가능 
 - DIP를 적용하기 위해 계층 간 결합도를 낮추도록 SOLID 원칙을 고려하며 모듈을 구현
-    - 단일 책임의 원칙: 역할에 따른 기능 분리로 인한 계층 모듈화<br>(예: 액션을 담당하는 ViewModel, 비즈니스 로직을 담당하는 UseCase, 회원인증에 대한 API를 담당하는 Repository 등등)
+    - 단일 책임의 원칙: 역할에 따른 기능 분리로 인한 계층 모듈화<br>(예: 액션을 담당하는 ViewModel, 비즈니스 로직을 담당하는 UseCase, 인증에 대한 API를 담당하는 Repository 등등)
     - 개방-폐쇄의 원칙: 추상화된 protocol을 채택하여 외부에서 사용되지 않는 메서드는 Class 내부에서 private하게 구현
     - 리스코프 치환 원칙: ViewController를 자식 Class로 바라보며 공통적으로 필요한 View(Navigation, Hierarchy, Layout, UI 등)<br>설정 메서드를 정의하여 ViewDidLoad에서 호출해 자식 Class인 ViewController에서 재정의해 구현할 수 있도록 구성
-    - 인터페이스 분리 원칙: Input, OutPut, UseCase, Repository 등 역할에 따른 상위 모듈에서 사용되는 메서드 및 프로퍼티만 요구사항으로서 프로토콜에 정의
+    - 인터페이스 분리 원칙: Input, OutPut, UseCase, Repository 등 역할에 따른 상위 모듈에서 사용되는 메서드 및<br>프로퍼티만 요구사항으로서 프로토콜에 정의
     - 의존성 역전 원칙: 상위 모듈이 하위 모듈에 의존하지 않는, 추상화된 프로토콜에 의존하는 방식으로 모듈을 구현
 
 ### 3. Input/Output 패턴
 - 추상화된 형태의 프로토콜로 Input과 Output을 구성하였으며, 두 프로토콜을 병합한 형태로 typealias를 통해 별칭을 ViewModel로 설정
 - View에서 일어나는 액션을 Input을 통해 ViewModel에 전달
 - ViewModel에서 처리된 데이터를 Output을 통해 View로 전달하여 UI를 업데이트
-- Input/Output 패턴을 활용하여 MVVM 구조에서 View와 ViewModel 간에 양방향 통신에 대한 데이터의 흐름을 직관적으로 파악 및 관리 
+- Input/Output 패턴을 활용하여 MVVM 구조에서 View와 ViewModel 간에 양방향 통신에 대한 데이터의 흐름을<br>직관적으로 파악 및 관리 
 
 ### 4. DTO(Data Transfer Object)구조 및 데이터 흐름
 - API 호출로 인한 네트워크 요청 시 요청에 필요한 데이터를 RequestDTO로 요청, 응답으로 받은 데이터를 ResponseDTO로 받으며,<br>ResposeDTO를 Entity로 변환하여 관리
 - RequestDTO: API 호출 시 ViewModel과 UseCase를 통해 받아온 Query 객체 데이터를 Repository 계층에서<br>RequestDTO 객체로 변환하여 Network Manager에 전달
 - ResponseDTO: 서버 API로부터 전달받은 JSON 데이터를 ResponseDTO 객체 데이터로 변환 후 앱에서 사용하는 데이터의 형태로 가공된 Entity 객체 데이터로 변환하여 UseCase로 전달
-- Entity: 앱 내 도메인 즉, 비즈니스 로직에 사용되는 데이터 객체로, ResposeDTO에서 변환된 후 UseCase로 전달되어 UI 업데이트를 위해 ViewModel로 전달
+- Entity: 앱 내 도메인 즉, 비즈니스 로직에 사용되는 데이터 객체로, ResposeDTO에서 변환된 후 UseCase로 전달되어<br>UI 업데이트를 위해 ViewModel로 전달
 
 ### 5. Unit Test
 - 목적 및 설계: Input/Output에 대한 데이터 흐름 및 API 호출에 대한 성공/실패 시나리오를 테스트
 - 기대 효과: 비즈니스 로직의 성공과 에러에 대한 핸들링에 대한 안정적인 작동 확인을 통해 신뢰성 확인
-- 테스트 진행: Mock 객체(UseCase, LocalStorge)를 통한 네트워크 통신 및 Local DB 접근을 하였으며, Protocol 타입으로 선언된 ViewModel에 실제 사용되는 ViewModel 객체를 대입하여 실질적인 Input/Output에 대한 안정적인 데이터 흐름 테스트 완료.
+- 테스트 진행: Mock 객체(UseCase, LocalStorge)를 통한 네트워크 통신 및 Local DB 접근을 하였으며,<br>Protocol 타입으로 선언된 ViewModel에 실제 사용되는 ViewModel 객체를 대입하여 실질적인<br>Input/Output에 대한 안정적인 데이터 흐름 테스트 완료.
 
 ### 6. 아키텍쳐의 데이터 흐름 예시
 <p align="center"> 
