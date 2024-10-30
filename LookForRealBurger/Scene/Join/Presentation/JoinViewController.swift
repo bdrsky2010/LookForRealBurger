@@ -80,6 +80,10 @@ final class JoinViewController: BaseViewController {
         bind()
     }
     
+    override func configureNavigation() {
+        navigationItem.title = R.Phrase.joinTitle
+    }
+    
     override func configureHierarchy() {
         view.addSubview(baseView)
         baseView.addSubview(bunUpImageView)
@@ -149,7 +153,6 @@ final class JoinViewController: BaseViewController {
     }
     
     override func configureUI() {
-        navigationItem.title = R.Phrase.joinTitle
         setupBackButton()
         emailSearchBar.keyboardType = .emailAddress
         passwordSearchBar.isSecureTextEntry = true
@@ -211,6 +214,7 @@ extension JoinViewController {
             nickSearchBar.rx.text.orEmpty
         )
         joinButton.rx.tap
+            .throttle(.seconds(1), scheduler: MainScheduler.instance)
             .withLatestFrom(fieldData)
             .map { JoinQuery(email: $0.0, password: $0.1, nick: $0.2) }
             .bind(with: self) { owner, query in

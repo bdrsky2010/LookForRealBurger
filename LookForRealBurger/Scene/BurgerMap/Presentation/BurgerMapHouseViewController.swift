@@ -88,10 +88,6 @@ final class BurgerMapHouseViewController: BaseViewController {
         bind()
     }
     
-    override func configureNavigation() {
-//        navigationItem.title = "BURGER HOUSE"
-    }
-    
     override func configureHierarchy() {
         view.addSubview(nameLabel)
         view.addSubview(roadAddressImage)
