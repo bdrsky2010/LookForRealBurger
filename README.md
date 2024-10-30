@@ -148,7 +148,9 @@
 ### 4. DTO(Data Transfer Object)구조 및 데이터 흐름
 > API 호출로 인한 네트워크 요청 시 요청에 필요한 데이터를 RequestDTO로 요청, 응답으로 받은 데이터를<br>ResponseDTO로 받으며, ResposeDTO를 Entity로 변환하여 관리
 - **RequestDTO**: API 호출 시 ViewModel과 UseCase를 통해 받아온 Query 객체 데이터를 Repository 계층에서<br>RequestDTO 객체로 변환하여 Network Manager에 전달
+
 - **ResponseDTO**: 서버 API로부터 전달받은 JSON 데이터를 ResponseDTO 객체 데이터로 변환 후 앱에서 사용하는<br>데이터의 형태로 가공된 Entity 객체 데이터로 변환하여 UseCase로 전달
+
 - **Entity**: 앱 내 도메인 즉, 비즈니스 로직에 사용되는 데이터 객체로, ResposeDTO에서 변환된 후 UseCase로 전달되어<br>UI 업데이트를 위해 ViewModel로 전달
 
 ### 5. Unit Test
