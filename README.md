@@ -147,7 +147,7 @@
 
 ### 6. 아키텍쳐의 데이터 흐름 예시
 <p align="center"> 
-    <img src="./images/join.png" align="center" width="33%"> 
+    <img src="./images/join.png" align="center" width="40%"> 
 </p>
 
 </div>
