@@ -135,7 +135,7 @@
     
     - **리스코프 치환 원칙**: ViewController를 자식 Class로 바라보며 공통적으로 필요한 View(Navigation, Hierarchy, Layout, UI 등) 설정 메서드를 정의하여 ViewDidLoad에서 호출해 자식 Class인 ViewController에서<br>재정의해 구현할 수 있도록 구성
     
-    - **인터페이스 분리 원칙**: Input, OutPut, UseCase, Repository 등 역할에 따른 상위 모듈에서 사용되는 메서드 및<br>프로퍼티만 요구사항으로서 프로토콜에 정의
+    - **인터페이스 분리 원칙**: Input, Output, UseCase, Repository 등 역할에 따른 상위 모듈에서 사용되는 메서드 및<br>프로퍼티만 요구사항으로서 프로토콜에 정의
     
     - **의존성 역전 원칙**: 상위 모듈이 하위 모듈에 의존하지 않는, 추상화된 프로토콜에 의존하는 방식으로 모듈을 구현
 
