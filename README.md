@@ -44,7 +44,7 @@
 - 효율적인 데이터 로딩
   - 전체 리뷰를 조회하는 경우, Cursor Based Pagination을 통해 데이터를 효율적으로 로드하도록 구현했습니다.
 - 이미지 데이터 업로드
-  - 리뷰 작성 시 이미지와 텍스트를 함께 서버에 전송하기 위해 HTTP Request(Post)의 Content-type을 multipart/form-data로 설정하였으며, 이미지를 JPEG로 압축 후 HTTP Request의 Body에 포함하여 서버에 업로드하였습니다.
+  - 리뷰 작성 시 이미지와 텍스트를 함께 서버에 전송하기 위해 HTTP Request(Post)의 Content-type을<br>multipart/form-data로 설정하였으며, 이미지를 JPEG로 압축 후 HTTP Request의 Body에 포함하여 서버에 업로드하였습니다.
 <br>
 
 # 프로젝트 환경
