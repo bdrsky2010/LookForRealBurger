@@ -44,8 +44,10 @@
 - 지도 기반 리뷰
   - Mapkit의 MKMapViewDelegate 활용해 사용자 리뷰가 있는 햄버거 식당 위치를 지도에 표시했습니다.
   - Custom MKAnnotationView를 사용해 Pin의 모양을 햄버거 아이콘으로 커스터마이징하여<br>사용자가 한눈에 위치를 인식할 수 있도록 구현했습니다.
+  
 - 효율적인 데이터 로딩
   - 전체 리뷰를 조회하는 경우, Cursor Based Pagination을 통해 데이터를 효율적으로 로드하도록 구현했습니다.
+  
 - 이미지 데이터 업로드
   - 리뷰 작성 시 이미지와 텍스트를 함께 서버에 전송하기 위해 HTTP Request(Post)의 Content-type을<br>multipart/form-data로 설정하였으며, 이미지를 JPEG로 압축 후 HTTP Request의 Body에 포함하여<br>서버에 업로드하였습니다.
 <br>
@@ -66,8 +68,8 @@
   - MVVM, Input-Output, Clean Architecture
   - CodeBasedUI
   - Cursor Based Pagination
+  
 - 라이브러리
-
 |라이브러리|사용목적|
 |-|-|
 |RxSwift|반응형 프로그래밍, 코드 가독성 향상 및 일관성 유지|
@@ -124,11 +126,16 @@
 
 ### 2. 의존성 역전 원칙
 - 하위 모듈을 프로토콜 타입으로서 의존성을 외부에서 주입하여 의존성의 방향을 역전시켰으며,<br>그로인한 유지보수성이 좋고 Testable한 코드를 작성이 가능 
+
 - DIP를 적용하기 위해 계층 간 결합도를 낮추도록 SOLID 원칙을 고려하며 모듈을 구현
     - 단일 책임의 원칙: 역할에 따른 기능 분리로 인한 계층 모듈화<br>(예: 액션을 담당하는 ViewModel, 비즈니스 로직을 담당하는 UseCase, 인증에 대한 API를 담당하는 Repository 등등)
+    
     - 개방-폐쇄의 원칙: 추상화된 protocol을 채택하여 외부에서 사용되지 않는 메서드는 Class 내부에서 private하게 구현
+    
     - 리스코프 치환 원칙: ViewController를 자식 Class로 바라보며 공통적으로 필요한 View(Navigation, Hierarchy, Layout, UI 등)<br>설정 메서드를 정의하여 ViewDidLoad에서 호출해 자식 Class인 ViewController에서 재정의해 구현할 수 있도록 구성
+    
     - 인터페이스 분리 원칙: Input, OutPut, UseCase, Repository 등 역할에 따른 상위 모듈에서 사용되는 메서드 및<br>프로퍼티만 요구사항으로서 프로토콜에 정의
+    
     - 의존성 역전 원칙: 상위 모듈이 하위 모듈에 의존하지 않는, 추상화된 프로토콜에 의존하는 방식으로 모듈을 구현
 
 ### 3. Input/Output 패턴
@@ -138,14 +145,16 @@
 - Input/Output 패턴을 활용하여 MVVM 구조에서 View와 ViewModel 간에 양방향 통신에 대한 데이터의 흐름을<br>직관적으로 파악 및 관리 
 
 ### 4. DTO(Data Transfer Object)구조 및 데이터 흐름
-- API 호출로 인한 네트워크 요청 시 요청에 필요한 데이터를 RequestDTO로 요청, 응답으로 받은 데이터를<br>ResponseDTO로 받으며, ResposeDTO를 Entity로 변환하여 관리
+> API 호출로 인한 네트워크 요청 시 요청에 필요한 데이터를 RequestDTO로 요청, 응답으로 받은 데이터를<br>ResponseDTO로 받으며, ResposeDTO를 Entity로 변환하여 관리
 - RequestDTO: API 호출 시 ViewModel과 UseCase를 통해 받아온 Query 객체 데이터를 Repository 계층에서<br>RequestDTO 객체로 변환하여 Network Manager에 전달
 - ResponseDTO: 서버 API로부터 전달받은 JSON 데이터를 ResponseDTO 객체 데이터로 변환 후 앱에서 사용하는<br>데이터의 형태로 가공된 Entity 객체 데이터로 변환하여 UseCase로 전달
 - Entity: 앱 내 도메인 즉, 비즈니스 로직에 사용되는 데이터 객체로, ResposeDTO에서 변환된 후 UseCase로 전달되어<br>UI 업데이트를 위해 ViewModel로 전달
 
 ### 5. Unit Test
 - 목적 및 설계: Input/Output에 대한 데이터 흐름 및 API 호출에 대한 성공/실패 시나리오를 테스트
+
 - 기대 효과: 비즈니스 로직의 성공과 에러에 대한 핸들링에 대한 안정적인 작동 확인을 통해 신뢰성 확인
+
 - 테스트 진행: Mock 객체(UseCase, LocalStorge)를 통한 네트워크 통신 및 Local DB 접근을 하였으며,<br>Protocol 타입으로 선언된 ViewModel에 실제 사용되는 ViewModel 객체를 대입하여 실질적인<br>Input/Output에 대한 안정적인 데이터 흐름 테스트 완료.
 
 ### 6. 아키텍쳐의 데이터 흐름 예시
