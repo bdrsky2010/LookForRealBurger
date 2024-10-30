@@ -95,7 +95,27 @@
 
 ### 1. 계층구조
 - **ViewModel**
-    - 안녕하세요
+    - RxSwift와 RxCocoa를 활용하여 ViewController와의 데이터 바인딩을 담당하는 계층
+    - Input과 Output을 정의하여 View와 통신을 관리
+    - UseCase를 통해 비즈니스 로직을 처리하고, UI 업데이트에 필요한 데이터를 제공
+    
+- **UseCase**
+    - 비즈니스 로직을 담당하는 계층으로, 특정 작업을 처리하기 위해 데이터를 요청 및 제공하는 역할
+    - Repository를 통해 데이터를 요청 및 제공
+    - 네트워크 통신 시, RxSwift의 Single trait을 활용 및 Result 타입으로<br>한 번 더 래핑하여 error가 발생해도 구독이 끊기지 않고 Stream이 유지되도록 구현
+    
+- **Repository**
+    - Network에 API를 요청하여 데이터를 받아오는 역할을 담당
+    - 요청에 대한 데이터를 DTO로 변환하여 API에 요청
+    - 응답에 대한 DTO 데이터를 Entity로 변환하여 UseCase에 전달 
+    
+- **Network**
+    - 실질적인 네트워크 통신을 담당하는 Network Manager와 Router 패턴을 활용하여 API별로<br>네트워크 요청 시 필요한 데이터를 직관적으로 관리하는 Network Router를 통해 API 요청과 응답을 관리하는 계층
+    - RequestDTO와 ResposeDTO를 통해 데이터를 요청 및 응답
+    
+- **Data Storage**
+    - UserDefaults를 활용하여 Local DB를 관리하는 계층
+    - 간단한 데이터 저장 및 조회
 
 ### 2. 의존성 역전 원칙
 
