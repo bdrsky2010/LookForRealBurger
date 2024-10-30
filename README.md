@@ -89,6 +89,28 @@
 </p>
 
 > MVVM(Input/Output) + Clean Architecture
+<details>
+<summary>설명</summary>
+<div>
+
+### 1. 계층구조
+- *ViewModel*
+    - 안녕하세요
+
+### 2. 의존성 역전 원칙
+
+
+### 3. Input/Output 패턴
+
+
+### 4. DTO(Data Transfer Object)구조 및 데이터 흐름
+
+
+### 5. Unit Test
+
+</div>
+</details>
+
 - Input/Output 패턴을 활용하여 양방향 데이터바인딩
 - ViewModel, UseCase, Repository 로 나눠지는 역할에 따른 로직 모듈화
 - Router 패턴을 활용하여 반복되는 네트워크 작업을 추상화
