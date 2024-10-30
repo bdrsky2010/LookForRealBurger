@@ -40,7 +40,7 @@
 # 주요기술
 - 지도 기반 리뷰
   - Mapkit의 MKMapViewDelegate 활용해 사용자 리뷰가 있는 햄버거 식당 위치를 지도에 표시했습니다.
-  - Custom MKAnnotationView를 사용해 Pin의 모양을 햄버거 아이콘으로 커스터마이징하여---사용자가 한눈에 위치를 인식할 수 있도록 구현했습니다.
+  - Custom MKAnnotationView를 사용해 Pin의 모양을 햄버거 아이콘으로 커스터마이징하여<br>사용자가 한눈에 위치를 인식할 수 있도록 구현했습니다.
 - 효율적인 데이터 로딩
   - 전체 리뷰를 조회하는 경우, Cursor Based Pagination을 통해 데이터를 효율적으로 로드하도록 구현했습니다.
 - 이미지 데이터 업로드
