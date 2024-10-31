@@ -214,7 +214,6 @@ bool 타입의 프로퍼티를 설정할 수 있는 빈 setter 메서드를 구�
 <p align="center"> 
      <img src="./images/unittest_2.png" align="center" width="80%">
 </p>
-<br>
 
 <br>
 <p align="center"> 
