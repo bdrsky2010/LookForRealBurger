@@ -100,28 +100,28 @@
 <div>
 
 ### 1. 계층구조
-- **ViewModel**
+- **ViewModel** ([관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Scene/WriteReview/Presentation/WriteReviewViewModel.swift))
     - RxSwift와 RxCocoa를 활용하여 ViewController와의 데이터 바인딩을 담당하는 계층
     - Input과 Output을 정의하여 View와 통신을 관리
     - UseCase를 통해 비즈니스 로직을 처리하고, UI 업데이트에 필요한 데이터를 제공
     
-- **UseCase**
+- **UseCase** ([관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Scene/WriteReview/Domain/UseCase/UploadPostUseCase.swift))
     - 비즈니스 로직을 담당하는 계층으로, 특정 작업을 처리하기 위해 데이터를 요청 및 제공하는 역할
     - Repository를 통해 데이터를 요청 및 제공
     - 네트워크 통신 시, RxSwift의 Single trait을 활용 및 Result 타입으로<br>한 번 더 래핑하여 error가 발생해도 구독이 끊기지 않고 Stream이 유지되도록 구현
     
-- **Repository**
+- **Repository** ([관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/Repository/PostRepository.swift))
     - Network에 API를 요청하여 데이터를 받아오는 역할을 담당
     - 요청에 대한 데이터를 DTO로 변환하여 API에 요청
     - 응답에 대한 DTO 데이터를 Entity로 변환하여 UseCase에 전달 
     
-- **Network**
+- **Network** ([Manager 관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/Network/LFRBNetworkManager.swift)) / [Router 관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/Network/Router/AuthRouter.swift))
     - Network Manager와 Network Router를 활용하여 실질적으로 네트워크를 담당하는 계층 
     - Network Manager: Moya의 MoyaProvider를 활용하여 네트워크 요청을 보내 응답을 받아 데이터를 반환하는 객체 
     - Network Router: Moya의 TargetType을 더 추상화한 형태의 TargetType을 새로 정의하여 채택한<br>enum의 case와 연관값을 활용하여 API의 BaseURL, HTTPMethod, Parameter, Header 등을 설정
     - RequestDTO와 ResposeDTO를 통해 데이터를 요청 및 응답
     
-- **Data Storage**
+- **Data Storage** ([관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/AccessTokenStorage/AccessStorage.swift))
     - UserDefaults를 활용하여 Local DB를 관리하는 계층
     - 간단한 데이터 저장 및 조회
 
@@ -153,7 +153,7 @@
 
 - **Entity**: 앱 내 도메인 즉, 비즈니스 로직에 사용되는 데이터 객체로, ResposeDTO에서 변환된 후 UseCase로 전달되어<br>UI 업데이트를 위해 ViewModel로 전달
 
-### 5. Unit Test
+### 5. Unit Test ([관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurgerTests/WriteReviewUnitTest.swift))
 - **목적 및 설계**: Input/Output에 대한 데이터 흐름 및 API 호출에 대한 성공/실패 시나리오를 테스트
 
 - **기대 효과**: 비즈니스 로직의 성공과 에러에 대한 핸들링에 대한 안정적인 작동 확인을 통해 신뢰성 확인
