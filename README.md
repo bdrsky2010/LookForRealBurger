@@ -115,7 +115,7 @@
     - 요청에 대한 데이터를 DTO로 변환하여 API에 요청
     - 응답에 대한 DTO 데이터를 Entity로 변환하여 UseCase에 전달 
     
-- **Network** ([Manager 관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/Network/LFRBNetworkManager.swift)) / [Router 관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/Network/Router/AuthRouter.swift))
+- **Network** ([Manager 관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/Network/LFRBNetworkManager.swift) / [Router 관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/Network/Router/AuthRouter.swift))
     - Network Manager와 Network Router를 활용하여 실질적으로 네트워크를 담당하는 계층 
     - Network Manager: Moya의 MoyaProvider를 활용하여 네트워크 요청을 보내 응답을 받아 데이터를 반환하는 객체 
     - Network Router: Moya의 TargetType을 더 추상화한 형태의 TargetType을 새로 정의하여 채택한<br>enum의 case와 연관값을 활용하여 API의 BaseURL, HTTPMethod, Parameter, Header 등을 설정
