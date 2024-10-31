@@ -186,7 +186,7 @@ ViewController의 Input/Output 액션을 담당하는 ViewModel에
 
 <br>
 <p align="center"> 
-     <img src="./images/unit_1.png" align="center" width="80%">
+     <img src="./images/unittest_1.png" align="center" width="80%">
 </p>
 <br>
 
@@ -212,13 +212,13 @@ bool 타입의 프로퍼티를 설정할 수 있는 빈 setter 메서드를 구�
 
 <br>
 <p align="center"> 
-     <img src="./images/unit_2.png" align="center" width="80%">
+     <img src="./images/unittest_2.png" align="center" width="80%">
 </p>
 <br>
 
 <br>
 <p align="center"> 
-     <img src="./images/unit_3.png" align="center" width="80%">
+     <img src="./images/unittest_3.png" align="center" width="80%">
 </p>
 <br>
 
@@ -226,7 +226,7 @@ bool 타입의 프로퍼티를 설정할 수 있는 빈 setter 메서드를 구�
 
 <br>
 <p align="center"> 
-     <img src="./images/unit_4.png" align="center" width="80%">
+     <img src="./images/unittest_4.png" align="center" width="80%">
 </p>
 
 <br>
