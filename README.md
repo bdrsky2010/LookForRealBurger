@@ -172,6 +172,69 @@
 
 # 트러블 슈팅
 <details>
+<summary>Unit Test - Mock 객체 메서드 내 분기처리</summary>
+<div>
+
+### Unit Test - Mock 객체 메서드 내 분기처리
+
+본인은 앱 비즈니스 로직의 안정적인 데이터 흐름에 대한 신뢰성 향상을 위해
+Unit Test를 진행하였다.
+
+ViewController의 Input/Output 액션을 담당하는 ViewModel에
+비즈니스 로직을 담당하는 UseCase를 테스트용 Mock 객체로 구현하여
+의존성을 주입 후, 테스트를 진행하도록 설계하였다.
+
+<br>
+<p align="center"> 
+     <img src="./images/unit_1.png" align="center" width="80%">
+</p>
+<br>
+
+하지만 시작하자마자 문제가 생겼는데,
+protocol에 요구된 메서드를 통해 
+Mock 데이터를 활용하여 API 네트워크 통신 테스트를 진행하기에
+매개변수로는 성공과 실패 케이스에 대한 분기 처리를 할 수 없어
+테스트를 진행하기에 어려운 상황에 직면했다.
+
+이 상황에서 필요한 것은 Flag에 대한 신호를 보내서 분기 처리를 하는 방법이었다.
+하지만 나는 protocol을 통해서 메서드에 접근하기 때문에 class 구현체 내부의
+신호를 보낼 방법이 없었고 여기서 내가 할 수 있는 최선의 선택은 
+protocol의 extension 기능이었다
+
+protocol에서 요구사항을 정의할 때는 메서드 및 프로퍼티의 선언만 이뤄지는데
+protocol extension을 통해 확장하는 경우, 메서드의 구현이 가능하다.
+
+UseCase protocol의 extension을 통해
+API 네트워크 통신 과정에서 성공과 실패에 대한 분기를 나눌 수 있는
+bool 타입의 프로퍼티를 설정할 수 있는 빈 setter 메서드를 구현 후,
+해당 protocol을 채택하는 Mock 객체에서 실질적으로 구현하는
+방식을 선택할 수 있었다.
+
+<br>
+<p align="center"> 
+     <img src="./images/unit_2.png" align="center" width="80%">
+</p>
+<br>
+
+<br>
+<p align="center"> 
+     <img src="./images/unit_3.png" align="center" width="80%">
+</p>
+<br>
+
+덕분에 성공과 실패에 대한 케이스 둘다 성공적으로 테스트를 진행할 수 있었다.
+
+<br>
+<p align="center"> 
+     <img src="./images/unit_4.png" align="center" width="80%">
+</p>
+
+<br>
+
+</div>
+</details>
+
+<details>
 <summary>Access Token 자동갱신</summary>
 <div>
 
