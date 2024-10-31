@@ -11,8 +11,6 @@ protocol AccessStorage: AnyObject {
     var accessToken: String { get set }
     var refreshToken: String { get set }
     var loginUserId: String { get set }
-    var accessEmail: String { get set }
-    var accessPassword: String { get set }
     
     func removeToken()
 }
@@ -23,8 +21,6 @@ final class UserDefaultsAccessStorage {
     private let accessTokenKey = "LookForRealBurgerAccess"
     private let refreshTokenKey = "LookForRealBurgerRefresh"
     private let loginUserIdKey = "LookForRealBurgerLoginUserId"
-    private let accessEmailKey = "LookForRealBurgerEmail"
-    private let accessPasswordKey = "LookForRealBurgerPassword"
     private let userDefaults: UserDefaults
     
     private init(
@@ -53,14 +49,6 @@ extension UserDefaultsAccessStorage: AccessStorage {
         get { userDefaults.string(forKey: loginUserIdKey) ?? "" }
         set { userDefaults.set(newValue, forKey: loginUserIdKey) }
     }
-    var accessEmail: String {
-        get { userDefaults.string(forKey: accessEmailKey) ?? "" }
-        set { userDefaults.set(newValue, forKey: accessEmailKey) }
-    }
-    var accessPassword: String {
-        get { userDefaults.string(forKey: accessPasswordKey) ?? "" }
-        set { userDefaults.set(newValue, forKey: accessPasswordKey) }
-    }
     
     func removeToken() {
         resetUserDefaults()
@@ -78,14 +66,6 @@ final class MockAccessStorage: AccessStorage {
     }
     var loginUserId: String {
         get { "me" }
-        set {  }
-    }
-    var accessEmail: String {
-        get { "" }
-        set {  }
-    }
-    var accessPassword: String {
-        get { "" }
         set {  }
     }
     
