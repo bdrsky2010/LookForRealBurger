@@ -294,10 +294,10 @@ Refresh Token을 통한 Access Token 자동 갱신 방식을 선택하게 되었
     <img src="./images/error.png" align="center" width="80%"> 
 </p>
 
-- `TabBarController` 의 세번째 탭을 탭하게 되면 `EmptyViewContoller` 즉 빈 ViewController가 load가 되고 해당 ViewController가 로드되면 Modal이 Present 되는 상황
-- Modal이 Present 가 된 상황에서 뷰의 계층구조를 Xcode Hierarchy 확인해보니 하위 ViewController 모두 뷰의 계층구조에서 사라진 상황
+- `TabBarController` 의 세번째 탭을 탭하게 되면 `EmptyViewContoller` 즉 빈 ViewController가 load 되고<br>해당 ViewController가 로드되면 Modal이 Present 되는 상황
+- Modal이 Present 가 된 상황에서 뷰의 계층구조를 Xcode Hierarchy를 통해 확인해보니 하위 ViewController 모두<br>뷰의 계층구조에서 사라진 상황
 - 그리고 위 경고 message가 Console 에 출력
-- 경고 message를 부족한 영어실력으로 해석해보면
+- 경고 message
   -  먼저 `EmptyPresentViewController` 가 뷰의 계층구조에서 분리되었다!
   - 이 분리된 뷰컨트롤러에서 `UINavigationController` 를 Present 하는 것을 좀 아닌 것 같다.
   - 손상된 결과물이 보여질 수 있다.
@@ -310,10 +310,13 @@ Refresh Token을 통한 Access Token 자동 갱신 방식을 선택하게 되었
 </p>
 <br>
 
-- 위 경고 message를 해석한 후 `Modal`이 `Present` 되는 위치를 확인해보니
-- `viewWillAppear(_ animated: Bool)` 생명주기 메서드 내에 작성
-- 해당 코드를 보며 생각해봤을 때, `viewWillAppear(_ animated: Bool)` 에서 `ViewController` 를 `Present` 하게되면 뷰가 다 보여지지 않은 상태에서 `Modal`에서 보여지는 `ViewController`가 계층구조에 올라가는 것이 아닐까 라는 생각이 들며
-- 이러한 이유로 `EmptyViewController` 가 뷰의 계층구조에서 사라진 것이 아닌 뷰의 계층구조에 올라가기도 전에 분리가 되어 버린 것이라고 판단
+위 경고 message를 해석한 후 `Modal`이 `Present` 되는 위치를 확인해보니
+<br><br>
+`viewWillAppear(_ animated: Bool)` 생명주기 메서드 내에 작성
+<br><br>
+해당 코드를 보며 생각해봤을 때, `viewWillAppear(_ animated: Bool)` 에서 `ViewController` 를<br>`Present` 하게되면 뷰가 다 보여지지 않은 상태에서 `Modal`에서 보여지는<br>`ViewController`가 계층구조에 올라가는 것이 아닐까 라는 생각이 들며
+<brb><br>
+이러한 이유로 `EmptyViewController` 가 뷰의 계층구조에서 사라진 것이 아닌 뷰의 계층구조에 올라가기도 전에 분리가 되어 버린 것이라고 판단
 
 <br>
 <p align="center"> 
@@ -321,14 +324,14 @@ Refresh Token을 통한 Access Token 자동 갱신 방식을 선택하게 되었
 </p>
 <br>
 
-- 그렇다면 `ViewController` 가 다 보여진 상태에서 `Modal` 을 `Present` 하게되면 해결될 것이라는 확신이 들었으며
-- `Modal` 이 `Present` 되는 코드를 `viewDidAppear(_ animated: Bool)` 내에 작성
-- 그 후, 빌드해서 확인해보니 에러 message가 사라지고 뷰의 계층구조도 잘 올라가있는 것을 확인할 수 있었다.
-
+그렇다면 `ViewController` 가 다 보여진 상태에서 `Modal` 을 `Present` 하게되면 해결될 것이라는 확신이 들었으며
+<br><br>
+`Modal` 이 `Present` 되는 코드를 `viewDidAppear(_ animated: Bool)` 내에 작성
+<br><br>
+그 후, 빌드해서 확인해보니 에러 message가 사라지고 뷰의 계층구조도 잘 올라가있는 것을 확인할 수 있었다.
 <br>
 
-> 느낀점
-> 뷰의 생명주기 메서드를 활용할 땐, 생각을 좀 하면서 해야겠다 라고 생각했다.
+> 느낀점<br>ViewController의 생명주기 메서드를 활용할 땐, 생각을 좀 하면서 해야겠다 라고 생각했다.
 
 <br>
 
@@ -348,7 +351,7 @@ Refresh Token을 통한 Access Token 자동 갱신 방식을 선택하게 되었
 <br>
 
 - 전체 리뷰 게시글을 확인하는 화면에서 `Pull To Refresh` 기능을 구성해놓은 상황
-- 이 기능을 내가 사용자의 입장에서 계속해서 사용해본 경험으로는 게시글이 `Refresh` 가 되고 있는 지 아닌 지 구분이 되지 않을 정도로 너무 빠르게 사라졌으며
+- 이 기능을 내가 사용자의 입장에서 계속해서 사용해본 경험으로는 게시글이 `Refresh` 가 되고 있는 지 아닌 지<br>구분이 되지 않을 정도로 너무 빠르게 사라졌으며
 - 이 부분이 내 입장에서는 어색함과 답답함이 느껴졌다.
 
 <br>
@@ -359,7 +362,7 @@ Refresh Token을 통한 Access Token 자동 갱신 방식을 선택하게 되었
 
 - 물론 코드를 내가 그렇게 작동하도록 구현을 해놨기 때문이다.
 - 즉, 데이터에 대한 패치를 요청하고 바로 Refreshing을 끝내버린 것이다.
-- 그래서 API 통신이 완료되면 end Refreshing 되도록 로직을 수정해봐도 데이터 패치 속도가 빨라 애니메이션이 끝나는 시점이 거의 유사했다.
+- 그래서 API 통신이 완료되면 end Refreshing 되도록 로직을 수정해봐도 데이터 패치 속도가 빨라<br>애니메이션이 끝나는 시점이 거의 유사했다.
 
 <br>
 <p align="center"> 
@@ -367,8 +370,8 @@ Refresh Token을 통한 Access Token 자동 갱신 방식을 선택하게 되었
 </p>
 <br>
 
-- 결국에는 `refreshing` 을 끝내라는 `Output Action` 이 일어나게 되면 `2초 Delay` 를 주고 `End Refreshing` 되도록 변경
-- 물론 이건 너무 억지라고 할 수도 있지만 어쨌든 개발자도 사용자의 입장에서 생각을 해봐야 한다고 생각해봤을 때 이게 더 나은 선택이라고 느껴졌다.
+- 결국에는 `refreshing` 을 끝내라는 `Output Action` 이 일어나게 되면 `2초 Delay` 를 주고<br>`End Refreshing` 되도록 변경
+- 물론 이건 너무 억지라고 할 수도 있지만 어쨌든 개발자도 사용자의 입장에서 생각을 해봐야 한다고<br>생각해봤을 때 이게 더 나은 선택이라고 느껴졌다.
 
 <br>
 <p align="center">  
