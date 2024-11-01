@@ -314,7 +314,7 @@ Refresh Token을 통한 Access Token 자동 갱신 방식을 선택하게 되었
 <br><br>
 `viewWillAppear(_ animated: Bool)` 생명주기 메서드 내에 작성
 <br><br>
-해당 코드를 보며 생각해봤을 때, `viewWillAppear(_ animated: Bool)` 에서 `ViewController` 를<br>`Present` 하게되면 뷰가 다 보여지지 않은 상태에서 `Modal`에서 보여지는<br>`ViewController`가 계층구조에 올라가는 것이 아닐까 라는 생각이 들며
+해당 코드를 보며 생각해봤을 때, `viewWillAppear(_ animated: Bool)` 에서 `ViewController` 를<br>`Present` 하게되면 뷰가 다 보여지지 않은 상태에서 `Modal`에서 보여지는`ViewController`가<br>계층구조에 올라가는 것이 아닐까 라는 생각이 들며
 <brb><br>
 이러한 이유로 `EmptyViewController` 가 뷰의 계층구조에서 사라진 것이 아닌 뷰의 계층구조에 올라가기도 전에 분리가 되어 버린 것이라고 판단
 
