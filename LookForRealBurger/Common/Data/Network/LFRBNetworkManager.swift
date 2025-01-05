@@ -35,8 +35,8 @@ final class LFRBNetworkManager: NetworkManager {
     func request<Target: LFRBTargetType, T: Decodable>(
         _ targetType: Target,
         of type: T.Type,
-        completionHandler: @escaping (Result<T, NetworkError>
-        ) -> Void) {
+        completionHandler: @escaping (Result<T, NetworkError>) -> Void
+    ) {
         let provider = MoyaProvider<Target>()
         
         provider.request(targetType) { result in
