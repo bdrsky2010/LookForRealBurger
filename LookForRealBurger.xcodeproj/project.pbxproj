@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7B6ABC5B2D2AADA7005B9DFD /* SecureTokenManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6ABC5A2D2AADA7005B9DFD /* SecureTokenManager.swift */; };
+		7B6ABC5D2D2AADC7005B9DFD /* SecureEnclaveService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6ABC5C2D2AADC7005B9DFD /* SecureEnclaveService.swift */; };
+		7B6ABC5F2D2AADD6005B9DFD /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6ABC5E2D2AADD6005B9DFD /* KeychainService.swift */; };
+		7B6ABC612D2AB2A9005B9DFD /* SecureID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6ABC602D2AB2A9005B9DFD /* SecureID.swift */; };
+		7B6ABC632D2AB3B2005B9DFD /* SecureTokenManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6ABC622D2AB3B2005B9DFD /* SecureTokenManagerTests.swift */; };
 		7B700DA72CC7DE7E0020AF46 /* LoginUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DA62CC7DE7E0020AF46 /* LoginUnitTest.swift */; };
 		7B700DA92CC8BE080020AF46 /* JoinUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DA82CC8BE080020AF46 /* JoinUnitTest.swift */; };
 		7B700DAC2CC8D2170020AF46 /* BurgerMapUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DAB2CC8D2170020AF46 /* BurgerMapUnitTest.swift */; };
@@ -228,6 +233,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7B6ABC5A2D2AADA7005B9DFD /* SecureTokenManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTokenManager.swift; sourceTree = "<group>"; };
+		7B6ABC5C2D2AADC7005B9DFD /* SecureEnclaveService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureEnclaveService.swift; sourceTree = "<group>"; };
+		7B6ABC5E2D2AADD6005B9DFD /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
+		7B6ABC602D2AB2A9005B9DFD /* SecureID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureID.swift; sourceTree = "<group>"; };
+		7B6ABC622D2AB3B2005B9DFD /* SecureTokenManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTokenManagerTests.swift; sourceTree = "<group>"; };
 		7B700D9D2CC7DD710020AF46 /* LookForRealBurgerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LookForRealBurgerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B700DA62CC7DE7E0020AF46 /* LoginUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUnitTest.swift; sourceTree = "<group>"; };
 		7B700DA82CC8BE080020AF46 /* JoinUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinUnitTest.swift; sourceTree = "<group>"; };
@@ -465,6 +475,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B6ABC592D2AAD5F005B9DFD /* Secure */ = {
+			isa = PBXGroup;
+			children = (
+				7B6ABC5A2D2AADA7005B9DFD /* SecureTokenManager.swift */,
+				7B6ABC5C2D2AADC7005B9DFD /* SecureEnclaveService.swift */,
+				7B6ABC5E2D2AADD6005B9DFD /* KeychainService.swift */,
+				7B6ABC602D2AB2A9005B9DFD /* SecureID.swift */,
+			);
+			path = Secure;
+			sourceTree = "<group>";
+		};
 		7B700D9E2CC7DD710020AF46 /* LookForRealBurgerTests */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,6 +500,7 @@
 				7B700DBB2CCBBCB30020AF46 /* SearchBurgerHouseUnitTest.swift */,
 				7B700DBD2CCE52A30020AF46 /* MyProfileUnitTest.swift */,
 				7B700DBF2CCE52B40020AF46 /* OtherProfileUnitTest.swift */,
+				7B6ABC622D2AB3B2005B9DFD /* SecureTokenManagerTests.swift */,
 			);
 			path = LookForRealBurgerTests;
 			sourceTree = "<group>";
@@ -1055,6 +1077,7 @@
 				7B91C2392C70E3360019C51F /* Data */,
 				7B91C2442C70E56A0019C51F /* Location */,
 				7B91C23A2C70E35C0019C51F /* Utilities */,
+				7B6ABC592D2AAD5F005B9DFD /* Secure */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -1485,6 +1508,7 @@
 			files = (
 				7B700DB22CC942190020AF46 /* BurgerReviewDetailUnitTest.swift in Sources */,
 				7B700DBE2CCE52A30020AF46 /* MyProfileUnitTest.swift in Sources */,
+				7B6ABC632D2AB3B2005B9DFD /* SecureTokenManagerTests.swift in Sources */,
 				7B700DBC2CCBBCB30020AF46 /* SearchBurgerHouseUnitTest.swift in Sources */,
 				7B700DBA2CCBBCA00020AF46 /* WriteReviewUnitTest.swift in Sources */,
 				7B700DAE2CC8D21F0020AF46 /* BurgerMapHouseUnitTest.swift in Sources */,
@@ -1536,6 +1560,7 @@
 				7BA6732B2C8492F000D4F792 /* ProfileReviewTabViewController.swift in Sources */,
 				7B91C28F2C7341530019C51F /* EmailValidMessage.swift in Sources */,
 				7B8351152C80661600785049 /* BurgerHouseReviewDetailUseCase.swift in Sources */,
+				7B6ABC5D2D2AADC7005B9DFD /* SecureEnclaveService.swift in Sources */,
 				7B8350632C7C9EBD00785049 /* UIWindowScene+.swift in Sources */,
 				7B83502B2C77691800785049 /* ProfileViewController.swift in Sources */,
 				7B8350FC2C7FB46300785049 /* BaseCollectionViewCell.swift in Sources */,
@@ -1613,6 +1638,7 @@
 				7BA672ED2C81E7D900D4F792 /* SectionImageType.swift in Sources */,
 				7B91C2E92C76A6E20019C51F /* UINavigationController+.swift in Sources */,
 				7B8350722C7CD86D00785049 /* GetPostQuery.swift in Sources */,
+				7B6ABC612D2AB2A9005B9DFD /* SecureID.swift in Sources */,
 				7B91C2352C70DB630019C51F /* LFRBHeader.swift in Sources */,
 				7B8351042C7FD89600785049 /* BurgerHouseReviewUseCase.swift in Sources */,
 				7B8350E22C7F247100785049 /* BurgerMapScene.swift in Sources */,
@@ -1633,6 +1659,7 @@
 				7B7BAC312C8706160045695C /* PaymentRequestDTO+Mapping.swift in Sources */,
 				7BA673262C84865D00D4F792 /* ProfileScene.swift in Sources */,
 				7B8351072C7FD91F00785049 /* BurgerHouseReviewScene.swift in Sources */,
+				7B6ABC5B2D2AADA7005B9DFD /* SecureTokenManager.swift in Sources */,
 				7B7BAC2E2C8704270045695C /* PaymentRouter.swift in Sources */,
 				7B91C2D62C7606AF0019C51F /* LoginScene.swift in Sources */,
 				7BA673452C85168C00D4F792 /* FollowViewController.swift in Sources */,
@@ -1657,6 +1684,7 @@
 				7B91C1FB2C6C96160019C51F /* R.swift in Sources */,
 				7B7BAC332C8706220045695C /* PaymentResponseDTO+Mapping.swift in Sources */,
 				7BA6730D2C844BE400D4F792 /* BurgerHouseReviewCommentViewController.swift in Sources */,
+				7B6ABC5F2D2AADD6005B9DFD /* KeychainService.swift in Sources */,
 				7B8350F42C7F899B00785049 /* BurgerMapHouseViewController.swift in Sources */,
 				7B8350452C7B1F1500785049 /* WriteReviewViewModel.swift in Sources */,
 				7BA673222C8479AB00D4F792 /* MoreUseCase.swift in Sources */,
