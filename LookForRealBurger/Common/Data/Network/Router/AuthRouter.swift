@@ -13,7 +13,7 @@ enum AuthRouter {
     case join(_ dto: JoinRequestDTO)
     case emailValid(_ dto: EmailValidRequestDTO)
     case login(_ dto: LoginRequestDTO)
-    case accessTokenRefresh
+    case accessTokenRefresh(_ refreshToken: String)
     case withdraw
 }
 
@@ -75,11 +75,11 @@ extension AuthRouter: LFRBTargetType {
                 LFRBHeader.contentType.rawValue: LFRBHeader.json.rawValue,
                 LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue
             ]
-        case .accessTokenRefresh:
+        case .accessTokenRefresh(let refreshToken):
             return [
                 LFRBHeader.authorization.rawValue: UserDefaultsAccessStorage.shared.accessToken,
                 LFRBHeader.sesacKey.rawValue: APIKEY.lslp.rawValue,
-                LFRBHeader.refresh.rawValue: UserDefaultsAccessStorage.shared.refreshToken
+                LFRBHeader.refresh.rawValue: refreshToken
             ]
         case .withdraw:
             return [
