@@ -110,7 +110,7 @@ extension DefaultLoginViewModel: LoginInput {
     
     func saveToken(loginUser: LoginUser) {
         accessStorage.accessToken = loginUser.accessToken
-        accessStorage.refreshToken = loginUser.refreshToken
+//        accessStorage.refreshToken = loginUser.refreshToken
         accessStorage.loginUserId = loginUser.userId
     }
 }
