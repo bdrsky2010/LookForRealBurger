@@ -8,7 +8,6 @@
 import Foundation
 
 protocol SecureEnclaveService {
-    func getOrCreateSecureEnclaveKey() -> SecKey?
     func encryptData(data: Data) -> Data?
     func decryptData(data: Data) -> Data?
 }
@@ -16,8 +15,57 @@ protocol SecureEnclaveService {
 final class DefaultSecureEnclaveService: SecureEnclaveService {
     private let account = SecureID.account
     
-    /// ✅ Secure Enclave 키 생성 (시뮬레이터 대응 포함)
-    func getOrCreateSecureEnclaveKey() -> SecKey? {
+    /// ✅ 데이터 암호화
+    func encryptData(data: Data) -> Data? {
+        #if targetEnvironment(simulator)
+        print("🖥️ 시뮬레이터: 암호화 없이 데이터 반환")
+        return data
+        #else
+        guard let privateKey = readOrCreateSecureEnclaveKey(),
+              let publicKey = SecKeyCopyPublicKey(privateKey) else { return nil }
+        
+        var error: Unmanaged<CFError>?
+        guard let encryptedData = SecKeyCreateEncryptedData(
+            publicKey,
+            .eciesEncryptionStandardX963SHA256AESGCM,
+            data as CFData,
+            &error
+        ) else {
+            print("❌ 데이터 암호화 실패: \(error!.takeRetainedValue())")
+            return nil
+        }
+        
+        return encryptedData as Data
+        #endif
+    }
+    
+    /// ✅ 데이터 복호화 (시뮬레이터 대응)
+    func decryptData(data: Data) -> Data? {
+        #if targetEnvironment(simulator)
+        print("🖥️ 시뮬레이터: 암호화 없이 데이터 반환")
+        return data
+        #else
+        guard let privateKey = readOrCreateSecureEnclaveKey() else { return nil }
+        
+        var error: Unmanaged<CFError>?
+        guard let decryptedData = SecKeyCreateDecryptedData(
+            privateKey,
+            .eciesEncryptionStandardX963SHA256AESGCM,
+            data as CFData,
+            &error
+        ) else {
+            print("❌ 데이터 복호화 실패: \(error!.takeRetainedValue())")
+            return nil
+        }
+        
+        return decryptedData as Data
+        #endif
+    }
+}
+
+extension DefaultSecureEnclaveService {
+    /// ✅ Secure Enclave 키 생성
+    private func readOrCreateSecureEnclaveKey() -> SecKey? {
         let tag = account.data(using: .utf8)!
         
         #if targetEnvironment(simulator)
@@ -60,51 +108,17 @@ final class DefaultSecureEnclaveService: SecureEnclaveService {
         return privateKey
         #endif
     }
+}
+
+final class MockSecureEnclaveService: SecureEnclaveService {
+    var encryptSucceed = true
+    var decryptSucceed = true
     
-    /// ✅ 데이터 암호화 (시뮬레이터 대응)
     func encryptData(data: Data) -> Data? {
-        #if targetEnvironment(simulator)
-        print("🖥️ 시뮬레이터: AES 암호화로 대체")
-        return data
-        #else
-        guard let privateKey = getOrCreateSecureEnclaveKey(),
-              let publicKey = SecKeyCopyPublicKey(privateKey) else { return nil }
-        
-        var error: Unmanaged<CFError>?
-        guard let encryptedData = SecKeyCreateEncryptedData(
-            publicKey,
-            .eciesEncryptionStandardX963SHA256AESGCM,
-            data as CFData,
-            &error
-        ) else {
-            print("❌ 데이터 암호화 실패: \(error!.takeRetainedValue())")
-            return nil
-        }
-        
-        return encryptedData as Data
-        #endif
+        return encryptSucceed ? Data("encryptedMockToken".utf8) : nil
     }
     
-    /// ✅ 데이터 복호화 (시뮬레이터 대응)
     func decryptData(data: Data) -> Data? {
-        #if targetEnvironment(simulator)
-        print("🖥️ 시뮬레이터: 암호화 없이 데이터 반환")
-        return data
-        #else
-        guard let privateKey = getOrCreateSecureEnclaveKey() else { return nil }
-        
-        var error: Unmanaged<CFError>?
-        guard let decryptedData = SecKeyCreateDecryptedData(
-            privateKey,
-            .eciesEncryptionStandardX963SHA256AESGCM,
-            data as CFData,
-            &error
-        ) else {
-            print("❌ 데이터 복호화 실패: \(error!.takeRetainedValue())")
-            return nil
-        }
-        
-        return decryptedData as Data
-        #endif
+        return decryptSucceed ? Data("mockToken".utf8) : nil
     }
 }
