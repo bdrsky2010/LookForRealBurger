@@ -7,49 +7,82 @@
 
 import Foundation
 
+enum KeychainError: Error {
+    case error
+}
+
 protocol KeychainService {
-    func storeData(_ data: Data) -> Bool
-    func retrieveData() -> Data?
-    func deleteData() -> Bool
+    func storeData(_ data: Data, completion: @escaping (Result<Void, KeychainError>) -> Void)
+    func retrieveData(completion: @escaping (Result<Data, KeychainError>) -> Void)
+    func deleteData(completion: @escaping (Result<Void, KeychainError>) -> Void)
 }
 
 final class DefaultKeychainService: KeychainService {
-    private let account = SecureID.account
+    private let account: String
+    private let keychainQueue: DispatchQueue
     
-    func storeData(_ data: Data) -> Bool {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: account,
-            kSecValueData as String: data
-        ]
-        
-        SecItemDelete(query as CFDictionary)
-        let status = SecItemAdd(query as CFDictionary, nil)
-        return status == errSecSuccess
+    init(account: String = SecureID.account) {
+        self.account = account
+        self.keychainQueue = DispatchQueue(label: "KEYCHAIN_QUEUE", attributes: .concurrent)
     }
     
-    func retrieveData() -> Data? {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: account,
-            kSecReturnData as String: true
-        ]
-        
-        var item: CFTypeRef?
-        let status = SecItemCopyMatching(query as CFDictionary, &item)
-        guard status == errSecSuccess else { return nil }
-        
-        return item as? Data
+    func storeData(_ data: Data, completion: @escaping (Result<Void, KeychainError>) -> Void) {
+        keychainQueue.async { [weak self] in
+            guard let self else { return }
+            
+            let query: [String: Any] = [
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrAccount as String: account,
+                kSecValueData as String: data
+            ]
+            
+            SecItemDelete(query as CFDictionary)
+            let status = SecItemAdd(query as CFDictionary, nil)
+            
+            if status == errSecSuccess {
+                completion(.success(()))
+            } else {
+                completion(.failure(.error))
+            }
+        }
     }
     
-    func deleteData() -> Bool {
-        let query: [String: Any] = [
-            kSecClass as String: kSecClassGenericPassword,
-            kSecAttrAccount as String: account
-        ]
-        let status = SecItemDelete(query as CFDictionary)
-        
-        if status == errSecSuccess { return true }
-        else { return false }
+    func retrieveData(completion: @escaping (Result<Data, KeychainError>) -> Void) {
+        keychainQueue.async { [weak self] in
+            guard let self else { return }
+            
+            let query: [String: Any] = [
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrAccount as String: account,
+                kSecReturnData as String: true
+            ]
+            
+            var item: CFTypeRef?
+            let status = SecItemCopyMatching(query as CFDictionary, &item)
+            
+            if status == errSecSuccess, let data = item as? Data {
+                completion(.success(data))
+            } else {
+                completion(.failure(.error))
+            }
+        }
+    }
+    
+    func deleteData(completion: @escaping (Result<Void, KeychainError>) -> Void) {
+        keychainQueue.async { [weak self] in
+            guard let self else { return }
+            
+            let query: [String: Any] = [
+                kSecClass as String: kSecClassGenericPassword,
+                kSecAttrAccount as String: account
+            ]
+            let status = SecItemDelete(query as CFDictionary)
+            
+            if status == errSecSuccess {
+                completion(.success(()))
+            } else {
+                completion(.failure(.error))
+            }
+        }
     }
 }
