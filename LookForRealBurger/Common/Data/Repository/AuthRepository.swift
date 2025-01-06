@@ -162,7 +162,7 @@ extension DefualtAuthRepository: AuthRepository {
             switch result {
             case .success(let token):
                 network.request(
-                    AuthRouter.accessTokenRefresh,
+                    AuthRouter.accessTokenRefresh(token),
                     of: RefreshAccessTokenResponseDTO.self
                 ) { [weak self] result in
                     guard let self else { return }
