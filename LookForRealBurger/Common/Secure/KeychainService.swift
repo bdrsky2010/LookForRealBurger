@@ -27,7 +27,7 @@ final class DefaultKeychainService: KeychainService {
     }
     
     func storeData(_ data: Data, completion: @escaping (Result<Void, KeychainError>) -> Void) {
-        keychainQueue.async { [weak self] in
+        keychainQueue.sync { [weak self] in
             guard let self else { return }
             
             let query: [String: Any] = [
@@ -48,7 +48,7 @@ final class DefaultKeychainService: KeychainService {
     }
     
     func retrieveData(completion: @escaping (Result<Data, KeychainError>) -> Void) {
-        keychainQueue.async { [weak self] in
+        keychainQueue.sync { [weak self] in
             guard let self else { return }
             
             let query: [String: Any] = [
@@ -69,7 +69,7 @@ final class DefaultKeychainService: KeychainService {
     }
     
     func deleteData(completion: @escaping (Result<Void, KeychainError>) -> Void) {
-        keychainQueue.async { [weak self] in
+        keychainQueue.sync { [weak self] in
             guard let self else { return }
             
             let query: [String: Any] = [
