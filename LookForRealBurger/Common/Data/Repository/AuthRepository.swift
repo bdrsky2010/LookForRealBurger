@@ -63,11 +63,14 @@ final class DefualtAuthRepository {
     static let shared = DefualtAuthRepository()
     
     private let network: NetworkManager
+    private let secureTokenManager: SecureTokenManager
     
     private init(
-        network: NetworkManager = LFRBNetworkManager.shared
+        network: NetworkManager = LFRBNetworkManager.shared,
+        secureTokenManager: SecureTokenManager = DefaultSecureTokenManager.shared
     ) {
         self.network = network
+        self.secureTokenManager = secureTokenManager
     }
 }
 
@@ -136,7 +139,14 @@ extension DefualtAuthRepository: AuthRepository {
             guard let self else { return }
             switch result {
             case .success(let success):
-                completion(.success(success.toDomain()))
+                secureTokenManager.encryptAndStoreToken(token: success.refreshToken) { result in
+                    switch result {
+                    case .success:
+                        completion(.success(success.toDomain()))
+                    case .failure(let failure):
+                        completion(.failure(.accountVerify(R.Phrase.accountVerifyError)))
+                    }
+                }
             case .failure(let failure):
                 let authError = errorHandling(type: .login, failure: failure)
                 completion(.failure(authError))
@@ -147,17 +157,26 @@ extension DefualtAuthRepository: AuthRepository {
     func refreshAccessToken(
         completion: @escaping (Result<AccessToken, AuthError>) -> Void
     ) {
-        network.request(
-            AuthRouter.accessTokenRefresh,
-            of: RefreshAccessTokenResponseDTO.self
-        ) { [weak self] result in
+        secureTokenManager.retrieveAndDecryptToken { [weak self] result in
             guard let self else { return }
             switch result {
-            case .success(let success):
-                completion(.success(success.toDomain()))
-            case .failure(let failure):
-                let authError = errorHandling(type: .accessTokenRefresh, failure: failure)
-                completion(.failure(authError))
+            case .success(let token):
+                network.request(
+                    AuthRouter.accessTokenRefresh,
+                    of: RefreshAccessTokenResponseDTO.self
+                ) { [weak self] result in
+                    guard let self else { return }
+                    switch result {
+                    case .success(let success):
+                        completion(.success(success.toDomain()))
+                    case .failure(let failure):
+                        let authError = errorHandling(type: .accessTokenRefresh, failure: failure)
+                        completion(.failure(authError))
+                    }
+                }
+                
+            case .failure:
+                completion(.failure(.expiredRefreshToken))
             }
         }
     }
