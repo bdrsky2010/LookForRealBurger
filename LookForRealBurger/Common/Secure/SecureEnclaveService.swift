@@ -15,7 +15,7 @@ protocol SecureEnclaveService {
 final class DefaultSecureEnclaveService: SecureEnclaveService {
     private let account = SecureID.account
     
-    /// ✅ 데이터 암호화
+    // ✅ 데이터 암호화
     func encryptData(data: Data) -> Data? {
         #if targetEnvironment(simulator)
         print("🖥️ 시뮬레이터: 암호화 없이 데이터 반환")
@@ -39,7 +39,7 @@ final class DefaultSecureEnclaveService: SecureEnclaveService {
         #endif
     }
     
-    /// ✅ 데이터 복호화 (시뮬레이터 대응)
+    // ✅ 데이터 복호화 (시뮬레이터 대응)
     func decryptData(data: Data) -> Data? {
         #if targetEnvironment(simulator)
         print("🖥️ 시뮬레이터: 암호화 없이 데이터 반환")
@@ -64,7 +64,7 @@ final class DefaultSecureEnclaveService: SecureEnclaveService {
 }
 
 extension DefaultSecureEnclaveService {
-    /// ✅ Secure Enclave 키 생성
+    // ✅ Secure Enclave 키 생성
     private func readOrCreateSecureEnclaveKey() -> SecKey? {
         let tag = account.data(using: .utf8)!
         

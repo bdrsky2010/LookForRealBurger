@@ -49,7 +49,7 @@ final class DefaultSecureTokenManager: SecureTokenManager {
                 switch result {
                 case .success:
                     completion(.success(()))
-                case .failure(let failure):
+                case .failure:
                     completion(.failure(.error))
                 }
             }
@@ -71,7 +71,7 @@ final class DefaultSecureTokenManager: SecureTokenManager {
                         completion(.failure(.error))
                     }
                 }
-            case .failure(let failure):
+            case .failure:
                 print("❌ 토큰 복호화 실패")
                 completion(.failure(.error))
             }
@@ -119,7 +119,7 @@ final class TestSecureTokenManager: SecureTokenManager {
                 switch result {
                 case .success:
                     completion(.success(()))
-                case .failure(let failure):
+                case .failure:
                     completion(.failure(.error))
                 }
             }
@@ -141,7 +141,7 @@ final class TestSecureTokenManager: SecureTokenManager {
                         completion(.failure(.error))
                     }
                 }
-            case .failure(let failure):
+            case .failure:
                 print("❌ 토큰 복호화 실패")
                 completion(.failure(.error))
             }
