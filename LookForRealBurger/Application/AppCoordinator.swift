@@ -33,6 +33,10 @@ extension AppCoordinator {
         authCoordinator.start()
     }
     
+protocol LoginNavigation: AnyObject {
+    func goToJoin()
+    func goToJoinComplete(user: JoinUser)
+    func goToMainTabbar()
 }
 
 final class AuthCoordinator: Coordinator {
@@ -51,7 +55,23 @@ final class AuthCoordinator: Coordinator {
     }
     
     func start() {
-        let viewController = LoginScene.makeView()
+        let viewController = LoginScene.makeView(coordinator: self)
         navigationController.viewControllers = [viewController]
+    }
+}
+
+extension AuthCoordinator: LoginNavigation {
+    func goToJoin() {
+        let viewController = JoinScene.makeView(coordinator: self)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func goToJoinComplete(user: JoinUser) {
+        let viewController = JoinScene.makeView(coordinator: self, user: user)
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func goToMainTabbar() {
+        
     }
 }
