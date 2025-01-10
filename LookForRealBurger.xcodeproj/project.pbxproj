@@ -12,6 +12,8 @@
 		7B6ABC5F2D2AADD6005B9DFD /* KeychainService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6ABC5E2D2AADD6005B9DFD /* KeychainService.swift */; };
 		7B6ABC612D2AB2A9005B9DFD /* SecureID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6ABC602D2AB2A9005B9DFD /* SecureID.swift */; };
 		7B6ABC632D2AB3B2005B9DFD /* SecureTokenManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6ABC622D2AB3B2005B9DFD /* SecureTokenManagerTests.swift */; };
+		7B6ABC902D315125005B9DFD /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6ABC8F2D315125005B9DFD /* AppCoordinator.swift */; };
+		7B6ABC922D3155FF005B9DFD /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B6ABC912D3155FF005B9DFD /* Coordinator.swift */; };
 		7B700DA72CC7DE7E0020AF46 /* LoginUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DA62CC7DE7E0020AF46 /* LoginUnitTest.swift */; };
 		7B700DA92CC8BE080020AF46 /* JoinUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DA82CC8BE080020AF46 /* JoinUnitTest.swift */; };
 		7B700DAC2CC8D2170020AF46 /* BurgerMapUnitTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B700DAB2CC8D2170020AF46 /* BurgerMapUnitTest.swift */; };
@@ -238,6 +240,8 @@
 		7B6ABC5E2D2AADD6005B9DFD /* KeychainService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainService.swift; sourceTree = "<group>"; };
 		7B6ABC602D2AB2A9005B9DFD /* SecureID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureID.swift; sourceTree = "<group>"; };
 		7B6ABC622D2AB3B2005B9DFD /* SecureTokenManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureTokenManagerTests.swift; sourceTree = "<group>"; };
+		7B6ABC8F2D315125005B9DFD /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
+		7B6ABC912D3155FF005B9DFD /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		7B700D9D2CC7DD710020AF46 /* LookForRealBurgerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LookForRealBurgerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7B700DA62CC7DE7E0020AF46 /* LoginUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginUnitTest.swift; sourceTree = "<group>"; };
 		7B700DA82CC8BE080020AF46 /* JoinUnitTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinUnitTest.swift; sourceTree = "<group>"; };
@@ -484,6 +488,14 @@
 				7B6ABC602D2AB2A9005B9DFD /* SecureID.swift */,
 			);
 			path = Secure;
+			sourceTree = "<group>";
+		};
+		7B6ABC8E2D315102005B9DFD /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				7B6ABC912D3155FF005B9DFD /* Coordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		7B700D9E2CC7DD710020AF46 /* LookForRealBurgerTests */ = {
@@ -988,6 +1000,7 @@
 			isa = PBXGroup;
 			children = (
 				7B91C2232C6F2C6A0019C51F /* Application */,
+				7B6ABC8E2D315102005B9DFD /* Coordinator */,
 				7B91C2362C70E2460019C51F /* Common */,
 				7B91C2372C70E2AC0019C51F /* Scene */,
 				7B91C1DD2C6C8BF80019C51F /* Resources */,
@@ -1063,6 +1076,7 @@
 			children = (
 				7B91C1C52C6C7CE30019C51F /* AppDelegate.swift */,
 				7B91C1C72C6C7CE30019C51F /* SceneDelegate.swift */,
+				7B6ABC8F2D315125005B9DFD /* AppCoordinator.swift */,
 				7B91C2992C7374250019C51F /* AppAppearance.swift */,
 			);
 			path = Application;
@@ -1525,6 +1539,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B6ABC902D315125005B9DFD /* AppCoordinator.swift in Sources */,
 				7BA673172C84750D00D4F792 /* FollowResponseDTO+Mapping.swift in Sources */,
 				7B8350202C77504100785049 /* SearchBurgerHouseViewController.swift in Sources */,
 				7B83504A2C7B534F00785049 /* LocalSearchTableViewCell.swift in Sources */,
@@ -1628,6 +1643,7 @@
 				7B8350D92C7EF55800785049 /* RefreshAccessTokenResponseDTO+Mapping.swift in Sources */,
 				7B91C27B2C72CA2A0019C51F /* BaseViewModel.swift in Sources */,
 				7B83508F2C7D4BF000785049 /* CommentRequestDTO+Mapping.swift in Sources */,
+				7B6ABC922D3155FF005B9DFD /* Coordinator.swift in Sources */,
 				7B91C2C72C75E0C40019C51F /* PretendardRoundedButton.swift in Sources */,
 				7BA672EB2C81DBB700D4F792 /* BurgerReviewImageCell.swift in Sources */,
 				7BA673372C84FB7700D4F792 /* FollowQuery.swift in Sources */,
