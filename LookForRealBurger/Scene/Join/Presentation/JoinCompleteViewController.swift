@@ -34,14 +34,17 @@ final class JoinCompleteViewController: BaseViewController {
         title: R.Phrase.goToLogin, backgroudColor: R.Color.red
     )
     
+    private weak var coordinator: LoginNavigation!
     private var user: JoinUser!
     private var disposeBag: DisposeBag!
     
     static func create(
+        coordinator: LoginNavigation,
         user: JoinUser,
         disposeBag: DisposeBag = DisposeBag()
     ) -> JoinCompleteViewController {
         let view = JoinCompleteViewController()
+        view.coordinator = coordinator
         view.user = user
         view.disposeBag = disposeBag
         return view
