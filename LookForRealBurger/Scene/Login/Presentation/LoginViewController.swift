@@ -214,9 +214,7 @@ extension LoginViewController {
         
         viewModel.goToMain
             .bind(with: self) { owner, _ in
-                let authRepository = DefualtAuthRepository.shared
-                let loginUseCase = DefaultLoginUseCase(authRepository: authRepository)
-                let mainTabBar = MainTabBar.create(loginUseCase: loginUseCase)
+                let mainTabBar = MainTabBar.create()
                 owner.changeRootViewController(mainTabBar)
             }
             .disposed(by: disposeBag)
