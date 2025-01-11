@@ -61,6 +61,7 @@ private enum TabItem: CaseIterable {
 }
 
 final class MainTabBar: UITabBarController {
+    static func create() -> UITabBarController {
         let view = MainTabBar()
         
         var viewControllers = [UIViewController]()
