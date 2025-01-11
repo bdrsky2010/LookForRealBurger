@@ -7,9 +7,6 @@
 
 import UIKit
 
-import RxCocoa
-import RxSwift
-
 private enum TabItem: CaseIterable {
     case map
     case review
@@ -64,15 +61,7 @@ private enum TabItem: CaseIterable {
 }
 
 final class MainTabBar: UITabBarController {
-    private var loginUseCase: LoginUseCase!
-    private var disposeBag: DisposeBag!
-    
-    static func create(
-        loginUseCase: LoginUseCase,
-        disposeBag: DisposeBag = DisposeBag()
-    ) -> UITabBarController {
         let view = MainTabBar()
-        view.loginUseCase = loginUseCase
         
         var viewControllers = [UIViewController]()
         
