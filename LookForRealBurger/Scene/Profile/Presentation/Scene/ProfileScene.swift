@@ -8,7 +8,10 @@
 import Foundation
 
 enum ProfileScene {
-    static func makeView(profileType: ProfileType) -> ProfileViewController {
+    static func makeView(
+        coordinator: ProfileNavigation,
+        profileType: ProfileType
+    ) -> ProfileViewController {
         let profileRepository = DefaultProfileRepository.shared
         let followRepository = DefaultFollowRepository.shared
         let authRepository = DefualtAuthRepository.shared

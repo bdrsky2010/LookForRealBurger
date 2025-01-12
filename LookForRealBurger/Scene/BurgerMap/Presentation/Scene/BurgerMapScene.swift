@@ -8,7 +8,7 @@
 import Foundation
 
 enum BurgerMapScene {
-    static func makeView() -> BurgerMapViewController {
+    static func makeView(coordinator: MapNavigation) -> BurgerMapViewController {
         let locationManager = DefaultLocationManager.shared
         let postRepository = DefaultPostRepository.shared
         let authRepository = DefualtAuthRepository.shared
