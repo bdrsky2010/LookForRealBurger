@@ -77,6 +77,102 @@ extension AuthCoordinator: LoginNavigation {
     }
     
     func goToMainTabbar() {
+final class MainTabbarCoordinator: Coordinator {
+    var parentCoordinator: Coordinator?
+    var childCoordinators: [Coordinator] = []
+    
+    init() {
+        print("init -> \(String(describing: self))")
+    }
+    
+    deinit {
+        print("deinit -> \(String(describing: self))")
+    }
+    
+    func start() {
+        goToMain()
+    }
+}
+
+extension MainTabbarCoordinator {
+    private func goToMain() {
+}
+
+private enum TabItem: CaseIterable {
+    case map
+    case review
+    case writeReview
+    case profile
+    
+    func setupViewController(parentCoordinator: Coordinator) -> UIViewController {
+        let viewController: BaseViewController
+        
+        switch self {
+        case .map:
+            let mapCoordinator = MapCoordinator()
+            mapCoordinator.parentCoordinator = parentCoordinator
+            parentCoordinator.childCoordinators.append(mapCoordinator)
+            viewController = BurgerMapScene.makeView(
+                coordinator: mapCoordinator
+            )
+            
+        case .review:
+            let reviewCoordinator = ReviewCoordinator()
+            reviewCoordinator.parentCoordinator = parentCoordinator
+            parentCoordinator.childCoordinators.append(reviewCoordinator)
+            viewController = BurgerHouseReviewScene.makeView(
+                coordinator: reviewCoordinator,
+                getPostType: .total
+            )
+        case .writeReview:
+            let writeReviewCoordinator = WriteReviewCoordinator()
+            writeReviewCoordinator.parentCoordinator = parentCoordinator
+            parentCoordinator.childCoordinators.append(writeReviewCoordinator)
+            viewController = EmptyPresentViewController.create(
+                coordinator: writeReviewCoordinator
+            )
+        case .profile:
+            let profileCoordinator = ProfileCoordinator()
+            profileCoordinator.parentCoordinator = parentCoordinator
+            parentCoordinator.childCoordinators.append(profileCoordinator)
+            viewController = ProfileScene.makeView(
+                coordinator: profileCoordinator,
+                profileType: .me(UserDefaultsAccessStorage.shared.loginUserId)
+            )
+        }
+        
+        let nav = UINavigationController()
+        nav.pushViewController(viewController, animated: false)
+        return nav
+    }
+    
+    var image: UIImage? {
+        switch self {
+        case .map:         UIImage(named: "burgerFlag")
+        case .review:      UIImage(systemName: "list.clipboard.fill")
+        case .writeReview: UIImage(systemName: "pencil.and.list.clipboard")
+        case .profile:     UIImage(systemName: "person.crop.circle.fill")
+        }
+    }
+    
+    var selectedImage: UIImage? {
+        switch self {
+        case .map:         UIImage(named: "burgerFlag")
+        case .review:      UIImage(systemName: "list.clipboard.fill")
+        case .writeReview: UIImage(systemName: "pencil.and.list.clipboard")
+        case .profile:     UIImage(systemName: "person.crop.circle.fill")
+        }
+    }
+    
+    var title: String {
+        switch self {
+        case .map:         R.Phrase.burgerMap
+        case .review:      R.Phrase.review
+        case .writeReview: R.Phrase.writeReview
+        case .profile:     R.Phrase.profile
+        }
+    }
+}
 
 protocol MapNavigation: AnyObject {
     
