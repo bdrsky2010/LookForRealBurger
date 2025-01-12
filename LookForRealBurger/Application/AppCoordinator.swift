@@ -77,6 +77,75 @@ extension AuthCoordinator: LoginNavigation {
     }
     
     func goToMainTabbar() {
+
+protocol MapNavigation: AnyObject {
+    
+}
+
+final class MapCoordinator: Coordinator {
+    var parentCoordinator: Coordinator?
+    
+    var childCoordinators: [Coordinator] = []
+    
+    func start() {
         
     }
+}
+
+extension MapCoordinator: MapNavigation {
+    
+}
+
+protocol ReviewNavigation: AnyObject {
+    
+}
+
+final class ReviewCoordinator: Coordinator {
+    var parentCoordinator: Coordinator?
+    
+    var childCoordinators: [Coordinator] = []
+    
+    func start() {
+        
+    }
+}
+
+extension ReviewCoordinator: ReviewNavigation {
+    
+}
+
+protocol WriteReviewNavigation: AnyObject {
+    
+}
+
+final class WriteReviewCoordinator: Coordinator {
+    var parentCoordinator: Coordinator?
+    
+    var childCoordinators: [Coordinator] = []
+    
+    func start() {
+        
+    }
+}
+
+extension WriteReviewCoordinator: WriteReviewNavigation {
+    
+}
+
+protocol ProfileNavigation: AnyObject {
+    
+}
+
+final class ProfileCoordinator: Coordinator {
+    var parentCoordinator: Coordinator?
+    
+    var childCoordinators: [Coordinator] = []
+    
+    func start() {
+        
+    }
+}
+
+extension ProfileCoordinator: ProfileNavigation {
+    
 }
