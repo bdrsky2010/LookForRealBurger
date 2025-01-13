@@ -96,6 +96,20 @@ final class MainTabbarCoordinator: Coordinator {
 
 extension MainTabbarCoordinator {
     private func goToMain() {
+        let tabbar = MainTabBar()
+        
+        var viewControllers = [UIViewController]()
+        
+        TabItem.allCases.forEach { [weak parentCoordinator] item in
+            guard let parentCoordinator else { return }
+            let viewController = item.setupViewController(parentCoordinator: parentCoordinator)
+            viewController.tabBarItem.imageInsets = .init(top: 0, left: 0, bottom: -6, right: 0)
+            viewController.tabBarItem.image = item.image
+            viewController.tabBarItem.selectedImage = item.selectedImage
+            viewController.tabBarItem.title = item.title
+            viewControllers.append(viewController)
+        }
+    }
 }
 
 private enum TabItem: CaseIterable {
