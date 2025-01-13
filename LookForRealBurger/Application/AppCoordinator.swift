@@ -173,73 +173,135 @@ private enum TabItem: CaseIterable {
 }
 
 protocol MapNavigation: AnyObject {
-    
+    func goToLogin()
+    func goToMap()
 }
 
 final class MapCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
-    
     var childCoordinators: [Coordinator] = []
     
+    private var navigationController: UINavigationController!
+    
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+    
     func start() {
-        
+        goToMap()
     }
 }
 
 extension MapCoordinator: MapNavigation {
+    func goToLogin() {
+        
+    }
     
+    func goToMap() {
+        let viewController = BurgerMapScene.makeView(coordinator: self)
+        navigationController.viewControllers = [viewController]
+    }
 }
 
 protocol ReviewNavigation: AnyObject {
-    
+    func goToLogin()
+    func goToReview()
+    func goToDetail()
 }
 
 final class ReviewCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
-    
     var childCoordinators: [Coordinator] = []
     
+    private var navigationController: UINavigationController!
+    
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+    
     func start() {
-        
+        goToReview()
     }
 }
 
 extension ReviewCoordinator: ReviewNavigation {
+    func goToLogin() {
+        
+    }
     
+    func goToReview() {
+        let viewController = BurgerHouseReviewScene.makeView(
+            coordinator: self,
+            getPostType: .total
+        )
+        navigationController.viewControllers = [viewController]
+    }
+    
+    func goToDetail() {
+        
+    }
 }
 
 protocol WriteReviewNavigation: AnyObject {
-    
+    func goToWriteReview()
+    func goToSearchBurgerHouse()
 }
 
 final class WriteReviewCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
-    
     var childCoordinators: [Coordinator] = []
     
+    private var navigationController: UINavigationController!
+    
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+    
     func start() {
-        
+        goToWriteReview()
     }
 }
 
 extension WriteReviewCoordinator: WriteReviewNavigation {
+    func goToWriteReview() {
+        
+    }
     
-}
-
-protocol ProfileNavigation: AnyObject {
-    
-}
-
-final class ProfileCoordinator: Coordinator {
-    var parentCoordinator: Coordinator?
-    
-    var childCoordinators: [Coordinator] = []
-    
-    func start() {
+    func goToSearchBurgerHouse() {
         
     }
 }
 
-extension ProfileCoordinator: ProfileNavigation {
+protocol ProfileNavigation: AnyObject {
+    func goToProfile()
+    func goToReviewDetail()
+}
+
+final class ProfileCoordinator: Coordinator {
+    var parentCoordinator: Coordinator?
+    var childCoordinators: [Coordinator] = []
     
+    private var navigationController: UINavigationController!
+    
+    init(navigationController: UINavigationController) {
+        self.navigationController = navigationController
+    }
+    
+    func start() {
+        goToProfile()
+    }
+}
+
+extension ProfileCoordinator: ProfileNavigation {
+    func goToProfile() {
+        let viewController = ProfileScene.makeView(
+            coordinator: self,
+            profileType: .me(UserDefaultsAccessStorage.shared.loginUserId)
+        )
+        navigationController.viewControllers = [viewController]
+    }
+    
+    func goToReviewDetail() {
+        
+    }
 }
