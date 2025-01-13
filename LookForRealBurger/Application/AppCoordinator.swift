@@ -105,45 +105,43 @@ private enum TabItem: CaseIterable {
     case profile
     
     func setupViewController(parentCoordinator: Coordinator) -> UIViewController {
-        let viewController: BaseViewController
+        let navigationController = UINavigationController()
         
         switch self {
         case .map:
-            let mapCoordinator = MapCoordinator()
+            let mapCoordinator = MapCoordinator(navigationController: navigationController)
             mapCoordinator.parentCoordinator = parentCoordinator
+            
             parentCoordinator.childCoordinators.append(mapCoordinator)
-            viewController = BurgerMapScene.makeView(
-                coordinator: mapCoordinator
-            )
+            
+            mapCoordinator.start()
             
         case .review:
-            let reviewCoordinator = ReviewCoordinator()
+            let reviewCoordinator = ReviewCoordinator(navigationController: navigationController)
             reviewCoordinator.parentCoordinator = parentCoordinator
+            
             parentCoordinator.childCoordinators.append(reviewCoordinator)
-            viewController = BurgerHouseReviewScene.makeView(
-                coordinator: reviewCoordinator,
-                getPostType: .total
-            )
+            
+            reviewCoordinator.start()
+            
         case .writeReview:
-            let writeReviewCoordinator = WriteReviewCoordinator()
+            let writeReviewCoordinator = WriteReviewCoordinator(navigationController: navigationController)
             writeReviewCoordinator.parentCoordinator = parentCoordinator
             parentCoordinator.childCoordinators.append(writeReviewCoordinator)
-            viewController = EmptyPresentViewController.create(
-                coordinator: writeReviewCoordinator
-            )
+            
+            let emptyViewController = EmptyPresentViewController.create(coordinator: writeReviewCoordinator)
+            return emptyViewController
+            
         case .profile:
-            let profileCoordinator = ProfileCoordinator()
+            let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
             profileCoordinator.parentCoordinator = parentCoordinator
+            
             parentCoordinator.childCoordinators.append(profileCoordinator)
-            viewController = ProfileScene.makeView(
-                coordinator: profileCoordinator,
-                profileType: .me(UserDefaultsAccessStorage.shared.loginUserId)
-            )
+            
+            profileCoordinator.start()
         }
         
-        let nav = UINavigationController()
-        nav.pushViewController(viewController, animated: false)
-        return nav
+        return navigationController
     }
     
     var image: UIImage? {
