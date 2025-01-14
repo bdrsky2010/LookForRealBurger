@@ -214,15 +214,14 @@ extension LoginViewController {
         
         viewModel.goToMain
             .bind(with: self) { owner, _ in
-                let mainTabBar = MainTabBar.create()
-                owner.changeRootViewController(mainTabBar)
+//                let mainTabBar = MainTabBar.create()
+//                owner.changeRootViewController(mainTabBar)
+                owner.coordinator.goToMainTabbar()
             }
             .disposed(by: disposeBag)
         
         viewModel.goToJoin
             .bind(with: self) { owner, _ in
-//                let joinViewController = JoinScene.makeView()
-//                owner.navigationController?.pushViewController(joinViewController, animated: true)
                 owner.coordinator.goToJoin()
             }
             .disposed(by: disposeBag)

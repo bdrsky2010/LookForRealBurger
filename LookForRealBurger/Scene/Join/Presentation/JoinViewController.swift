@@ -268,8 +268,9 @@ extension JoinViewController {
         
         viewModel.isSuccessJoin
             .bind(with: self) { owner, user in
-                let vc = JoinScene.makeView(user: user)
-                owner.navigationController?.pushViewController(vc, animated: false)
+//                let vc = JoinScene.makeView(user: user)
+//                owner.navigationController?.pushViewController(vc, animated: false)
+                owner.coordinator.goToJoinComplete(user: user)
             }
             .disposed(by: disposeBag)
     }

@@ -56,8 +56,9 @@ final class JoinCompleteViewController: BaseViewController {
         
         goToLoginButton.rx.tap
             .bind(with: self) { owner, _ in
-                let loginViewController = LoginScene.makeView()
-                owner.changeRootViewController(loginViewController)
+//                let loginViewController = LoginScene.makeView()
+//                owner.changeRootViewController(loginViewController)
+                owner.coordinator.goToMainTabbar()
             }
             .disposed(by: disposeBag)
     }
