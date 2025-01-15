@@ -8,9 +8,9 @@
 import UIKit
 
 final class EmptyPresentViewController: BaseViewController {
-    private weak var coordinator: WriteReviewNavigation!
+    private weak var coordinator: WriteReviewCoordinator!
     
-    static func create(coordinator: WriteReviewNavigation) -> EmptyPresentViewController {
+    static func create(coordinator: WriteReviewCoordinator) -> EmptyPresentViewController {
         let view = EmptyPresentViewController()
         view.coordinator = coordinator
         return view
