@@ -62,20 +62,22 @@ final class WriteReviewViewController: BaseViewController {
     
     private let placeholder = R.Phrase.plzWriteReview
     
+    private weak var coordinator: WriteReviewNavigation!
+    
     private var viewModel: WriteReviewViewModel!
     private var disposeBag: DisposeBag!
-    
-    private weak var tabBar: UITabBarController?
+
+    weak var delegate: WriteReviewDelegate?
     
     static func create(
+        coordinator: WriteReviewNavigation,
         viewModel: WriteReviewViewModel,
-        disposeBag: DisposeBag = DisposeBag(),
-        tabBar: UITabBarController?
+        disposeBag: DisposeBag = DisposeBag()
     ) -> WriteReviewViewController {
         let view = WriteReviewViewController()
+        view.coordinator = coordinator
         view.viewModel  = viewModel
         view.disposeBag = disposeBag
-        view.tabBar = tabBar
         return view
     }
     
@@ -376,20 +378,14 @@ extension WriteReviewViewController {
         
         viewModel.goToPreviousTab
             .bind(with: self) { owner, _ in
-                if let index = owner.tabBar?.previousSelectedIndex {
-                    owner.tabBar?.selectedIndex = index
-                }
+                owner.delegate?.dismiss()
                 owner.dismiss(animated: true)
             }
             .disposed(by: disposeBag)
         
         viewModel.goToLocalSearch
             .bind(with: self) { owner, _ in
-                let view = WriteReviewScene.makeView()
-                view.didSelectItem = { burgerHouse in
-                    owner.viewModel.burgerHouseSelect(burgerHouse: burgerHouse)
-                }
-                owner.navigationController?.pushViewController(view, animated: true)
+                owner.coordinator.goToSearchBurgerHouse(delegate: self)
             }
             .disposed(by: disposeBag)
         
@@ -490,7 +486,7 @@ extension WriteReviewViewController {
         viewModel.didSuccessUploadReview
             .bind(with: self) { owner, _ in
                 NotificationCenter.default.post(Notification(name: Notification.Name("UpdateReview")))
-                owner.tabBar?.selectedIndex = 1
+                owner.delegate?.didSuccessUpload()
                 owner.dismiss(animated: true)
             }
             .disposed(by: disposeBag)
