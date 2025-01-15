@@ -18,12 +18,10 @@ final class EmptyPresentViewController: BaseViewController {
     
     override func viewIsAppearing(_ animated: Bool) {
         super.viewIsAppearing(animated)
-        let vc = WriteReviewScene.makeView(
-            tabBar: tabBarController
-        )
-        let nav = UINavigationController(rootViewController: vc)
-        nav.modalPresentationStyle = .fullScreen
-        present(nav, animated: true)
+        let navigationController = UINavigationController()
+        coordinator.initNavigationController(navigationController: navigationController)
+        coordinator.start()
+        present(navigationController, animated: true)
     }
     
     override func viewDidLoad() {
