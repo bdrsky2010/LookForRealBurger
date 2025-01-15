@@ -20,11 +20,28 @@ final class EmptyPresentViewController: BaseViewController {
         super.viewIsAppearing(animated)
         let navigationController = UINavigationController()
         coordinator.initNavigationController(navigationController: navigationController)
+        coordinator.delegate = self
         coordinator.start()
         present(navigationController, animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+    }
+}
+
+protocol WriteReviewDelegate: AnyObject {
+    func dismiss()
+    func didSuccessUpload()
+}
+
+extension EmptyPresentViewController: WriteReviewDelegate {
+    func dismiss() {
+        guard let tabBarController else { return }
+        tabBarController.selectedIndex = tabBarController.previousSelectedIndex
+    }
+    
+    func didSuccessUpload() {
+        tabBarController?.selectedIndex = 1
     }
 }
