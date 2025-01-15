@@ -9,7 +9,7 @@ import UIKit
 
 enum WriteReviewScene {
     static func makeView(
-        tabBar: UITabBarController?
+        coordinator: WriteReviewNavigation
     ) -> WriteReviewViewController {
         let postRepository = DefaultPostRepository.shared
         let commentRepository = DefaultCommentRepository.shared
@@ -25,8 +25,8 @@ enum WriteReviewScene {
             accessStorage: accessStorage
         )
         let view = WriteReviewViewController.create(
-            viewModel: viewModel,
-            tabBar: tabBar
+            coordinator: coordinator,
+            viewModel: viewModel
         )
         return view
     }
