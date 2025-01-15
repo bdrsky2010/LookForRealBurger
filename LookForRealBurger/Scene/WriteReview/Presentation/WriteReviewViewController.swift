@@ -553,3 +553,13 @@ extension WriteReviewViewController: PHPickerViewControllerDelegate {
         }
     }
 }
+
+protocol SearchBurgerDelegate: AnyObject {
+    func didSelectItem(burgerHouse: BurgerHouse)
+}
+
+extension WriteReviewViewController: SearchBurgerDelegate {
+    func didSelectItem(burgerHouse: BurgerHouse) {
+        viewModel.burgerHouseSelect(burgerHouse: burgerHouse)
+    }
+}
