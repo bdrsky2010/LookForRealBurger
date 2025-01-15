@@ -25,7 +25,8 @@ final class SearchBurgerHouseViewController: BaseViewController {
     private var viewModel: SearchBurgerHouseViewModel!
     private var disposeBag: DisposeBag!
     
-    var didSelectItem: ((BurgerHouse) -> Void)?
+    weak var coordinator: WriteReviewCoordinator?
+    weak var delegate: SearchBurgerDelegate?
     
     static func create(
         viewModel: SearchBurgerHouseViewModel,
@@ -166,8 +167,8 @@ extension SearchBurgerHouseViewController {
         
         viewModel.selectItem
             .bind(with: self) { owner, burgerHouse in
-                owner.didSelectItem?(burgerHouse)
-                owner.navigationController?.popViewController(animated: true)
+                owner.delegate?.didSelectItem(burgerHouse: burgerHouse)
+                owner.coordinator?.backToWriteReview()
             }
             .disposed(by: disposeBag)
         
