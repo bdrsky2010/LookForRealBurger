@@ -11,10 +11,10 @@ final class AppCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
     
-    private var navigationController: UINavigationController!
+    private var window: UIWindow!
     
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
+    init(window: UIWindow?) {
+        self.window = window
     }
     
     func start() {
@@ -24,6 +24,7 @@ final class AppCoordinator: Coordinator {
 
 extension AppCoordinator {
     func startAuthCoordinator() {
+        let navigationController = UINavigationController()
         let authCoordinator = AuthCoordinator(navigationController: navigationController)
 
         childCoordinators.removeAll()
@@ -31,8 +32,30 @@ extension AppCoordinator {
         
         authCoordinator.parentCoordinator = self
         authCoordinator.start()
+        
+        setRootViewController(navigationController)
     }
     
+    func startMainTabbarCoordinator() {
+        let mainTabbarCoordinator = MainTabbarCoordinator()
+        
+        childCoordinators.removeAll()
+        childCoordinators.append(mainTabbarCoordinator)
+        
+        mainTabbarCoordinator.parentCoordinator = self
+        
+        let mainTabBarController = MainTabBar.create(coordinator: mainTabbarCoordinator)
+        setRootViewController(mainTabBarController)
+    }
+}
+
+extension AppCoordinator {
+    private func setRootViewController(_ viewController: UIViewController) {
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
+    }
+}
+
 protocol LoginNavigation: AnyObject {
     func goToLogin()
     func goToJoin()
@@ -77,6 +100,11 @@ extension AuthCoordinator: LoginNavigation {
     }
     
     func goToMainTabbar() {
+        guard let appCoordinator = parentCoordinator as? AppCoordinator else { return }
+        appCoordinator.startMainTabbarCoordinator()
+    }
+}
+
 final class MainTabbarCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
@@ -89,101 +117,7 @@ final class MainTabbarCoordinator: Coordinator {
         print("deinit -> \(String(describing: self))")
     }
     
-    func start() {
-        goToMain()
-    }
-}
-
-extension MainTabbarCoordinator {
-    private func goToMain() {
-        let tabbar = MainTabBar()
-        
-        var viewControllers = [UIViewController]()
-        
-        TabItem.allCases.forEach { [weak parentCoordinator] item in
-            guard let parentCoordinator else { return }
-            let viewController = item.setupViewController(parentCoordinator: parentCoordinator)
-            viewController.tabBarItem.imageInsets = .init(top: 0, left: 0, bottom: -6, right: 0)
-            viewController.tabBarItem.image = item.image
-            viewController.tabBarItem.selectedImage = item.selectedImage
-            viewController.tabBarItem.title = item.title
-            viewControllers.append(viewController)
-        }
-    }
-}
-
-private enum TabItem: CaseIterable {
-    case map
-    case review
-    case writeReview
-    case profile
-    
-    func setupViewController(parentCoordinator: Coordinator) -> UIViewController {
-        let navigationController = UINavigationController()
-        
-        switch self {
-        case .map:
-            let mapCoordinator = MapCoordinator(navigationController: navigationController)
-            mapCoordinator.parentCoordinator = parentCoordinator
-            
-            parentCoordinator.childCoordinators.append(mapCoordinator)
-            
-            mapCoordinator.start()
-            
-        case .review:
-            let reviewCoordinator = ReviewCoordinator(navigationController: navigationController)
-            reviewCoordinator.parentCoordinator = parentCoordinator
-            
-            parentCoordinator.childCoordinators.append(reviewCoordinator)
-            
-            reviewCoordinator.start()
-            
-        case .writeReview:
-            let writeReviewCoordinator = WriteReviewCoordinator(navigationController: navigationController)
-            writeReviewCoordinator.parentCoordinator = parentCoordinator
-            parentCoordinator.childCoordinators.append(writeReviewCoordinator)
-            
-            let emptyViewController = EmptyPresentViewController.create(coordinator: writeReviewCoordinator)
-            return emptyViewController
-            
-        case .profile:
-            let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
-            profileCoordinator.parentCoordinator = parentCoordinator
-            
-            parentCoordinator.childCoordinators.append(profileCoordinator)
-            
-            profileCoordinator.start()
-        }
-        
-        return navigationController
-    }
-    
-    var image: UIImage? {
-        switch self {
-        case .map:         UIImage(named: "burgerFlag")
-        case .review:      UIImage(systemName: "list.clipboard.fill")
-        case .writeReview: UIImage(systemName: "pencil.and.list.clipboard")
-        case .profile:     UIImage(systemName: "person.crop.circle.fill")
-        }
-    }
-    
-    var selectedImage: UIImage? {
-        switch self {
-        case .map:         UIImage(named: "burgerFlag")
-        case .review:      UIImage(systemName: "list.clipboard.fill")
-        case .writeReview: UIImage(systemName: "pencil.and.list.clipboard")
-        case .profile:     UIImage(systemName: "person.crop.circle.fill")
-        }
-    }
-    
-    var title: String {
-        switch self {
-        case .map:         R.Phrase.burgerMap
-        case .review:      R.Phrase.review
-        case .writeReview: R.Phrase.writeReview
-        case .profile:     R.Phrase.profile
-        }
-    }
+    func start() { }
 }
 
 protocol MapNavigation: AnyObject {
