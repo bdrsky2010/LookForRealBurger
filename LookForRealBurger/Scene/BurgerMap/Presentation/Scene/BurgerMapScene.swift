@@ -22,11 +22,17 @@ enum BurgerMapScene {
             burgerMapUseCase: burgerMapUseCase,
             accessStorage: accessStorage
         )
-        let view = BurgerMapViewController.create(viewModel: viewModel)
+        let view = BurgerMapViewController.create(
+            coordinator: coordinator,
+            viewModel: viewModel
+        )
         return view
     }
     
-    static func makeView(burgerMapHouse: BurgerMapHouse) -> BurgerMapHouseViewController {
+    static func makeView(
+        coordinator: MapNavigation,
+        burgerMapHouse: BurgerMapHouse
+    ) -> BurgerMapHouseViewController {
         let postRepository = DefaultPostRepository.shared
         let authRepository = DefualtAuthRepository.shared
         let burgerMapHouseUseCase = DefaultBurgerMapHouseUseCase(
@@ -38,7 +44,10 @@ enum BurgerMapScene {
             burgerMapHouseUseCase: burgerMapHouseUseCase,
             accessStorage: accessStorage,
             burgerMapHouse: burgerMapHouse)
-        let view = BurgerMapHouseViewController.create(viewModel: viewModel)
+        let view = BurgerMapHouseViewController.create(
+            coordinator: coordinator,
+            viewModel: viewModel
+        )
         return view
     }
 }
