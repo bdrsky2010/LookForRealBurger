@@ -13,23 +13,44 @@ private enum TabItem: CaseIterable {
     case writeReview
     case profile
     
-    var viewController: UIViewController {
-        let view: BaseViewController
+    func setupViewController(parentCoordinator: Coordinator) -> UIViewController {
+        let navigationController = UINavigationController()
         
         switch self {
         case .map:
-            view = BurgerMapScene.makeView()
+            let mapCoordinator = MapCoordinator(navigationController: navigationController)
+            mapCoordinator.parentCoordinator = parentCoordinator
+            
+            parentCoordinator.childCoordinators.append(mapCoordinator)
+            
+            mapCoordinator.start()
+            
         case .review:
-            view = BurgerHouseReviewScene.makeView(getPostType: .total)
+            let reviewCoordinator = ReviewCoordinator(navigationController: navigationController)
+            reviewCoordinator.parentCoordinator = parentCoordinator
+            
+            parentCoordinator.childCoordinators.append(reviewCoordinator)
+            
+            reviewCoordinator.start()
+            
         case .writeReview:
-            view = EmptyPresentViewController()
+            let writeReviewCoordinator = WriteReviewCoordinator()
+            writeReviewCoordinator.parentCoordinator = parentCoordinator
+            parentCoordinator.childCoordinators.append(writeReviewCoordinator)
+            
+            let emptyViewController = EmptyPresentViewController.create(coordinator: writeReviewCoordinator)
+            return emptyViewController
+            
         case .profile:
-            view = ProfileScene.makeView(profileType: .me(UserDefaultsAccessStorage.shared.loginUserId))
+            let profileCoordinator = ProfileCoordinator(navigationController: navigationController)
+            profileCoordinator.parentCoordinator = parentCoordinator
+            
+            parentCoordinator.childCoordinators.append(profileCoordinator)
+            
+            profileCoordinator.start()
         }
         
-        let nav = UINavigationController()
-        nav.pushViewController(view, animated: false)
-        return nav
+        return navigationController
     }
     
     var image: UIImage? {
@@ -61,18 +82,20 @@ private enum TabItem: CaseIterable {
 }
 
 final class MainTabBar: UITabBarController {
-    static func create() -> UITabBarController {
-        let view = MainTabBar()
-        
+    private weak var coordinator: MainTabbarCoordinator!
+    
+    static func create(coordinator: MainTabbarCoordinator) -> UITabBarController {
+        let tabBarController = MainTabBar()
         var viewControllers = [UIViewController]()
         
         TabItem.allCases.forEach { item in
-            let vc = item.viewController
-            vc.tabBarItem.imageInsets = .init(top: 0, left: 0, bottom: -6, right: 0)
-            vc.tabBarItem.image = item.image
-            vc.tabBarItem.selectedImage = item.selectedImage
-            vc.tabBarItem.title = item.title
-            viewControllers.append(vc)
+            guard let parentCoordinator = coordinator.parentCoordinator else { return }
+            let viewController = item.setupViewController(parentCoordinator: parentCoordinator)
+            viewController.tabBarItem.imageInsets = .init(top: 0, left: 0, bottom: -6, right: 0)
+            viewController.tabBarItem.image = item.image
+            viewController.tabBarItem.selectedImage = item.selectedImage
+            viewController.tabBarItem.title = item.title
+            viewControllers.append(viewController)
         }
         
         let tabBarAppearance = UITabBarAppearance()
@@ -88,18 +111,18 @@ final class MainTabBar: UITabBarController {
         ]
         tabBarAppearance.backgroundColor = R.Color.background
         
-        view.tabBar.standardAppearance = tabBarAppearance
-        view.tabBar.scrollEdgeAppearance = tabBarAppearance
+        tabBarController.tabBar.standardAppearance = tabBarAppearance
+        tabBarController.tabBar.scrollEdgeAppearance = tabBarAppearance
         
-        view.tabBar.layer.masksToBounds = false
-        view.tabBar.layer.shadowColor = UIColor.gray.cgColor
-        view.tabBar.layer.shadowOpacity = 0.3
-        view.tabBar.layer.shadowOffset = CGSize(width: 0, height: 0)
-        view.tabBar.layer.shadowRadius = 6
+        tabBarController.tabBar.layer.masksToBounds = false
+        tabBarController.tabBar.layer.shadowColor = UIColor.gray.cgColor
+        tabBarController.tabBar.layer.shadowOpacity = 0.3
+        tabBarController.tabBar.layer.shadowOffset = CGSize(width: 0, height: 0)
+        tabBarController.tabBar.layer.shadowRadius = 6
         
-        view.setViewControllers(viewControllers, animated: true)
+        tabBarController.setViewControllers(viewControllers, animated: true)
         
-        return view
+        return tabBarController
     }
     
     deinit {
