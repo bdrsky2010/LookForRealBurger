@@ -493,7 +493,9 @@ extension WriteReviewViewController {
         
         viewModel.goToLogin
             .bind(with: self) { owner, _ in
-                owner.goToLogin()
+                owner.goToLogin { [weak owner] in
+                    owner?.coordinator.goToLogin()
+                }
             }
             .disposed(by: disposeBag)
     }
