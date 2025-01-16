@@ -143,6 +143,8 @@ final class MapCoordinator: Coordinator {
 extension MapCoordinator: MapNavigation {
     func goToLogin() {
         
+        guard let appCoordinator = parentCoordinator as? AppCoordinator else { return }
+        appCoordinator.startAuthCoordinator()
     }
     
     func goToMap() {
@@ -175,6 +177,8 @@ final class ReviewCoordinator: Coordinator {
 extension ReviewCoordinator: ReviewNavigation {
     func goToLogin() {
         
+        guard let appCoordinator = parentCoordinator as? AppCoordinator else { return }
+        appCoordinator.startAuthCoordinator()
     }
     
     func goToReview() {
@@ -211,6 +215,11 @@ final class WriteReviewCoordinator: Coordinator {
 }
 
 extension WriteReviewCoordinator: WriteReviewNavigation {
+    func goToLogin() {
+        guard let appCoordinator = parentCoordinator as? AppCoordinator else { return }
+        appCoordinator.startAuthCoordinator()
+    }
+    
     func goToWriteReview() {
         
     }
@@ -242,6 +251,11 @@ final class ProfileCoordinator: Coordinator {
 
 extension ProfileCoordinator: ProfileNavigation {
     func goToProfile() {
+    func goToLogin() {
+        guard let appCoordinator = parentCoordinator as? AppCoordinator else { return }
+        appCoordinator.startAuthCoordinator()
+    }
+    
         let viewController = ProfileScene.makeView(
             coordinator: self,
             profileType: .me(UserDefaultsAccessStorage.shared.loginUserId)
