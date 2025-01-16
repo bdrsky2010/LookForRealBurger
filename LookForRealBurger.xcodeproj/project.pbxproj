@@ -1000,7 +1000,6 @@
 			isa = PBXGroup;
 			children = (
 				7B91C2232C6F2C6A0019C51F /* Application */,
-				7B6ABC8E2D315102005B9DFD /* Coordinator */,
 				7B91C2362C70E2460019C51F /* Common */,
 				7B91C2372C70E2AC0019C51F /* Scene */,
 				7B91C1DD2C6C8BF80019C51F /* Resources */,
@@ -1086,6 +1085,7 @@
 			isa = PBXGroup;
 			children = (
 				7B8350DD2C7F0E3B00785049 /* Protocol */,
+				7B6ABC8E2D315102005B9DFD /* Coordinator */,
 				7B91C25D2C723F600019C51F /* Base */,
 				7B91C2962C7368930019C51F /* Reusable */,
 				7B91C2392C70E3360019C51F /* Data */,
