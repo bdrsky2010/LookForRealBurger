@@ -31,14 +31,18 @@ final class BurgerMapViewController: BaseViewController {
         return button
     }()
     
+    private weak var coordinator: MapNavigation!
+    
     private var viewModel: BurgerMapViewModel!
     private var disposeBag: DisposeBag!
     
     static func create(
+        coordinator: MapNavigation,
         viewModel: BurgerMapViewModel,
         disposeBag: DisposeBag = DisposeBag()
     ) -> BurgerMapViewController {
         let view = BurgerMapViewController()
+        view.coordinator = coordinator
         view.viewModel = viewModel
         view.disposeBag = disposeBag
         return view
@@ -184,7 +188,10 @@ extension BurgerMapViewController {
         
         viewModel.showBurgerMapHouseModel
             .bind(with: self) { owner, burgerMapHouse in
-                let vc = BurgerMapScene.makeView(burgerMapHouse: burgerMapHouse)
+                let vc = BurgerMapScene.makeView(
+                    coordinator: owner.coordinator,
+                    burgerMapHouse: burgerMapHouse
+                )
                 owner.present(vc, animated: true)
             }
             .disposed(by: disposeBag)
@@ -197,7 +204,9 @@ extension BurgerMapViewController {
         
         viewModel.goToLogin
             .bind(with: self) { owner, _ in
-                owner.goToLogin()
+                owner.goToLogin { [weak owner] in
+                    owner?.coordinator.goToLogin()
+                }
             }
             .disposed(by: disposeBag)
         
