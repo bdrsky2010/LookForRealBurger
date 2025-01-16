@@ -28,7 +28,27 @@ class BaseViewController: UIViewController {
 }
 
 extension BaseViewController {
-    func goToLogin() {
+//    func goToLogin() {
+//        let alert = UIAlertController(
+//            title: R.Phrase.expiredLogin,
+//            message: R.Phrase.expiredLoginExplain,
+//            preferredStyle: .alert
+//        )
+//        let check = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+//            guard let self else { return }
+//            let view = LoginScene.makeView()
+//            let navigationContoller = UINavigationController()
+//            navigationContoller.pushViewController(view, animated: false)
+//            if self is WriteReviewViewController {
+//                dismiss(animated: false)
+//            }
+//            changeRootViewController(navigationContoller)
+//        }
+//        alert.addAction(check)
+//        present(alert, animated: true)
+//    }
+    
+    func goToLogin(checkHandler: @escaping () -> Void) {
         let alert = UIAlertController(
             title: R.Phrase.expiredLogin,
             message: R.Phrase.expiredLoginExplain,
@@ -36,15 +56,19 @@ extension BaseViewController {
         )
         let check = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
             guard let self else { return }
-            let view = LoginScene.makeView()
-            let navigationContoller = UINavigationController()
-            navigationContoller.pushViewController(view, animated: false)
+            
             if self is WriteReviewViewController {
-                dismiss(animated: false)
+                dismiss(animated: true)
             }
-            changeRootViewController(navigationContoller)
+            if self is BurgerMapHouseViewController {
+                dismiss(animated: true)
+            }
+            
+            checkHandler()
         }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
         alert.addAction(check)
+        alert.addAction(cancel)
         present(alert, animated: true)
     }
 }
