@@ -85,17 +85,23 @@ final class AuthCoordinator: Coordinator {
 
 extension AuthCoordinator: LoginNavigation {
     func goToLogin() {
-        let viewController = LoginScene.makeView(coordinator: self)
+        let viewController = LoginScene.makeView()
+        viewController.coordinator = self
+        
         navigationController.viewControllers = [viewController]
     }
     
     func goToJoin() {
-        let viewController = JoinScene.makeView(coordinator: self)
+        let viewController = JoinScene.makeView()
+        viewController.coordinator = self
+        
         navigationController.pushViewController(viewController, animated: true)
     }
     
     func goToJoinComplete(user: JoinUser) {
-        let viewController = JoinScene.makeView(coordinator: self, user: user)
+        let viewController = JoinScene.makeView(user: user)
+        viewController.coordinator = self
+        
         navigationController.pushViewController(viewController, animated: true)
     }
     
