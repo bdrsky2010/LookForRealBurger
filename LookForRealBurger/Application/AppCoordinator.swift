@@ -148,13 +148,14 @@ final class MapCoordinator: Coordinator {
 
 extension MapCoordinator: MapNavigation {
     func goToLogin() {
-        
         guard let appCoordinator = parentCoordinator as? AppCoordinator else { return }
         appCoordinator.startAuthCoordinator()
     }
     
     func goToMap() {
-        let viewController = BurgerMapScene.makeView(coordinator: self)
+        let viewController = BurgerMapScene.makeView()
+        viewController.coordinator = self
+        
         navigationController.viewControllers = [viewController]
     }
 }
