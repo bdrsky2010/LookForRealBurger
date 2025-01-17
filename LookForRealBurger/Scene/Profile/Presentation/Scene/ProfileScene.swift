@@ -8,10 +8,7 @@
 import Foundation
 
 enum ProfileScene {
-    static func makeView(
-        coordinator: ProfileNavigation,
-        profileType: ProfileType
-    ) -> ProfileViewController {
+    static func makeView(profileType: ProfileType) -> ProfileViewController {
         let profileRepository = DefaultProfileRepository.shared
         let followRepository = DefaultFollowRepository.shared
         let authRepository = DefualtAuthRepository.shared
@@ -33,7 +30,10 @@ enum ProfileScene {
         return view
     }
     
-    static func makeView(myUserId: String, followList: [GetFollow]) -> FollowListViewController {
+    static func makeView(
+        myUserId: String,
+        followList: [GetFollow]
+    ) -> FollowListViewController {
         let viewModel = DefaultFollowListViewModel(
             myUserId: myUserId,
             followList: followList
@@ -42,15 +42,20 @@ enum ProfileScene {
         return view
     }
     
-    static func makeView(followType: FollowType,
-                         myUserId: String,
-                         followers: [GetFollow],
-                         followings: [GetFollow]) -> FollowViewController {
+    static func makeView(
+        coordinator: ReviewProfileNavigation,
+        followType: FollowType,
+        myUserId: String,
+        followers: [GetFollow],
+        followings: [GetFollow]
+    ) -> FollowViewController {
         let view = FollowViewController.create(followListTabView: FollowListTabViewController(
+            coordinator: coordinator,
             followType: followType,
             myUserId: myUserId,
             followers: followers,
-            followings: followings)
+            followings: followings
+            )
         )
         return view
     }

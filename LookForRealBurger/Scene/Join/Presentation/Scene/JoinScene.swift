@@ -8,25 +8,18 @@
 import UIKit
 
 enum JoinScene {
-    static func makeView(coordinator: LoginNavigation) -> JoinViewController {
+    static func makeView() -> JoinViewController {
         let authRepository = DefualtAuthRepository.shared
         let joinUseCase = DefaultJoinUseCase(authRepository: authRepository)
         let joinViewModel = DefaultLFRBJoinViewModel(joinUseCase: joinUseCase)
-        let joinView = JoinViewController.create(
-            coordinator: coordinator,
-            with: joinViewModel
-        )
+        let joinView = JoinViewController.create(with: joinViewModel)
         return joinView
     }
     
     static func makeView(
-        coordinator: LoginNavigation,
         user: JoinUser
     ) -> JoinCompleteViewController {
-        let joinCompleteView = JoinCompleteViewController.create(
-            coordinator: coordinator,
-            user: user
-        )
+        let joinCompleteView = JoinCompleteViewController.create(user: user)
         return joinCompleteView
     }
 }

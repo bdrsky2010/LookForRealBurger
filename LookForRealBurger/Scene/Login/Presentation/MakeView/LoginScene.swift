@@ -8,7 +8,7 @@
 import UIKit
 
 enum LoginScene {
-    static func makeView(coordinator: LoginNavigation) -> LoginViewController {
+    static func makeView() -> LoginViewController {
         let authRepository = DefualtAuthRepository.shared
         let loginUseCase = DefaultLoginUseCase(authRepository: authRepository)
         let accessStorage = UserDefaultsAccessStorage.shared
@@ -16,10 +16,7 @@ enum LoginScene {
             loginUseCase: loginUseCase,
             accessStorage: accessStorage
         )
-        let view = LoginViewController.create(
-            coordinator: coordinator,
-            with: viewModel
-        )
+        let view = LoginViewController.create(with: viewModel)
         return view
     }
 }
