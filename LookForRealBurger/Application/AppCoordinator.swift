@@ -160,12 +160,6 @@ extension MapCoordinator: MapNavigation {
     }
 }
 
-protocol ReviewNavigation: AnyObject {
-    func goToLogin()
-    func goToReview()
-    func goToDetail()
-}
-
 final class ReviewCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
@@ -181,8 +175,6 @@ final class ReviewCoordinator: Coordinator {
     }
 }
 
-extension ReviewCoordinator: ReviewNavigation {
-    func goToLogin() {
         
         guard let appCoordinator = parentCoordinator as? AppCoordinator else { return }
         appCoordinator.startAuthCoordinator()
@@ -236,11 +228,6 @@ extension WriteReviewCoordinator: WriteReviewNavigation {
     }
 }
 
-protocol ProfileNavigation: AnyObject {
-    func goToProfile()
-    func goToReviewDetail()
-}
-
 final class ProfileCoordinator: Coordinator {
     var parentCoordinator: Coordinator?
     var childCoordinators: [Coordinator] = []
@@ -252,12 +239,9 @@ final class ProfileCoordinator: Coordinator {
     }
     
     func start() {
-        goToProfile()
     }
 }
 
-extension ProfileCoordinator: ProfileNavigation {
-    func goToProfile() {
     func goToLogin() {
         guard let appCoordinator = parentCoordinator as? AppCoordinator else { return }
         appCoordinator.startAuthCoordinator()
@@ -265,12 +249,9 @@ extension ProfileCoordinator: ProfileNavigation {
     
         let viewController = ProfileScene.makeView(
             coordinator: self,
-            profileType: .me(UserDefaultsAccessStorage.shared.loginUserId)
         )
-        navigationController.viewControllers = [viewController]
     }
     
-    func goToReviewDetail() {
         
     }
 }
