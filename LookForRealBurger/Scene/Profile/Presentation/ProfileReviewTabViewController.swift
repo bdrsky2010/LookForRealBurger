@@ -11,13 +11,16 @@ import Tabman
 import Pageboy
 
 final class ProfileReviewTabViewController: TabmanViewController {
+    private weak var coordinator: ReviewProfileNavigation!
     private var viewControllers: [UIViewController]
     private let profileType: ProfileType
     
     init(
+        coordinator: ReviewProfileNavigation?,
         viewControllers: [UIViewController] = [],
         profileType: ProfileType
     ) {
+        self.coordinator = coordinator
         self.viewControllers = viewControllers
         self.profileType = profileType
         super.init(nibName: nil, bundle: nil)
@@ -31,14 +34,30 @@ final class ProfileReviewTabViewController: TabmanViewController {
         super.viewDidLoad()
         switch profileType {
         case .me:
-            let myReview = BurgerHouseReviewScene.makeView(getPostType: .byUser(UserDefaultsAccessStorage.shared.loginUserId))
-            let myLikeReview = BurgerHouseReviewScene.makeView(getPostType: .myLike)
-            let myBookmarkReview = BurgerHouseReviewScene.makeView(getPostType: .myLike2)
+            let myReview = BurgerHouseReviewScene.makeView(
+                getPostType: .byUser(UserDefaultsAccessStorage.shared.loginUserId)
+            )
+            myReview.coordinator = coordinator
+            
+            let myLikeReview = BurgerHouseReviewScene.makeView(
+                getPostType: .myLike
+            )
+            myLikeReview.coordinator = coordinator
+            
+            let myBookmarkReview = BurgerHouseReviewScene.makeView(
+                getPostType: .myLike2
+            )
+            myBookmarkReview.coordinator = coordinator
+            
             viewControllers.append(myReview)
             viewControllers.append(myLikeReview)
             viewControllers.append(myBookmarkReview)
         case .other(let userId, _):
-            let userReview = BurgerHouseReviewScene.makeView(getPostType: .byUser(userId))
+            let userReview = BurgerHouseReviewScene.makeView(
+                getPostType: .byUser(userId)
+            )
+            userReview.coordinator = coordinator
+            
             viewControllers.append(userReview)
         }
         

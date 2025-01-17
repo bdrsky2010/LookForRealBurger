@@ -34,17 +34,16 @@ final class JoinCompleteViewController: BaseViewController {
         title: R.Phrase.goToLogin, backgroudColor: R.Color.red
     )
     
-    private weak var coordinator: LoginNavigation!
     private var user: JoinUser!
     private var disposeBag: DisposeBag!
     
+    weak var coordinator: LoginNavigation!
+    
     static func create(
-        coordinator: LoginNavigation,
         user: JoinUser,
         disposeBag: DisposeBag = DisposeBag()
     ) -> JoinCompleteViewController {
         let view = JoinCompleteViewController()
-        view.coordinator = coordinator
         view.user = user
         view.disposeBag = disposeBag
         return view
@@ -56,8 +55,6 @@ final class JoinCompleteViewController: BaseViewController {
         
         goToLoginButton.rx.tap
             .bind(with: self) { owner, _ in
-//                let loginViewController = LoginScene.makeView()
-//                owner.changeRootViewController(loginViewController)
                 owner.coordinator.goToMainTabbar()
             }
             .disposed(by: disposeBag)

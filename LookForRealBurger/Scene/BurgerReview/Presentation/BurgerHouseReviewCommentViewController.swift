@@ -40,6 +40,8 @@ final class BurgerHouseReviewCommentViewController: BaseViewController {
     private var viewModel: BurgerHouseReviewCommentViewModel!
     private var disposeBag: DisposeBag!
     
+    weak var coordinator: ReviewProfileNavigation!
+    
     var onChangeComments: ((_ comments: [Comment]) -> Void)?
     
     static func create(

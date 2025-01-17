@@ -31,6 +31,8 @@ final class BurgerHouseReviewViewController: BaseViewController {
     private var viewModel: BurgerHouseReviewViewModel!
     private var disposeBag: DisposeBag!
     
+    weak var coordinator: ReviewProfileNavigation!
+    
     static func create(
         viewModel: BurgerHouseReviewViewModel,
         disposeBag: DisposeBag = DisposeBag()
@@ -175,7 +177,9 @@ extension BurgerHouseReviewViewController {
         
         viewModel.goToLogin
             .bind(with: self) { owner, _ in
-                owner.goToLogin()
+                owner.goToLogin {
+                    
+                }
             }
             .disposed(by: disposeBag)
     }

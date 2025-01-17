@@ -16,6 +16,8 @@ final class FollowViewController: BaseViewController {
     private var followListTabView: FollowListTabViewController!
     private var disposeBag: DisposeBag!
     
+    private weak var coordinator: ReviewProfileNavigation!
+    
     static func create(
         followListTabView: FollowListTabViewController,
         disposeBag: DisposeBag = DisposeBag()
@@ -37,7 +39,7 @@ final class FollowViewController: BaseViewController {
         }
         navigationItem.leftBarButtonItem?.rx.tap
             .bind(with: self) { owner, _ in
-                owner.navigationController?.popViewController(animated: true)
+                owner.coordinator.goToBack()
             }
             .disposed(by: disposeBag)
     }

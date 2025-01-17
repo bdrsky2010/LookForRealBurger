@@ -123,11 +123,16 @@ final class ProfileViewController: BaseViewController {
         backgroudColor: R.Color.orange
     )
     
-    private lazy var profileReviewTabView = ProfileReviewTabViewController(profileType: profileType)
+    private lazy var profileReviewTabView = ProfileReviewTabViewController(
+        coordinator: coordinator,
+        profileType: profileType
+    )
     
     private var viewModel: ProfileViewModel!
     private var disposeBag: DisposeBag!
     private var profileType: ProfileType!
+    
+    weak var coordinator: ReviewProfileNavigation!
     
     static func create(
         viewModel: ProfileViewModel,
@@ -248,7 +253,7 @@ extension ProfileViewController {
         
         navigationItem.rightBarButtonItem?.rx.tap
             .bind(with: self) { owner, _ in
-                owner.navigationController?.pushViewController(MoreViewController(), animated: true)
+                owner.coordinator.goToMore()
             }
             .disposed(by: disposeBag)
         
@@ -292,7 +297,7 @@ extension ProfileViewController {
         
         viewModel.popPreviousView
             .bind(with: self) { owner, _ in
-                owner.navigationController?.popViewController(animated: true)
+                owner.coordinator.goToBack()
             }
             .disposed(by: disposeBag)
         
@@ -314,19 +319,20 @@ extension ProfileViewController {
         
         viewModel.goToLogin
             .bind(with: self) { owner, _ in
-                owner.goToLogin()
+                owner.goToLogin { [weak owner] in
+                    owner?.coordinator.goToLogin()
+                }
             }
             .disposed(by: disposeBag)
         
         viewModel.pushFollowView
             .bind(with: self) { owner, tuple in
-                let view = ProfileScene.makeView(
+                owner.coordinator.goToFollow(
                     followType: tuple.followType,
                     myUserId: tuple.myUserId,
                     followers: tuple.followers,
                     followings: tuple.followings
                 )
-                owner.navigationController?.pushViewController(view, animated: true)
             }
             .disposed(by: disposeBag)
     }

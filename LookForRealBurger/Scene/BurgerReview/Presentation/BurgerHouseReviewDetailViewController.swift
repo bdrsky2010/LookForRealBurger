@@ -115,6 +115,8 @@ final class BurgerHouseReviewDetailViewController: BaseViewController {
     private var viewModel: BurgerHouseReviewDetailViewModel!
     private var disposeBag: DisposeBag!
     
+    weak var coordinator: ReviewProfileNavigation!
+    
     static func create(
         viewModel: BurgerHouseReviewDetailViewModel,
         disposeBag: DisposeBag = DisposeBag()
@@ -123,11 +125,6 @@ final class BurgerHouseReviewDetailViewController: BaseViewController {
         view.viewModel = viewModel
         view.disposeBag = disposeBag
         return view
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
     }
     
     override func viewDidLoad() {
@@ -341,7 +338,7 @@ extension BurgerHouseReviewDetailViewController {
         
         viewModel.popViewController
             .bind(with: self) { owner, _ in
-                owner.navigationController?.popViewController(animated: true)
+                owner.coordinator.goToBack()
             }
             .disposed(by: disposeBag)
         
@@ -468,17 +465,18 @@ extension BurgerHouseReviewDetailViewController {
         
         viewModel.pushCommentView
             .bind(with: self) { owner, tuple in
-                let view = BurgerHouseReviewScene.makeView(
+                let viewController = BurgerHouseReviewScene.makeView(
                     postId: tuple.postId,
                     comments: tuple.comments
                 )
+                viewController.coordinator = owner.coordinator
                 
-                view.onChangeComments = { comments in
+                viewController.onChangeComments = { comments in
                     owner.viewModel.onChangeComments(comments: comments)
                     NotificationCenter.default.post(Notification(name: Notification.Name("UpdateReview")))
                 }
                 
-                owner.present(view, animated: true)
+                owner.present(viewController, animated: true)
             }
             .disposed(by: disposeBag)
         
@@ -491,8 +489,7 @@ extension BurgerHouseReviewDetailViewController {
         
         viewModel.pushProfileView
             .bind(with: self) { owner, type in
-                let view = ProfileScene.makeView(profileType: type)
-                owner.navigationController?.pushViewController(view, animated: true)
+                owner.coordinator.goToProfile(profileType: type)
             }
             .disposed(by: disposeBag)
         
@@ -504,7 +501,9 @@ extension BurgerHouseReviewDetailViewController {
         
         viewModel.goToLogin
             .bind(with: self) { owner, _ in
-                owner.goToLogin()
+                owner.goToLogin { [weak owner] in
+                    owner?.coordinator.goToLogin()
+                }
             }
             .disposed(by: disposeBag)
     }

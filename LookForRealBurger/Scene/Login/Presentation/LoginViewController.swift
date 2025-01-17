@@ -61,17 +61,17 @@ final class LoginViewController: BaseViewController {
         imageView.clipsToBounds = true
         return imageView
     }()
-    private weak var coordinator: LoginNavigation!
+    
     private var viewModel: LoginViewModel!
     private var disposeBag: DisposeBag!
     
+    weak var coordinator: LoginNavigation!
+    
     static func create(
-        coordinator: LoginNavigation,
         with viewModel: LoginViewModel,
         disposeBag: DisposeBag = DisposeBag()
     ) -> LoginViewController {
         let view = LoginViewController()
-        view.coordinator = coordinator
         view.viewModel = viewModel
         view.disposeBag = disposeBag
         return view
@@ -214,8 +214,6 @@ extension LoginViewController {
         
         viewModel.goToMain
             .bind(with: self) { owner, _ in
-//                let mainTabBar = MainTabBar.create()
-//                owner.changeRootViewController(mainTabBar)
                 owner.coordinator.goToMainTabbar()
             }
             .disposed(by: disposeBag)

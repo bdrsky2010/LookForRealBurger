@@ -17,6 +17,8 @@ final class FollowListViewController: BaseViewController {
     private var viewModel: FollowListViewModel!
     private var disposeBag: DisposeBag!
     
+    weak var coordinator: ReviewProfileNavigation!
+    
     static func create(
         viewModel: FollowListViewModel,
         disposeBag: DisposeBag = DisposeBag()
@@ -61,8 +63,7 @@ final class FollowListViewController: BaseViewController {
         
         viewModel.pushProfileView
             .bind(with: self) { owner, type in
-                let view = ProfileScene.makeView(profileType: type)
-                owner.navigationController?.pushViewController(view, animated: true)
+                owner.coordinator.goToProfile(profileType: type)
             }
             .disposed(by: disposeBag)
     }

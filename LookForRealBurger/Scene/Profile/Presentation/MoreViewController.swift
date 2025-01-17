@@ -20,6 +20,8 @@ final class MoreViewController: BaseViewController {
     private let supportButton = CapsuleButton(title: R.Phrase.support, font: R.Font.chab20, backgroudColor: R.Color.orange)
     private let disposeBag = DisposeBag()
     
+    weak var coordinator: ReviewProfileNavigation!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
@@ -59,7 +61,7 @@ extension MoreViewController {
     private func bind() {
         navigationItem.leftBarButtonItem?.rx.tap
             .bind(with: self) { owner, _ in
-                owner.navigationController?.popViewController(animated: true)
+                owner.coordinator.goToBack()
             }
             .disposed(by: disposeBag)
         
@@ -76,10 +78,7 @@ extension MoreViewController {
             .bind(with: self) { owner, _ in
                 let alert = UIAlertController(title: R.Phrase.logoutComment, message: "", preferredStyle: .alert)
                 let check = UIAlertAction(title: R.Phrase.check, style: .default) { _ in
-                    let view = LoginScene.makeView()
-                    let nav = UINavigationController()
-                    nav.pushViewController(view, animated: false)
-                    owner.changeRootViewController(nav)
+                    owner.coordinator.goToLogin()
                 }
                 let cancel = UIAlertAction(title: R.Phrase.cancel, style: .cancel)
                 alert.addAction(check)

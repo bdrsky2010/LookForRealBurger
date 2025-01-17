@@ -57,18 +57,16 @@ final class BurgerMapHouseViewController: BaseViewController {
         collectionViewLayout: createLayout()
     )
     
-    private weak var coordinator: MapNavigation!
-    
     private var viewModel: BurgerMapHouseViewModel!
     private var disposeBag: DisposeBag!
     
+    weak var coordinator: MapNavigation!
+    
     static func create(
-        coordinator: MapNavigation,
         viewModel: BurgerMapHouseViewModel,
         disposeBag: DisposeBag = DisposeBag()
     ) -> BurgerMapHouseViewController {
         let view = BurgerMapHouseViewController()
-        view.coordinator = coordinator
         view.viewModel = viewModel
         view.disposeBag = disposeBag
         return view

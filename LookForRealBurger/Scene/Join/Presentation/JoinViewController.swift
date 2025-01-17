@@ -62,17 +62,16 @@ final class JoinViewController: BaseViewController {
         return imageView
     }()
     
-    private weak var coordinator: LoginNavigation!
     private var viewModel: JoinViewModel!
     private var disposeBag: DisposeBag!
     
+    weak var coordinator: LoginNavigation!
+    
     static func create(
-        coordinator: LoginNavigation,
         with viewModel: JoinViewModel,
         disposeBag: DisposeBag = DisposeBag()
     ) -> JoinViewController {
         let view = JoinViewController()
-        view.coordinator = coordinator
         view.viewModel = viewModel
         view.disposeBag = disposeBag
         return view

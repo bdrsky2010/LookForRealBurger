@@ -8,10 +8,7 @@
 import Foundation
 
 enum BurgerHouseReviewScene {
-    static func makeView(
-        coordinator: ReviewNavigation,
-        getPostType: GetPostType
-    ) -> BurgerHouseReviewViewController {
+    static func makeView(getPostType: GetPostType) -> BurgerHouseReviewViewController {
         let postRepository = DefaultPostRepository.shared
         let authRepository = DefualtAuthRepository.shared
         let burgerReviewUseCase = DefaultBurgerHouseReviewUseCase(

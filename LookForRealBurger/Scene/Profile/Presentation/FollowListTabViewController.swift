@@ -17,18 +17,23 @@ enum FollowType: Int {
 
 final class FollowListTabViewController: TabmanViewController {
     private var viewControllers: [UIViewController]
+    
     private let followType: FollowType
     private let myUserId: String
     private let followers: [GetFollow]
     private let followings: [GetFollow]
     
+    private weak var coordinator: ReviewProfileNavigation!
+    
     init(
+        coordinator: ReviewProfileNavigation,
         viewControllers: [UIViewController] = [],
         followType: FollowType,
         myUserId: String,
         followers: [GetFollow],
         followings: [GetFollow]
     ) {
+        self.coordinator = coordinator
         self.viewControllers = viewControllers
         self.followType = followType
         self.myUserId = myUserId
@@ -46,7 +51,11 @@ final class FollowListTabViewController: TabmanViewController {
         super.viewDidLoad()
         
         let followersView = ProfileScene.makeView(myUserId: myUserId, followList: followers)
+        followersView.coordinator = coordinator
+        
         let followingsView = ProfileScene.makeView(myUserId: myUserId, followList: followings)
+        followingsView.coordinator = coordinator
+        
         viewControllers.append(followersView)
         viewControllers.append(followingsView)
         
