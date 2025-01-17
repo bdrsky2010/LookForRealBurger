@@ -180,22 +180,17 @@ final class ReviewCoordinator: Coordinator {
         appCoordinator.startAuthCoordinator()
     }
     
-    func goToReview() {
         let viewController = BurgerHouseReviewScene.makeView(
             coordinator: self,
-            getPostType: .total
         )
-        navigationController.viewControllers = [viewController]
     }
     
-    func goToDetail() {
         
     }
 }
 
 protocol WriteReviewNavigation: AnyObject {
     func goToWriteReview()
-    func goToSearchBurgerHouse()
 }
 
 final class WriteReviewCoordinator: Coordinator {
@@ -204,9 +199,6 @@ final class WriteReviewCoordinator: Coordinator {
     
     private var navigationController: UINavigationController!
     
-    init(navigationController: UINavigationController) {
-        self.navigationController = navigationController
-    }
     
     func start() {
         goToWriteReview()
