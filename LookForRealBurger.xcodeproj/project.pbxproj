@@ -621,8 +621,8 @@
 				7B83502A2C77691800785049 /* ProfileViewController.swift */,
 				7BA6732A2C8492F000D4F792 /* ProfileReviewTabViewController.swift */,
 				7BA673442C85168C00D4F792 /* FollowViewController.swift */,
-				7BA6733C2C85094600D4F792 /* FollowListViewController.swift */,
 				7BA673422C85137A00D4F792 /* FollowListTabViewController.swift */,
+				7BA6733C2C85094600D4F792 /* FollowListViewController.swift */,
 				7BA6731D2C84786C00D4F792 /* MoreViewController.swift */,
 				7BA6732E2C84A67500D4F792 /* ProfileViewModel.swift */,
 				7BA673402C850B7A00D4F792 /* FollowListViewModel.swift */,
@@ -1183,7 +1183,7 @@
 		7B91C2402C70E4730019C51F /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				7B91C2D22C7604A00019C51F /* MakeView */,
+				7B91C2D22C7604A00019C51F /* Scene */,
 				7B91C2A32C739A780019C51F /* Lottie */,
 				7B91C2592C723F400019C51F /* JoinViewController.swift */,
 				7B91C2AA2C74D8960019C51F /* JoinCompleteViewController.swift */,
@@ -1291,12 +1291,12 @@
 			path = MakeView;
 			sourceTree = "<group>";
 		};
-		7B91C2D22C7604A00019C51F /* MakeView */ = {
+		7B91C2D22C7604A00019C51F /* Scene */ = {
 			isa = PBXGroup;
 			children = (
 				7B91C2D32C7605170019C51F /* JoinScene.swift */,
 			);
-			path = MakeView;
+			path = Scene;
 			sourceTree = "<group>";
 		};
 		7BA672F02C82154700D4F792 /* Common */ = {
