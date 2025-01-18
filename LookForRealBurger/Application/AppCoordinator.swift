@@ -175,17 +175,63 @@ final class ReviewCoordinator: Coordinator {
     }
 }
 
+extension ReviewCoordinator: ReviewProfileNavigation {
+    func goToReview() {
+        let viewController = BurgerHouseReviewScene.makeView(getPostType: .total)
+        viewController.coordinator = self
         
+        navigationController.viewControllers = [viewController]
+    }
+    
+    func goToLogin() {
         guard let appCoordinator = parentCoordinator as? AppCoordinator else { return }
         appCoordinator.startAuthCoordinator()
     }
     
+    func goToReviewDetail(burgerHouseReview: BurgerHouseReview) {
         let viewController = BurgerHouseReviewScene.makeView(
-            coordinator: self,
+            burgerHouseReview: burgerHouseReview
         )
+        viewController.coordinator = self
+        
+        navigationController.pushViewController(viewController, animated: true)
     }
     
+    func goToProfile(profileType: ProfileType) {
+        let viewController = ProfileScene.makeView(
+            profileType: profileType
+        )
+        viewController.coordinator = self
         
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func goToFollow(
+        followType: FollowType,
+        myUserId: String,
+        followers: [GetFollow],
+        followings: [GetFollow]
+    ) {
+        let viewController = ProfileScene.makeView(
+            coordinator: self,
+            followType: followType,
+            myUserId: myUserId,
+            followers: followers,
+            followings: followings
+        )
+        
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func goToMore() {
+        let viewController = MoreViewController()
+        viewController.coordinator = self
+        
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func goToBack() {
+        navigationController.popViewController(animated: true)
     }
 }
 
@@ -231,20 +277,67 @@ final class ProfileCoordinator: Coordinator {
     }
     
     func start() {
+        goToMyProfile()
     }
 }
 
+extension ProfileCoordinator: ReviewProfileNavigation {
+    func goToMyProfile() {
+        let viewController = ProfileScene.makeView(
+            profileType: .me(UserDefaultsAccessStorage.shared.loginUserId)
+        )
+        navigationController.viewControllers = [viewController]
+    }
+    
     func goToLogin() {
         guard let appCoordinator = parentCoordinator as? AppCoordinator else { return }
         appCoordinator.startAuthCoordinator()
     }
     
-        let viewController = ProfileScene.makeView(
-            coordinator: self,
+    func goToReviewDetail(burgerHouseReview: BurgerHouseReview) {
+        let viewController = BurgerHouseReviewScene.makeView(
+            burgerHouseReview: burgerHouseReview
         )
+        viewController.coordinator = self
+        
+        navigationController.pushViewController(viewController, animated: true)
     }
     
+    func goToProfile(profileType: ProfileType) {
+        let viewController = ProfileScene.makeView(
+            profileType: profileType
+        )
+        viewController.coordinator = self
         
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func goToFollow(
+        followType: FollowType,
+        myUserId: String,
+        followers: [GetFollow],
+        followings: [GetFollow]
+    ) {
+        let viewController = ProfileScene.makeView(
+            coordinator: self,
+            followType: followType,
+            myUserId: myUserId,
+            followers: followers,
+            followings: followings
+        )
+        
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func goToMore() {
+        let viewController = MoreViewController()
+        viewController.coordinator = self
+        
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func goToBack() {
+        navigationController.popViewController(animated: true)
     }
 }
 
