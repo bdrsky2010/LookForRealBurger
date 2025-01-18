@@ -247,3 +247,17 @@ final class ProfileCoordinator: Coordinator {
         
     }
 }
+
+protocol ReviewProfileNavigation: AnyObject {
+    func goToLogin()
+    func goToReviewDetail(burgerHouseReview: BurgerHouseReview)
+    func goToProfile(profileType: ProfileType)
+    func goToFollow(
+        followType: FollowType,
+        myUserId: String,
+        followers: [GetFollow],
+        followings: [GetFollow]
+    )
+    func goToMore()
+    func goToBack()
+}
