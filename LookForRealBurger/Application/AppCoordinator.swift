@@ -236,7 +236,10 @@ extension ReviewCoordinator: ReviewProfileNavigation {
 }
 
 protocol WriteReviewNavigation: AnyObject {
+    func goToLogin()
     func goToWriteReview()
+    func goToSearchBurgerHouse(delegate: SearchBurgerDelegate)
+    func backToWriteReview()
 }
 
 final class WriteReviewCoordinator: Coordinator {
@@ -245,9 +248,16 @@ final class WriteReviewCoordinator: Coordinator {
     
     private var navigationController: UINavigationController!
     
+    weak var delegate: WriteReviewDelegate?
     
     func start() {
         goToWriteReview()
+    }
+}
+
+extension WriteReviewCoordinator {
+    func initNavigationController(navigationController: UINavigationController) {
+        self.navigationController = navigationController
     }
 }
 
@@ -258,11 +268,22 @@ extension WriteReviewCoordinator: WriteReviewNavigation {
     }
     
     func goToWriteReview() {
+        let viewController = WriteReviewScene.makeView(coordinator: self)
+        viewController.delegate = delegate
         
+        navigationController.modalPresentationStyle = .fullScreen
+        navigationController.viewControllers = [viewController]
     }
     
-    func goToSearchBurgerHouse() {
-        
+    func goToSearchBurgerHouse(delegate: SearchBurgerDelegate) {
+        let viewController = WriteReviewScene.makeView()
+        viewController.coordinator = self
+        viewController.delegate = delegate
+        navigationController.pushViewController(viewController, animated: true)
+    }
+    
+    func backToWriteReview() {
+        navigationController.popViewController(animated: true)
     }
 }
 
