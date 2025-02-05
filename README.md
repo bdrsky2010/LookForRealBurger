@@ -91,7 +91,7 @@
 
 # 앱 아키텍쳐
 <p align="center"> 
-    <img src="./images/App_Architecture.png" align="center" width="80%"> 
+    <img src="./images/App_Architecture.png" align="center" width="90%"> 
 </p>
 
 > MVVM(Input/Output) + Clean Architecture
