@@ -164,7 +164,7 @@
 
 # 구현 기술
 <details>
-<summary>🚩 Unit Test</summary>
+<summary>Unit Test</summary>
 <div>
 
 ### 🚩 Unit Test
@@ -207,52 +207,64 @@
 </details>
 
 <details>
-<summary>Access Token 자동갱신</summary>
+<summary>Refresh Token 보안 관리</summary>
 <div>
 
-### Access Token 자동갱신
+### 🔐 Refresh Token 보안 관리
 
-해당 프로젝트의 모든 API(게시물, 팔로잉/팔로우 등등)는
-<br>
-로그인 API를 통해 발급받은 Access Token을 요구한다.
+1. **문제**
 
-이 Access Token의 유효 시간은 약 5분으로 짧았는데
-<br>
-그로 인해 사용자는 계속 Access Token이 만료되는 문제를 직면하게 된다.
+제 프로젝트에서는 서버 API(게시물, 팔로우, 좋아요 등) 호출을 위해 Access Token을 사용하고 있습니다.
 
-이 문제를 해결하기 위해 두 가지 방법을 고민하게 되었다.
-1. Access Token이 만료될 때마다 재로그인을 하는 방식
-2. Refresh Token을 통해 Access Token을 자동으로 갱신하는 방식
+하지만 Access Token의 유효시간이 5분으로 짧아 반복적인 재로그인 문제가 발생했습니다.
+
+1. **접근 방식**
+- Access Token 만료 시마다 재로그인 요청
+    - **보안 강점**: 매번 수동 로그인을 통한 보안 강화
+    - **사용성 저하**: 잦은 재로그인으로 불편함 증가
+- Refresh Token을 활용한 Access Token 자동 갱신(최종 선택)
+    - **보안 유지**: Refresh Token을 활용하여 Access Token을 자동 갱신
+    - **사용성 강화**: Refresh Token이 만료될 경우에만 재로그인 요청
+
+1. **추가적인 고민**
+- Access Token: 유효시간이 짧아 UserDefaults 사용 가능
+- Refresh Token: 갱신주기가 긴 민감한 데이터 -> 더 강력한 보안이 필요
+- Refresh Token을 Keychain에 저장하기로 결정
+- 👉 Keychain만으로 충분할까?추가적인 암호화가 필요하다고 판단하였으며,Secure Enclave를 활용해 Refresh Token을 한 번 더 암호화하여Keychain에 저장하는 방식으로 보안을 한층 더 강화하는 것으로 결정했습니다.
+
+1. 보안을 강화하기 위한 아키텍쳐 설계 (관련 코드)
+Refresh Token을 안전하게 관리하기 위해, Secure Enclave + Keychain을 조합한 아키텍쳐를 설계했습니다.
 
 <p align="center"> 
-    <img src="./images/token_1.png" align="center" width="80%"> 
+    <img src="./images/Secure.png" align="center" width="50%"> 
 </p>
 
-이 두 방식이 고민이 됐던 이유는 Access Token을 갱신하는데 필요한 Refresh Token도 만료되는 경우 다시 
-<br>
-로그인을 해야하기 때문에 바로 재로그인을 하는 것이 어떨까 라는 고민을 했던 것이다.
+- **📌 아키텍쳐 구성**
+    1. **Secure Token Manager (상위 계층)**
+        - Refresh Token 암호화, 복호화, 읽기, 저장, 삭제 등 총괄 관리
+        - 의존성 주입(DI)를 통해 Secure Enclave Service와 Keychain Service를 사용
+    2. **Secure Enclave Service**
+        - Secure Enclave를 활용한 비대칭 암호화 / 복호화
+    3. Keychain Service
+        - Keychain에 암호화된 Refresh Token을 읽기 / 저장 / 삭제
 
-그렇다면 이 부분에서 또 고민을 해야했던 부분이 두 가지가 더 존재했다.
-1. 직접 로그인 방식: Access Token이 만료될 때마다 사용자가 직접 로그인하게 한다면 사용자의 경험이 매우 나빠질 것이다.
-2. 자동 로그인 구현: 자동 로그인의 경우 유저의 아이디와 비밀번호를 저장해줘야 하지만 이를 UserDefaults인 로컬 저장소에 저장하는 것은 보안상으로 매우 위험하다고 판단이 됐다.
+1. **Race Condition 방지**
+Keychain은 멀티스레딩 환경에서 안전하지 않기 때문에 Race Condition 방지가 필요하다고 판단했습니다.Custom Concurrent Serial Queue와 sync 메서드를 활용하여 Keychain에 대한 접근을 직렬화했습니다.
 
-결론적으로, 재로그인을 하더라도 사용자가 직접 로그인을 해야하기 때문에 Access Token이 만료될 때마다 
-<br>
-재로그인을 하게 하는 것 또한 사용자에게 엄청난 불편함을 줄 수 있기 때문에
-<br> 
-Refresh Token을 통한 Access Token 자동 갱신 방식을 선택하게 되었다.
+1. **신뢰성 확보를 위한 Unit**
+Test신뢰성을 보장하기 위해 Mock 객체를 활용한 Unit Test를 진행했습니다.
 
-결론적으로, 사용자가 직접 재로그인하는 불편함을 줄이기 위해 Refresh Token을 통한 자동 갱신 방식을 선택하였다.
-<br>
-즉, Refresh Token이 만료될 경우에만 사용자에게 재로그인을 요구함으로써 보안과 사용자 경험의 균형을 맞추게 되었다.
+- **📌 Unit Test 시나리오**
+    1. 토큰 암호화 및 저장 키체인 저장 성공 / 실패 테스트
+    2. 키체인 읽기 및 토큰 복호화 성공 / 실패 테스트
+    3. 키체인 데이터 삭제 테스트
 
-최종적으로 작성된 로직은 아래 코드와 같다.
-<p align="center"> 
-    <img src="./images/token_2.png" align="center" width="80%"> 
-</p>
-<p align="center"> 
-    <img src="./images/token_3.png" align="center" width="80%"> 
-</p>
+1. **결과 및 성과**
+- **보안 강화**: Secure Enclave + Keychain 조합으로 Refresh Token 관리
+- **사용성 개선**: Access Token 자동 갱신
+- **멀티스레딩 안전성 확보**: Race Condition 방지
+- **신뢰성 확보**: Mock 객체를 활용한 Unit Test 완료
+
 
 </div>
 </details>
