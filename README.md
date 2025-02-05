@@ -25,31 +25,18 @@
 <br>
 
 # 주요기능
-- 지도 기반 리뷰 확인
-  - 사용자는 지도를 통해 주변 햄버거 맛집을 탐색하고, 해당 식당에 작성된 리뷰를 확인할 수 있습니다.
-  - 식당 위치를 나타내는 핀을 선택하면, 리뷰와 함께 이미지를 시작적으로 제공합니다.
-  
-- 리뷰 작성 및 상호작용
-  - 사용자는 텍스트와 이미지로 리뷰를 남기며, 리뷰에 대해 좋아요 혹은 북마크를 통해 상호작용을 할 수 있습니다.
-  - 작성된 리뷰에 댓글을 남겨, 다른 사용자들과 소통이 가능합니다.
-   
-- 팔로우 및 유저 피드
-  - 원하는 유저를 팔로우할 수 있고, 팔로우한 유저들의 프로필을 방문하여 최신 리뷰를 피드에서 손쉽게 확인할 수 있습니다.
-  
-- 다국어 지원
-  - 한국어, 영어, 일본어를 지원하며, 사용자의 기기에 설정된 언어에 맞춰 자동으로 설정됩니다.
+- 회원가입 및 로그인 인증
+- 위치 기반 햄버거 맛집 확인
+- 방문한 맛집에 대한 리뷰 및 평가 등록
+- 다른 유저들의 리뷰 열람 및 좋아요, 댓글 작성
+- 팔로우한 유저들의 리뷰 및 활동을 피드에서 확인
 <br>
 
 # 주요기술
-- 지도 기반 리뷰
-  - Mapkit의 MKMapViewDelegate 활용해 사용자 리뷰가 있는 햄버거 식당 위치를 지도에 표시했습니다.
-  - Custom MKAnnotationView를 사용해 Pin의 모양을 햄버거 아이콘으로 커스터마이징하여<br>사용자가 한눈에 위치를 인식할 수 있도록 구현했습니다.
-  
-- 효율적인 데이터 로딩
-  - 전체 리뷰를 조회하는 경우, Cursor Based Pagination을 통해 데이터를 효율적으로 로드하도록 구현했습니다.
-  
-- 이미지 데이터 업로드
-  - 리뷰 작성 시 이미지와 텍스트를 함께 서버에 전송하기 위해 HTTP Request(Post)의 Content-type을<br>multipart/form-data로 설정하였으며, 이미지를 JPEG로 압축 후 HTTP Request의 Body에 포함하여<br>서버에 업로드하였습니다.
+- 맛집 위치 시각화: MKMapViewDelegate와 Custom Annotation을 활용한 지도 위 맛집 위치 시각화
+- 간편 결제 시스템:  PG 연동 및 영수증 유효성 검증을 통해 진행되는 카드 결제 구현
+- 페이지네이션 구현: 커서 기반 페이지네이션을 적용하여 무한 스크롤 시 네트워크 요청 최적화 및 성능 개선
+- 이미지 업로드 및 전송: multipart/form-data를 활용한 서버 이미지 업로드 기능 구현
 <br>
 
 # 프로젝트 환경
@@ -175,65 +162,46 @@
 
 <br>
 
-# 트러블 슈팅
+# 구현 기술
 <details>
-<summary>Unit Test - Mock 객체 메서드 내 분기처리</summary>
+<summary>Unit Test</summary>
 <div>
 
-### Unit Test - Mock 객체 메서드 내 분기처리
+### Unit Test
 
-본인은 앱 비즈니스 로직의 안정적인 데이터 흐름에 대한 신뢰성 향상을 위해
-Unit Test를 진행하였다.
+프로젝트의 Unit Test 진행 중, Protocol 기반 의존성 주입으로 성공 / 실패 분기 처리가 어려웠습니다.Protocol Extenstion과 Mock 객체를 활용한 Flag 기반 분기 처리로 문제를 해결하고, 비즈니스 로직의 신뢰성을 검증했습니다.
 
-ViewController의 Input/Output 액션을 담당하는 ViewModel에
-비즈니스 로직을 담당하는 UseCase를 테스트용 Mock 객체로 구현하여
-의존성을 주입 후, 테스트를 진행하도록 설계하였다.
+1. 문제
+- 프로젝트의 비즈니스 로직의 신뢰성을 보장하기 위해 Unit Test를 도입했습니다.
+- ViewModel의 Input / Output 액션을 검증하기 위해 UseCase를 Mock 객체로 구성하여 의존성을 주입하였으며,
+- Mock 데이터로 API 요청의 성공 / 실패를 분기 처리해야 했지만, Protocol을 기반으로 의존성이 주입된 상태였습니다.
+- 하지만 Protocol에 정의된 메서드로는 성공 / 실패 케이스를 분기 처리하기 어려웠습니다.
+- 메서드의 재설계 없이 테스트 가능성을 확보해야 했습니다.
 
-<br>
-<p align="center"> 
-     <img src="./images/unittest_1.png" align="center" width="80%">
-</p>
-<br>
+2. 문제 분석
+- 테스트가 불가능한 상황
+    - UseCase Mock 객체에서 성공 / 실패를 제어할 수 없는 구조
+- 제한사항
+    - 기존 비즈니스 로직을 변경하지 않고, 테스트 환경에서만 분기처리가 필요
 
-하지만 시작하자마자 문제가 생겼는데,
-protocol에 요구된 메서드를 통해 
-Mock 데이터를 활용하여 API 네트워크 통신 테스트를 진행하기에
-매개변수로는 성공과 실패 케이스에 대한 분기 처리를 할 수 없어
-테스트를 진행하기에 어려운 상황에 직면했다.
+3. 접근 방식
+- Protocol Extenstion을 활용하여 테스트용 Flag를 추가
+- Bool 값을 통해 성공 / 실패를 분기처리
 
-이 상황에서 필요한 것은 Flag에 대한 신호를 보내서 분기 처리를 하는 방법이었다.
-하지만 나는 protocol을 통해서 메서드에 접근하기 때문에 class 구현체 내부의
-신호를 보낼 방법이 없었고 여기서 내가 할 수 있는 최선의 선택은 
-protocol의 extension 기능이었다
+4. 해결 방식
+- Protocol Extension 활용
+    - 성공 / 실패를 분기 처리할 수 있는 빈 Flag Setter 메서드 Extension에서 정의
+- Mock 객체에 Flag 적용
+    - Protocol Extension에 정의된 Flag Setter 메서드를 Mock 객체 내부에서 구현
+    - Flag를 Set 해 줄 프로퍼티 추가
+    - 해당 Flag 값을 기반으로 성공 / 실패 결과를 반환하도록 로직을 구성
+    - 이를 통해 기존 비즈니스 로직을 수정하지 않고, 테스트 환경에서만 분기 처리가 가능
 
-protocol에서 요구사항을 정의할 때는 메서드 및 프로퍼티의 선언만 이뤄지는데
-protocol extension을 통해 확장하는 경우, 메서드의 구현이 가능하다.
+5. 결론
 
-UseCase protocol의 extension을 통해
-API 네트워크 통신 과정에서 성공과 실패에 대한 분기를 나눌 수 있는
-bool 타입의 프로퍼티를 설정할 수 있는 빈 setter 메서드를 구현 후,
-해당 protocol을 채택하는 Mock 객체에서 실질적으로 구현하는
-방식을 선택할 수 있었다.
+테스트 가능한 코드 구성: 기존 비즈니스 로직을 수정 없이 테스트 가능하도록 개선 완료하였습니다.
 
-<br>
-<p align="center"> 
-     <img src="./images/unittest_2.png" align="center" width="80%">
-</p>
-
-<br>
-<p align="center"> 
-     <img src="./images/unittest_3.png" align="center" width="80%">
-</p>
-<br>
-
-덕분에 성공과 실패에 대한 케이스 둘다 성공적으로 테스트를 진행할 수 있었다.
-
-<br>
-<p align="center"> 
-     <img src="./images/unittest_4.png" align="center" width="80%">
-</p>
-
-<br>
+의존성 역전 원칙(DIP)를 준수했다고 해서 Testable한 구조가 보장되지는 않는다.즉, 비즈니스 로직을 설계할 때, Testability를 함께 고려해야 한다 라는 것을 알게됐습니다.다른 프로젝트에서 Unit Test를 설계할 경우, 비즈니스 로직을 처음부터 Testable한 방식으로 설계할 계획입니다.
 
 </div>
 </details>
