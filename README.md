@@ -215,10 +215,9 @@
 1. **문제**
 
 제 프로젝트에서는 서버 API(게시물, 팔로우, 좋아요 등) 호출을 위해 Access Token을 사용하고 있습니다.
-
 하지만 Access Token의 유효시간이 5분으로 짧아 반복적인 재로그인 문제가 발생했습니다.
 
-1. **접근 방식**
+2. **접근 방식**
 - Access Token 만료 시마다 재로그인 요청
     - **보안 강점**: 매번 수동 로그인을 통한 보안 강화
     - **사용성 저하**: 잦은 재로그인으로 불편함 증가
@@ -226,13 +225,13 @@
     - **보안 유지**: Refresh Token을 활용하여 Access Token을 자동 갱신
     - **사용성 강화**: Refresh Token이 만료될 경우에만 재로그인 요청
 
-1. **추가적인 고민**
+3. **추가적인 고민**
 - Access Token: 유효시간이 짧아 UserDefaults 사용 가능
 - Refresh Token: 갱신주기가 긴 민감한 데이터 -> 더 강력한 보안이 필요
 - Refresh Token을 Keychain에 저장하기로 결정
 - 👉 Keychain만으로 충분할까?추가적인 암호화가 필요하다고 판단하였으며,Secure Enclave를 활용해 Refresh Token을 한 번 더 암호화하여Keychain에 저장하는 방식으로 보안을 한층 더 강화하는 것으로 결정했습니다.
 
-1. 보안을 강화하기 위한 아키텍쳐 설계 (관련 코드)
+4. 보안을 강화하기 위한 아키텍쳐 설계 (관련 코드)
 Refresh Token을 안전하게 관리하기 위해, Secure Enclave + Keychain을 조합한 아키텍쳐를 설계했습니다.
 
 <p align="center"> 
@@ -248,10 +247,10 @@ Refresh Token을 안전하게 관리하기 위해, Secure Enclave + Keychain을 
     3. Keychain Service
         - Keychain에 암호화된 Refresh Token을 읽기 / 저장 / 삭제
 
-1. **Race Condition 방지**
+5. **Race Condition 방지**
 Keychain은 멀티스레딩 환경에서 안전하지 않기 때문에 Race Condition 방지가 필요하다고 판단했습니다.Custom Concurrent Serial Queue와 sync 메서드를 활용하여 Keychain에 대한 접근을 직렬화했습니다.
 
-1. **신뢰성 확보를 위한 Unit**
+6. **신뢰성 확보를 위한 Unit**
 Test신뢰성을 보장하기 위해 Mock 객체를 활용한 Unit Test를 진행했습니다.
 
 - **📌 Unit Test 시나리오**
@@ -259,7 +258,7 @@ Test신뢰성을 보장하기 위해 Mock 객체를 활용한 Unit Test를 진�
     2. 키체인 읽기 및 토큰 복호화 성공 / 실패 테스트
     3. 키체인 데이터 삭제 테스트
 
-1. **결과 및 성과**
+7. **결과 및 성과**
 - **보안 강화**: Secure Enclave + Keychain 조합으로 Refresh Token 관리
 - **사용성 개선**: Access Token 자동 갱신
 - **멀티스레딩 안전성 확보**: Race Condition 방지
