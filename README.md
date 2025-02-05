@@ -65,7 +65,7 @@
 # 프로젝트 기술스택
 - 활용기술
   - UIKit, Mapkit
-  - MVVM, Input-Output, Clean Architecture
+  - MVVM-C, Input-Output, Clean Architecture
   - CodeBasedUI
   - Cursor Based Pagination
   
@@ -91,7 +91,12 @@
 
 # 앱 아키텍쳐
 <p align="center"> 
-    <img src="./images/architecture.png" align="center" width="80%"> 
+    <img src="./images/App_Architecture.png" align="center" width="80%"> 
+</p>
+
+<p align="center"> 
+    <img src="./images/Coordinator.png" align="center" width="40%">
+    <img src="./images/Secure.png" align="center" width="30%"> 
 </p>
 
 > MVVM(Input/Output) + Clean Architecture
@@ -100,28 +105,33 @@
 <div>
 
 ### 1. 계층구조
-- **ViewModel** ([관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Scene/WriteReview/Presentation/WriteReviewViewModel.swift))
+- **Coordinator** ([관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Application/AppCoordinator.swift)
+    - RxSwift와 RxCocoa를 활용하여 ViewController와의 데이터 바인딩을 담당하는 계층
+    - Input과 Output을 정의하여 View와 통신을 관리
+    - UseCase를 통해 비즈니스 로직을 처리하고, UI 업데이트에 필요한 데이터를 제공
+
+- **ViewModel** ([관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Scene/WriteReview/Presentation/WriteReviewViewModel.swift)
     - RxSwift와 RxCocoa를 활용하여 ViewController와의 데이터 바인딩을 담당하는 계층
     - Input과 Output을 정의하여 View와 통신을 관리
     - UseCase를 통해 비즈니스 로직을 처리하고, UI 업데이트에 필요한 데이터를 제공
     
-- **UseCase** ([관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Scene/WriteReview/Domain/UseCase/UploadPostUseCase.swift))
+- **UseCase** ([관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Scene/WriteReview/Domain/UseCase/UploadPostUseCase.swift)
     - 비즈니스 로직을 담당하는 계층으로, 특정 작업을 처리하기 위해 데이터를 요청 및 제공하는 역할
     - Repository를 통해 데이터를 요청 및 제공
     - 네트워크 통신 시, RxSwift의 Single trait을 활용 및 Result 타입으로<br>한 번 더 래핑하여 error가 발생해도 구독이 끊기지 않고 Stream이 유지되도록 구현
     
-- **Repository** ([관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/Repository/PostRepository.swift))
+- **Repository** ([관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/Repository/PostRepository.swift)
     - Network에 API를 요청하여 데이터를 받아오는 역할을 담당
     - 요청에 대한 데이터를 DTO로 변환하여 API에 요청
     - 응답에 대한 DTO 데이터를 Entity로 변환하여 UseCase에 전달 
     
-- **Network** ([Manager 관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/Network/LFRBNetworkManager.swift) / [Router 관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/Network/Router/AuthRouter.swift))
+- **Network** ([Manager 관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/Network/LFRBNetworkManager.swift) / [Router 관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/Network/Router/AuthRouter.swift)
     - Network Manager와 Network Router를 활용하여 실질적으로 네트워크를 담당하는 계층 
     - Network Manager: Moya의 MoyaProvider를 활용하여 네트워크 요청을 보내 응답을 받아 데이터를 반환하는 객체 
     - Network Router: Moya의 TargetType을 더 추상화한 형태의 TargetType을 새로 정의하여 채택한<br>enum의 case와 연관값을 활용하여 API의 BaseURL, HTTPMethod, Parameter, Header 등을 설정
     - RequestDTO와 ResposeDTO를 통해 데이터를 요청 및 응답
     
-- **Data Storage** ([관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/AccessTokenStorage/AccessStorage.swift))
+- **Data Storage** ([관련코드](https://github.com/bdrsky2010/LookForRealBurger/blob/main/LookForRealBurger/Common/Data/AccessTokenStorage/AccessStorage.swift)
     - UserDefaults를 활용하여 Local DB를 관리하는 계층
     - 간단한 데이터 저장 및 조회
 
@@ -133,7 +143,7 @@
     
     - **개방-폐쇄의 원칙**: 추상화된 protocol을 채택하여 외부에서 사용되지 않는 메서드는 Class 내부에서 private하게 구현
     
-    - **리스코프 치환 원칙**: ViewController를 자식 Class로 바라보며 공통적으로 필요한 View(Navigation, Hierarchy, Layout, UI 등) 설정 메서드를 정의하여 ViewDidLoad에서 호출해 자식 Class인 ViewController에서<br>재정의해 구현할 수 있도록 구성
+    - **리스코프 치환 원칙**: 추상화된 protocol을 채택하여 해당 protocol을 따르는 모든 객체가 독립적으로 일관된 동작을 하도록 구현
     
     - **인터페이스 분리 원칙**: Input, Output, UseCase, Repository 등 역할에 따른 상위 모듈에서 사용되는 메서드 및<br>프로퍼티만 요구사항으로서 프로토콜에 정의
     
