@@ -94,11 +94,6 @@
     <img src="./images/App_Architecture.png" align="center" width="80%"> 
 </p>
 
-<p align="center"> 
-    <img src="./images/Coordinator.png" align="center" width="40%">
-    <img src="./images/Secure.png" align="center" width="40%"> 
-</p>
-
 > MVVM(Input/Output) + Clean Architecture
 <details>
 <summary>설명</summary>
