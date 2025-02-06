@@ -164,6 +164,35 @@
 
 # 구현 기술
 <details>
+<summary>UIKit 기반 Clean Architecture + MVVM-C 설계</summary>
+<div>
+
+### 🏛️ UIKit 기반 Clean Architecture + MVVM-C 설계
+
+1. **기존 MVVM 아키텍처의 문제점:**
+    - **ViewModel의 비대화**: 기능 추가로 인해 ViewModel이 비즈니스 로직, 데이터 변환, 네트워크 요청 등을 모두 처리하게 되어 가독성과 유지보수성이 저하되었습니다.
+    - **비효율적인 화면 전환 구조**: ViewController가 직접 NavigationController에 접근하여 화면 전환을 수행하는 방식은 계층 구조상 부적절하다고 판단되었습니다.
+
+1. **Clean Architecture와 MVVM-C 패턴 설계:**
+    - **계층 분리**:
+        - **Presentation Layer**: ViewController와 ViewModel로 구성되며, UI와 사용자 입력 처리를 담당합니다.
+        - **Domain Layer**: UseCase를 통해 비즈니스 로직을 처리합니다.
+        - **Data Layer**: Repository, NetworkRouter, NetworkManager를 통해 데이터 관리 및 네트워크 처리를 담당합니다.
+
+1. **의존성 관리 및 주입 (DI, DIP 적용)**:
+    - 모든 객체는 Protocol을 통해 추상화되고, 외부에서 의존성을 주입받도록 설계하여 결합도를 낮추고 테스트 용이성을 높였습니다.
+
+1. **화면 전환 개선 – Coordinator 패턴 적용**:
+    - Coordinator가 NavigationController를 직접 관리하여 화면 전환 책임을 분리하고, ViewController는 UI 처리에 집중할 수 있도록 구조를 개선하였습니다.
+
+1. **결론**:
+    - 이러한 설계를 통해 각 계층의 역할이 명확해지고, 유지보수성과 확장성이 향상되었습니다.
+
+
+</div>
+</details>
+
+<details>
 <summary>Unit Test</summary>
 <div>
 
