@@ -23,7 +23,7 @@ final class DefaultKeychainService: KeychainService {
     
     init(account: String = SecureID.account) {
         self.account = account
-        self.keychainQueue = DispatchQueue(label: "KEYCHAIN_QUEUE", attributes: .concurrent)
+        self.keychainQueue = DispatchQueue(label: "KEYCHAIN_QUEUE", target: DispatchQueue.global(qos: .background))
     }
     
     func storeData(_ data: Data, completion: @escaping (Result<Void, KeychainError>) -> Void) {
